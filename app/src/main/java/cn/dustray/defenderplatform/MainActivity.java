@@ -19,7 +19,6 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import cn.dustray.adapter.MainViewPagerAdapter;
-import cn.dustray.defenderplatform.dummy.DummyContent;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -139,7 +138,7 @@ mainAppBar =findViewById(R.id.main_appbar);
     }
 
     @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+    public void onListFragmentInteraction(Uri uri) {
 
     }
 }
