@@ -116,6 +116,8 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
         layoutManager.setStackFromEnd(true);
         chatListView.setLayoutManager(layoutManager);
         chatListView.setOnTouchListener(new View.OnTouchListener() {
+            float touchDownPosition = 0, touchUpPosition = 0;
+
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 if (toolFrag != null) {//隐藏工具栏
@@ -126,12 +128,26 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                     toolFrag.onDestroy();
                     toolFrag = null;
                 }
-                if(motionEvent.getAction()==MotionEvent.ACTION_UP)
-                // Toast.makeText(getActivity(), "交流,角楼2" +motionEvent.getSize(), Toast.LENGTH_LONG).show();
-                sendMessage("触控面积：" + motionEvent.getSize()+"压力大小："+motionEvent.getPressure());
+                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                    touchDownPosition = motionEvent.getY();
+                }
+                if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                    touchUpPosition = motionEvent.getY();
+                    if (!chatListView.canScrollVertically(1) && touchDownPosition- touchUpPosition >300) {
+                        //判断是否还能往上滑（滑到底）
+                       // Toast.makeText(getActivity(), "弹键盘", Toast.LENGTH_LONG).show();
+                        showSoftInputFromWindow(sendContent);
+                    }
+                }
+
+               // if (motionEvent.getAction() == MotionEvent.ACTION_UP)
+                    // Toast.makeText(getActivity(), "交流,角楼2" +motionEvent.getSize(), Toast.LENGTH_LONG).show();
+                   // sendMessage("触控面积：" + motionEvent.getSize() + "压力大小：" + motionEvent.getPressure());
                 return false;
             }
+
         });
+
         chatListView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
