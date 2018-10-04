@@ -129,11 +129,13 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                     toolFrag = null;
                 }
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+
+                    //chatListView.performClick();
                     touchDownPosition = motionEvent.getY();
                 }
                 if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                     touchUpPosition = motionEvent.getY();
-                    if (!chatListView.canScrollVertically(1) && touchDownPosition- touchUpPosition >300) {
+                    if (!chatListView.canScrollVertically(1) && touchDownPosition- touchUpPosition >200) {
                         //判断是否还能往上滑（滑到底）
                        // Toast.makeText(getActivity(), "弹键盘", Toast.LENGTH_LONG).show();
                         showSoftInputFromWindow(sendContent);
@@ -168,7 +170,6 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
 
         adapter = new ChatListAdapter(getActivity(), list);
         chatListView.setAdapter(adapter);
-
         sendBtn = getActivity().findViewById(R.id.chat_send_btn);
         sendBtn.setOnClickListener(this);
         sendContent = getActivity().findViewById(R.id.chat_send_content);

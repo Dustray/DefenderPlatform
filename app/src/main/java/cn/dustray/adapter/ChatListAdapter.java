@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -31,8 +32,13 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.Holder
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_chat_recycle, parent, false);
 
-        Holder holder = new Holder(view);
-
+        final Holder holder = new Holder(view);
+        holder.textContent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Toast.makeText(context, "0---"+holder.textContent.getText().toString() , Toast.LENGTH_LONG).show();
+            }
+        });
         return holder;
     }
 
@@ -78,6 +84,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.Holder
             super(itemView);
             headBtn = itemView.findViewById(R.id.chat_list_item_head);
             textContent = itemView.findViewById(R.id.chat_list_item);
+
         }
     }
 }

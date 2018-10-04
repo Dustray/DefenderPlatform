@@ -3,14 +3,15 @@
 
     <item android:state_pressed="false">
         <shape android:useLevel="false">
-            <gradient android:endColor="#2AAAFF" android:startColor="#1E90FF" android:type="linear" />
+            <gradient android:centerColor="#0000" android:endColor="#0000" android:gradientRadius="100" android:startColor="#0000" android:type="radial" />
             <corners android:bottomLeftRadius="100dip" android:bottomRightRadius="100dip" android:topLeftRadius="100dip" android:topRightRadius="100dip" />
         </shape>
     </item>
 
     <item android:state_pressed="true">
         <shape android:useLevel="false">
-            <gradient android:endColor="#1A9AFF" android:startColor="#0E80EF" android:type="linear" />
+
+            <gradient android:endColor="#0000" android:gradientRadius="100" android:startColor="#4666" android:type="radial" />
             <corners android:bottomLeftRadius="100dip" android:bottomRightRadius="100dip" android:topLeftRadius="100dip" android:topRightRadius="100dip" />
         </shape>
     </item>

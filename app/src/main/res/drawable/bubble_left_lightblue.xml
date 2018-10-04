@@ -1,22 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:useLevel="false">
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <gradient
-        android:endColor="#2AAAFF"
-        android:startColor="#1E90FF"
-        android:type="linear" />
-
-    <padding
-        android:top="10dip"
-        android:bottom="10dip"
-        android:left="10dip"
-        android:right="10dip" />
-    <corners
-        android:bottomLeftRadius="10dip"
-        android:bottomRightRadius="10dip"
-        android:topLeftRadius="0dip"
-        android:topRightRadius="10dip" />
-
-
-</shape>
+    <item android:state_pressed="false">
+        <shape android:useLevel="false">
+            <gradient android:endColor="#2AAAFF" android:startColor="#1E90FF" android:type="linear" />
+            <padding android:bottom="10dip" android:left="10dip" android:right="10dip" android:top="10dip" />
+            <corners android:bottomLeftRadius="10dip" android:bottomRightRadius="10dip" android:topLeftRadius="0dip" android:topRightRadius="10dip" />
+        </shape>
+    </item>
+    <item android:state_pressed="true">
+        <shape android:useLevel="false">
+            <gradient android:endColor="#1A9AFF" android:startColor="#0E80EF" android:type="linear" />
+            <padding android:bottom="10dip" android:left="10dip" android:right="10dip" android:top="10dip" />
+            <corners android:bottomLeftRadius="10dip" android:bottomRightRadius="10dip" android:topLeftRadius="0dip" android:topRightRadius="10dip" />
+        </shape>
+    </item>
+</selector>
