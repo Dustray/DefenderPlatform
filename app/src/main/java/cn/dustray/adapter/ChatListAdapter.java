@@ -2,13 +2,16 @@ package cn.dustray.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,10 +37,36 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.Holder
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_chat_recycle, parent, false);
 
         final Holder holder = new Holder(view);
+        holder.textContent.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                // 用于PopupWindow的View
+                View contentView=LayoutInflater.from(context).inflate(R.layout.popup_text_menu, null, false);
+                // 创建PopupWindow对象，其中：
+                // 第一个参数是用于PopupWindow中的View，第二个参数是PopupWindow的宽度，
+                // 第三个参数是PopupWindow的高度，第四个参数指定PopupWindow能否获得焦点
+                PopupWindow window=new PopupWindow(contentView, 400, 100, true);
+                // 设置PopupWindow的背景
+                window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                // 设置PopupWindow是否能响应外部点击事件
+                window.setOutsideTouchable(true);
+                // 设置PopupWindow是否能响应点击事件
+                window.setTouchable(true);
+                // 显示PopupWindow，其中：
+                // 第一个参数是PopupWindow的锚点，第二和第三个参数分别是PopupWindow相对锚点的x、y偏移
+                window.showAsDropDown(holder.textContent,0,-220);
+                // 或者也可以调用此方法显示PopupWindow，其中：
+                // 第一个参数是PopupWindow的父View，第二个参数是PopupWindow相对父View的位置，
+                // 第三和第四个参数分别是PopupWindow相对父View的x、y偏移
+                // window.showAtLocation(parent, gravity, x, y);
+                return false;
+            }
+        });
         holder.textContent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Toast.makeText(context, "0---"+holder.textContent.getText().toString() , Toast.LENGTH_LONG).show();
+
             }
         });
         return holder;
