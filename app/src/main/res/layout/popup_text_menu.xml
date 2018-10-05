@@ -2,24 +2,31 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ddd"
+    android:animateLayoutChanges="true"
+    android:background="@drawable/popup_o_black"
     android:orientation="horizontal"
-    android:padding="1dp"
-    android:animateLayoutChanges="true">
+    android:padding="1dp">
 
     <Button
         android:layout_width="70dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="#fff"
-        android:text="复制" />
+        android:background="#0000"
+        android:text="复制"
+        android:textColor="#fff" />
+
+    <RelativeLayout
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#fff"></RelativeLayout>
 
     <Button
         android:layout_width="70dp"
         android:layout_height="match_parent"
         android:layout_marginLeft="1dp"
         android:layout_weight="1"
-        android:background="#fff"
-        android:text="分享" />
+        android:background="#0000"
+        android:text="分享"
+        android:textColor="#fff" />
 
 </LinearLayout>

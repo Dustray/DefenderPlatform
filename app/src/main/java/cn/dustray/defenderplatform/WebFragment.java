@@ -2,6 +2,7 @@ package cn.dustray.defenderplatform;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Build;
@@ -14,13 +15,18 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.SslErrorHandler;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 
-public class WebFragment extends Fragment {
+public class WebFragment extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -33,6 +39,10 @@ public class WebFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     private WebView mainWebView;
+
+    private ImageButton btnBack, btnGo, btnMenu, btnGroup, btnShare;
+    private ProgressBar progressBar;
+    private LinearLayout webToolBar;
 
     public WebFragment() {
         // Required empty public constructor
@@ -93,26 +103,89 @@ public class WebFragment extends Fragment {
                 return false;
             }
 
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+                progressBar.setVisibility(View.VISIBLE);
+                //隐藏toolbar
+                    AppBarLayout mainAppBar = getActivity().findViewById(R.id.main_appbar);
+                    mainAppBar.setExpanded(false, true);
+
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                judgeWebState();
+                progressBar.setVisibility(View.INVISIBLE);
+
+            }
+
         });
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             mainWebView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            mainWebView.setOnScrollChangeListener(new WebView.OnScrollChangeListener() {
-                @Override
-                public void onScrollChange(View view, int x, int y, int oldX, int oldY) {
+        mainWebView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                super.onProgressChanged(view, newProgress);
+                progressBar.setProgress(newProgress);
+
+            }
+
+        });
+
+        mainWebView.setOnTouchListener(new View.OnTouchListener() {
+            float touchDownPosition = 0, touchUpPosition = 0;
+            boolean moveFlag = false;
+
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+
+                    //chatListView.performClick();
+                    touchDownPosition = motionEvent.getY();
+                    moveFlag = true;
+                }
+                //if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                if (moveFlag) {
+                    touchUpPosition = motionEvent.getY();
                     AppBarLayout mainAppBar = getActivity().findViewById(R.id.main_appbar);
-                    if (y > oldX) {
+                    if (touchDownPosition - touchUpPosition > 50) {
+                        //往上滑 隐藏toolbar和web tool bar
+                        // Toast.makeText(getActivity(), "弹键盘", Toast.LENGTH_LONG).show();
                         mainAppBar.setExpanded(false, true);
-                    } else {
+                        moveFlag = false;
+                    } else if (touchUpPosition - touchDownPosition > 50) {
+                        //往下滑 显示lbar和web tool bar
                         mainAppBar.setExpanded(true, true);
+                        moveFlag = false;
+
                     }
                 }
-
-            });
-        }
-
+                // }
+                return false;
+            }
+        });
         mainWebView.loadUrl("https://www.bing.com/");
+        initWebToolBar();
+        progressBar = getActivity().findViewById(R.id.web_progressbar);
+    }
+
+    private void initWebToolBar() {
+        webToolBar = getActivity().findViewById(R.id.web_tool_bar);
+
+        btnBack = getActivity().findViewById(R.id.btn_web_tool_back);
+        btnGo = getActivity().findViewById(R.id.btn_web_tool_go);
+        btnMenu = getActivity().findViewById(R.id.btn_web_tool_menu);
+        btnGroup = getActivity().findViewById(R.id.btn_web_tool_go);
+        btnShare = getActivity().findViewById(R.id.btn_web_tool_share);
+
+        btnBack.setOnClickListener(this);
+        btnGo.setOnClickListener(this);
+        btnMenu.setOnClickListener(this);
+        btnGroup.setOnClickListener(this);
+        btnShare.setOnClickListener(this);
     }
 
     public boolean canGoBack() {
@@ -120,9 +193,26 @@ public class WebFragment extends Fragment {
     }
 
     public void goBack() {
-        mainWebView.goBack();
+        if (mainWebView.canGoBack())
+            mainWebView.goBack();
+        judgeWebState();
     }
 
+    private void judgeWebState() {
+        if (mainWebView.canGoBack()) {
+            btnBack.setImageResource(R.drawable.ic_btn_back_black);
+        } else {
+            btnBack.setImageResource(R.drawable.ic_btn_back_gray);
+        }
+        if (mainWebView.canGoForward()) {
+            btnGo.setImageResource(R.drawable.ic_btn_go_black);
+        } else {
+            btnGo.setImageResource(R.drawable.ic_btn_go_gray);
+        }
+    }
+public void search(String searchStr){
+    mainWebView.loadUrl("https://m.baidu.com/s?from=1012852p&word=" + searchStr);
+}
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -162,6 +252,30 @@ public class WebFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_web_tool_back:
+                goBack();
+
+                break;
+            case R.id.btn_web_tool_go:
+                if (mainWebView.canGoForward())
+                    mainWebView.goForward();
+                judgeWebState();
+                break;
+            case R.id.btn_web_tool_menu:
+
+                break;
+            case R.id.btn_web_tool_group:
+
+                break;
+            case R.id.btn_web_tool_share:
+
+                break;
+        }
     }
 
     /**

@@ -1,19 +1,22 @@
 package cn.dustray.defenderplatform;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -23,14 +26,14 @@ import cn.dustray.adapter.MainViewPagerAdapter;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         ChatFragment.OnFragmentInteractionListener,
-        WebFragment.OnFragmentInteractionListener ,
-ChatToolFragment.OnListFragmentInteractionListener{
+        WebFragment.OnFragmentInteractionListener,
+        ChatToolFragment.OnListFragmentInteractionListener {
 
     private TabLayout titleTab;
     private ViewPager mainPage;
     private ChatFragment chatFragment = ChatFragment.newInstance();
     private WebFragment webFragment = WebFragment.newInstance();
-private AppBarLayout mainAppBar;
+    private AppBarLayout mainAppBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +41,7 @@ private AppBarLayout mainAppBar;
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
-mainAppBar =findViewById(R.id.main_appbar);
+        mainAppBar = findViewById(R.id.main_appbar);
 
         setSupportActionBar(toolbar);
 
@@ -52,6 +55,7 @@ mainAppBar =findViewById(R.id.main_appbar);
         navigationView.setNavigationItemSelectedListener(this);
 
         initTabPage();
+
 
     }
 
@@ -92,6 +96,27 @@ mainAppBar =findViewById(R.id.main_appbar);
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        final SearchView searchView = (SearchView) menu.findItem(R.id.ab_search).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                if (TextUtils.isEmpty(query)) {
+                    //Toast.makeText(MainActivity.this, "请输入查找内容！", Toast.LENGTH_SHORT).show();
+                } else {
+                    mainPage.setCurrentItem(1);
+                    webFragment.search(query);
+                    searchView.clearFocus();
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
         return true;
     }
 

@@ -1,18 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".WebFragment">
 
-        <WebView
-            android:id="@+id/main_webview"
-            android:layout_width="match_parent"
+    <WebView
+        android:id="@+id/main_webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/web_tool_bar"
+        android:layout_alignParentTop="true">
+
+    </WebView>
+
+    <ProgressBar
+        android:id="@+id/web_progressbar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="2dp" />
+
+    <LinearLayout
+        android:id="@+id/web_tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:background="#fff"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btn_web_tool_back"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true">
+            android:layout_weight="1"
+            android:background="@drawable/btn_web_tool"
+            android:src="@drawable/ic_btn_back_black" />
 
+        <ImageButton
+            android:id="@+id/btn_web_tool_go"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/btn_web_tool"
+            android:src="@drawable/ic_btn_go_gray" />
 
-        </WebView>
-</FrameLayout>
+        <ImageButton
+            android:id="@+id/btn_web_tool_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/btn_web_tool"
+            android:src="@drawable/ic_btn_menu_black" />
+
+        <ImageButton
+            android:id="@+id/btn_web_tool_group"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/btn_web_tool"
+            android:src="@drawable/ic_btn_group_black" />
+
+        <ImageButton
+            android:id="@+id/btn_web_tool_share"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/btn_web_tool"
+            android:src="@drawable/ic_btn_share_black" />
+
+    </LinearLayout>
+</RelativeLayout>
