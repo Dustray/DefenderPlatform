@@ -99,6 +99,7 @@ public class MainActivity extends AppCompatActivity
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         final SearchView searchView = (SearchView) menu.findItem(R.id.ab_search).getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setSubmitButtonEnabled(true);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -108,6 +109,7 @@ public class MainActivity extends AppCompatActivity
                     mainPage.setCurrentItem(1);
                     webFragment.search(query);
                     searchView.clearFocus();
+
                 }
                 return false;
             }

@@ -108,8 +108,8 @@ public class WebFragment extends Fragment implements View.OnClickListener {
                 super.onPageStarted(view, url, favicon);
                 progressBar.setVisibility(View.VISIBLE);
                 //隐藏toolbar
-                    AppBarLayout mainAppBar = getActivity().findViewById(R.id.main_appbar);
-                    mainAppBar.setExpanded(false, true);
+                AppBarLayout mainAppBar = getActivity().findViewById(R.id.main_appbar);
+                mainAppBar.setExpanded(false, true);
 
             }
 
@@ -210,9 +210,11 @@ public class WebFragment extends Fragment implements View.OnClickListener {
             btnGo.setImageResource(R.drawable.ic_btn_go_gray);
         }
     }
-public void search(String searchStr){
-    mainWebView.loadUrl("https://m.baidu.com/s?from=1012852p&word=" + searchStr);
-}
+
+    public void search(String searchStr) {
+        mainWebView.loadUrl("https://m.baidu.com/s?from=1012852p&word=" + searchStr);
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

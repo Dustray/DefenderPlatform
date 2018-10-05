@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:enterFadeDuration="100" android:exitFadeDuration="500">
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/colorPrimary">
 
-    <item android:state_pressed="false">
-        <shape android:useLevel="false">
-            <solid android:color="#fff" />
+                <solid android:color="#fff" />
 
-            <corners android:bottomLeftRadius="10dip" android:bottomRightRadius="10dip" android:topLeftRadius="10dip" android:topRightRadius="10dip" />
-        </shape>
-    </item>
-
-    <item android:state_pressed="true">
-        <shape android:useLevel="false">
-            <solid android:color="@null" />
-            <gradient android:endColor="#0000" android:gradientRadius="100" android:startColor="#4666" android:type="radial" />
-            <corners android:bottomLeftRadius="10dip" android:bottomRightRadius="10dip" android:topLeftRadius="10dip" android:topRightRadius="10dip" />
-        </shape>
-    </item>
-</selector>
+</ripple>
