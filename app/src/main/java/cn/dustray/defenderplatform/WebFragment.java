@@ -25,6 +25,9 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import cn.dustray.popupwindow.WebGroupPopup;
+import cn.dustray.popupwindow.WebMenuPopup;
+
 
 public class WebFragment extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
@@ -178,7 +181,7 @@ public class WebFragment extends Fragment implements View.OnClickListener {
         btnBack = getActivity().findViewById(R.id.btn_web_tool_back);
         btnGo = getActivity().findViewById(R.id.btn_web_tool_go);
         btnMenu = getActivity().findViewById(R.id.btn_web_tool_menu);
-        btnGroup = getActivity().findViewById(R.id.btn_web_tool_go);
+        btnGroup = getActivity().findViewById(R.id.btn_web_tool_group);
         btnShare = getActivity().findViewById(R.id.btn_web_tool_share);
 
         btnBack.setOnClickListener(this);
@@ -269,10 +272,11 @@ public class WebFragment extends Fragment implements View.OnClickListener {
                 judgeWebState();
                 break;
             case R.id.btn_web_tool_menu:
-
+                new WebMenuPopup(getActivity()).showAtBottom(webToolBar);
                 break;
             case R.id.btn_web_tool_group:
 
+                new WebGroupPopup(getActivity()).showAtBottom(webToolBar);
                 break;
             case R.id.btn_web_tool_share:
 
