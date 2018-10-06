@@ -21,6 +21,7 @@ import cn.dustray.adapter.WebGroupListAdapter;
 import cn.dustray.control.xWebView;
 import cn.dustray.defenderplatform.MainActivity;
 import cn.dustray.defenderplatform.R;
+import cn.dustray.defenderplatform.WebItemFragment;
 import cn.dustray.entity.ChatRecordEntity;
 import cn.dustray.tool.PixelConvert;
 
@@ -29,10 +30,10 @@ public class WebGroupPopup extends PopupWindow implements View.OnClickListener {
     private Context context;
     private RecyclerView webGroupList;
     private WebGroupListAdapter webGroupAdapter;
-    private List<xWebView> list;
+    private List<WebItemFragment> list;
     private ImageButton btnWebAdd;
 
-    public WebGroupPopup(Context context, List<xWebView> list) {
+    public WebGroupPopup(Context context, List<WebItemFragment> list) {
         this.context = context;
         this.list = list;
         init();
@@ -106,7 +107,7 @@ public class WebGroupPopup extends PopupWindow implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_web_add:
-                ((MainActivity)context).webFragment.createNewWeb();
+                ((MainActivity)context).webFragment.createNewFragment();
                 dismiss();
                 break;
         }

@@ -27,11 +27,12 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         ChatFragment.OnFragmentInteractionListener,
         WebFragment.OnFragmentInteractionListener,
-        ChatToolFragment.OnListFragmentInteractionListener {
+        ChatToolFragment.OnListFragmentInteractionListener,
+        WebItemFragment.OnFragmentInteractionListener {
 
     private TabLayout titleTab;
     private ViewPager mainPage;
-    public  ChatFragment chatFragment = ChatFragment.newInstance();
+    public ChatFragment chatFragment = ChatFragment.newInstance();
     public WebFragment webFragment = WebFragment.newInstance();
     private AppBarLayout mainAppBar;
 

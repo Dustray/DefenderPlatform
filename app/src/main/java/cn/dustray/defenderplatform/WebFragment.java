@@ -1,39 +1,26 @@
 package cn.dustray.defenderplatform;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
-import android.net.http.SslError;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.SslErrorHandler;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.dustray.control.xWebView;
 import cn.dustray.popupwindow.WebGroupPopup;
 import cn.dustray.popupwindow.WebMenuPopup;
 
 
-public class WebFragment extends Fragment implements View.OnClickListener {
+public class WebFragment extends Fragment implements View.OnClickListener, WebItemFragment.OnWebViewCreatedListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -45,12 +32,14 @@ public class WebFragment extends Fragment implements View.OnClickListener {
 
     private OnFragmentInteractionListener mListener;
 
-    private xWebView mainWebView;
 
     private ImageButton btnBack, btnGo, btnMenu, btnGroup, btnShare;
-    private ProgressBar progressBar;
     private LinearLayout webToolBar;
-    List<xWebView> webGroupArray = new ArrayList<>();
+    List<WebItemFragment> webFragArray = new ArrayList<>();
+
+    private WebItemFragment webFrag;
+    private FragmentManager manager;
+    private WebGroupPopup webGroupPopup;
 
     public WebFragment() {
         // Required empty public constructor
@@ -67,203 +56,28 @@ public class WebFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-
-        initWebView();
-
+        initFragment();
         initWebToolBar();
-        progressBar = getActivity().findViewById(R.id.web_progressbar);
         //btnBack.setImageBitmap(mainWebView.getCapture());
     }
 
-    private void initWebView() {
-        mainWebView = getView().findViewById(R.id.main_webview);
-        mainWebView.setWebViewClient(new WebViewClient() {
-            @Override
-            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-                handler.proceed(); // 接受所有网站的证书
-            }
+    private void initFragment() {
+        manager = getActivity().getSupportFragmentManager();
 
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-//
-//                if (url == null) return false;
-//
-//                try {
-//                    if (url.startsWith("http:") || url.startsWith("https:")) {
-//                        view.loadUrl(url);
-//                        return true;
-//                    } else {
-//                        Toast.makeText(getActivity(), "交流,角楼" , Toast.LENGTH_LONG).show();
-//                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-//                        startActivity(intent);
-//                        return false;
-//                    }
-//                } catch (Exception e) { //防止crash (如果手机上没有安装处理某个scheme开头的url的APP, 会导致crash)
-//                    return false;
-//                }
-                return false;
-            }
-
-            @Override
-            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                super.onPageStarted(view, url, favicon);
-                progressBar.setVisibility(View.VISIBLE);
-                //隐藏toolbar
-                AppBarLayout mainAppBar = getActivity().findViewById(R.id.main_appbar);
-                mainAppBar.setExpanded(false, true);
-
-            }
-
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(view, url);
-                judgeWebState();
-                progressBar.setVisibility(View.INVISIBLE);
-
-            }
-
-        });
-
-        mainWebView.setWebChromeClient(new WebChromeClient() {
-            @Override
-            public void onProgressChanged(WebView view, int newProgress) {
-                super.onProgressChanged(view, newProgress);
-                progressBar.setProgress(newProgress);
-
-            }
-
-        });
-
-        mainWebView.setOnTouchListener(new View.OnTouchListener() {
-            float touchDownPosition = 0, touchUpPosition = 0;
-            boolean moveFlag = false;
-
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-
-                    //chatListView.performClick();
-                    touchDownPosition = motionEvent.getY();
-                    moveFlag = true;
-                }
-                //if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                if (moveFlag) {
-                    touchUpPosition = motionEvent.getY();
-                    AppBarLayout mainAppBar = getActivity().findViewById(R.id.main_appbar);
-                    if (touchDownPosition - touchUpPosition > 50) {
-                        //往上滑 隐藏toolbar和web tool bar
-                        // Toast.makeText(getActivity(), "弹键盘", Toast.LENGTH_LONG).show();
-                        mainAppBar.setExpanded(false, true);
-                        moveFlag = false;
-                    } else if (touchUpPosition - touchDownPosition > 50) {
-                        //往下滑 显示lbar和web tool bar
-                        mainAppBar.setExpanded(true, true);
-                        moveFlag = false;
-
-                    }
-                }
-                // }
-                return false;
-            }
-        });
-        mainWebView.loadUrl("https://www.bing.com/");
-        webGroupArray.add(mainWebView);//入列
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.setCustomAnimations(R.animator.fragment_slide_top_enter, R.animator.fragment_slide_bottom_exit);
+        webFrag = WebItemFragment.newInstance(this);
+        transaction.add(R.id.web_main_frag, webFrag);
+        transaction.commit();
+        webFragArray.add(webFrag);
     }
 
-    private xWebView initWebView(xWebView web) {
-        web = getView().findViewById(R.id.main_webview);
-        web.setWebViewClient(new WebViewClient() {
-            @Override
-            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-                handler.proceed(); // 接受所有网站的证书
-            }
+    public boolean canGoBack() {
+        return webFrag.canGoBack();
+    }
 
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-//
-//                if (url == null) return false;
-//
-//                try {
-//                    if (url.startsWith("http:") || url.startsWith("https:")) {
-//                        view.loadUrl(url);
-//                        return true;
-//                    } else {
-//                        Toast.makeText(getActivity(), "交流,角楼" , Toast.LENGTH_LONG).show();
-//                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-//                        startActivity(intent);
-//                        return false;
-//                    }
-//                } catch (Exception e) { //防止crash (如果手机上没有安装处理某个scheme开头的url的APP, 会导致crash)
-//                    return false;
-//                }
-                return false;
-            }
-
-            @Override
-            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                super.onPageStarted(view, url, favicon);
-                progressBar.setVisibility(View.VISIBLE);
-                //隐藏toolbar
-                AppBarLayout mainAppBar = getActivity().findViewById(R.id.main_appbar);
-                mainAppBar.setExpanded(false, true);
-
-            }
-
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(view, url);
-                judgeWebState();
-                progressBar.setVisibility(View.INVISIBLE);
-
-            }
-
-        });
-
-        web.setWebChromeClient(new WebChromeClient() {
-            @Override
-            public void onProgressChanged(WebView view, int newProgress) {
-                super.onProgressChanged(view, newProgress);
-                progressBar.setProgress(newProgress);
-
-            }
-
-        });
-
-        web.setOnTouchListener(new View.OnTouchListener() {
-            float touchDownPosition = 0, touchUpPosition = 0;
-            boolean moveFlag = false;
-
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-
-                    //chatListView.performClick();
-                    touchDownPosition = motionEvent.getY();
-                    moveFlag = true;
-                }
-                //if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                if (moveFlag) {
-                    touchUpPosition = motionEvent.getY();
-                    AppBarLayout mainAppBar = getActivity().findViewById(R.id.main_appbar);
-                    if (touchDownPosition - touchUpPosition > 50) {
-                        //往上滑 隐藏toolbar和web tool bar
-                        // Toast.makeText(getActivity(), "弹键盘", Toast.LENGTH_LONG).show();
-                        mainAppBar.setExpanded(false, true);
-                        moveFlag = false;
-                    } else if (touchUpPosition - touchDownPosition > 50) {
-                        //往下滑 显示lbar和web tool bar
-                        mainAppBar.setExpanded(true, true);
-                        moveFlag = false;
-
-                    }
-                }
-                // }
-                return false;
-            }
-        });
-        web.loadUrl("https://www.bing.com/");
-        return web;
+    public void goBack() {
+        webFrag.goBack();
     }
 
     private void initWebToolBar() {
@@ -280,45 +94,54 @@ public class WebFragment extends Fragment implements View.OnClickListener {
         btnMenu.setOnClickListener(this);
         btnGroup.setOnClickListener(this);
         btnShare.setOnClickListener(this);
+
     }
 
-    public boolean canGoBack() {
-        return mainWebView.canGoBack();
+    public void createNewFragment() {
+        initFragment();
     }
 
-    public void goBack() {
-        if (mainWebView.canGoBack())
-            mainWebView.goBack();
+    public void loadFragment(WebItemFragment fragment) {
+//        webFrag = fragment;
+//        FragmentTransaction transaction = manager.beginTransaction();
+//        transaction.replace(R.id.web_main_frag, fragment);
+//        transaction.commit();
+        if (webGroupPopup != null) {
+            webGroupPopup.dismiss();
+        }
+        switchContent(webFrag, fragment);
         judgeWebState();
     }
 
+    public void switchContent(WebItemFragment from, WebItemFragment to) {
+        if (webFrag != to) {
+            webFrag = to;
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.setCustomAnimations(R.animator.fragment_slide_top_enter, R.animator.fragment_slide_bottom_exit);
+            if (!to.isAdded()) {    // 先判断是否被add过
+                transaction.hide(from).add(R.id.web_main_frag, to).commit(); // 隐藏当前的fragment，add下一个到Activity中
+            } else {
+                transaction.hide(from).show(to).commit(); // 隐藏当前的fragment，显示下一个
+            }
+
+        }
+    }
+
+    public void search(String searchStr) {
+        webFrag.loadUrl("https://m.baidu.com/s?from=1012852p&word=" + searchStr);
+    }
+
     private void judgeWebState() {
-        if (mainWebView.canGoBack()) {
+        if (webFrag.canGoBack()) {
             btnBack.setImageResource(R.drawable.ic_btn_back_black);
         } else {
             btnBack.setImageResource(R.drawable.ic_btn_back_gray);
         }
-        if (mainWebView.canGoForward()) {
+        if (webFrag.canGoForward()) {
             btnGo.setImageResource(R.drawable.ic_btn_go_black);
         } else {
             btnGo.setImageResource(R.drawable.ic_btn_go_gray);
         }
-    }
-
-    public void createNewWeb() {
-        xWebView web = new xWebView(getActivity());
-        //mainWebView = web;
-        web = initWebView(web);
-        webGroupArray.add(web);//入列
-        mainWebView = web;
-    }
-
-    public void loadWeb(xWebView web) {
-        mainWebView = web;
-    }
-
-    public void search(String searchStr) {
-        mainWebView.loadUrl("https://m.baidu.com/s?from=1012852p&word=" + searchStr);
     }
 
     @Override
@@ -337,6 +160,7 @@ public class WebFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_web, container, false);
     }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -366,12 +190,13 @@ public class WebFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_web_tool_back:
-                goBack();
-
+                if (webFrag.canGoBack())
+                    webFrag.goBack();
+                judgeWebState();
                 break;
             case R.id.btn_web_tool_go:
-                if (mainWebView.canGoForward())
-                    mainWebView.goForward();
+                if (webFrag.canGoForward())
+                    webFrag.goForward();
                 judgeWebState();
                 break;
             case R.id.btn_web_tool_menu:
@@ -379,12 +204,19 @@ public class WebFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.btn_web_tool_group:
                 //webGroupArray.add(mainWebView);
-                new WebGroupPopup(getActivity(), webGroupArray).showAtBottom(webToolBar);
+                webGroupPopup = new WebGroupPopup(getActivity(), webFragArray);
+                webGroupPopup.showAtBottom(webToolBar);
                 break;
             case R.id.btn_web_tool_share:
 
                 break;
         }
+    }
+
+    @Override
+    public void onWebViewCreateFinished() {
+
+        judgeWebState();
     }
 
     /**

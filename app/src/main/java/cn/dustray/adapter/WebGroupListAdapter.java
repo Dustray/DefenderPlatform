@@ -15,13 +15,14 @@ import java.util.List;
 import cn.dustray.control.xWebView;
 import cn.dustray.defenderplatform.MainActivity;
 import cn.dustray.defenderplatform.R;
+import cn.dustray.defenderplatform.WebItemFragment;
 
 public class WebGroupListAdapter extends RecyclerView.Adapter<WebGroupListAdapter.Holder> {
 
     final Context context;
-    List<xWebView> list;
+    List<WebItemFragment> list;
 
-    public WebGroupListAdapter(Context context, List<xWebView> list) {
+    public WebGroupListAdapter(Context context, List<WebItemFragment> list) {
         this.context = context;
         this.list = list;
     }
@@ -46,13 +47,13 @@ public class WebGroupListAdapter extends RecyclerView.Adapter<WebGroupListAdapte
     @Override
     public void onBindViewHolder(Holder holder, final int position) {
         holder.setIsRecyclable(false);//混乱临时解决办法
-        xWebView s = list.get(position);
+        xWebView s = list.get(position).mainWebView;
         holder.captureImage.setImageBitmap(s.getCapture());
         holder.captureImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity)context).webFragment.loadWeb(list.get(position));
-                Toast.makeText(context,list.get(position).toString()+""+position,Toast.LENGTH_LONG).show();
+                ((MainActivity)context).webFragment.loadFragment(list.get(position));
+             //   Toast.makeText(context,list.get(position).toString()+""+position,Toast.LENGTH_LONG).show();
             }
         });
     }
