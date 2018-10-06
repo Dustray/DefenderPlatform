@@ -43,7 +43,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
     private OnFragmentInteractionListener mListener;
 
     private RecyclerView chatListView;
-    ChatListAdapter adapter;
+    private ChatListAdapter adapter;
     private Button sendBtn;
     private ImageButton moToolBtn;
     private EditText sendContent;
@@ -170,6 +170,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
 
         adapter = new ChatListAdapter(getActivity(), list);
         chatListView.setAdapter(adapter);
+
         sendBtn = getActivity().findViewById(R.id.chat_send_btn);
         sendBtn.setOnClickListener(this);
         sendContent = getActivity().findViewById(R.id.chat_send_content);

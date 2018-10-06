@@ -31,8 +31,8 @@ public class MainActivity extends AppCompatActivity
 
     private TabLayout titleTab;
     private ViewPager mainPage;
-    private ChatFragment chatFragment = ChatFragment.newInstance();
-    private WebFragment webFragment = WebFragment.newInstance();
+    public  ChatFragment chatFragment = ChatFragment.newInstance();
+    public WebFragment webFragment = WebFragment.newInstance();
     private AppBarLayout mainAppBar;
 
     @Override

@@ -11,6 +11,7 @@ import android.widget.PopupWindow;
 import android.view.View;
 
 import cn.dustray.defenderplatform.R;
+import cn.dustray.tool.PixelConvert;
 
 public class WebMenuPopup extends PopupWindow implements View.OnClickListener {
 
@@ -30,10 +31,11 @@ public class WebMenuPopup extends PopupWindow implements View.OnClickListener {
 
     private void initWindow() {
         this.setWidth(WindowManager.LayoutParams.MATCH_PARENT);
-        this.setHeight(500);
+        this.setHeight(PixelConvert.dip2px(context,100));
         this.setFocusable(true);
         this.setOutsideTouchable(true);
         this.setTouchable(true);
+        this.setElevation(1);
         this.update();
         //实例化一个ColorDrawable颜色为半透明
        ColorDrawable dw = new ColorDrawable(Color.WHITE);        //设置SelectPicPopupWindow弹出窗体的背景

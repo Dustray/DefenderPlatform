@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:layout_margin="5dp">
+
+    <ImageButton
+        android:id="@+id/web_card_item_image"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:adjustViewBounds="true"
+        android:background="@color/colorPrimary"
+        android:scaleType="fitXY" />
+
+    <ImageButton
+        android:id="@+id/web_card_item_close"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/btn_web_card_close"
+        android:elevation="2dp"
+        android:padding="6dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_btn_close_black" />
+</android.support.v7.widget.CardView>

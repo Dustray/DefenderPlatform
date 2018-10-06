@@ -25,6 +25,10 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import cn.dustray.control.xWebView;
 import cn.dustray.popupwindow.WebGroupPopup;
 import cn.dustray.popupwindow.WebMenuPopup;
 
@@ -41,11 +45,12 @@ public class WebFragment extends Fragment implements View.OnClickListener {
 
     private OnFragmentInteractionListener mListener;
 
-    private WebView mainWebView;
+    private xWebView mainWebView;
 
     private ImageButton btnBack, btnGo, btnMenu, btnGroup, btnShare;
     private ProgressBar progressBar;
     private LinearLayout webToolBar;
+    List<xWebView> webGroupArray = new ArrayList<>();
 
     public WebFragment() {
         // Required empty public constructor
@@ -62,23 +67,17 @@ public class WebFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+
+        initWebView();
+
+        initWebToolBar();
+        progressBar = getActivity().findViewById(R.id.web_progressbar);
+        //btnBack.setImageBitmap(mainWebView.getCapture());
+    }
+
+    private void initWebView() {
         mainWebView = getView().findViewById(R.id.main_webview);
-        //支持javascript
-        mainWebView.getSettings().setJavaScriptEnabled(true);
-        // 设置可以支持缩放
-        mainWebView.getSettings().setSupportZoom(true);
-        // 设置出现缩放工具
-        mainWebView.getSettings().setBuiltInZoomControls(false);
-        //扩大比例的缩放
-        mainWebView.getSettings().setUseWideViewPort(true);
-        //自适应屏幕
-        mainWebView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-        mainWebView.getSettings().setLoadWithOverviewMode(true);
-
-
-        if (Build.VERSION.SDK_INT >= 19) {
-            mainWebView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-        }
         mainWebView.setWebViewClient(new WebViewClient() {
             @Override
             public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
@@ -125,9 +124,7 @@ public class WebFragment extends Fragment implements View.OnClickListener {
             }
 
         });
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            mainWebView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
-        }
+
         mainWebView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
@@ -171,8 +168,102 @@ public class WebFragment extends Fragment implements View.OnClickListener {
             }
         });
         mainWebView.loadUrl("https://www.bing.com/");
-        initWebToolBar();
-        progressBar = getActivity().findViewById(R.id.web_progressbar);
+        webGroupArray.add(mainWebView);//入列
+    }
+
+    private xWebView initWebView(xWebView web) {
+        web = getView().findViewById(R.id.main_webview);
+        web.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+                handler.proceed(); // 接受所有网站的证书
+            }
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//
+//                if (url == null) return false;
+//
+//                try {
+//                    if (url.startsWith("http:") || url.startsWith("https:")) {
+//                        view.loadUrl(url);
+//                        return true;
+//                    } else {
+//                        Toast.makeText(getActivity(), "交流,角楼" , Toast.LENGTH_LONG).show();
+//                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+//                        startActivity(intent);
+//                        return false;
+//                    }
+//                } catch (Exception e) { //防止crash (如果手机上没有安装处理某个scheme开头的url的APP, 会导致crash)
+//                    return false;
+//                }
+                return false;
+            }
+
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+                progressBar.setVisibility(View.VISIBLE);
+                //隐藏toolbar
+                AppBarLayout mainAppBar = getActivity().findViewById(R.id.main_appbar);
+                mainAppBar.setExpanded(false, true);
+
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                judgeWebState();
+                progressBar.setVisibility(View.INVISIBLE);
+
+            }
+
+        });
+
+        web.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                super.onProgressChanged(view, newProgress);
+                progressBar.setProgress(newProgress);
+
+            }
+
+        });
+
+        web.setOnTouchListener(new View.OnTouchListener() {
+            float touchDownPosition = 0, touchUpPosition = 0;
+            boolean moveFlag = false;
+
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+
+                    //chatListView.performClick();
+                    touchDownPosition = motionEvent.getY();
+                    moveFlag = true;
+                }
+                //if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                if (moveFlag) {
+                    touchUpPosition = motionEvent.getY();
+                    AppBarLayout mainAppBar = getActivity().findViewById(R.id.main_appbar);
+                    if (touchDownPosition - touchUpPosition > 50) {
+                        //往上滑 隐藏toolbar和web tool bar
+                        // Toast.makeText(getActivity(), "弹键盘", Toast.LENGTH_LONG).show();
+                        mainAppBar.setExpanded(false, true);
+                        moveFlag = false;
+                    } else if (touchUpPosition - touchDownPosition > 50) {
+                        //往下滑 显示lbar和web tool bar
+                        mainAppBar.setExpanded(true, true);
+                        moveFlag = false;
+
+                    }
+                }
+                // }
+                return false;
+            }
+        });
+        web.loadUrl("https://www.bing.com/");
+        return web;
     }
 
     private void initWebToolBar() {
@@ -212,6 +303,18 @@ public class WebFragment extends Fragment implements View.OnClickListener {
         } else {
             btnGo.setImageResource(R.drawable.ic_btn_go_gray);
         }
+    }
+
+    public void createNewWeb() {
+        xWebView web = new xWebView(getActivity());
+        //mainWebView = web;
+        web = initWebView(web);
+        webGroupArray.add(web);//入列
+        mainWebView = web;
+    }
+
+    public void loadWeb(xWebView web) {
+        mainWebView = web;
     }
 
     public void search(String searchStr) {
@@ -275,8 +378,8 @@ public class WebFragment extends Fragment implements View.OnClickListener {
                 new WebMenuPopup(getActivity()).showAtBottom(webToolBar);
                 break;
             case R.id.btn_web_tool_group:
-
-                new WebGroupPopup(getActivity()).showAtBottom(webToolBar);
+                //webGroupArray.add(mainWebView);
+                new WebGroupPopup(getActivity(), webGroupArray).showAtBottom(webToolBar);
                 break;
             case R.id.btn_web_tool_share:
 
