@@ -59,6 +59,7 @@ public class WebGroupListAdapter extends RecyclerView.Adapter<WebGroupListAdapte
 
                 s.onDestroy();
                 list.remove(position);
+                notifyItemRangeChanged(0,list.size());
                 if (list.size() == 0) {
                     frag.dismiss();
                     ((MainActivity) context).webFragment.createNewFragment();

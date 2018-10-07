@@ -109,7 +109,7 @@ public class WebGroupPopup extends PopupWindow implements View.OnClickListener {
                 break;
             case R.id.btn_web_closeall:
                 webGroupAdapter.removeAllItem();
-               
+
                 break;
         }
     }

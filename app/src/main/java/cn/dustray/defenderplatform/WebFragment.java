@@ -12,21 +12,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.dustray.popupwindow.WebGroupPopup;
 import cn.dustray.popupwindow.WebMenuPopup;
+import cn.dustray.tool.xToast;
 
 
-public class WebFragment extends Fragment implements View.OnClickListener, WebTabFragment.OnWebViewCreatedListener {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+public class WebFragment extends Fragment implements View.OnClickListener, WebTabFragment.OnWebViewCreatedListener
+,View.OnLongClickListener {
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -66,13 +67,19 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
         manager = getActivity().getSupportFragmentManager();
 
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.setCustomAnimations(R.animator.fragment_slide_top_enter, R.animator.fragment_slide_bottom_exit);
+        transaction.setCustomAnimations(R.animator.fragment_slide_right_enter, R.animator.fragment_slide_left_exit);
         webFrag = WebTabFragment.newInstance(this);
         transaction.add(R.id.web_main_frag, webFrag);
         transaction.commit();
         webFragArray.add(webFrag);
     }
 
+    public void goHome() {
+        webFrag.goHome();
+    }
+    public void refresh() {
+        webFrag.refresh();
+    }
     public boolean canGoBack() {
         return webFrag.canGoBack();
     }
@@ -93,7 +100,9 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
         btnBack.setOnClickListener(this);
         btnGo.setOnClickListener(this);
         btnMenu.setOnClickListener(this);
+        btnMenu.setOnLongClickListener(this);
         btnGroup.setOnClickListener(this);
+        btnGroup.setOnLongClickListener(this);
         btnShare.setOnClickListener(this);
 
     }
@@ -118,7 +127,7 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
         if (webFrag != to) {
             webFrag = to;
             FragmentTransaction transaction = manager.beginTransaction();
-            transaction.setCustomAnimations(R.animator.fragment_slide_top_enter, R.animator.fragment_slide_bottom_exit);
+            transaction.setCustomAnimations(R.animator.fragment_slide_right_enter, R.animator.fragment_slide_left_exit);
             if (!to.isAdded()) {    // 先判断是否被add过
                 transaction.hide(from).add(R.id.web_main_frag, to).commit(); // 隐藏当前的fragment，add下一个到Activity中
             } else {
@@ -144,6 +153,7 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
             btnGo.setImageResource(R.drawable.ic_btn_go_gray);
         }
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -213,12 +223,28 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
                 break;
         }
     }
+    @Override
+    public boolean onLongClick(View view) {
+        switch (view.getId()) {
 
+            case R.id.btn_web_tool_menu:
+                goHome();
+                xToast.toast(getActivity(),"回到首页");
+                break;
+            case R.id.btn_web_tool_group:
+                createNewFragment();
+                xToast.toast(getActivity(),"新建标签页");
+                break;
+        }
+        return true;
+    }
     @Override
     public void onWebViewCreateFinished() {
 
         judgeWebState();
     }
+
+
 
     /**
      * This interface must be implemented by activities that contain this

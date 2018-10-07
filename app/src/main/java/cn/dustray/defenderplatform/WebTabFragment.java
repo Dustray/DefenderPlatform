@@ -31,6 +31,7 @@ public class WebTabFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private static  final String homeUrl="https://www.bing.com/";
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -97,7 +98,6 @@ public class WebTabFragment extends Fragment {
                 if (webListener != null) {
                     webListener.onWebViewCreateFinished();
                 }
-
                 progressBar.setVisibility(View.INVISIBLE);
 
             }
@@ -105,6 +105,7 @@ public class WebTabFragment extends Fragment {
         });
 
         mainWebView.setWebChromeClient(new WebChromeClient() {
+
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 super.onProgressChanged(view, newProgress);
@@ -146,12 +147,17 @@ public class WebTabFragment extends Fragment {
                 return false;
             }
         });
-        mainWebView.loadUrl("https://www.bing.com/");
+        mainWebView.loadUrl(homeUrl);
         if (webListener != null) {
             webListener.onWebViewCreateFinished();
         }
     }
-
+    public void goHome() {
+        mainWebView.loadUrl(homeUrl);
+    }
+    public void refresh() {
+        mainWebView.reload();
+    }
     public boolean canGoBack() {
         return mainWebView.canGoBack();
     }

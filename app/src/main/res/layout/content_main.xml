@@ -8,12 +8,12 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <android.support.v4.view.ViewPager
+    <cn.dustray.control.xViewPager
         android:id="@+id/main_page"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </android.support.v4.view.ViewPager>
+    </cn.dustray.control.xViewPager>
 
 
 

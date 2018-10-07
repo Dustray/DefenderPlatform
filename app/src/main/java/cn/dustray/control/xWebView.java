@@ -31,12 +31,11 @@ public class xWebView extends WebView {
 
     public xWebView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        //init();
+        init();
     }
 
     public xWebView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        //init();
     }
 
     private void init() {
@@ -53,6 +52,8 @@ public class xWebView extends WebView {
         this.getSettings().setLoadWithOverviewMode(true);
         this.getSettings().setDomStorageEnabled(true);
         this.getSettings().setLoadsImagesAutomatically(true); // 加载图片
+        this.getSettings().setAllowFileAccess(true);
+       this.getSettings().setAppCacheEnabled(true);
         this.getSettings().setTextZoom(100);
         if (Build.VERSION.SDK_INT >= 19) {
             this.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
@@ -68,7 +69,7 @@ public class xWebView extends WebView {
         this.destroyDrawingCache();
         this.setDrawingCacheEnabled(true);//设置能否缓存图片信息（drawing cache）
         this.buildDrawingCache();
-        Bitmap bmp = Bitmap.createScaledBitmap(this.getDrawingCache(),450,800,true);
+        Bitmap bmp = Bitmap.createScaledBitmap(this.getDrawingCache(), 450, 800, true);
 
         //this.setDrawingCacheEnabled(false);
         return bmp;

@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
 import cn.dustray.adapter.MainViewPagerAdapter;
+import cn.dustray.control.xViewPager;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity
         WebTabFragment.OnFragmentInteractionListener {
 
     private TabLayout titleTab;
-    private ViewPager mainPage;
+    private xViewPager mainPage;
     public ChatFragment chatFragment = ChatFragment.newInstance();
     public WebFragment webFragment = WebFragment.newInstance();
     private AppBarLayout mainAppBar;
@@ -69,6 +70,13 @@ public class MainActivity extends AppCompatActivity
         mainPage.setAdapter(adapter);
         titleTab.setupWithViewPager(mainPage);
 
+    }
+
+    public boolean changePageScroll() {
+        return mainPage.changeScrollFlag();
+    }
+    public boolean getPageScrollState(){
+        return mainPage.getScrollFlag();
     }
 
     @Override
