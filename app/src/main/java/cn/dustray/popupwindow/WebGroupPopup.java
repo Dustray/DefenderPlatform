@@ -26,7 +26,7 @@ public class WebGroupPopup extends PopupWindow implements View.OnClickListener {
     private RecyclerView webGroupList;
     private WebGroupListAdapter webGroupAdapter;
     private List<WebTabFragment> list;
-    private ImageButton btnWebAdd;
+    private ImageButton btnWebAdd, btnWebCloseAll;
 
     public WebGroupPopup(Context context, List<WebTabFragment> list) {
         this.context = context;
@@ -47,6 +47,8 @@ public class WebGroupPopup extends PopupWindow implements View.OnClickListener {
     private void initButton() {
         btnWebAdd = getContentView().findViewById(R.id.btn_web_add);
         btnWebAdd.setOnClickListener(this);
+        btnWebCloseAll = getContentView().findViewById(R.id.btn_web_closeall);
+        btnWebCloseAll.setOnClickListener(this);
     }
 
     private void initRecycle() {
@@ -56,7 +58,7 @@ public class WebGroupPopup extends PopupWindow implements View.OnClickListener {
         layoutManager.setStackFromEnd(true);
         webGroupList.setLayoutManager(layoutManager);
         //new LinearSnapHelper().attachToRecyclerView(webGroupList);
-        webGroupAdapter = new WebGroupListAdapter(context, list);
+        webGroupAdapter = new WebGroupListAdapter(context, list, this);
         webGroupList.setAdapter(webGroupAdapter);
 
     }
@@ -102,8 +104,12 @@ public class WebGroupPopup extends PopupWindow implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_web_add:
-                ((MainActivity)context).webFragment.createNewFragment();
+                ((MainActivity) context).webFragment.createNewFragment();
                 dismiss();
+                break;
+            case R.id.btn_web_closeall:
+                webGroupAdapter.removeAllItem();
+               
                 break;
         }
     }

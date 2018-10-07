@@ -12,16 +12,20 @@ import java.util.List;
 
 import cn.dustray.defenderplatform.MainActivity;
 import cn.dustray.defenderplatform.R;
+import cn.dustray.defenderplatform.WebFragment;
 import cn.dustray.defenderplatform.WebTabFragment;
+import cn.dustray.popupwindow.WebGroupPopup;
 
 public class WebGroupListAdapter extends RecyclerView.Adapter<WebGroupListAdapter.Holder> {
 
     final Context context;
     List<WebTabFragment> list;
+    WebGroupPopup frag;
 
-    public WebGroupListAdapter(Context context, List<WebTabFragment> list) {
+    public WebGroupListAdapter(Context context, List<WebTabFragment> list, WebGroupPopup frag) {
         this.context = context;
         this.list = list;
+        this.frag = frag;
     }
 
     @NonNull
@@ -29,7 +33,7 @@ public class WebGroupListAdapter extends RecyclerView.Adapter<WebGroupListAdapte
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_web_group_recycle, parent, false);
 
-         Holder holder = new Holder(view);
+        Holder holder = new Holder(view);
 
 
         return holder;
@@ -44,18 +48,35 @@ public class WebGroupListAdapter extends RecyclerView.Adapter<WebGroupListAdapte
         holder.captureImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity)context).webFragment.loadFragment(s);
-             //   Toast.makeText(context,list.get(position).toString()+""+position,Toast.LENGTH_LONG).show();
+                ((MainActivity) context).webFragment.loadFragment(s);
+                //   Toast.makeText(context,list.get(position).toString()+""+position,Toast.LENGTH_LONG).show();
             }
         });
         holder.closeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                s.onDestroy();
-               list.remove(position);
+                notifyItemRemoved(position);
 
+                s.onDestroy();
+                list.remove(position);
+                if (list.size() == 0) {
+                    frag.dismiss();
+                    ((MainActivity) context).webFragment.createNewFragment();
+                }
             }
         });
+    }
+
+    public void removeAllItem() {
+        for (int i = 0; i < getItemCount(); i++) {
+            notifyItemRemoved(i);
+            list.get(i).onDestroy();
+        }
+        list.clear();
+        if (list.size() == 0) {
+            frag.dismiss();
+            ((MainActivity) context).webFragment.createNewFragment();
+        }
     }
 
     @Override
