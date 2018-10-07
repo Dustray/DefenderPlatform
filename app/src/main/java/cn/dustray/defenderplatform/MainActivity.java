@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,6 +20,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+
 import cn.dustray.adapter.MainViewPagerAdapter;
 
 public class MainActivity extends AppCompatActivity
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity
         ChatFragment.OnFragmentInteractionListener,
         WebFragment.OnFragmentInteractionListener,
         ChatToolFragment.OnListFragmentInteractionListener,
-        WebItemFragment.OnFragmentInteractionListener {
+        WebTabFragment.OnFragmentInteractionListener {
 
     private TabLayout titleTab;
     private ViewPager mainPage;
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
         mainAppBar = findViewById(R.id.main_appbar);
-
+        Fresco.initialize(this);//初始化list图片处理
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

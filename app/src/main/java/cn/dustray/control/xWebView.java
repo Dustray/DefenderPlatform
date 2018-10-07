@@ -26,14 +26,17 @@ public class xWebView extends WebView {
 
     public xWebView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        init();
     }
 
     public xWebView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        //init();
     }
 
     public xWebView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+        //init();
     }
 
     private void init() {
@@ -65,7 +68,7 @@ public class xWebView extends WebView {
         this.destroyDrawingCache();
         this.setDrawingCacheEnabled(true);//设置能否缓存图片信息（drawing cache）
         this.buildDrawingCache();
-        Bitmap bmp = Bitmap.createBitmap(this.getDrawingCache());
+        Bitmap bmp = Bitmap.createScaledBitmap(this.getDrawingCache(),450,800,true);
 
         //this.setDrawingCacheEnabled(false);
         return bmp;

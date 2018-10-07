@@ -20,7 +20,7 @@ import cn.dustray.popupwindow.WebGroupPopup;
 import cn.dustray.popupwindow.WebMenuPopup;
 
 
-public class WebFragment extends Fragment implements View.OnClickListener, WebItemFragment.OnWebViewCreatedListener {
+public class WebFragment extends Fragment implements View.OnClickListener, WebTabFragment.OnWebViewCreatedListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -35,9 +35,9 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebIt
 
     private ImageButton btnBack, btnGo, btnMenu, btnGroup, btnShare;
     private LinearLayout webToolBar;
-    List<WebItemFragment> webFragArray = new ArrayList<>();
+    List<WebTabFragment> webFragArray = new ArrayList<>();
 
-    private WebItemFragment webFrag;
+    private WebTabFragment webFrag;
     private FragmentManager manager;
     private WebGroupPopup webGroupPopup;
 
@@ -56,6 +56,7 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebIt
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         initFragment();
         initWebToolBar();
         //btnBack.setImageBitmap(mainWebView.getCapture());
@@ -66,7 +67,7 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebIt
 
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.setCustomAnimations(R.animator.fragment_slide_top_enter, R.animator.fragment_slide_bottom_exit);
-        webFrag = WebItemFragment.newInstance(this);
+        webFrag = WebTabFragment.newInstance(this);
         transaction.add(R.id.web_main_frag, webFrag);
         transaction.commit();
         webFragArray.add(webFrag);
@@ -101,7 +102,7 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebIt
         initFragment();
     }
 
-    public void loadFragment(WebItemFragment fragment) {
+    public void loadFragment(WebTabFragment fragment) {
 //        webFrag = fragment;
 //        FragmentTransaction transaction = manager.beginTransaction();
 //        transaction.replace(R.id.web_main_frag, fragment);
@@ -113,7 +114,7 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebIt
         judgeWebState();
     }
 
-    public void switchContent(WebItemFragment from, WebItemFragment to) {
+    public void switchContent(WebTabFragment from, WebTabFragment to) {
         if (webFrag != to) {
             webFrag = to;
             FragmentTransaction transaction = manager.beginTransaction();

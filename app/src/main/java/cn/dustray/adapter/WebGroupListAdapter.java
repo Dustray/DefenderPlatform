@@ -7,22 +7,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import java.util.List;
 
-import cn.dustray.control.xWebView;
 import cn.dustray.defenderplatform.MainActivity;
 import cn.dustray.defenderplatform.R;
-import cn.dustray.defenderplatform.WebItemFragment;
+import cn.dustray.defenderplatform.WebTabFragment;
 
 public class WebGroupListAdapter extends RecyclerView.Adapter<WebGroupListAdapter.Holder> {
 
     final Context context;
-    List<WebItemFragment> list;
+    List<WebTabFragment> list;
 
-    public WebGroupListAdapter(Context context, List<WebItemFragment> list) {
+    public WebGroupListAdapter(Context context, List<WebTabFragment> list) {
         this.context = context;
         this.list = list;
     }
@@ -32,28 +29,31 @@ public class WebGroupListAdapter extends RecyclerView.Adapter<WebGroupListAdapte
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_web_group_recycle, parent, false);
 
-        final Holder holder = new Holder(view);
+         Holder holder = new Holder(view);
 
-        holder.closeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Toast.makeText(context, "0---"+holder.textContent.getText().toString() , Toast.LENGTH_LONG).show();
 
-            }
-        });
         return holder;
     }
 
     @Override
     public void onBindViewHolder(Holder holder, final int position) {
-        holder.setIsRecyclable(false);//混乱临时解决办法
-        xWebView s = list.get(position).mainWebView;
-        holder.captureImage.setImageBitmap(s.getCapture());
+        //holder.setIsRecyclable(false);//混乱临时解决办法
+        final WebTabFragment s = list.get(position);
+        s.generateSnapshot();
+        holder.captureImage.setImageBitmap(s.getSnapshot());
         holder.captureImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity)context).webFragment.loadFragment(list.get(position));
+                ((MainActivity)context).webFragment.loadFragment(s);
              //   Toast.makeText(context,list.get(position).toString()+""+position,Toast.LENGTH_LONG).show();
+            }
+        });
+        holder.closeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                s.onDestroy();
+               list.remove(position);
+
             }
         });
     }
