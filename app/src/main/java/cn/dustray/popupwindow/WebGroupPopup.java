@@ -36,7 +36,7 @@ public class WebGroupPopup extends PopupWindow implements View.OnClickListener {
 
     private void init() {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.popup_group_menu, null);
+        View view = inflater.inflate(R.layout.popup_web_group, null);
 
         setContentView(view);
         initWindow();

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:name="cn.dustray.defenderplatform.ChatToolFragment"
+    android:layout_width="match_parent"
+    android:layout_height="220dp"
+    android:background="#eee"
+    android:orientation="vertical"
+    tools:context=".ChatToolFragment">
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_columnWeight="1"
+        android:background="@color/colorPrimary"
+        android:elevation="1dp">
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/text_web_share_title"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/bg_web_share_title"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:lines="1"
+        android:padding="5dp"
+        android:text="title"
+        android:textColor="#aaa"
+        android:textSize="17dp" />
+
+    <LinearLayout
+        android:id="@+id/web_share_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_web_share_chat"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/btn_web_share"
+            android:text="分享至聊天框" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/btn_web_share"
+            android:text="分享至QQ" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/btn_web_share"
+            android:text="分享至微信" />
+    </LinearLayout>
+
+
+</LinearLayout>

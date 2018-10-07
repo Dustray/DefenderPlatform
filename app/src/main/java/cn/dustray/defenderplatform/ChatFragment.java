@@ -129,22 +129,23 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                     toolFrag = null;
                 }
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-
                     //chatListView.performClick();
                     touchDownPosition = motionEvent.getY();
                 }
                 if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                     touchUpPosition = motionEvent.getY();
-                    if (!chatListView.canScrollVertically(1) && touchDownPosition- touchUpPosition >200) {
+                    if (!chatListView.canScrollVertically(1) && touchDownPosition - touchUpPosition > 200) {
                         //判断是否还能往上滑（滑到底）
-                       // Toast.makeText(getActivity(), "弹键盘", Toast.LENGTH_LONG).show();
+                        // Toast.makeText(getActivity(), "弹键盘", Toast.LENGTH_LONG).show();
                         showSoftInputFromWindow(sendContent);
                     }
                 }
-
-               // if (motionEvent.getAction() == MotionEvent.ACTION_UP)
-                    // Toast.makeText(getActivity(), "交流,角楼2" +motionEvent.getSize(), Toast.LENGTH_LONG).show();
-                   // sendMessage("触控面积：" + motionEvent.getSize() + "压力大小：" + motionEvent.getPressure());
+                if (touchUpPosition == touchDownPosition) {
+                    hideSoftInputFromWindow(sendContent);
+                }
+                // if (motionEvent.getAction() == MotionEvent.ACTION_UP)
+                // Toast.makeText(getActivity(), "交流,角楼2" +motionEvent.getSize(), Toast.LENGTH_LONG).show();
+                // sendMessage("触控面积：" + motionEvent.getSize() + "压力大小：" + motionEvent.getPressure());
                 return false;
             }
 
@@ -267,7 +268,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
         sendContent.setText("");
     }
 
-    private void sendMessage(String s) {
+    public  void sendMessage(String s) {
         ChatRecordEntity c = new ChatRecordEntity(s, ChatRecordEntity.TYPE_SENT);
         list.add(c);
         adapter.notifyItemInserted(list.size());

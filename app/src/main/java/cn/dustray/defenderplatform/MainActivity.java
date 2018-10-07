@@ -24,6 +24,7 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 
 import cn.dustray.adapter.MainViewPagerAdapter;
 import cn.dustray.control.xViewPager;
+import cn.dustray.tool.xToast;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -78,7 +79,12 @@ public class MainActivity extends AppCompatActivity
     public boolean getPageScrollState(){
         return mainPage.getScrollFlag();
     }
-
+public void switchToChat(){
+    mainPage.setCurrentItem(0);
+}
+    public void switchToWeb(){
+        mainPage.setCurrentItem(1);
+    }
     @Override
     public void onBackPressed() {
         int position = mainPage.getCurrentItem();
@@ -95,10 +101,11 @@ public class MainActivity extends AppCompatActivity
         } else {
 //            super.onBackPressed();
             //返回桌面不销毁
-            Intent home = new Intent(Intent.ACTION_MAIN);
-            home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            home.addCategory(Intent.CATEGORY_HOME);
-            startActivity(home);
+            xToast.exitBy2Click(this);
+//            Intent home = new Intent(Intent.ACTION_MAIN);
+//            home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            home.addCategory(Intent.CATEGORY_HOME);
+//            startActivity(home);
         }
     }
 
@@ -116,9 +123,10 @@ public class MainActivity extends AppCompatActivity
                 if (TextUtils.isEmpty(query)) {
                     //Toast.makeText(MainActivity.this, "请输入查找内容！", Toast.LENGTH_SHORT).show();
                 } else {
-                    mainPage.setCurrentItem(1);
+                    switchToWeb();
                     webFragment.search(query);
                     searchView.clearFocus();
+                    searchView.onActionViewCollapsed();
 
                 }
                 return false;

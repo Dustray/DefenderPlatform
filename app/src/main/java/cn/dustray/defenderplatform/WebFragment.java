@@ -19,11 +19,12 @@ import java.util.List;
 
 import cn.dustray.popupwindow.WebGroupPopup;
 import cn.dustray.popupwindow.WebMenuPopup;
+import cn.dustray.popupwindow.WebSharePopup;
 import cn.dustray.tool.xToast;
 
 
 public class WebFragment extends Fragment implements View.OnClickListener, WebTabFragment.OnWebViewCreatedListener
-,View.OnLongClickListener {
+        , View.OnLongClickListener {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -64,11 +65,21 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
     }
 
     private void initFragment() {
+        String Url = "";
+        initFragment(Url);
+    }
+
+    private void initFragment(String Url) {
+
         manager = getActivity().getSupportFragmentManager();
 
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.setCustomAnimations(R.animator.fragment_slide_right_enter, R.animator.fragment_slide_left_exit);
-        webFrag = WebTabFragment.newInstance(this);
+        if (Url.equals("")) {
+            webFrag = WebTabFragment.newInstance(this);
+        } else {
+            webFrag = WebTabFragment.newInstance(this, Url);
+        }
         transaction.add(R.id.web_main_frag, webFrag);
         transaction.commit();
         webFragArray.add(webFrag);
@@ -77,9 +88,11 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
     public void goHome() {
         webFrag.goHome();
     }
+
     public void refresh() {
         webFrag.refresh();
     }
+
     public boolean canGoBack() {
         return webFrag.canGoBack();
     }
@@ -111,11 +124,11 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
         initFragment();
     }
 
+    public void createNewFragment(String Url) {
+        initFragment(Url);
+    }
+
     public void loadFragment(WebTabFragment fragment) {
-//        webFrag = fragment;
-//        FragmentTransaction transaction = manager.beginTransaction();
-//        transaction.replace(R.id.web_main_frag, fragment);
-//        transaction.commit();
         if (webGroupPopup != null) {
             webGroupPopup.dismiss();
         }
@@ -138,10 +151,11 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
     }
 
     public void search(String searchStr) {
-        webFrag.loadUrl("https://m.baidu.com/s?from=1012852p&word=" + searchStr);
+        createNewFragment("https://m.baidu.com/s?word=" + searchStr);
     }
 
     private void judgeWebState() {
+
         if (webFrag.canGoBack()) {
             btnBack.setImageResource(R.drawable.ic_btn_back_black);
         } else {
@@ -219,31 +233,38 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
                 webGroupPopup.showAtBottom(webToolBar);
                 break;
             case R.id.btn_web_tool_share:
-
+                new WebSharePopup(getActivity(),webFrag.mainWebView.getTitle(),webFrag.mainWebView.getUrl()).showAtBottom(webToolBar);
                 break;
         }
     }
+
     @Override
     public boolean onLongClick(View view) {
         switch (view.getId()) {
 
             case R.id.btn_web_tool_menu:
                 goHome();
-                xToast.toast(getActivity(),"回到首页");
+                xToast.toast(getActivity(), "回到首页");
                 break;
             case R.id.btn_web_tool_group:
                 createNewFragment();
-                xToast.toast(getActivity(),"新建标签页");
+                xToast.toast(getActivity(), "新建标签页");
                 break;
+
         }
         return true;
     }
+
     @Override
     public void onWebViewCreateFinished() {
 
         judgeWebState();
     }
 
+    @Override
+    public void onOpenNewWebTab(String Url) {
+        createNewFragment(Url);
+    }
 
 
     /**

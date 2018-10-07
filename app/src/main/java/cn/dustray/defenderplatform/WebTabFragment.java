@@ -5,7 +5,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.net.http.SslError;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
@@ -22,6 +24,7 @@ import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
 import cn.dustray.control.xWebView;
+import cn.dustray.tool.xToast;
 
 
 @SuppressLint("ValidFragment")
@@ -31,7 +34,7 @@ public class WebTabFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private static  final String homeUrl="file:///android_asset/html/HomePage.html";
+    private static String homeUrl = "file:///android_asset/html/HomePage.html";
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -57,6 +60,12 @@ public class WebTabFragment extends Fragment {
         return fragment;
     }
 
+    public static WebTabFragment newInstance(Fragment frag, String url) {
+        WebTabFragment fragment = new WebTabFragment(frag);
+        homeUrl = url;
+        return fragment;
+    }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -66,22 +75,11 @@ public class WebTabFragment extends Fragment {
     }
 
     private void initWebView() {
-        frameLayout =getView().findViewById(R.id.web_frame);
-        mainWebView=new xWebView(getActivity().getApplicationContext());
+        frameLayout = getView().findViewById(R.id.web_frame);
+        mainWebView = new xWebView(getActivity().getApplicationContext());
         frameLayout.addView(mainWebView);
         //mainWebView = getView().findViewById(R.id.main_webview);
         mainWebView.setWebViewClient(new WebViewClient() {
-            @Override
-            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-                handler.proceed(); // 接受所有网站的证书
-            }
-
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-
-                return false;
-            }
-
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
@@ -89,17 +87,22 @@ public class WebTabFragment extends Fragment {
                 //隐藏toolbar
                 AppBarLayout mainAppBar = getActivity().findViewById(R.id.main_appbar);
                 mainAppBar.setExpanded(false, true);
-
+                if (webListener != null) {
+                    webListener.onWebViewCreateFinished();
+                }
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                if (webListener != null) {
-                    webListener.onWebViewCreateFinished();
-                }
+
                 progressBar.setVisibility(View.INVISIBLE);
 
+            }
+            @Override
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+                super.onReceivedError(view, errorCode, description, failingUrl);
+                  mainWebView.loadUrl(homeUrl);
             }
 
         });
@@ -113,6 +116,14 @@ public class WebTabFragment extends Fragment {
 
             }
 
+            @Override
+            public boolean onCreateWindow(WebView view, boolean isDialog, boolean isUserGesture, Message resultMsg) {
+
+                if (webListener != null) {
+                    webListener.onOpenNewWebTab(view.getUrl());
+                }
+                return true; //super.onCreateWindow(view, isDialog, isUserGesture, resultMsg);
+            }
         });
 
         mainWebView.setOnTouchListener(new View.OnTouchListener() {
@@ -148,16 +159,20 @@ public class WebTabFragment extends Fragment {
             }
         });
         mainWebView.loadUrl(homeUrl);
+        homeUrl = "file:///android_asset/html/HomePage.html";
         if (webListener != null) {
             webListener.onWebViewCreateFinished();
         }
     }
+
     public void goHome() {
         mainWebView.loadUrl(homeUrl);
     }
+
     public void refresh() {
         mainWebView.reload();
     }
+
     public boolean canGoBack() {
         return mainWebView.canGoBack();
     }
@@ -226,7 +241,7 @@ public class WebTabFragment extends Fragment {
 
     @Override
     public void onDestroy() {
-        if( mainWebView!=null) {
+        if (mainWebView != null) {
 
             // 如果先调用destroy()方法，则会命中if (isDestroyed()) return;这一行代码，需要先onDetachedFromWindow()，再
             // destory()
@@ -270,5 +285,7 @@ public class WebTabFragment extends Fragment {
 
     public interface OnWebViewCreatedListener {
         void onWebViewCreateFinished();
+
+        void onOpenNewWebTab(String Url);
     }
 }

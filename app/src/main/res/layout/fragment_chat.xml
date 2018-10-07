@@ -25,28 +25,33 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:padding="5dp">
+            android:background="#fff"
+            android:elevation="5dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="5dp"
+            android:paddingRight="5dp">
 
-            <ImageButton
-                android:id="@+id/chat_moretool_btn"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignParentTop="true"
-                android:background="#00000000"
-                android:padding="3dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_btn_add" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="40dp">
+                android:layout_height="35dp"
+                android:layout_alignParentTop="true">
+
+                <ImageButton
+                    android:id="@+id/chat_moretool_btn"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_alignParentTop="true"
+                    android:background="#0000"
+                    android:padding="3dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_btn_add" />
 
                 <EditText
                     android:id="@+id/chat_send_content"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="35dp"
                     android:background="@drawable/input_o_gray"
                     android:hint="输入消息"
                     android:paddingLeft="13dp"
@@ -55,11 +60,11 @@
                 <Button
                     android:id="@+id/chat_send_btn"
                     android:layout_width="55dp"
-                    android:layout_height="30dp"
+                    android:layout_height="31dp"
                     android:layout_alignParentRight="true"
                     android:layout_marginLeft="5px"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="2dp"
                     android:background="@drawable/btn_o_lightblue"
                     android:text="发送"
                     android:textColor="#fff" />
@@ -68,14 +73,15 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="45dp"
+                android:layout_marginTop="40dp"
                 android:adjustViewBounds="true"
                 android:maxHeight="100dp">
+
                 <FrameLayout
                     android:id="@+id/chat_tool_frag"
                     android:name="cn.dustray.defenderplatform.ChatToolFragment"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
             </RelativeLayout>
         </RelativeLayout>
     </RelativeLayout>
