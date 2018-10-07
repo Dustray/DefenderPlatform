@@ -31,7 +31,7 @@ public class WebTabFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private static  final String homeUrl="https://www.bing.com/";
+    private static  final String homeUrl="file:///android_asset/html/HomePage.html";
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
