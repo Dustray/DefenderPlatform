@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -37,7 +38,7 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
 
     private ImageButton btnBack, btnGo, btnMenu, btnGroup, btnShare;
     private LinearLayout webToolBar;
-    List<WebTabFragment> webFragArray = new ArrayList<>();
+    List<WebTabFragment> webFragArray = new ArrayList<WebTabFragment>();
 
     private WebTabFragment webFrag;
     private FragmentManager manager;
@@ -136,6 +137,41 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
         judgeWebState();
     }
 
+    public void refreshGroupIcon() {
+        switch ( webFragArray.size()) {
+            case 1:
+                btnGroup.setImageResource(R.drawable.ic_btn_group_black_1);
+                break;
+            case 2:
+                btnGroup.setImageResource(R.drawable.ic_btn_group_black_2);
+                break;
+            case 3:
+                btnGroup.setImageResource(R.drawable.ic_btn_group_black_3);
+                break;
+            case 4:
+                btnGroup.setImageResource(R.drawable.ic_btn_group_black_4);
+                break;
+            case 5:
+                btnGroup.setImageResource(R.drawable.ic_btn_group_black_5);
+                break;
+            case 6:
+                btnGroup.setImageResource(R.drawable.ic_btn_group_black_6);
+                break;
+            case 7:
+                btnGroup.setImageResource(R.drawable.ic_btn_group_black_7);
+                break;
+            case 8:
+                btnGroup.setImageResource(R.drawable.ic_btn_group_black_8);
+                break;
+            case 9:
+                btnGroup.setImageResource(R.drawable.ic_btn_group_black_9);
+                break;
+            default:
+                btnGroup.setImageResource(R.drawable.ic_btn_group_black_9_);
+                break;
+        }
+    }
+
     public void switchContent(WebTabFragment from, WebTabFragment to) {
         if (webFrag != to) {
             webFrag = to;
@@ -152,6 +188,7 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
 
     public void search(String searchStr) {
         createNewFragment("https://m.baidu.com/s?word=" + searchStr);
+        refreshGroupIcon();
     }
 
     private void judgeWebState() {
@@ -213,6 +250,9 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
 
     @Override
     public void onClick(View view) {
+
+        AppBarLayout mainAppBar = getActivity().findViewById(R.id.main_appbar);
+        mainAppBar.setExpanded(false, true);
         switch (view.getId()) {
             case R.id.btn_web_tool_back:
                 if (webFrag.canGoBack())
@@ -233,7 +273,7 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
                 webGroupPopup.showAtBottom(webToolBar);
                 break;
             case R.id.btn_web_tool_share:
-                new WebSharePopup(getActivity(),webFrag.mainWebView.getTitle(),webFrag.mainWebView.getUrl()).showAtBottom(webToolBar);
+                new WebSharePopup(getActivity(), webFrag.mainWebView.getTitle(), webFrag.mainWebView.getUrl()).showAtBottom(webToolBar);
                 break;
         }
     }

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.WindowManager;
 import android.widget.ImageButton;
@@ -79,7 +80,10 @@ public class WebMenuPopup extends PopupWindow implements View.OnClickListener {
     }
 
     public void showAtBottom(View view) {        //弹窗位置设置
-        showAsDropDown(view, 0, 0);
+
+        setAnimationStyle(R.style.pop_animation);
+        showAtLocation(view, Gravity.BOTTOM, 0, PixelConvert.dip2px(context, 45));
+        // showAsDropDown(view, 0, 0);
         //showAtLocation(view, Gravity.TOP | Gravity.RIGHT, 10, 110);//有偏差
 
 

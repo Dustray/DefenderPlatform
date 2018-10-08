@@ -64,6 +64,8 @@ public class WebGroupListAdapter extends RecyclerView.Adapter<WebGroupListAdapte
                     frag.dismiss();
                     ((MainActivity) context).webFragment.createNewFragment();
                 }
+
+                ((MainActivity) context).webFragment.refreshGroupIcon();
             }
         });
     }
@@ -78,6 +80,7 @@ public class WebGroupListAdapter extends RecyclerView.Adapter<WebGroupListAdapte
             frag.dismiss();
             ((MainActivity) context).webFragment.createNewFragment();
         }
+        ((MainActivity) context).webFragment.refreshGroupIcon();
     }
 
     @Override

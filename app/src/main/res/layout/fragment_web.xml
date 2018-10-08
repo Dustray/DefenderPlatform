@@ -21,7 +21,8 @@
         android:layout_alignParentBottom="true"
         android:background="#fff"
 
-        android:elevation="5dp"
+        android:elevation="10dp"
+        android:translationZ="5dp"
         android:orientation="horizontal">
 
         <ImageButton
@@ -54,7 +55,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/btn_web_tool"
-            android:src="@drawable/ic_btn_group_black" />
+            android:src="@drawable/ic_btn_group_black_1" />
 
         <ImageButton
             android:id="@+id/btn_web_tool_share"

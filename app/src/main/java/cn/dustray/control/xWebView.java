@@ -8,6 +8,7 @@ import android.support.design.widget.AppBarLayout;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.webkit.CookieManager;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
@@ -102,7 +103,7 @@ public class xWebView extends WebView {
                 handler.proceed();//接受证书
             }
         });
-
+        CookieManager.getInstance().setAcceptThirdPartyCookies(this,true);
     }
 
     public Bitmap getCapture() {

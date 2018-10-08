@@ -87,15 +87,15 @@ public class WebTabFragment extends Fragment {
                 //隐藏toolbar
                 AppBarLayout mainAppBar = getActivity().findViewById(R.id.main_appbar);
                 mainAppBar.setExpanded(false, true);
-                if (webListener != null) {
-                    webListener.onWebViewCreateFinished();
-                }
+
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-
+                if (webListener != null) {
+                    webListener.onWebViewCreateFinished();
+                }
                 progressBar.setVisibility(View.INVISIBLE);
 
             }

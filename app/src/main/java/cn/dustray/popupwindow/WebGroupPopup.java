@@ -6,9 +6,12 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.PopupWindow;
 
@@ -93,8 +96,9 @@ public class WebGroupPopup extends PopupWindow implements View.OnClickListener {
     }
 
     public void showAtBottom(View view) {        //弹窗位置设置
-
-        showAsDropDown(view, 0, 0);
+        setAnimationStyle(R.style.pop_animation);
+        showAtLocation(view, Gravity.BOTTOM, 0, PixelConvert.dip2px(context, 45));
+        //  showAsDropDown(view, 0, 0);
         //showAtLocation(view, Gravity.TOP | Gravity.RIGHT, 10, 110);//有偏差
 
 
@@ -105,6 +109,8 @@ public class WebGroupPopup extends PopupWindow implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.btn_web_add:
                 ((MainActivity) context).webFragment.createNewFragment();
+
+                ((MainActivity) context).webFragment.refreshGroupIcon();
                 dismiss();
                 break;
             case R.id.btn_web_closeall:
