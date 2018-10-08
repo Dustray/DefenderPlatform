@@ -61,7 +61,7 @@ private TextView textTitle;
 
     private void initWindow() {
         this.setWidth(WindowManager.LayoutParams.MATCH_PARENT);
-        this.setHeight(PixelConvert.dip2px(context, 265));
+        this.setHeight(PixelConvert.dip2px(context, 295));
 
         this.setFocusable(true);
         this.setOutsideTouchable(true);

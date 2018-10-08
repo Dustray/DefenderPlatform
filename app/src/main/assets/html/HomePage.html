@@ -54,12 +54,13 @@
         height: 32px;
         outline: none;
     }
-    .content .search-submit:hover{
+
+    .content .search-submit:hover {
         background-color: #0E80EF;
     }
 </style>
 
-<body>
+<body onkeydown="_key()">
     <div class="head">
         <h2>首页</h2>
     </div>
@@ -74,6 +75,10 @@
         if (text == "") return;
         window.location.href = "https://m.baidu.com/s?word=" + text;
     }
+    function _key() {
+        if (event.keyCode == 13)
+            submit();
+    } 
 </script>
 
 </html>

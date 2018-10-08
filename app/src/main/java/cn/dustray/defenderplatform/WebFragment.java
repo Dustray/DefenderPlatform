@@ -60,8 +60,8 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        initFragment();
         initWebToolBar();
+        initFragment();
         //btnBack.setImageBitmap(mainWebView.getCapture());
     }
 
@@ -84,6 +84,7 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
         transaction.add(R.id.web_main_frag, webFrag);
         transaction.commit();
         webFragArray.add(webFrag);
+        refreshGroupIcon();
     }
 
     public void goHome() {
@@ -138,6 +139,7 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
     }
 
     public void refreshGroupIcon() {
+
         switch ( webFragArray.size()) {
             case 1:
                 btnGroup.setImageResource(R.drawable.ic_btn_group_black_1);
@@ -188,7 +190,7 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
 
     public void search(String searchStr) {
         createNewFragment("https://m.baidu.com/s?word=" + searchStr);
-        refreshGroupIcon();
+
     }
 
     private void judgeWebState() {

@@ -53,7 +53,7 @@ public class WebMenuPopup extends PopupWindow implements View.OnClickListener {
 
     private void initWindow() {
         this.setWidth(WindowManager.LayoutParams.MATCH_PARENT);
-        this.setHeight(PixelConvert.dip2px(context, 100));
+        this.setHeight(PixelConvert.dip2px(context, 130));
         this.setFocusable(true);
         this.setOutsideTouchable(true);
         this.setTouchable(true);
@@ -99,11 +99,8 @@ public class WebMenuPopup extends PopupWindow implements View.OnClickListener {
                 webFragment.refresh();
                 break;
             case R.id.btn_web_menu_rolllock:
-                if (((MainActivity) context).changePageScroll()) {
-                    btnRollLock.setImageResource(R.drawable.ic_btn_roll_unlock_black);
-                } else {
-                    btnRollLock.setImageResource(R.drawable.ic_btn_roll_lock_black);
-                }
+               ((MainActivity) context).changePageScroll();
+
                 break;
 
         }

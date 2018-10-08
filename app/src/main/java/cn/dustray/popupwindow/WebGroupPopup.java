@@ -68,7 +68,7 @@ public class WebGroupPopup extends PopupWindow implements View.OnClickListener {
 
     private void initWindow() {
         this.setWidth(WindowManager.LayoutParams.MATCH_PARENT);
-        this.setHeight(PixelConvert.dip2px(context, 390));
+        this.setHeight(PixelConvert.dip2px(context, 440));
 
         this.setFocusable(true);
         this.setOutsideTouchable(true);
@@ -110,7 +110,6 @@ public class WebGroupPopup extends PopupWindow implements View.OnClickListener {
             case R.id.btn_web_add:
                 ((MainActivity) context).webFragment.createNewFragment();
 
-                ((MainActivity) context).webFragment.refreshGroupIcon();
                 dismiss();
                 break;
             case R.id.btn_web_closeall:
