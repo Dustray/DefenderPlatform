@@ -28,6 +28,7 @@ import java.util.List;
 
 import cn.dustray.adapter.ChatListAdapter;
 import cn.dustray.entity.ChatRecordEntity;
+import cn.dustray.popupwindow.WebSharePopup;
 
 
 public class ChatFragment extends Fragment implements View.OnClickListener {
@@ -289,6 +290,10 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
         inputManager.hideSoftInputFromWindow(editText.getWindowToken(), 0);
     }
 
+    public void share(String title,String url){
+
+        new WebSharePopup(getActivity(), title, url).showAtBottom(sendBtn);
+    }
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

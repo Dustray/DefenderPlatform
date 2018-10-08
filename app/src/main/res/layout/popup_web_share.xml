@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:name="cn.dustray.defenderplatform.ChatToolFragment"
     android:layout_width="match_parent"
-    android:layout_height="295dp"
+    android:layout_height="345dp"
     android:background="#eee"
     android:orientation="vertical"
     tools:context=".ChatToolFragment">
@@ -14,8 +14,11 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_columnWeight="1"
+        android:layout_marginBottom="5dp"
         android:background="@color/colorPrimary"
-        android:elevation="2dp">
+        android:elevation="1dp"
+        android:translationZ="2dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -42,7 +45,7 @@
     <LinearLayout
         android:id="@+id/web_share_item"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="205dp"
         android:orientation="vertical">
 
         <Button
@@ -52,7 +55,7 @@
             android:layout_marginTop="2dp"
             android:layout_marginBottom="2dp"
             android:background="@drawable/btn_web_share"
-            android:text="分享至聊天页" />
+            android:text="发送至聊天" />
 
         <Button
             android:layout_width="match_parent"
@@ -77,8 +80,24 @@
             android:layout_marginTop="2dp"
             android:layout_marginBottom="2dp"
             android:background="@drawable/btn_web_share_dark"
-            android:text="复制链接" />
+            android:elevation="0dp"
+            android:text="复制链接"
+            android:translationZ="0dp" />
     </LinearLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:elevation="10dp"
+        android:translationZ="5dp">
+
+        <ImageButton
+            android:id="@+id/btn_web_share_down"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/btn_web_share"
+            android:src="@drawable/ic_btn_menu_down_black" />
+    </RelativeLayout>
 
 </LinearLayout>

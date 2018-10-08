@@ -20,6 +20,7 @@ import java.util.List;
 
 import cn.dustray.defenderplatform.R;
 import cn.dustray.entity.ChatRecordEntity;
+import cn.dustray.popupwindow.TextMenuPopup;
 
 public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.Holder> {
 
@@ -40,25 +41,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.Holder
         holder.textContent.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                // 用于PopupWindow的View
-                View contentView=LayoutInflater.from(context).inflate(R.layout.popup_text_menu, null, false);
-                // 创建PopupWindow对象，其中：
-                // 第一个参数是用于PopupWindow中的View，第二个参数是PopupWindow的宽度，
-                // 第三个参数是PopupWindow的高度，第四个参数指定PopupWindow能否获得焦点
-                PopupWindow window=new PopupWindow(contentView, 400, 100, true);
-                // 设置PopupWindow的背景
-                window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                // 设置PopupWindow是否能响应外部点击事件
-                window.setOutsideTouchable(true);
-                // 设置PopupWindow是否能响应点击事件
-                window.setTouchable(true);
-                // 显示PopupWindow，其中：
-                // 第一个参数是PopupWindow的锚点，第二和第三个参数分别是PopupWindow相对锚点的x、y偏移
-                window.showAsDropDown(holder.textContent,0,-220);
-                // 或者也可以调用此方法显示PopupWindow，其中：
-                // 第一个参数是PopupWindow的父View，第二个参数是PopupWindow相对父View的位置，
-                // 第三和第四个参数分别是PopupWindow相对父View的x、y偏移
-                // window.showAtLocation(parent, gravity, x, y);
+                new TextMenuPopup(context, holder.textContent.getText().toString()).showAtBottom(holder.textContent);
                 return false;
             }
         });

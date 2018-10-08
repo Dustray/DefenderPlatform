@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:name="cn.dustray.defenderplatform.ChatToolFragment"
     android:layout_width="match_parent"
-    android:layout_height="440dp"
+    android:layout_height="485dp"
     android:background="#eee"
     android:orientation="vertical"
     tools:context=".ChatToolFragment">
@@ -15,7 +15,8 @@
         android:layout_height="40dp"
         android:layout_columnWeight="1"
         android:background="@color/colorPrimary"
-        android:elevation="2dp">
+        android:elevation="1dp"
+        android:translationZ="2dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -28,7 +29,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="400dp">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/web_group_list"
@@ -59,5 +60,21 @@
             android:elevation="3dp"
             android:src="@drawable/ic_btn_add_black" />
 
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:elevation="10dp"
+        android:translationZ="5dp"
+        >
+
+        <ImageButton
+            android:id="@+id/btn_web_group_down"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:src="@drawable/ic_btn_menu_down_black"
+            android:background="@drawable/btn_web_share"/>
     </RelativeLayout>
 </LinearLayout>

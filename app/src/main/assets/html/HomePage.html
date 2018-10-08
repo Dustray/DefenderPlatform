@@ -58,6 +58,28 @@
     .content .search-submit:hover {
         background-color: #0E80EF;
     }
+
+    .link {
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    .link a {
+        color: #444;
+        display: inline-block;
+        width: 20%;
+        text-align: center;
+        font-size: 15px;
+        text-decoration: none;
+        background: #f0f0f0;
+        margin: 5px 0;
+        padding: 5px;
+        border-radius: 4px;
+    }
+    .link p{
+        color: #1E90FF;
+        font-weight: 600;
+    }
 </style>
 
 <body onkeydown="_key()">
@@ -68,11 +90,21 @@
         <input id="search-text" class=" content search-text" type="text" />
         <input id="search-submit" class=" content search-submit" type="button" onclick="submit()" value="百度一下" />
     </div>
+    <div class="link">
+        <p>常用</p>
+        <a href="http://cn.bing.com/">Bing搜索</a>
+        <a href="http://cn.bing.com/translator/">Bing翻译</a>
+        <a href="https://s.weibo.com/top/summary?cate=realtimehot">微博热搜</a>
+        <a href="https://m.ithome.com/"/>IT之家</a>
+        <p>考研</p>
+        <a href=" https://www.chsi.com.cn/ ">学信网</a>
+        <a href="https://yz.chsi.com.cn/ ">研招网</a>
+    </div>
 </body>
 <script>
     function submit() {
         var text = document.getElementById('search-text').value;
-        if (text == "") return;
+        if (text == " ") return;
         window.location.href = "https://m.baidu.com/s?word=" + text;
     }
     function _key() {

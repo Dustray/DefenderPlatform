@@ -30,9 +30,11 @@ import cn.dustray.tool.xToast;
 public class WebSharePopup extends PopupWindow implements View.OnClickListener {
 
     private Context context;
-    private Button btnShareChat,btnShareCopy;
+    private Button btnShareChat, btnShareCopy;
+    private ImageButton btnExit;
     private String title, url;
-private TextView textTitle;
+    private TextView textTitle;
+
     public WebSharePopup(Context context, String title, String url) {
         this.context = context;
         this.title = title;
@@ -56,12 +58,14 @@ private TextView textTitle;
         btnShareChat.setOnClickListener(this);
         btnShareCopy = getContentView().findViewById(R.id.btn_web_share_copy);
         btnShareCopy.setOnClickListener(this);
+        btnExit = getContentView().findViewById(R.id.btn_web_share_down);
+        btnExit.setOnClickListener(this);
     }
 
 
     private void initWindow() {
         this.setWidth(WindowManager.LayoutParams.MATCH_PARENT);
-        this.setHeight(PixelConvert.dip2px(context, 295));
+        this.setHeight(PixelConvert.dip2px(context, 345));
 
         this.setFocusable(true);
         this.setOutsideTouchable(true);
@@ -89,8 +93,8 @@ private TextView textTitle;
     }
 
     public void showAtBottom(View view) {        //弹窗位置设置
-      setAnimationStyle(R.style.pop_animation);
-        showAtLocation(view, Gravity.BOTTOM, 0, PixelConvert.dip2px(context, 45));
+        setAnimationStyle(R.style.pop_animation);
+        showAtLocation(view, Gravity.BOTTOM, 0, 0);
 
         //showAsDropDown(view, 0, PixelConvert.dip2px(context, 45),Gravity.BOTTOM);
         //showAtLocation(view, Gravity.TOP | Gravity.RIGHT, 10, 110);//有偏差
@@ -112,8 +116,11 @@ private TextView textTitle;
                 // 将文本内容放到系统剪贴板里。
                 ClipData clipData = ClipData.newPlainText("DefenderPlatform", url);
                 cm.setPrimaryClip(clipData);
-                xToast.toast(context,"复制成功");
+                xToast.toast(context, "复制成功");
                 break;
-        } dismiss();
+            case R.id.btn_web_menu_down:
+                break;
+        }
+        dismiss();
     }
 }
