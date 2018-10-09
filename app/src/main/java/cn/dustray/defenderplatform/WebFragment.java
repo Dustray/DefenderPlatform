@@ -69,6 +69,7 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
         String Url = "";
         initFragment(Url);
     }
+
     private void initFragment(String Url) {
 
         manager = getActivity().getSupportFragmentManager();
@@ -79,7 +80,7 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
         webFrag = WebTabFragment.newInstance();
         webFrag.setFatherFrag(this);
         if (!Url.equals("")) {
-           webFrag.setHomeUrl(Url);
+            webFrag.setHomeUrl(Url);
         }
         transaction.add(R.id.web_main_frag, webFrag);
         transaction.commit();
@@ -140,7 +141,7 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
 
     public void refreshGroupIcon() {
 
-        switch ( webFragArray.size()) {
+        switch (webFragArray.size()) {
             case 1:
                 btnGroup.setImageResource(R.drawable.ic_btn_group_black_1);
                 break;
@@ -189,7 +190,23 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
     }
 
     public void search(String searchStr) {
-        createNewFragment("https://m.baidu.com/s?word=" + searchStr);
+        String test = searchStr;
+        test = test.replace("/", "");
+        if (test.endsWith(".cn") || test.endsWith(".com") || test.endsWith(".org") || test.endsWith(".net") || test.endsWith(".xin") ||
+                test.endsWith(".edu") || test.endsWith(".top") || test.endsWith(".cc") || test.endsWith(".tv") || test.endsWith(".co") ||
+                test.endsWith(".site") || test.endsWith(".biz") || test.endsWith(".vip") || test.endsWith(".wang") || test.endsWith(".ltd")) {
+            //如果是网址
+            if (!test.startsWith("http")) {
+                //如果不以http开头
+                createNewFragment("http://" + searchStr);
+            } else {
+                //如果以http开头
+                createNewFragment(searchStr);
+            }
+        } else {
+            //如果不是网址
+            createNewFragment("https://m.baidu.com/s?word=" + searchStr);
+        }
 
     }
 

@@ -7,11 +7,4 @@
     android:id="@+id/web_frame">
 
 
-    <ProgressBar
-
-        android:id="@+id/web_progressbar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="2dp" />
-
 </FrameLayout>

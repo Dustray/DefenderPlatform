@@ -18,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -76,15 +77,19 @@ public class MainActivity extends AppCompatActivity
     public boolean changePageScroll() {
         return mainPage.changeScrollFlag();
     }
-    public boolean getPageScrollState(){
+
+    public boolean getPageScrollState() {
         return mainPage.getScrollFlag();
     }
-public void switchToChat(){
-    mainPage.setCurrentItem(0);
-}
-    public void switchToWeb(){
+
+    public void switchToChat() {
+        mainPage.setCurrentItem(0);
+    }
+
+    public void switchToWeb() {
         mainPage.setCurrentItem(1);
     }
+
     @Override
     public void onBackPressed() {
         int position = mainPage.getCurrentItem();
@@ -118,6 +123,15 @@ public void switchToChat(){
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setSubmitButtonEnabled(true);
         searchView.setMaxWidth(1000);
+
+        searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (!b) {
+                    searchView.onActionViewCollapsed();
+                }
+            }
+        });
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

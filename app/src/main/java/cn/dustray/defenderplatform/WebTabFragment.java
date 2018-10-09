@@ -11,17 +11,20 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+import android.view.WindowManager;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import cn.dustray.control.xWebView;
 import cn.dustray.tool.xToast;
@@ -62,7 +65,9 @@ public class WebTabFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initWebView();
-        progressBar = getActivity().findViewById(R.id.web_progressbar);
+        //progressBar = getActivity().findViewById(R.id.web_progressbar);
+
+
         //btnBack.setImageBitmap(mainWebView.getCapture());
     }
 
@@ -70,6 +75,15 @@ public class WebTabFragment extends Fragment {
         frameLayout = getView().findViewById(R.id.web_frame);
         mainWebView = new xWebView(getActivity().getApplicationContext());
         frameLayout.addView(mainWebView);
+
+        progressBar = new ProgressBar(getActivity(), null, android.R.attr.progressBarStyleHorizontal);
+        frameLayout.addView(progressBar);
+        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) progressBar.getLayoutParams();
+        params.gravity = Gravity.TOP;
+        params.width = WindowManager.LayoutParams.MATCH_PARENT;
+        params.height = 5;
+        progressBar.setLayoutParams(params);
+
         //mainWebView = getView().findViewById(R.id.main_webview);
         mainWebView.setWebViewClient(new WebViewClient() {
             @Override
@@ -160,11 +174,14 @@ public class WebTabFragment extends Fragment {
     }
 
     public void setHomeUrl(String url) {
-        homeUrl = url;
+
+            homeUrl = url;
     }
-public  void setFatherFrag(Fragment frag){
-    webListener = (OnWebViewCreatedListener) frag;
-}
+
+    public void setFatherFrag(Fragment frag) {
+        webListener = (OnWebViewCreatedListener) frag;
+    }
+
     public void goHome() {
         mainWebView.loadUrl(homeUrl);
     }

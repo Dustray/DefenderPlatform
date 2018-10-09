@@ -10,22 +10,27 @@
 <style>
     body {
         color: #444;
+        margin: 0px;
     }
 
     .head {
         text-align: center;
     }
-
-    .content {
+    .main-content{
+        
+        margin: 10px;
+    }
+    .content-search,
+    .content-go {
         font-size: 15px;
         box-sizing: border-box;
         position: relative;
         width: 100%;
         height: 40px;
-        margin-top: auto;
     }
 
-    .content .search-text {
+
+    .content-search>.search-text {
         position: absolute;
         height: 40px;
         width: 100%;
@@ -40,11 +45,10 @@
         padding-right: 85px;
     }
 
-    .content .search-submit {
+    .content-search>.search-submit {
         position: relative;
         z-index: 2;
-        margin-right: 4px;
-        margin-top: 4px;
+        margin:4px;
         float: right;
         background-color: #1E90FF;
         color: #fff;
@@ -55,8 +59,42 @@
         outline: none;
     }
 
-    .content .search-submit:hover {
+    .content-search .search-submit:hover {
         background-color: #0E80EF;
+    }
+
+    .content-go>.search-text {
+        position: absolute;
+        height: 40px;
+        width: 100%;
+        z-index: 1;
+        float: left;
+        border-radius: 2px;
+        outline: 0 !important;
+        border: 0 solid;
+        background-color: #f2f2f2;
+        display: inherit;
+        padding-left: 10px;
+        padding-right: 85px;
+
+    }
+
+    .content-go>.search-submit {
+        position: relative;
+        z-index: 2;
+        margin:5px;
+        float: right;
+        background-color: #ddd;
+        color: #444;
+        border-radius: 2px;
+        border: 0px solid;
+        width:80px;
+        height: 30px;
+        outline: none;
+    }
+
+    .content-go .search-submit:hover {
+        background-color: #ccc;
     }
 
     .link {
@@ -76,41 +114,76 @@
         padding: 5px;
         border-radius: 4px;
     }
-    .link p{
+
+    .link p {
         color: #1E90FF;
         font-weight: 600;
+    }
+
+    .image {
+        text-align: center;
     }
 </style>
 
 <body onkeydown="_key()">
+<div style="background: #ddd;padding: 5px;">
+    <div class="content-go">
+        <input id="go-text" placeholder="请输入网址" class=" content-go search-text" type="text" />
+        <input id="go-submit" class=" content-go search-submit" type="button" onclick="go()" value="转到" />
+    </div></div>
     <div class="head">
         <h2>首页</h2>
     </div>
-    <div class="content">
-        <input id="search-text" class=" content search-text" type="text" />
-        <input id="search-submit" class=" content search-submit" type="button" onclick="submit()" value="百度一下" />
+    <div class="main-content">
+
+    <div class="content-search">
+        <input id="search-text" placeholder="请输入搜索内容" class=" content-search search-text" type="text" />
+        <input id="search-submit" class=" content-search search-submit" type="button" onclick="submit()" value="百度一下" />
     </div>
     <div class="link">
         <p>常用</p>
         <a href="http://cn.bing.com/">Bing搜索</a>
         <a href="http://cn.bing.com/translator/">Bing翻译</a>
         <a href="https://s.weibo.com/top/summary?cate=realtimehot">微博热搜</a>
-        <a href="https://m.ithome.com/"/>IT之家</a>
-        <p>考研</p>
+        <a href="https://m.ithome.com/" />IT之家</a>
+        <p>教育</p>
         <a href=" https://www.chsi.com.cn/ ">学信网</a>
         <a href="https://yz.chsi.com.cn/ ">研招网</a>
     </div>
+    <div class="image">
+        <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1539083023061&di=fe74b9c32ab074772cf3c09621a801d4&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F78310a55b319ebc4092170d98926cffc1e171610.jpg"
+        />
+    </div>
+</div>
 </body>
 <script>
+    function go() {
+        var text = document.getElementById('go-text').value;
+        if (text == "") return;
+        var fdstart = text.indexOf("http");
+        if (fdstart == -1) {
+            text = "http://" + text;
+        }
+        alert(text);
+        window.location.href = text;
+    }
     function submit() {
         var text = document.getElementById('search-text').value;
-        if (text == " ") return;
+        if (text == "") return;
         window.location.href = "https://m.baidu.com/s?word=" + text;
     }
     function _key() {
-        if (event.keyCode == 13)
-            submit();
-    } 
+        if (event.keyCode == 13) {
+            var gos = document.getElementById('go-text');
+            var searchs = document.getElementById('search-text');
+            if (gos == document.activeElement) {
+                go();
+            } else if (searchs == document.activeElement) {
+                submit();
+            }
+        }
+    }
+
 </script>
 
 </html>
