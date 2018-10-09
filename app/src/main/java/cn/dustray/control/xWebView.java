@@ -63,7 +63,7 @@ public class xWebView extends WebView {
         this.getSettings().setAppCacheEnabled(true);
         this.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);//不使用网络缓存，开启的话容易导致app膨胀导致卡顿
         this.getSettings().setTextZoom(100);
-        this.getSettings().setSupportMultipleWindows(true);
+      //  this.getSettings().setSupportMultipleWindows(true);
         if (Build.VERSION.SDK_INT >= 19) {
             this.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         }

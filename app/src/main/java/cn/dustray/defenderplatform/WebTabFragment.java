@@ -27,7 +27,6 @@ import cn.dustray.control.xWebView;
 import cn.dustray.tool.xToast;
 
 
-@SuppressLint("ValidFragment")
 public class WebTabFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -48,21 +47,14 @@ public class WebTabFragment extends Fragment {
     private Bitmap snapshotBmp;
     private FrameLayout frameLayout;
 
-    @SuppressLint("ValidFragment")
-    public WebTabFragment(Fragment frag) {
+    public WebTabFragment() {
         // Required empty public constructor
-        webListener = (OnWebViewCreatedListener) frag;
+
     }
 
-    public static WebTabFragment newInstance(Fragment frag) {
-        WebTabFragment fragment = new WebTabFragment(frag);
+    public static WebTabFragment newInstance() {
+        WebTabFragment fragment = new WebTabFragment();
 
-        return fragment;
-    }
-
-    public static WebTabFragment newInstance(Fragment frag, String url) {
-        WebTabFragment fragment = new WebTabFragment(frag);
-        homeUrl = url;
         return fragment;
     }
 
@@ -99,10 +91,11 @@ public class WebTabFragment extends Fragment {
                 progressBar.setVisibility(View.INVISIBLE);
 
             }
+
             @Override
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
                 super.onReceivedError(view, errorCode, description, failingUrl);
-                  mainWebView.loadUrl(homeUrl);
+                mainWebView.loadUrl(homeUrl);
             }
 
         });
@@ -118,6 +111,7 @@ public class WebTabFragment extends Fragment {
 
             @Override
             public boolean onCreateWindow(WebView view, boolean isDialog, boolean isUserGesture, Message resultMsg) {
+//xToast.toast(getContext(),resultMsg.toString());
 
                 if (webListener != null) {
                     webListener.onOpenNewWebTab(view.getUrl());
@@ -165,6 +159,12 @@ public class WebTabFragment extends Fragment {
         }
     }
 
+    public void setHomeUrl(String url) {
+        homeUrl = url;
+    }
+public  void setFatherFrag(Fragment frag){
+    webListener = (OnWebViewCreatedListener) frag;
+}
     public void goHome() {
         mainWebView.loadUrl(homeUrl);
     }

@@ -69,17 +69,17 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
         String Url = "";
         initFragment(Url);
     }
-
     private void initFragment(String Url) {
 
         manager = getActivity().getSupportFragmentManager();
 
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.setCustomAnimations(R.animator.fragment_slide_right_enter, R.animator.fragment_slide_left_exit);
-        if (Url.equals("")) {
-            webFrag = WebTabFragment.newInstance(this);
-        } else {
-            webFrag = WebTabFragment.newInstance(this, Url);
+
+        webFrag = WebTabFragment.newInstance();
+        webFrag.setFatherFrag(this);
+        if (!Url.equals("")) {
+           webFrag.setHomeUrl(Url);
         }
         transaction.add(R.id.web_main_frag, webFrag);
         transaction.commit();

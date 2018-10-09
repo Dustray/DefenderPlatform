@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:layout_centerInParent="true"
     android:layout_margin="5dp"
-    android:elevation="3dp">
+    android:elevation="3dp"
+    android:translationZ="1dp">
 
     <ImageButton
         android:id="@+id/web_card_item_image"
@@ -22,8 +23,9 @@
         android:layout_gravity="center_horizontal|bottom"
         android:layout_marginBottom="20dp"
         android:background="@drawable/btn_web_card_close"
-        android:elevation="3dp"
+        android:elevation="5dp"
         android:padding="6dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/ic_btn_close_black" />
+        android:src="@drawable/ic_btn_close_black"
+         />
 </android.support.v7.widget.CardView>

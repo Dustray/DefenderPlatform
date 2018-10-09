@@ -117,6 +117,7 @@ public void switchToChat(){
         final SearchView searchView = (SearchView) menu.findItem(R.id.ab_search).getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setSubmitButtonEnabled(true);
+        searchView.setMaxWidth(1000);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

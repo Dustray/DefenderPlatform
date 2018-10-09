@@ -17,7 +17,7 @@
         android:layout_marginBottom="5dp"
         android:background="@color/colorPrimary"
         android:elevation="1dp"
-        android:translationZ="2dp">
+        android:translationZ="1dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -39,7 +39,7 @@
         android:lines="1"
         android:padding="5dp"
         android:text="title"
-        android:textColor="#aaa"
+        android:textColor="#999"
         android:textSize="17dp" />
 
     <LinearLayout
@@ -75,14 +75,13 @@
 
         <Button
             android:id="@+id/btn_web_share_copy"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginTop="2dp"
             android:layout_marginBottom="2dp"
             android:background="@drawable/btn_web_share_dark"
-            android:elevation="0dp"
-            android:text="复制链接"
-            android:translationZ="0dp" />
+            android:text="复制链接" />
     </LinearLayout>
 
     <RelativeLayout
