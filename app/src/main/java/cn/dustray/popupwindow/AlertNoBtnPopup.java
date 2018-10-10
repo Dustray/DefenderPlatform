@@ -107,6 +107,11 @@ public class AlertNoBtnPopup extends PopupWindow implements View.OnClickListener
                         dismiss();
                     }
                 }
+                if(downY < motionEvent.getY()){
+                    btnExit.setImageResource(R.drawable.ic_btn_lock_white);
+                }else{
+                    btnExit.setImageResource(R.drawable.ic_btn_menu_up_white);
+                }
                 return false;
             }
         });
@@ -167,6 +172,7 @@ public class AlertNoBtnPopup extends PopupWindow implements View.OnClickListener
             case R.id.btn_alert_popup_up:
                 break;
         }
+        btnExit.setImageResource(R.drawable.ic_btn_menu_up_white);
         dismiss();
     }
 
