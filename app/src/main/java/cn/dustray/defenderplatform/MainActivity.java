@@ -37,14 +37,13 @@ public class MainActivity extends AppCompatActivity
         ChatFragment.OnFragmentInteractionListener,
         WebFragment.OnFragmentInteractionListener,
         ChatToolFragment.OnListFragmentInteractionListener,
-        WebTabFragment.OnFragmentInteractionListener {
+        WebTabFragment.OnFragmentInteractionListener ,xToast.OnPopupAlertListener {
 
     private TabLayout titleTab;
     private xViewPager mainPage;
     public ChatFragment chatFragment = ChatFragment.newInstance();
     public WebFragment webFragment = WebFragment.newInstance();
     private AppBarLayout mainAppBar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -226,6 +225,16 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onListFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void onClickOk() {
+        changePageScroll();
+    }
+
+    @Override
+    public void onClickCancle() {
 
     }
 }

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/alert_popup_frame"
+    android:name="cn.dustray.defenderplatform.ChatToolFragment"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#eee"
+    android:orientation="vertical"
+    tools:context=".ChatToolFragment">
+
+
+    <RelativeLayout
+        android:id="@+id/web_share_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/alert_popup_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:padding="5dp"
+            android:text="滑动切换已关闭，是否开启？"
+            android:textColor="#666"
+            android:textSize="20dp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:elevation="2dp"
+        android:translationZ="3dp">
+
+        <ImageButton
+            android:id="@+id/btn_alert_popup_up"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
+            android:background="@drawable/btn_web_share"
+            android:src="@drawable/ic_btn_menu_up_white" />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -18,6 +18,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.dustray.popupwindow.AlertNoBtnPopup;
 import cn.dustray.popupwindow.WebGroupPopup;
 import cn.dustray.popupwindow.WebMenuPopup;
 import cn.dustray.popupwindow.WebSharePopup;
@@ -304,6 +305,8 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
             case R.id.btn_web_tool_menu:
                 goHome();
                 xToast.toast(getActivity(), "回到首页");
+                //xToast.popupAlert(getActivity(),"回到首页","好的");
+                //new AlertNoBtnPopup(getActivity(), "回到首页","好的").showAtTop();
                 break;
             case R.id.btn_web_tool_group:
                 createNewFragment();

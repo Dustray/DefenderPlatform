@@ -145,7 +145,8 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                         showSoftInputFromWindow(sendContent);
                     }
                     if(!mListener.getViewPagerScrollState()&& touchDownPositionX - touchUpPositionX > 100&& Math.abs(touchDownPositionY - touchUpPositionY) < 100){
-                        xToast.toast(getContext(),"滑动切换已关闭");
+                        //xToast.toast(getContext(),"滑动切换已关闭");
+                        xToast.popupAlert(getActivity(),"滑动切换已关闭,是否打开？","好的");
                     }
                 }
                 if (touchUpPositionY == touchDownPositionY) {

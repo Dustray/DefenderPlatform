@@ -24,8 +24,12 @@
     </style>
 
     <style name="pop_animation" parent="android:Animation">
-        <item name="android:windowEnterAnimation">@anim/pop_slide_bottom_enter</item>
-        <item name="android:windowExitAnimation">@anim/pop_slide_top_exit</item>
+    <item name="android:windowEnterAnimation">@anim/pop_slide_bottom_enter</item>
+    <item name="android:windowExitAnimation">@anim/pop_slide_top_exit</item>
+</style>
+    <style name="pop_animation_2" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/pop_alert_top_enter</item>
+        <item name="android:windowExitAnimation">@anim/pop_alert_bottom_exit</item>
     </style>
 
     <style name="FullscreenTheme" parent="AppTheme">

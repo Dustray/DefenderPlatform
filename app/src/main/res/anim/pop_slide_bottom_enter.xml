@@ -6,4 +6,4 @@
     android:fromXDelta="0"
     android:fromYDelta="1000"
     android:toXDelta="0"
-    android:toYDelta="0"></translate>
+    android:toYDelta="0"/>
