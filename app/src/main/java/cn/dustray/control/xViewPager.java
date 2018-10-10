@@ -7,6 +7,8 @@ import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
+import cn.dustray.tool.xToast;
+
 public class xViewPager extends ViewPager {
     private boolean lockRollFlag = true;
 
@@ -24,8 +26,10 @@ public class xViewPager extends ViewPager {
     public boolean changeScrollFlag() {
         if(lockRollFlag){
             lockRollFlag=false;
+            xToast.toast(getContext(),"滑动切换已关闭");
         }else{
             lockRollFlag=true;
+            xToast.toast(getContext(),"滑动切换已开启");
         }
 
 

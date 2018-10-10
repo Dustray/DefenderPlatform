@@ -125,7 +125,6 @@ public class WebTabFragment extends Fragment {
 
             @Override
             public boolean onCreateWindow(WebView view, boolean isDialog, boolean isUserGesture, Message resultMsg) {
-//xToast.toast(getContext(),resultMsg.toString());
 
                 if (webListener != null) {
                     webListener.onOpenNewWebTab(view.getUrl());

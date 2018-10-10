@@ -9,6 +9,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.CookieManager;
+import android.webkit.GeolocationPermissions;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
@@ -61,6 +62,13 @@ public class xWebView extends WebView {
         this.getSettings().setLoadsImagesAutomatically(true); // 加载图片
         this.getSettings().setAllowFileAccess(true);
         this.getSettings().setAppCacheEnabled(true);
+        //启用地理定位
+        this.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+        this.getSettings().setGeolocationEnabled(true);//启用地理定位
+        this.getSettings().setDatabaseEnabled(true);//启用数据库
+        String dir = context.getApplicationContext().getDir("database", Context.MODE_PRIVATE).getPath();
+        this.getSettings().setGeolocationDatabasePath(dir);//设置定位的数据库路径
+
         this.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);//不使用网络缓存，开启的话容易导致app膨胀导致卡顿
         this.getSettings().setTextZoom(100);
       //  this.getSettings().setSupportMultipleWindows(true);
@@ -101,6 +109,13 @@ public class xWebView extends WebView {
             public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
                 super.onReceivedSslError(view, handler, error);
                 handler.proceed();//接受证书
+            }
+        });
+        this.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onGeolocationPermissionsShowPrompt(String origin, GeolocationPermissions.Callback callback) {
+                callback.invoke(origin, true, false);
+                super.onGeolocationPermissionsShowPrompt(origin, callback);
             }
         });
         CookieManager.getInstance().setAcceptThirdPartyCookies(this,true);

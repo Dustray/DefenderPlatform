@@ -1,12 +1,17 @@
 package cn.dustray.defenderplatform;
 
+import android.Manifest;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -60,7 +65,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         initTabPage();
-
+        checkLocationPermission();
 
     }
 
@@ -88,6 +93,20 @@ public class MainActivity extends AppCompatActivity
 
     public void switchToWeb() {
         mainPage.setCurrentItem(1);
+    }
+
+    public void checkLocationPermission() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            int checkPermission = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION);
+            if (checkPermission != PackageManager.PERMISSION_GRANTED) {
+
+                ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+                ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+                // Log.d("TTTT", "弹出提示");
+              //  xToast.toast(this,"申请权限1");
+
+            }
+        }
     }
 
     @Override
@@ -175,6 +194,8 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
+            Intent intent = new Intent(this, WebGameActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
@@ -195,6 +216,12 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onFragmentInteraction(Uri uri) {
         Toast.makeText(this, "交流,角楼" + uri.toString(), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public boolean getViewPagerScrollState() {
+
+        return getPageScrollState();
     }
 
     @Override

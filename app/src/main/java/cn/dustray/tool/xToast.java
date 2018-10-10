@@ -13,6 +13,9 @@ import java.util.TimerTask;
  */
 
 public class xToast {
+    public static  final  int ALERT_RESULT_OK=1;
+    public static  final  int ALERT_RESULT_CANCLE=2;
+    public static  final  int ALERT_RESULT_DONOTHING=3;
     private static boolean lastClickTime = true;//标志字
     public static void toast(Context context, String msg) {
         if (lastClickTime) {//标志字为true可调用Toast
@@ -30,7 +33,16 @@ public class xToast {
             }.start();
         }
     }
+    public static boolean popupAlert(Context context, String alertContext){
+        return popupAlert(context,alertContext,null);
+    };
+    public static boolean popupAlert(Context context, String alertContext,String button1Text){
+        return popupAlert(context,alertContext,button1Text,null);
+    };
+    public static boolean popupAlert(Context context, String alertContext,String button1Text,String button2Text){
 
+        return false;
+    };
 
     /**
      * 双击退出函数

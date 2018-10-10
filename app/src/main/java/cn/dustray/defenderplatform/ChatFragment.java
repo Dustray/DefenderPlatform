@@ -29,6 +29,7 @@ import java.util.List;
 import cn.dustray.adapter.ChatListAdapter;
 import cn.dustray.entity.ChatRecordEntity;
 import cn.dustray.popupwindow.WebSharePopup;
+import cn.dustray.tool.xToast;
 
 
 public class ChatFragment extends Fragment implements View.OnClickListener {
@@ -117,7 +118,8 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
         layoutManager.setStackFromEnd(true);
         chatListView.setLayoutManager(layoutManager);
         chatListView.setOnTouchListener(new View.OnTouchListener() {
-            float touchDownPosition = 0, touchUpPosition = 0;
+            float touchDownPositionX= 0, touchUpPositionX = 0;
+            float touchDownPositionY = 0, touchUpPositionY = 0;
 
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -131,17 +133,22 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                 }
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     //chatListView.performClick();
-                    touchDownPosition = motionEvent.getY();
+                    touchDownPositionY = motionEvent.getY();
+                    touchDownPositionX=motionEvent.getX();
                 }
                 if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                    touchUpPosition = motionEvent.getY();
-                    if (!chatListView.canScrollVertically(1) && touchDownPosition - touchUpPosition > 200) {
+                    touchUpPositionY = motionEvent.getY();
+                    touchUpPositionX=motionEvent.getX();
+                    if (!chatListView.canScrollVertically(1) && touchDownPositionY - touchUpPositionY > 200) {
                         //判断是否还能往上滑（滑到底）
                         // Toast.makeText(getActivity(), "弹键盘", Toast.LENGTH_LONG).show();
                         showSoftInputFromWindow(sendContent);
                     }
+                    if(!mListener.getViewPagerScrollState()&& touchDownPositionX - touchUpPositionX > 100&& Math.abs(touchDownPositionY - touchUpPositionY) < 100){
+                        xToast.toast(getContext(),"滑动切换已关闭");
+                    }
                 }
-                if (touchUpPosition == touchDownPosition) {
+                if (touchUpPositionY == touchDownPositionY) {
                     hideSoftInputFromWindow(sendContent);
                 }
                 // if (motionEvent.getAction() == MotionEvent.ACTION_UP)
@@ -151,7 +158,6 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
             }
 
         });
-
         chatListView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -295,7 +301,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
         new WebSharePopup(getActivity(), title, url).showAtBottom(sendBtn);
     }
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+        boolean getViewPagerScrollState();
     }
 }
