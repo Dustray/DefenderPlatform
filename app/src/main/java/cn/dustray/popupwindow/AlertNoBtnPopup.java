@@ -83,7 +83,7 @@ public class AlertNoBtnPopup extends PopupWindow implements View.OnClickListener
         textalertContext.setText(alertContext);
         switch (ALERT_TYPE) {
             case 3:
-                btnCancle= getContentView().findViewById(R.id.btn_alert_cancle);
+                btnCancle = getContentView().findViewById(R.id.btn_alert_cancle);
                 btnCancle.setOnClickListener(this);
                 btnCancle.setText(buttonText_2);
             case 2:
@@ -96,21 +96,23 @@ public class AlertNoBtnPopup extends PopupWindow implements View.OnClickListener
 
         btnExit.setOnTouchListener(new View.OnTouchListener() {
             float downY;
+            boolean canTouch = true;
 
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                    downY = motionEvent.getY();
-                    isTouching = true;
-                } else if (motionEvent.getAction() == MotionEvent.ACTION_MOVE) {
-                    if (downY - motionEvent.getY() > 100) {
-                        dismiss();
+                if (canTouch) {
+                    if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                        downY = motionEvent.getY();
+                        isTouching = true;
+                    } else if (motionEvent.getAction() == MotionEvent.ACTION_MOVE) {
+                        if (downY - motionEvent.getY() > 100) {//消失
+                            btnExit.setImageResource(R.drawable.ic_btn_menu_up_white);
+                            dismiss();
+                            canTouch = false;
+                        } else if (downY < motionEvent.getY()) {//锁定
+                            btnExit.setImageResource(R.drawable.ic_btn_lock_white);
+                        }
                     }
-                }
-                if(downY < motionEvent.getY()){
-                    btnExit.setImageResource(R.drawable.ic_btn_lock_white);
-                }else{
-                    btnExit.setImageResource(R.drawable.ic_btn_menu_up_white);
                 }
                 return false;
             }
@@ -188,6 +190,7 @@ public class AlertNoBtnPopup extends PopupWindow implements View.OnClickListener
 
     public interface OnPopupAlertListener {
         void onClickOk();
+
         void onClickCancle();
     }
 }

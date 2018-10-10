@@ -64,13 +64,13 @@ public class WebMenuPopup extends PopupWindow implements View.OnClickListener {
         //实例化一个ColorDrawable颜色为半透明
         ColorDrawable dw = new ColorDrawable(Color.WHITE);        //设置SelectPicPopupWindow弹出窗体的背景
         this.setBackgroundDrawable(dw);
-//        backgroundAlpha((Activity) context, 0.8f);//0.0-1.0
-//        this.setOnDismissListener(new OnDismissListener() {
-//            @Override
-//            public void onDismiss() {
-//                backgroundAlpha((Activity) context, 1f);
-//            }
-//        });
+        backgroundAlpha((Activity) context, 0.8f);//0.0-1.0
+        this.setOnDismissListener(new OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                backgroundAlpha((Activity) context, 1f);
+            }
+        });
     }
 
     //设置添加屏幕的背景透明度
