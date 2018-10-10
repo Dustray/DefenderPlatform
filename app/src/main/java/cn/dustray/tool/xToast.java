@@ -20,40 +20,31 @@ public class xToast {
     public static final int ALERT_RESULT_CANCLE = 2;
     public static final int ALERT_RESULT_DONOTHING = 3;
     private static boolean lastClickTime = true;//标志字
-    private static OnPopupAlertListener mLisenter;
+    private OnPopupAlertListener mLisenter;
+    Context mContext;
 
-    public static void toast(Context context, String msg) {
-        if (lastClickTime) {//标志字为true可调用Toast
-            lastClickTime = false;//标志字置false
-            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
-            new Thread() {//使用Thread
-                public void run() {
-                    try {
-                        Thread.sleep(1000);//延迟1000毫秒
-                        lastClickTime = true;//标志字置true
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }.start();
-        }
+    public xToast(Context context) {
+        mContext = context;
     }
 
-    public static boolean popupAlert(Context context, String alertContext) {
+    public void setOnPopupAlertListener(OnPopupAlertListener mLisenter) {
+        this.mLisenter = mLisenter;
+    }
+
+    public boolean popupAlert(Context context, String alertContext) {
         return popupAlert(context, alertContext, null);
     }
 
     ;
 
-    public static boolean popupAlert(Context context, String alertContext, String button1Text) {
+    public boolean popupAlert(Context context, String alertContext, String button1Text) {
         return popupAlert(context, alertContext, button1Text, null);
     }
 
     ;
 
-    public static boolean popupAlert(Context context, String alertContext, String button1Text, String button2Text) {
+    public boolean popupAlert(Context context, String alertContext, String button1Text, String button2Text) {
         if (lastClickTime) {//标志字为true可调用Toast
-            mLisenter = (MainActivity) context;
             lastClickTime = false;//标志字置false
             //Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
             AlertNoBtnPopup alert;
@@ -91,7 +82,25 @@ public class xToast {
         return false;
     }
 
+
     ;
+
+    public static void toast(Context context, String msg) {
+        if (lastClickTime) {//标志字为true可调用Toast
+            lastClickTime = false;//标志字置false
+            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+            new Thread() {//使用Thread
+                public void run() {
+                    try {
+                        Thread.sleep(1000);//延迟1000毫秒
+                        lastClickTime = true;//标志字置true
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }.start();
+        }
+    }
 
     /**
      * 双击退出函数

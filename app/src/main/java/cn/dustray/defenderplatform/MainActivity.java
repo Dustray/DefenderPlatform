@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity
         ChatFragment.OnFragmentInteractionListener,
         WebFragment.OnFragmentInteractionListener,
         ChatToolFragment.OnListFragmentInteractionListener,
-        WebTabFragment.OnFragmentInteractionListener ,xToast.OnPopupAlertListener {
+        WebTabFragment.OnFragmentInteractionListener {
 
     private TabLayout titleTab;
     private xViewPager mainPage;
@@ -224,17 +224,13 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onListFragmentInteraction(Uri uri) {
-
-    }
-
-    @Override
-    public void onClickOk() {
+    public void changeViewPagerScrollState() {
         changePageScroll();
     }
 
     @Override
-    public void onClickCancle() {
+    public void onListFragmentInteraction(Uri uri) {
 
     }
+
 }
