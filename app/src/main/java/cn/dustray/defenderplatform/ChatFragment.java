@@ -29,6 +29,7 @@ import java.util.List;
 import cn.dustray.adapter.ChatListAdapter;
 import cn.dustray.entity.ChatRecordEntity;
 import cn.dustray.popupwindow.WebSharePopup;
+import cn.dustray.tool.Alert;
 import cn.dustray.tool.xToast;
 
 
@@ -146,19 +147,19 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                     }
                     if (!mListener.getViewPagerScrollState() && touchDownPositionX - touchUpPositionX > 100 && Math.abs(touchDownPositionY - touchUpPositionY) < 100) {
                         //xToast.toast(getContext(),"滑动切换已关闭");
-                        xToast toast = new xToast(getActivity());
-                        toast.setOnPopupAlertListener(new xToast.OnPopupAlertListener() {
+                        Alert alert = new Alert(getActivity());
+                        alert.setOnPopupAlertListener(new Alert.OnPopupAlertListener() {
                             @Override
                             public void onClickOk() {
-                                mListener.changeViewPagerScrollState();
+                                mListener.changeViewPagerScrollState(true);
                             }
 
                             @Override
                             public void onClickCancle() {
-
+                                mListener.switchToViewPager(1);
                             }
                         });
-                        toast.popupAlert(getActivity(), "滑动切换已关闭,是否打开？", "好的");
+                        alert.popupAlert(getActivity(), "滑动切换已关闭,开启侧滑还是直接切换？", "开启侧滑", "直接切换");
                     }
                 }
                 if (touchUpPositionY == touchDownPositionY) {
@@ -319,6 +320,8 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
 
         boolean getViewPagerScrollState();
 
-        void changeViewPagerScrollState();
+        void changeViewPagerScrollState(boolean s);
+
+        void switchToViewPager(int item);
     }
 }

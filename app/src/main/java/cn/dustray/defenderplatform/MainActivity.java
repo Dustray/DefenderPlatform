@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity
     public ChatFragment chatFragment = ChatFragment.newInstance();
     public WebFragment webFragment = WebFragment.newInstance();
     private AppBarLayout mainAppBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +87,10 @@ public class MainActivity extends AppCompatActivity
         return mainPage.getScrollFlag();
     }
 
+    public void setPageScrollState(boolean s) {
+        mainPage.setScrollFlag(s);
+    }
+
     public void switchToChat() {
         mainPage.setCurrentItem(0);
     }
@@ -102,7 +107,7 @@ public class MainActivity extends AppCompatActivity
                 ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
                 ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
                 // Log.d("TTTT", "弹出提示");
-              //  xToast.toast(this,"申请权限1");
+                //  xToast.toast(this,"申请权限1");
 
             }
         }
@@ -224,8 +229,21 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void changeViewPagerScrollState() {
-        changePageScroll();
+    public void changeViewPagerScrollState(boolean s) {
+        setPageScrollState(s);
+    }
+
+    @Override
+    public void switchToViewPager(int item) {
+        switch (item) {
+            case 0:
+                switchToChat();
+                break;
+            case 1:
+                switchToWeb();
+                break;
+
+        }
     }
 
     @Override

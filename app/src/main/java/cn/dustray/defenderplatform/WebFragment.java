@@ -13,12 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.dustray.popupwindow.AlertNoBtnPopup;
 import cn.dustray.popupwindow.WebGroupPopup;
 import cn.dustray.popupwindow.WebMenuPopup;
 import cn.dustray.popupwindow.WebSharePopup;
@@ -306,7 +304,7 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
                 goHome();
                 xToast.toast(getActivity(), "回到首页");
                 //xToast.popupAlert(getActivity(),"回到首页","好的");
-                //new AlertNoBtnPopup(getActivity(), "回到首页","好的").showAtTop();
+                //new AlertPopup(getActivity(), "回到首页","好的").showAtTop();
                 break;
             case R.id.btn_web_tool_group:
                 createNewFragment();

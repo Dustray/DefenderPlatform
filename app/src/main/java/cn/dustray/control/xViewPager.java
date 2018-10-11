@@ -24,20 +24,26 @@ public class xViewPager extends ViewPager {
      * 切换是否能滑动换页
      */
     public boolean changeScrollFlag() {
-        if(lockRollFlag){
-            lockRollFlag=false;
-            xToast.toast(getContext(),"滑动切换已关闭");
-        }else{
-            lockRollFlag=true;
-            xToast.toast(getContext(),"滑动切换已开启");
+        if (lockRollFlag) {
+            lockRollFlag = false;
+            xToast.toast(getContext(), "滑动切换已关闭");
+        } else {
+            lockRollFlag = true;
+            xToast.toast(getContext(), "滑动切换已开启");
         }
 
 
         return lockRollFlag;
     }
+
     public boolean getScrollFlag() {
 
         return lockRollFlag;
+    }
+
+    public void setScrollFlag(boolean s) {
+        lockRollFlag = s;
+        xToast.toast(getContext(), "滑动切换已开启");
     }
 
     @Override

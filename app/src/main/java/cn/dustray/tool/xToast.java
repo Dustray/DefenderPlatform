@@ -8,9 +8,6 @@ import android.widget.Toast;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import cn.dustray.defenderplatform.MainActivity;
-import cn.dustray.popupwindow.AlertNoBtnPopup;
-
 /**
  * Created by Dustray on 2016/11/27 0027.
  */
@@ -19,71 +16,8 @@ public class xToast {
     public static final int ALERT_RESULT_OK = 1;
     public static final int ALERT_RESULT_CANCLE = 2;
     public static final int ALERT_RESULT_DONOTHING = 3;
+
     private static boolean lastClickTime = true;//标志字
-    private OnPopupAlertListener mLisenter;
-    Context mContext;
-
-    public xToast(Context context) {
-        mContext = context;
-    }
-
-    public void setOnPopupAlertListener(OnPopupAlertListener mLisenter) {
-        this.mLisenter = mLisenter;
-    }
-
-    public boolean popupAlert(Context context, String alertContext) {
-        return popupAlert(context, alertContext, null);
-    }
-
-    ;
-
-    public boolean popupAlert(Context context, String alertContext, String button1Text) {
-        return popupAlert(context, alertContext, button1Text, null);
-    }
-
-    ;
-
-    public boolean popupAlert(Context context, String alertContext, String button1Text, String button2Text) {
-        if (lastClickTime) {//标志字为true可调用Toast
-            lastClickTime = false;//标志字置false
-            //Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
-            AlertNoBtnPopup alert;
-            if (button1Text == null) {//no button
-                alert = new AlertNoBtnPopup(context, alertContext);
-            } else if (button2Text == null) {//ok
-                alert = new AlertNoBtnPopup(context, alertContext, button1Text);
-            } else {//ok cancle
-                alert = new AlertNoBtnPopup(context, alertContext, button1Text, button2Text);
-            }
-            alert.setOnPopupAlertListener(new AlertNoBtnPopup.OnPopupAlertListener() {
-                @Override
-                public void onClickOk() {
-                    mLisenter.onClickOk();
-                }
-
-                @Override
-                public void onClickCancle() {
-                    mLisenter.onClickCancle();
-
-                }
-            });
-            alert.showAtTop();
-            new Thread() {//使用Thread
-                public void run() {
-                    try {
-                        Thread.sleep(1000);//延迟1000毫秒
-                        lastClickTime = true;//标志字置true
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }.start();
-        }
-        return false;
-    }
-
-
-    ;
 
     public static void toast(Context context, String msg) {
         if (lastClickTime) {//标志字为true可调用Toast
@@ -131,9 +65,4 @@ public class xToast {
         }
     }
 
-    public interface OnPopupAlertListener {
-        void onClickOk();
-
-        void onClickCancle();
-    }
 }
