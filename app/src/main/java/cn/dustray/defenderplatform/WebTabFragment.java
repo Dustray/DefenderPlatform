@@ -165,7 +165,8 @@ public class WebTabFragment extends Fragment {
                 return false;
             }
         });
-        mainWebView.loadUrl(homeUrl);
+        loadUrl(homeUrl);
+
         homeUrl = "file:///android_asset/html/HomePage.html";
         if (webListener != null) {
             webListener.onWebViewCreateFinished();
