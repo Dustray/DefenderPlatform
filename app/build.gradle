@@ -32,4 +32,8 @@ dependencies {
     //RecycleView图片资源管理
     implementation 'com.facebook.fresco:fresco:1.10.0'
 
+    //rx
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.2'
+
 }

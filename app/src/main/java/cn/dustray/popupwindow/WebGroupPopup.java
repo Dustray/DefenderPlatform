@@ -10,8 +10,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.PopupWindow;
 
@@ -21,7 +19,7 @@ import cn.dustray.adapter.WebGroupListAdapter;
 import cn.dustray.defenderplatform.MainActivity;
 import cn.dustray.defenderplatform.R;
 import cn.dustray.defenderplatform.WebTabFragment;
-import cn.dustray.tool.PixelConvert;
+import cn.dustray.utils.PixelConvert;
 
 public class WebGroupPopup extends PopupWindow implements View.OnClickListener {
 
@@ -35,6 +33,8 @@ public class WebGroupPopup extends PopupWindow implements View.OnClickListener {
         this.context = context;
         this.list = list;
         init();
+
+       // list= webGroupAdapter.readSavedStateFromDisk();
     }
 
     private void init() {
@@ -111,7 +111,7 @@ public class WebGroupPopup extends PopupWindow implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.btn_web_add:
                 ((MainActivity) context).webFragment.createNewFragment();
-
+//webGroupAdapter.saveToFile();
                 break;
             case R.id.btn_web_closeall:
                 webGroupAdapter.removeAllItem();

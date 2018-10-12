@@ -9,10 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import java.util.List;
-
 import cn.dustray.defenderplatform.MainActivity;
 import cn.dustray.defenderplatform.R;
-import cn.dustray.defenderplatform.WebFragment;
 import cn.dustray.defenderplatform.WebTabFragment;
 import cn.dustray.popupwindow.WebGroupPopup;
 
@@ -59,7 +57,7 @@ public class WebGroupListAdapter extends RecyclerView.Adapter<WebGroupListAdapte
 
                 s.onDestroy();
                 list.remove(position);
-                notifyItemRangeChanged(0,list.size());
+                notifyItemRangeChanged(0, list.size());
                 if (list.size() == 0) {
                     frag.dismiss();
                     ((MainActivity) context).webFragment.createNewFragment();
@@ -99,4 +97,5 @@ public class WebGroupListAdapter extends RecyclerView.Adapter<WebGroupListAdapte
 
         }
     }
+
 }

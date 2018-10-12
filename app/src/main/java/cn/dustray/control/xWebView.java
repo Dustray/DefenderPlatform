@@ -4,31 +4,26 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.http.SslError;
 import android.os.Build;
-import android.support.design.widget.AppBarLayout;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
-import android.view.View;
 import android.webkit.CookieManager;
 import android.webkit.GeolocationPermissions;
 import android.webkit.SslErrorHandler;
+import android.webkit.WebBackForwardList;
 import android.webkit.WebChromeClient;
-import android.webkit.WebResourceError;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
-
-import cn.dustray.defenderplatform.R;
-import cn.dustray.tool.xToast;
 
 public class xWebView extends WebView {
 
     Context context;
     private HistoryStack historyStack = new HistoryStack();
+    private boolean isFromDatabase = false;
 
     public xWebView(Context context) {
         super(context);
@@ -132,23 +127,18 @@ public class xWebView extends WebView {
         CookieManager.getInstance().setAcceptThirdPartyCookies(this, true);
     }
 
-    @Override
-    public void loadUrl(String url) {
-        historyStack.push(url);
-        super.loadUrl(url);
-    }
-
-    @Override
-    public void goBack() {
-        super.goBack();
-    }
 
     public Bitmap getCapture() {
         this.destroyDrawingCache();
         this.setDrawingCacheEnabled(true);//设置能否缓存图片信息（drawing cache）
         this.buildDrawingCache();
-        Bitmap bmp = Bitmap.createScaledBitmap(this.getDrawingCache(), 450, 800, true);
-
+        Bitmap temp = this.getDrawingCache();
+        Bitmap bmp;
+        if (temp == null) {
+            bmp = Bitmap.createBitmap(450, 800, Bitmap.Config.RGB_565);
+        } else {
+            bmp = Bitmap.createScaledBitmap(temp, 450, 800, true);
+        }
         //this.setDrawingCacheEnabled(false);
         return bmp;
     }
@@ -185,16 +175,25 @@ public class xWebView extends WebView {
         }
 
 
-
     }
 
     class HistoryStack {
         private List<XWebViewHistoryEntity> list = new ArrayList<>();
         private int StackPosition = 0;//从0开始为第一页
         private Bitmap capture;
-        private static final int BACK_PAGE=-1;
-        private static final int NOW_PAGE=0;
-        private static final int FOREWARD_PAGE=1;
+        private static final int BACK_PAGE = -1;
+        private static final int NOW_PAGE = 0;
+        private static final int FOREWARD_PAGE = 1;
+
+        public boolean isStackBottom() {
+            if (StackPosition == 0) return true;
+            else return false;
+        }
+
+        public boolean isStackTop() {
+            if (StackPosition == size() - 1) return true;
+            else return false;
+        }
 
         /**
          * 获取历史栈长度（页面数）
@@ -287,13 +286,14 @@ public class xWebView extends WebView {
 
         /**
          * 判断网址是否相同
+         *
          * @param nowUrl
          * @param whichPage
          * @return
          */
-        public boolean isUrlSameAsHistory(String nowUrl ,int whichPage) {
+        public boolean isUrlSameAsHistory(String nowUrl, int whichPage) {
 
-            if (list.get(StackPosition+whichPage).getUrl().equals(nowUrl)) return true;
+            if (list.get(StackPosition + whichPage).getUrl().equals(nowUrl)) return true;
             else return false;
         }
 

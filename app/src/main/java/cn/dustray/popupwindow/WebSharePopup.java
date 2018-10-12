@@ -6,8 +6,6 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,16 +14,11 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.List;
-
-import cn.dustray.adapter.WebGroupListAdapter;
 import cn.dustray.defenderplatform.MainActivity;
 import cn.dustray.defenderplatform.R;
-import cn.dustray.defenderplatform.WebTabFragment;
-import cn.dustray.tool.PixelConvert;
-import cn.dustray.tool.xToast;
+import cn.dustray.utils.PixelConvert;
+import cn.dustray.utils.xToast;
 
 public class WebSharePopup extends PopupWindow implements View.OnClickListener {
 

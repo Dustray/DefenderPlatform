@@ -2,7 +2,6 @@ package cn.dustray.defenderplatform;
 
 import android.content.Context;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,14 +13,10 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +24,7 @@ import java.util.List;
 import cn.dustray.adapter.ChatListAdapter;
 import cn.dustray.entity.ChatRecordEntity;
 import cn.dustray.popupwindow.WebSharePopup;
-import cn.dustray.tool.Alert;
-import cn.dustray.tool.xToast;
+import cn.dustray.utils.Alert;
 
 
 public class ChatFragment extends Fragment implements View.OnClickListener {

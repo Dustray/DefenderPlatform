@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.WindowManager;
@@ -15,7 +14,7 @@ import android.view.View;
 import cn.dustray.defenderplatform.MainActivity;
 import cn.dustray.defenderplatform.R;
 import cn.dustray.defenderplatform.WebFragment;
-import cn.dustray.tool.PixelConvert;
+import cn.dustray.utils.PixelConvert;
 
 public class WebMenuPopup extends PopupWindow implements View.OnClickListener {
 

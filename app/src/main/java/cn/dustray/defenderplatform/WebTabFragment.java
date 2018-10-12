@@ -1,13 +1,11 @@
 package cn.dustray.defenderplatform;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.net.http.SslError;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Message;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
@@ -18,16 +16,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.WindowManager;
-import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 
+import java.util.List;
+
+import cn.dustray.browser.WebViewManager;
 import cn.dustray.control.xWebView;
-import cn.dustray.tool.xToast;
 
 
 public class WebTabFragment extends Fragment {
@@ -64,6 +62,7 @@ public class WebTabFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        mainWebView = new xWebView(getActivity().getApplicationContext());
         initWebView();
         //progressBar = getActivity().findViewById(R.id.web_progressbar);
 
@@ -71,9 +70,12 @@ public class WebTabFragment extends Fragment {
         //btnBack.setImageBitmap(mainWebView.getCapture());
     }
 
+    public void addXWebView(xWebView web) {
+        mainWebView = web;
+    }
+
     private void initWebView() {
         frameLayout = getView().findViewById(R.id.web_frame);
-        mainWebView = new xWebView(getActivity().getApplicationContext());
         frameLayout.addView(mainWebView);
 
         progressBar = new ProgressBar(getActivity(), null, android.R.attr.progressBarStyleHorizontal);
@@ -93,7 +95,10 @@ public class WebTabFragment extends Fragment {
                 //隐藏toolbar
                 AppBarLayout mainAppBar = getActivity().findViewById(R.id.main_appbar);
                 mainAppBar.setExpanded(false, true);
-
+                //保存页面状态
+                List<WebTabFragment> array=( (MainActivity)getActivity()).webFragment.webFragArray;
+                WebViewManager manager = new WebViewManager(getActivity().getApplication(),array,getActivity());
+                manager.saveToFile();
             }
 
             @Override
@@ -175,7 +180,7 @@ public class WebTabFragment extends Fragment {
 
     public void setHomeUrl(String url) {
 
-            homeUrl = url;
+        homeUrl = url;
     }
 
     public void setFatherFrag(Fragment frag) {
@@ -283,6 +288,12 @@ public class WebTabFragment extends Fragment {
         super.onDetach();
         mListener = null;
         webListener = null;
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mainWebView.saveState(outState);
     }
 
     /**

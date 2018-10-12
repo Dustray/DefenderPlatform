@@ -7,7 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
-import cn.dustray.tool.xToast;
+import cn.dustray.utils.xToast;
 
 public class xViewPager extends ViewPager {
     private boolean lockRollFlag = true;

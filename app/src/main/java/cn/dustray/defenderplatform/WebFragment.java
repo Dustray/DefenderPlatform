@@ -17,10 +17,12 @@ import android.widget.LinearLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.dustray.adapter.WebGroupListAdapter;
+import cn.dustray.browser.WebViewManager;
 import cn.dustray.popupwindow.WebGroupPopup;
 import cn.dustray.popupwindow.WebMenuPopup;
 import cn.dustray.popupwindow.WebSharePopup;
-import cn.dustray.tool.xToast;
+import cn.dustray.utils.xToast;
 
 
 public class WebFragment extends Fragment implements View.OnClickListener, WebTabFragment.OnWebViewCreatedListener
@@ -37,7 +39,7 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
 
     private ImageButton btnBack, btnGo, btnMenu, btnGroup, btnShare;
     private LinearLayout webToolBar;
-    List<WebTabFragment> webFragArray = new ArrayList<WebTabFragment>();
+    public List<WebTabFragment> webFragArray = new ArrayList<WebTabFragment>();
 
     private WebTabFragment webFrag;
     private FragmentManager manager;
@@ -58,9 +60,18 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        //获取保存成文件的webview 状态（state）
+        WebViewManager managers = new WebViewManager(getActivity().getApplication(), webFragArray, getActivity());
+        managers.readSavedStateFromDisk();
 
+        manager = getActivity().getSupportFragmentManager();
         initWebToolBar();
-        initFragment();
+        xToast.toast(getActivity(), "s" + webFragArray.size());
+        if (webFragArray.size() == 0) {//未从文件中获取缓存的页面
+            initFragment();
+        } else {
+            initFragment(webFragArray);
+        }
         //btnBack.setImageBitmap(mainWebView.getCapture());
     }
 
@@ -71,7 +82,6 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
 
     private void initFragment(String Url) {
 
-        manager = getActivity().getSupportFragmentManager();
 
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.setCustomAnimations(R.animator.fragment_slide_right_enter, R.animator.fragment_slide_left_exit);
@@ -84,6 +94,20 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
         transaction.add(R.id.web_main_frag, webFrag);
         transaction.commit();
         webFragArray.add(webFrag);
+
+        refreshGroupIcon();
+    }
+
+    private void initFragment(List<WebTabFragment> array) {
+        webFrag = array.get(array.size() - 1);
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.setCustomAnimations(R.animator.fragment_slide_right_enter, R.animator.fragment_slide_left_exit);
+
+        webFrag.setFatherFrag(this);
+
+        transaction.add(R.id.web_main_frag, webFrag);
+        transaction.commit();
+
         refreshGroupIcon();
     }
 

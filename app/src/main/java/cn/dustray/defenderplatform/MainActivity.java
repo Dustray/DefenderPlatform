@@ -12,7 +12,6 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -30,7 +29,7 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 
 import cn.dustray.adapter.MainViewPagerAdapter;
 import cn.dustray.control.xViewPager;
-import cn.dustray.tool.xToast;
+import cn.dustray.utils.xToast;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
