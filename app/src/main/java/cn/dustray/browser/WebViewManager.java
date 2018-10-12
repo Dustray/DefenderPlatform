@@ -57,9 +57,10 @@ public class WebViewManager {
                     Bundle state = bundle.getBundle("WEBVIEW_" + i);
                     Log.i("def", "putout:-------->WEBVIEW_" + i+";    size:"+state.toString());
                     WebTabFragment webFrag = WebTabFragment.newInstance();
-                     webFrag.mainWebView = new xWebView(context);
+                     webFrag.addXWebView(new xWebView(context.getApplicationContext()));
                     // webFragment.addXWebView(web);
-                    webFrag.mainWebView.restoreState(state);//.onSaveInstanceState(state);
+                    //webFrag.mainWebView.restoreState(state);//.onSaveInstanceState(state);
+                    webFrag.webState=state;
                     list.add(webFrag);
                     i++;
                 }

@@ -26,6 +26,7 @@ import java.util.List;
 
 import cn.dustray.browser.WebViewManager;
 import cn.dustray.control.xWebView;
+import cn.dustray.utils.xToast;
 
 
 public class WebTabFragment extends Fragment {
@@ -47,6 +48,7 @@ public class WebTabFragment extends Fragment {
 
     private Bitmap snapshotBmp;
     private FrameLayout frameLayout;
+    public Bundle webState;
 
     public WebTabFragment() {
         // Required empty public constructor
@@ -77,7 +79,7 @@ public class WebTabFragment extends Fragment {
     private void initWebView() {
         frameLayout = getView().findViewById(R.id.web_frame);
         frameLayout.addView(mainWebView);
-
+        xToast.toast(getActivity(),"addnew");
         progressBar = new ProgressBar(getActivity(), null, android.R.attr.progressBarStyleHorizontal);
         frameLayout.addView(progressBar);
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) progressBar.getLayoutParams();
@@ -170,8 +172,12 @@ public class WebTabFragment extends Fragment {
                 return false;
             }
         });
-        loadUrl(homeUrl);
+        if(null!=webState){
+          mainWebView.restoreState(webState);
 
+        }else {
+            loadUrl(homeUrl);
+        }
         homeUrl = "file:///android_asset/html/HomePage.html";
         if (webListener != null) {
             webListener.onWebViewCreateFinished();

@@ -66,7 +66,7 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
 
         manager = getActivity().getSupportFragmentManager();
         initWebToolBar();
-        xToast.toast(getActivity(), "s" + webFragArray.size());
+        //xToast.toast(getActivity(), "s" + webFragArray.size());
         if (webFragArray.size() == 0) {//未从文件中获取缓存的页面
             initFragment();
         } else {
