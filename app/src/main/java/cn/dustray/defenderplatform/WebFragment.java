@@ -248,7 +248,9 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
         }
     }
 
-
+    public void cleanCache() {
+        webFrag.cleanCache();
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

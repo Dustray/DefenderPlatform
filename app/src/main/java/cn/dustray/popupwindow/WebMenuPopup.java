@@ -19,7 +19,7 @@ import cn.dustray.utils.PixelConvert;
 public class WebMenuPopup extends PopupWindow implements View.OnClickListener {
 
     private Context context;
-    private ImageButton btnHome, btnRefresh, btnRollLock,btnExit;
+    private ImageButton btnHome, btnRefresh, btnRollLock,btnExit,btnClean;
     private WebFragment webFragment;
 
     public WebMenuPopup(Context context) {
@@ -50,6 +50,8 @@ public class WebMenuPopup extends PopupWindow implements View.OnClickListener {
         }
         btnExit= getContentView().findViewById(R.id.btn_web_menu_down);
         btnExit.setOnClickListener(this);
+        btnClean= getContentView().findViewById(R.id.btn_web_menu_clean);
+        btnClean.setOnClickListener(this);
     }
 
     private void initWindow() {
@@ -104,6 +106,9 @@ public class WebMenuPopup extends PopupWindow implements View.OnClickListener {
 
                 break;
             case R.id.btn_web_menu_down:
+                break;
+            case R.id.btn_web_menu_clean:
+                ((MainActivity) context).webFragment.cleanCache();
                 break;
         }
         dismiss();

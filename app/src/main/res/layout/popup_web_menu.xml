@@ -162,6 +162,7 @@
             android:layout_columnWeight="1">
 
             <ImageButton
+                android:id="@+id/btn_web_menu_clean"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/btn_web_menu_add"

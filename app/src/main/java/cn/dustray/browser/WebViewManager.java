@@ -122,6 +122,9 @@ public class WebViewManager {
 
 
             Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+            if (bitmap == null) {
+                bitmap = Bitmap.createBitmap(450, 800, Bitmap.Config.RGB_565);
+            }
             inputStream.close();
             Bitmap bmp = Bitmap.createScaledBitmap(bitmap, 450, 800, true);
             return bmp;

@@ -27,14 +27,14 @@ public class WebGroupPopup extends PopupWindow implements View.OnClickListener {
     private RecyclerView webGroupList;
     private WebGroupListAdapter webGroupAdapter;
     private List<WebTabFragment> list;
-    private ImageButton btnWebAdd, btnWebCloseAll,btnExit;
+    private ImageButton btnWebAdd, btnWebCloseAll, btnExit;
 
     public WebGroupPopup(Context context, List<WebTabFragment> list) {
         this.context = context;
         this.list = list;
         init();
 
-       // list= webGroupAdapter.readSavedStateFromDisk();
+        // list= webGroupAdapter.readSavedStateFromDisk();
     }
 
     private void init() {
@@ -52,7 +52,7 @@ public class WebGroupPopup extends PopupWindow implements View.OnClickListener {
         btnWebAdd.setOnClickListener(this);
         btnWebCloseAll = getContentView().findViewById(R.id.btn_web_closeall);
         btnWebCloseAll.setOnClickListener(this);
-        btnExit= getContentView().findViewById(R.id.btn_web_group_down);
+        btnExit = getContentView().findViewById(R.id.btn_web_group_down);
         btnExit.setOnClickListener(this);
     }
 
@@ -99,7 +99,7 @@ public class WebGroupPopup extends PopupWindow implements View.OnClickListener {
 
     public void showAtBottom(View view) {        //弹窗位置设置
         setAnimationStyle(R.style.pop_animation);
-        showAtLocation(view, Gravity.BOTTOM, 0,0);
+        showAtLocation(view, Gravity.BOTTOM, 0, 0);
         //  showAsDropDown(view, 0, 0);
         //showAtLocation(view, Gravity.TOP | Gravity.RIGHT, 10, 110);//有偏差
 
@@ -116,7 +116,8 @@ public class WebGroupPopup extends PopupWindow implements View.OnClickListener {
             case R.id.btn_web_closeall:
                 webGroupAdapter.removeAllItem();
 
-                break;      case R.id.btn_web_group_down:
+                break;
+            case R.id.btn_web_group_down:
                 break;
         }
         dismiss();

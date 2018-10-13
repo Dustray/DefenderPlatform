@@ -253,6 +253,10 @@ public class WebTabFragment extends Fragment {
         return snapshotBmp;
     }
 
+    public void cleanCache() {
+        mainWebView.cleanCache();
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

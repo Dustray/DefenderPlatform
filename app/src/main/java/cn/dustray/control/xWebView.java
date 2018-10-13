@@ -10,6 +10,7 @@ import android.util.AttributeSet;
 import android.webkit.CookieManager;
 import android.webkit.GeolocationPermissions;
 import android.webkit.SslErrorHandler;
+import android.webkit.ValueCallback;
 import android.webkit.WebBackForwardList;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -18,6 +19,9 @@ import android.webkit.WebViewClient;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.dustray.utils.DataCacheUtil;
+import cn.dustray.utils.xToast;
 
 public class xWebView extends WebView {
 
@@ -144,6 +148,27 @@ public class xWebView extends WebView {
         return bmp;
     }
 
+    public void cleanCache() {
+        clearCache(true);
+        String dataSize = "0KB";
+        try {
+            dataSize = DataCacheUtil.getTotalCacheSize(context.getApplicationContext());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        final String size = dataSize;
+        CookieManager.getInstance().removeAllCookies(new ValueCallback<Boolean>() {
+            @Override
+            public void onReceiveValue(Boolean aBoolean) {
+                if (aBoolean) {
+                    xToast.toast(context, "浏览器缓存已清除:" + size );
+                } else {
+                    xToast.toast(context, "当前无可清理缓存" + size);
+                }
+            }
+        });
+
+    }
 
     class XWebViewHistoryEntity {
         private String Url;

@@ -217,6 +217,12 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        System.exit(0);
+    }
+
+    @Override
     public void onFragmentInteraction(Uri uri) {
         Toast.makeText(this, "交流,角楼" + uri.toString(), Toast.LENGTH_LONG).show();
     }
