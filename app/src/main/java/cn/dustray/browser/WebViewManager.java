@@ -22,23 +22,26 @@ public class WebViewManager {
     List<WebTabFragment> list;
     Context context;
 
-    public WebViewManager(Application application, List<WebTabFragment> list,Context context) {
+    public WebViewManager(Application application, List<WebTabFragment> list, Context context) {
         this.application = application;
         this.list = list;
-        this.context=context;
+        this.context = context;
     }
 
     public void saveToFile() {
         Bundle outState = new Bundle(ClassLoader.getSystemClassLoader());
-
+        Log.i("def", "saveToFile:------------------IN-------------------------------WEBVIEW");
         for (int i = 0; i < list.size(); i++) {
             WebTabFragment tabFragment = list.get(i);
 
             Bundle state = new Bundle(ClassLoader.getSystemClassLoader());
             xWebView webView = tabFragment.mainWebView;
             if (webView != null) {
-                webView.saveState(state);
-                Log.i("def", "putin:--WEBVIEW_" + i+";    size:"+state.toString());
+                if (tabFragment.getWebState() != null) {
+                    state = tabFragment.getWebState();
+                } else
+                    webView.saveState(state);
+                Log.i("def", "putin:--WEBVIEW_" + i + ";    size:" + state.toString());
                 outState.putBundle("WEBVIEW_" + i, state);
             }
         }
@@ -52,15 +55,16 @@ public class WebViewManager {
         if (bundle != null) {
             Set<String> keySet = bundle.keySet();  //获取所有的Key,
             int i = 0;
+            Log.i("def", "readSavedStateFromDisk:------------------------OUT------------WEBVIEW");
             for (String key : keySet) {  //bundle.get(key);来获取对应的value
                 if (key.startsWith("WEBVIEW_")) {
                     Bundle state = bundle.getBundle("WEBVIEW_" + i);
-                    Log.i("def", "putout:-------->WEBVIEW_" + i+";    size:"+state.toString());
+                    Log.i("def", "putout:-------->WEBVIEW_" + i + ";    size:" + state.toString());
                     WebTabFragment webFrag = WebTabFragment.newInstance();
-                     webFrag.addXWebView(new xWebView(context.getApplicationContext()));
+                    webFrag.setWebView(new xWebView(context.getApplicationContext()));
                     // webFragment.addXWebView(web);
                     //webFrag.mainWebView.restoreState(state);//.onSaveInstanceState(state);
-                    webFrag.webState=state;
+                    webFrag.setWebState(state);
                     list.add(webFrag);
                     i++;
                 }

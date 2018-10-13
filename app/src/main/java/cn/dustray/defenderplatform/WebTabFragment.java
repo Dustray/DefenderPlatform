@@ -48,7 +48,7 @@ public class WebTabFragment extends Fragment {
 
     private Bitmap snapshotBmp;
     private FrameLayout frameLayout;
-    public Bundle webState;
+    private Bundle webState;
 
     public WebTabFragment() {
         // Required empty public constructor
@@ -64,22 +64,18 @@ public class WebTabFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mainWebView = new xWebView(getActivity().getApplicationContext());
+
         initWebView();
-        //progressBar = getActivity().findViewById(R.id.web_progressbar);
-
-
-        //btnBack.setImageBitmap(mainWebView.getCapture());
     }
 
-    public void addXWebView(xWebView web) {
-        mainWebView = web;
-    }
 
     private void initWebView() {
+        if (mainWebView == null) {
+            mainWebView = new xWebView(getActivity().getApplicationContext());
+        }
         frameLayout = getView().findViewById(R.id.web_frame);
         frameLayout.addView(mainWebView);
-        xToast.toast(getActivity(),"addnew");
+        //xToast.toast(getActivity(), "addnew");
         progressBar = new ProgressBar(getActivity(), null, android.R.attr.progressBarStyleHorizontal);
         frameLayout.addView(progressBar);
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) progressBar.getLayoutParams();
@@ -88,7 +84,6 @@ public class WebTabFragment extends Fragment {
         params.height = 5;
         progressBar.setLayoutParams(params);
 
-        //mainWebView = getView().findViewById(R.id.main_webview);
         mainWebView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
@@ -98,8 +93,8 @@ public class WebTabFragment extends Fragment {
                 AppBarLayout mainAppBar = getActivity().findViewById(R.id.main_appbar);
                 mainAppBar.setExpanded(false, true);
                 //保存页面状态
-                List<WebTabFragment> array=( (MainActivity)getActivity()).webFragment.webFragArray;
-                WebViewManager manager = new WebViewManager(getActivity().getApplication(),array,getActivity());
+                List<WebTabFragment> array = ((MainActivity) getActivity()).webFragment.webFragArray;
+                WebViewManager manager = new WebViewManager(getActivity().getApplication(), array, getActivity());
                 manager.saveToFile();
             }
 
@@ -172,10 +167,11 @@ public class WebTabFragment extends Fragment {
                 return false;
             }
         });
-        if(null!=webState){
-          mainWebView.restoreState(webState);
 
-        }else {
+        if ( webState!=null ) {
+            mainWebView.restoreState(webState);
+
+        } else {
             loadUrl(homeUrl);
         }
         homeUrl = "file:///android_asset/html/HomePage.html";
@@ -184,8 +180,18 @@ public class WebTabFragment extends Fragment {
         }
     }
 
-    public void setHomeUrl(String url) {
+    public void setWebView(xWebView web) {
+        mainWebView = web;
+    }
 
+    public void setWebState(Bundle state) {
+        this.webState = state;
+    }
+    public Bundle getWebState() {
+        return this.webState;
+    }
+
+    public void setHomeUrl(String url) {
         homeUrl = url;
     }
 

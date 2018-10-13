@@ -61,10 +61,11 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         //获取保存成文件的webview 状态（state）
-        WebViewManager managers = new WebViewManager(getActivity().getApplication(), webFragArray, getActivity());
-        managers.readSavedStateFromDisk();
-
+        WebViewManager webManager = new WebViewManager(getActivity().getApplication(), webFragArray, getActivity());
+        webManager.readSavedStateFromDisk();
+        //FragmentManager
         manager = getActivity().getSupportFragmentManager();
+        //初始化webtoolbar
         initWebToolBar();
         //xToast.toast(getActivity(), "s" + webFragArray.size());
         if (webFragArray.size() == 0) {//未从文件中获取缓存的页面

@@ -47,14 +47,12 @@ public class WebGroupListAdapter extends RecyclerView.Adapter<WebGroupListAdapte
             @Override
             public void onClick(View view) {
                 ((MainActivity) context).webFragment.loadFragment(s);
-                //   Toast.makeText(context,list.get(position).toString()+""+position,Toast.LENGTH_LONG).show();
             }
         });
         holder.closeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 notifyItemRemoved(position);
-
                 s.onDestroy();
                 list.remove(position);
                 notifyItemRangeChanged(0, list.size());
@@ -62,7 +60,6 @@ public class WebGroupListAdapter extends RecyclerView.Adapter<WebGroupListAdapte
                     frag.dismiss();
                     ((MainActivity) context).webFragment.createNewFragment();
                 }
-
                 ((MainActivity) context).webFragment.refreshGroupIcon();
             }
         });
