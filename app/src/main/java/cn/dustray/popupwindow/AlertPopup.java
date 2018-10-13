@@ -74,13 +74,14 @@ public class AlertPopup extends PopupWindow implements View.OnClickListener {
         }
         setContentView(view);
         alertFrame = view.findViewById(R.id.alert_popup_frame);
-        initWindow();
         initButton();
+        initWindow();
     }
 
     private void initButton() {
         textalertContext = getContentView().findViewById(R.id.alert_popup_title);
         textalertContext.setText(alertContext);
+
         switch (ALERT_TYPE) {
             case 3:
                 btnCancle = getContentView().findViewById(R.id.btn_alert_cancle);
@@ -122,8 +123,7 @@ public class AlertPopup extends PopupWindow implements View.OnClickListener {
 
     private void initWindow() {
         this.setWidth(WindowManager.LayoutParams.MATCH_PARENT);
-        alertFrame.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
-        this.setHeight(alertFrame.getMeasuredHeight());
+        this.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
 
         this.setFocusable(false);
         this.setOutsideTouchable(false);

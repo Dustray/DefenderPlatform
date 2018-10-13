@@ -14,12 +14,11 @@ import android.view.View;
 import cn.dustray.defenderplatform.MainActivity;
 import cn.dustray.defenderplatform.R;
 import cn.dustray.defenderplatform.WebFragment;
-import cn.dustray.utils.PixelConvert;
 
 public class WebMenuPopup extends PopupWindow implements View.OnClickListener {
 
     private Context context;
-    private ImageButton btnHome, btnRefresh, btnRollLock,btnExit,btnClean;
+    private ImageButton btnHome, btnRefresh, btnRollLock, btnExit, btnClean;
     private WebFragment webFragment;
 
     public WebMenuPopup(Context context) {
@@ -48,15 +47,15 @@ public class WebMenuPopup extends PopupWindow implements View.OnClickListener {
         } else {
             btnRollLock.setImageResource(R.drawable.ic_btn_roll_lock_black);
         }
-        btnExit= getContentView().findViewById(R.id.btn_web_menu_down);
+        btnExit = getContentView().findViewById(R.id.btn_web_menu_down);
         btnExit.setOnClickListener(this);
-        btnClean= getContentView().findViewById(R.id.btn_web_menu_clean);
+        btnClean = getContentView().findViewById(R.id.btn_web_menu_clean);
         btnClean.setOnClickListener(this);
     }
 
     private void initWindow() {
         this.setWidth(WindowManager.LayoutParams.MATCH_PARENT);
-        this.setHeight(PixelConvert.dip2px(context, 175));
+        this.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
         this.setFocusable(true);
         this.setOutsideTouchable(true);
         this.setTouchable(true);
@@ -102,7 +101,7 @@ public class WebMenuPopup extends PopupWindow implements View.OnClickListener {
                 webFragment.refresh();
                 break;
             case R.id.btn_web_menu_rolllock:
-               ((MainActivity) context).changePageScroll();
+                ((MainActivity) context).changePageScroll();
 
                 break;
             case R.id.btn_web_menu_down:

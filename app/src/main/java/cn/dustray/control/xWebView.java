@@ -163,7 +163,7 @@ public class xWebView extends WebView {
                 if (aBoolean) {
                     xToast.toast(context, "浏览器缓存已清除:" + size );
                 } else {
-                    xToast.toast(context, "当前无可清理缓存" + size);
+                    xToast.toast(context, "当前无可清理缓存" );
                 }
             }
         });

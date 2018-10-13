@@ -17,7 +17,6 @@ import android.widget.TextView;
 
 import cn.dustray.defenderplatform.MainActivity;
 import cn.dustray.defenderplatform.R;
-import cn.dustray.utils.PixelConvert;
 import cn.dustray.utils.xToast;
 
 public class WebSharePopup extends PopupWindow implements View.OnClickListener {
@@ -58,7 +57,7 @@ public class WebSharePopup extends PopupWindow implements View.OnClickListener {
 
     private void initWindow() {
         this.setWidth(WindowManager.LayoutParams.MATCH_PARENT);
-        this.setHeight(PixelConvert.dip2px(context, 345));
+        this.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
 
         this.setFocusable(true);
         this.setOutsideTouchable(true);

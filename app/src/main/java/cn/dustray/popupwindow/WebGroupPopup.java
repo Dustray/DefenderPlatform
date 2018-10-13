@@ -19,7 +19,6 @@ import cn.dustray.adapter.WebGroupListAdapter;
 import cn.dustray.defenderplatform.MainActivity;
 import cn.dustray.defenderplatform.R;
 import cn.dustray.defenderplatform.WebTabFragment;
-import cn.dustray.utils.PixelConvert;
 
 public class WebGroupPopup extends PopupWindow implements View.OnClickListener {
 
@@ -70,7 +69,7 @@ public class WebGroupPopup extends PopupWindow implements View.OnClickListener {
 
     private void initWindow() {
         this.setWidth(WindowManager.LayoutParams.MATCH_PARENT);
-        this.setHeight(PixelConvert.dip2px(context, 485));
+        this.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
 
         this.setFocusable(true);
         this.setOutsideTouchable(true);
