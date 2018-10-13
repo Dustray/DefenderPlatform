@@ -93,6 +93,9 @@ public class WebTabFragment extends Fragment {
                 AppBarLayout mainAppBar = getActivity().findViewById(R.id.main_appbar);
                 mainAppBar.setExpanded(false, true);
                 //保存页面状态
+//                if (webState == null)
+//                    webState = new Bundle(ClassLoader.getSystemClassLoader());
+//                mainWebView.saveState(webState);
                 List<WebTabFragment> array = ((MainActivity) getActivity()).webFragment.webFragArray;
                 WebViewManager manager = new WebViewManager(getActivity().getApplication(), array, getActivity());
                 manager.saveToFile();
@@ -168,7 +171,7 @@ public class WebTabFragment extends Fragment {
             }
         });
 
-        if ( webState!=null ) {
+        if (webState != null) {
             mainWebView.restoreState(webState);
 
         } else {
@@ -187,6 +190,7 @@ public class WebTabFragment extends Fragment {
     public void setWebState(Bundle state) {
         this.webState = state;
     }
+
     public Bundle getWebState() {
         return this.webState;
     }
@@ -306,6 +310,7 @@ public class WebTabFragment extends Fragment {
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         mainWebView.saveState(outState);
+        this.webState = outState;
     }
 
     /**

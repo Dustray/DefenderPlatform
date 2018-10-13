@@ -64,7 +64,9 @@ public class WebViewManager {
                     webFrag.setWebView(new xWebView(context.getApplicationContext()));
                     // webFragment.addXWebView(web);
                     //webFrag.mainWebView.restoreState(state);//.onSaveInstanceState(state);
-                    webFrag.setWebState(state);
+                    if (state.size() != 0) {
+                        webFrag.setWebState(state);
+                    }
                     list.add(webFrag);
                     i++;
                 }
