@@ -115,6 +115,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
         chatListView.setOnTouchListener(new View.OnTouchListener() {
             float touchDownPositionX = 0, touchUpPositionX = 0;
             float touchDownPositionY = 0, touchUpPositionY = 0;
+            Alert alert;
 
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -141,7 +142,8 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                     }
                     if (!mListener.getViewPagerScrollState() && touchDownPositionX - touchUpPositionX > 100 && Math.abs(touchDownPositionY - touchUpPositionY) < 100) {
                         //xToast.toast(getContext(),"滑动切换已关闭");
-                        Alert alert = new Alert(getActivity());
+
+                        if (alert == null) alert = new Alert(getActivity());
                         alert.setOnPopupAlertListener(new Alert.OnPopupAlertListener() {
                             @Override
                             public void onClickOk() {
@@ -156,6 +158,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                         alert.popupAlert(getActivity(), "滑动切换已关闭,开启侧滑还是直接切换？", "开启侧滑", "直接切换");
                     }
                 }
+                //点击
                 if (touchUpPositionY == touchDownPositionY) {
                     hideSoftInputFromWindow(sendContent);
                 }

@@ -163,6 +163,12 @@ public class AlertPopup extends PopupWindow implements View.OnClickListener {
     }
 
     @Override
+    public void dismiss() {
+        super.dismiss();
+        mListener.onDismiss();
+    }
+
+    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_alert_ok:
@@ -192,5 +198,7 @@ public class AlertPopup extends PopupWindow implements View.OnClickListener {
         void onClickOk();
 
         void onClickCancle();
+
+        void onDismiss();
     }
 }

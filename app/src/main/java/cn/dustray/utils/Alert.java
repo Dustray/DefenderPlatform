@@ -9,6 +9,7 @@ public class Alert {
     private static boolean lastClickTime = true;//标志字
     private Alert.OnPopupAlertListener mLisenter;
     Context mContext;
+    private boolean isShowing=false;
 
     public Alert(Context context) {
         mContext = context;
@@ -31,7 +32,8 @@ public class Alert {
     ;
 
     public boolean popupAlert(Context context, String alertContext, String button1Text, String button2Text) {
-        if (lastClickTime) {//标志字为true可调用Toast
+        if (lastClickTime&&!isShowing) {//标志字为true可调用Toast
+            isShowing=true;
             lastClickTime = false;//标志字置false
             //Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
             AlertPopup alert;
@@ -52,6 +54,10 @@ public class Alert {
                 public void onClickCancle() {
                     mLisenter.onClickCancle();
 
+                }
+                @Override
+                public void onDismiss() {
+                    isShowing=false;
                 }
             });
             alert.showAtTop();
