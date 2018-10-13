@@ -28,6 +28,8 @@ import cn.dustray.browser.WebViewManager;
 import cn.dustray.control.xWebView;
 import cn.dustray.utils.xToast;
 
+import static android.view.View.generateViewId;
+
 
 public class WebTabFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -72,6 +74,7 @@ public class WebTabFragment extends Fragment {
     private void initWebView() {
         if (mainWebView == null) {
             mainWebView = new xWebView(getActivity().getApplicationContext());
+            mainWebView.setId(generateViewId());
         }
         frameLayout = getView().findViewById(R.id.web_frame);
         frameLayout.addView(mainWebView);
@@ -92,13 +95,7 @@ public class WebTabFragment extends Fragment {
                 //隐藏toolbar
                 AppBarLayout mainAppBar = getActivity().findViewById(R.id.main_appbar);
                 mainAppBar.setExpanded(false, true);
-                //保存页面状态
-//                if (webState == null)
-//                    webState = new Bundle(ClassLoader.getSystemClassLoader());
-//                mainWebView.saveState(webState);
-                List<WebTabFragment> array = ((MainActivity) getActivity()).webFragment.webFragArray;
-                WebViewManager manager = new WebViewManager(getActivity().getApplication(), array, getActivity());
-                manager.saveToFile();
+
             }
 
             @Override
@@ -262,6 +259,18 @@ public class WebTabFragment extends Fragment {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        //保存页面状态
+//                if (webState == null)
+//                    webState = new Bundle(ClassLoader.getSystemClassLoader());
+//                mainWebView.saveState(webState);
+        List<WebTabFragment> array = ((MainActivity) getActivity()).webFragment.webFragArray;
+        WebViewManager manager = new WebViewManager(getActivity().getApplication(), array, getActivity());
+        manager.saveToFile();
     }
 
     @Override
