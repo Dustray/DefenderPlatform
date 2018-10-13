@@ -231,10 +231,25 @@ public class WebTabFragment extends Fragment {
     }
 
     public void generateSnapshot() {
-        snapshotBmp = mainWebView.getCapture();
+        Bitmap bmp = mainWebView.getCapture();
+        if (bmp == null) {
+            if (snapshotBmp == null) {
+                snapshotBmp = Bitmap.createBitmap(450, 800, Bitmap.Config.RGB_565);
+            }
+        } else {
+            snapshotBmp = bmp;
+        }
+
+    }
+
+    public void setSnapshotBmp(Bitmap snapshotBmp) {
+        this.snapshotBmp = snapshotBmp;
     }
 
     public Bitmap getSnapshot() {
+        if (snapshotBmp == null) {
+            snapshotBmp = Bitmap.createBitmap(450, 800, Bitmap.Config.RGB_565);
+        }
         return snapshotBmp;
     }
 

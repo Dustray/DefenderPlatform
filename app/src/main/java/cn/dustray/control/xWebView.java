@@ -134,11 +134,12 @@ public class xWebView extends WebView {
         this.buildDrawingCache();
         Bitmap temp = this.getDrawingCache();
         Bitmap bmp;
-        if (temp == null) {
-            bmp = Bitmap.createBitmap(450, 800, Bitmap.Config.RGB_565);
-        } else {
-            bmp = Bitmap.createScaledBitmap(temp, 450, 800, true);
-        }
+//        if (temp == null) {
+//            bmp = Bitmap.createBitmap(450, 800, Bitmap.Config.RGB_565);
+//        } else {
+        if (temp == null) return null;
+        bmp = Bitmap.createScaledBitmap(temp, 450, 800, true);
+        //}
         //this.setDrawingCacheEnabled(false);
         return bmp;
     }

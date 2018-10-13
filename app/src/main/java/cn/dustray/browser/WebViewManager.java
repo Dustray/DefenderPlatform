@@ -2,9 +2,16 @@ package cn.dustray.browser;
 
 import android.app.Application;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
@@ -14,6 +21,7 @@ import cn.dustray.defenderplatform.WebTabFragment;
 import cn.dustray.utils.FileUtils;
 import io.reactivex.Scheduler;
 
+import static android.support.constraint.Constraints.TAG;
 import static android.view.View.generateViewId;
 
 public class WebViewManager {
@@ -43,8 +51,9 @@ public class WebViewManager {
                     state = tabFragment.getWebState();
                 } else
                     webView.saveState(state);
-                Log.i("def", "putin:--WEBVIEW_" + i + ";    " + state.toString()+"(size"+state.size()+")");
+                Log.i("def", "putin:--WEBVIEW_" + i + ";    " + state.toString() + "(size" + state.size() + ")");
                 outState.putBundle("WEBVIEW_" + i, state);
+                saveBitmap(tabFragment.getSnapshot(), i);
             }
         }
         FileUtils.writeBundleToStorage(application, outState, "SAVED_TABS.parcel")
@@ -61,11 +70,12 @@ public class WebViewManager {
             for (String key : keySet) {  //bundle.get(key);来获取对应的value
                 if (key.startsWith("WEBVIEW_")) {
                     Bundle state = bundle.getBundle("WEBVIEW_" + i);
-                    Log.i("def", "putout:-------->WEBVIEW_" + i + ";    " + state.toString()+"(size"+state.size()+")");
+                    Log.i("def", "putout:-------->WEBVIEW_" + i + ";    " + state.toString() + "(size" + state.size() + ")");
                     WebTabFragment webFrag = WebTabFragment.newInstance();
-                    xWebView web=new xWebView(context.getApplicationContext());
+                    xWebView web = new xWebView(context.getApplicationContext());
                     web.setId(generateViewId());
                     webFrag.setWebView(web);
+                    webFrag.setSnapshotBmp(openBitmapFromFile(i));
                     // webFragment.addXWebView(web);
                     //webFrag.mainWebView.restoreState(state);//.onSaveInstanceState(state);
                     if (state.size() != 0) {
@@ -77,5 +87,52 @@ public class WebViewManager {
             }
         }
         return list;
+    }
+
+    public void saveBitmap(Bitmap bitmap, int index) {
+        // 首先保存图片
+        File appDir = new File(application.getFilesDir(), "web_capture_image");
+        if (!appDir.exists()) {
+            appDir.mkdir();
+        }
+        String fileName = "browser_tab_capture_" + index + ".jpg";
+        File file = new File(appDir, fileName);
+        Log.i(TAG, "write_filepath" + file.getPath());
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.flush();
+            fos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e(TAG, "Unable to write capture to storage" + e.toString(), e);
+        }
+
+    }
+
+    public Bitmap openBitmapFromFile(int index) {
+        File inputFile = new File(application.getFilesDir(), "web_capture_image");
+        Log.i(TAG, "filepath" + application.getFilesDir());
+        FileInputStream inputStream = null;
+        try {
+            //noinspection IOResourceOpenedButNotSafelyClosed
+            String fileName = "browser_tab_capture_" + index + ".jpg";
+            File file = new File(inputFile, fileName);
+            inputStream = new FileInputStream(file);
+
+
+            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+            inputStream.close();
+            Bitmap bmp = Bitmap.createScaledBitmap(bitmap, 450, 800, true);
+            return bmp;
+        } catch (FileNotFoundException e) {
+            Log.e(TAG, "Unable to read capture from storage" + e.toString());
+        } catch (IOException e) {
+            Log.e(TAG, "Unable to read capture from storage" + e.toString(), e);
+        } finally {
+            //noinspection ResultOfMethodCallIgnored
+            // inputFile.delete();
+        }
+        return null;
     }
 }
