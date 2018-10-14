@@ -1,5 +1,6 @@
 package cn.dustray.defenderplatform;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
@@ -44,6 +46,11 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
     private WebTabFragment webFrag;
     private FragmentManager manager;
     private WebGroupPopup webGroupPopup;
+    //浏览器配置
+    private boolean isFullScreen = false;
+    private boolean isNoPicMode = false;
+    private boolean isRatote = false;
+    private boolean isNightMode = false;
 
     public WebFragment() {
         // Required empty public constructor
@@ -92,6 +99,7 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
         if (!Url.equals("")) {
             webFrag.setHomeUrl(Url);
         }
+        webFrag.setShowPicture(!isNoPicMode);
         transaction.add(R.id.web_main_frag, webFrag);
         transaction.commit();
         webFragArray.add(webFrag);
@@ -251,6 +259,85 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
     public void cleanCache() {
         webFrag.cleanCache();
     }
+
+    public void setBrowserSetting(Boolean isFullScreen, Boolean isNoPicMode, Boolean isRatote, Boolean isNightMode) {
+        this.isFullScreen = (isFullScreen == null) ? this.isFullScreen : isFullScreen;
+        this.isNoPicMode = (isNoPicMode == null) ? this.isNoPicMode : isNoPicMode;
+        this.isRatote = (isRatote == null) ? this.isRatote : isRatote;
+        this.isNightMode = (isNightMode == null) ? this.isNightMode : isNightMode;
+    }
+
+    //设置添加屏幕的背景透明度//不起作用
+    public void changeToNightMode() {
+        if (isNightMode) {//设置为夜间模式
+            WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
+            lp.alpha = 0.7f;
+            getActivity().getWindow().setAttributes(lp);
+            getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        } else {//设置为日间模式
+            WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
+            lp.alpha = 0.7f;
+            getActivity().getWindow().setAttributes(lp);
+            getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        }
+    }
+
+
+    public void changeToFullScreen() {
+        if (!isFullScreen) {//设置为非全屏
+            WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
+            lp.flags &= (~WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            getActivity().getWindow().setAttributes(lp);
+            getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        } else {//设置为全屏
+            WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
+            lp.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
+            getActivity().getWindow().setAttributes(lp);
+            getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        }
+    }
+
+    public boolean changeFullScreen() {
+        this.isFullScreen = !isFullScreen;
+        changeToFullScreen();
+        return isFullScreen;
+    }
+
+    public boolean changeNoPicMode() {
+        this.isNoPicMode = !isNoPicMode;
+        //webFrag.setShowPicture(!this.isNoPicMode);
+        for(WebTabFragment frag :webFragArray)
+            frag.setShowPicture(!this.isNoPicMode);
+        return isNoPicMode;
+    }
+
+    public boolean changeRatote() {
+        this.isRatote = !isRatote;
+        return isRatote;
+    }
+
+    public boolean changeNightMode() {
+        this.isNightMode = !isNightMode;
+        changeToNightMode();
+        return isNightMode;
+    }
+
+    public boolean isFullScreen() {
+        return isFullScreen;
+    }
+
+    public boolean isNoPicMode() {
+        return isNoPicMode;
+    }
+
+    public boolean isRatote() {
+        return isRatote;
+    }
+
+    public boolean isNightMode() {
+        return isNightMode;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

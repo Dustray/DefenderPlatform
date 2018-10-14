@@ -51,6 +51,7 @@ public class WebTabFragment extends Fragment {
     private Bitmap snapshotBmp;
     private FrameLayout frameLayout;
     private Bundle webState;
+    private boolean showPicture = true;
 
     public WebTabFragment() {
         // Required empty public constructor
@@ -87,6 +88,7 @@ public class WebTabFragment extends Fragment {
         params.height = 5;
         progressBar.setLayoutParams(params);
 
+        mainWebView.getSettings().setLoadsImagesAutomatically(showPicture); // 加载图片
         mainWebView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
@@ -226,6 +228,12 @@ public class WebTabFragment extends Fragment {
             mainWebView.goForward();
     }
 
+    public void setShowPicture(boolean showPicture) {
+        this.showPicture = showPicture;
+        if (mainWebView != null)
+            mainWebView.getSettings().setLoadsImagesAutomatically(showPicture); // 加载图片
+    }
+
     public void loadUrl(String str) {
         mainWebView.loadUrl(str);
     }
@@ -290,6 +298,13 @@ public class WebTabFragment extends Fragment {
         List<WebTabFragment> array = ((MainActivity) getActivity()).webFragment.webFragArray;
         WebViewManager manager = new WebViewManager(getActivity().getApplication(), array, getActivity());
         manager.saveToFile();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        mainWebView.getSettings().setLoadsImagesAutomatically(showPicture); // 加载图片
     }
 
     @Override
