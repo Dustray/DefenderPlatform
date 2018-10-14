@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -137,10 +138,17 @@ public class WebTabFragment extends Fragment {
                 return true; //super.onCreateWindow(view, isDialog, isUserGesture, resultMsg);
             }
         });
-
+        WindowManager windowManagers = getActivity().getWindowManager();
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        windowManagers.getDefaultDisplay().getMetrics(outMetrics);
+        //int width = outMetrics.widthPixels;
+        final int screenHeight = outMetrics.heightPixels;
         mainWebView.setOnTouchListener(new View.OnTouchListener() {
-            float touchDownPosition = 0, touchUpPosition = 0;
-            boolean moveFlag = false;
+            float touchDownPositionY = 0, touchMovePositionY = 0, touchUpPositionY = 0;
+            float touchDownPositionX = 0, touchMovePositionX = 0, touchUpPositionX = 0;
+            boolean moveFlag = false, isToastEdge = false;
+            int height = screenHeight;
+
 
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -148,24 +156,52 @@ public class WebTabFragment extends Fragment {
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
 
                     //chatListView.performClick();
-                    touchDownPosition = motionEvent.getY();
+                    touchDownPositionY = motionEvent.getY();
+                    touchDownPositionX = motionEvent.getX();
                     moveFlag = true;
+                }
+                if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+
+                    //chatListView.performClick();
+                    touchUpPositionY = motionEvent.getY();
+                    touchUpPositionX = motionEvent.getX();
                 }
                 //if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                 if (moveFlag) {
-                    touchUpPosition = motionEvent.getY();
+                    touchMovePositionY = motionEvent.getY();
+                    touchMovePositionX = motionEvent.getX();
                     AppBarLayout mainAppBar = getActivity().findViewById(R.id.main_appbar);
-                    if (touchDownPosition - touchUpPosition > 50) {
+                    if (touchDownPositionY - touchMovePositionY > 50) {
                         //往上滑 隐藏toolbar和web tool bar
-                        // Toast.makeText(getActivity(), "弹键盘", Toast.LENGTH_LONG).show();
                         mainAppBar.setExpanded(false, true);
                         moveFlag = false;
-                    } else if (touchUpPosition - touchDownPosition > 50) {
+                    } else if (touchMovePositionY - touchDownPositionY > 50) {
                         //往下滑 显示lbar和web tool bar
                         mainAppBar.setExpanded(true, true);
                         moveFlag = false;
 
                     }
+
+                }
+                if (height - touchDownPositionY < 450) {
+                    if (touchDownPositionX - touchMovePositionX > 300 && Math.abs(touchMovePositionY - touchDownPositionY) < 100) {
+                        //从右往左,前进
+                        xToast.toast(getContext(), "前进");
+
+                            isToastEdge = true;
+
+                    } else if (touchMovePositionX - touchDownPositionX > 300 && Math.abs(touchMovePositionY - touchDownPositionY) < 100) {
+                        xToast.toast(getContext(), "后退");
+
+                    } 
+                    //抬起
+                    if (touchDownPositionX - touchUpPositionX > 300 && Math.abs(touchUpPositionY - touchDownPositionY) < 100) {
+                        //从右往左,前进
+                        goForward();
+                    } else if (touchUpPositionX - touchDownPositionX > 300 && Math.abs(touchUpPositionY - touchDownPositionY) < 100) {
+                        goBack();
+                    }
+
                 }
                 // }
                 return false;
@@ -241,14 +277,14 @@ public class WebTabFragment extends Fragment {
     }
 
     public void generateSnapshot() {
-        if (snapshotBmp == null||isCaptureChanged) {//如果是空或者改变过就获取新截图，否则不做处理
+        if (snapshotBmp == null || isCaptureChanged) {//如果是空或者改变过就获取新截图，否则不做处理
             Bitmap bmp = mainWebView.getCapture();
             if (bmp == null) {
                 snapshotBmp = Bitmap.createBitmap(450, 800, Bitmap.Config.RGB_565);
-            }else{
+            } else {
                 snapshotBmp = bmp;
             }
-            isCaptureChanged=false;
+            isCaptureChanged = false;
         }
 
 

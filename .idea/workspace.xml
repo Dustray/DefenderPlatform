@@ -28,11 +28,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="32b7c26a-14bf-42cd-bc38-6a0982cc9987" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_btn_picturemodeoff_gray.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_btn_picturemodeoff_gray.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_btn_picturemodeoff_gray.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_btn_picturemodeoff_gray.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/ic_btn_picturemodeoff_gray.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/cn/dustray/popupwindow/WebMotionBackForwardPopup.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-v24/img_motion_web_back.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/popup_web_motion_backforward.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" afterDir="false" />
@@ -41,21 +39,9 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/ChatFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/ChatFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/WebFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/WebFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/cn/dustray/control/xViewPager.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cn/dustray/control/xViewPager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/WebTabFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/WebTabFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/cn/dustray/popupwindow/AlertPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cn/dustray/popupwindow/AlertPopup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/cn/dustray/popupwindow/WebMenuPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cn/dustray/popupwindow/WebMenuPopup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_btn_rotateon_black.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_btn_rotateon_black.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_btn_rotateon_black.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_btn_rotateon_black.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_btn_rotateon_black.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_btn_rotateon_black.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_btn_rotateon_black.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_btn_rotateon_black.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/ic_btn_rotateon_black.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/ic_btn_rotateon_black.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/popup_web_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/popup_web_menu.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -88,54 +74,80 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="WebFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/WebFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="517">
-              <caret line="276" column="25" selection-start-line="276" selection-start-column="25" selection-end-line="276" selection-end-column="25" />
-              <folding>
-                <element signature="e#1369#1385#0" expanded="true" />
-                <element signature="e#4692#4693#0" expanded="true" />
-                <element signature="e#4722#4723#0" expanded="true" />
-                <element signature="e#5025#6305#0" />
-                <element signature="e#8306#8307#0" expanded="true" />
-                <element signature="e#8342#8343#0" expanded="true" />
-                <element signature="e#9981#9982#0" expanded="true" />
-                <element signature="e#10016#10017#0" expanded="true" />
-                <element signature="e#10052#10053#0" expanded="true" />
-                <element signature="e#10086#10087#0" expanded="true" />
-                <element signature="e#10119#10120#0" expanded="true" />
-                <element signature="e#10150#10151#0" expanded="true" />
-                <element signature="e#10186#10187#0" expanded="true" />
-                <element signature="e#10220#10221#0" expanded="true" />
-                <element signature="e#13380#13381#0" expanded="true" />
-                <element signature="e#13418#13419#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WebGroupListAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/adapter/WebGroupListAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="172">
-              <caret line="43" column="24" selection-start-line="43" selection-start-column="24" selection-end-line="43" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="WebTabFragment.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/WebTabFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="428">
-              <caret line="250" column="35" selection-start-line="250" selection-start-column="35" selection-end-line="250" selection-end-column="35" />
+            <state relative-caret-position="542">
+              <caret line="211" column="40" selection-start-line="211" selection-start-column="40" selection-end-line="211" selection-end-column="40" />
               <folding>
-                <element signature="e#7108#7207#0" />
-                <element signature="e#8654#8655#0" expanded="true" />
-                <element signature="e#8700#8701#0" expanded="true" />
-                <element signature="e#8926#8927#0" expanded="true" />
-                <element signature="e#8966#8967#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#8797#8798#0" expanded="true" />
+                <element signature="e#8830#8831#0" expanded="true" />
+                <element signature="e#8875#8876#0" expanded="true" />
+                <element signature="e#8912#8913#0" expanded="true" />
+                <element signature="e#8947#8948#0" expanded="true" />
+                <element signature="e#8983#8984#0" expanded="true" />
+                <element signature="e#9025#9026#0" expanded="true" />
+                <element signature="e#9054#9055#0" expanded="true" />
+                <element signature="e#9102#9103#0" expanded="true" />
+                <element signature="e#9163#9164#0" expanded="true" />
+                <element signature="e#9191#9192#0" expanded="true" />
+                <element signature="e#9235#9236#0" expanded="true" />
+                <element signature="e#9264#9265#0" expanded="true" />
+                <element signature="e#9300#9301#0" expanded="true" />
+                <element signature="e#9334#9335#0" expanded="true" />
+                <element signature="e#9380#9381#0" expanded="true" />
+                <element signature="e#9522#9523#0" expanded="true" />
+                <element signature="e#9571#9572#0" expanded="true" />
+                <element signature="e#9946#9947#0" expanded="true" />
+                <element signature="e#9986#9987#0" expanded="true" />
+                <element signature="e#10449#10450#0" expanded="true" />
+                <element signature="e#10495#10496#0" expanded="true" />
+                <element signature="e#10721#10722#0" expanded="true" />
+                <element signature="e#10761#10762#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="popup_web_motion_backforward.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/popup_web_motion_backforward.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="200">
+              <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WebMotionBackForwardPopup.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/popupwindow/WebMotionBackForwardPopup.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="317">
+              <caret line="53" column="62" selection-start-line="53" selection-start-column="62" selection-end-line="53" selection-end-column="62" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="styles.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="100">
+              <caret line="30" column="17" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="popup_web_menu.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/popup_web_menu.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="442">
+              <caret line="81" column="44" selection-start-line="81" selection-start-column="44" selection-end-line="82" selection-end-column="42" />
             </state>
           </provider>
         </entry>
@@ -151,7 +163,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>://www.b</find>
       <find>adU</find>
       <find>onWebViewC</find>
       <find>tActivity</find>
@@ -162,7 +173,6 @@
       <find>btnWebCloseAll</find>
       <find>pop</find>
       <find>change</find>
-      <find>touchUpPosition</find>
       <find>.com</find>
       <find>getActivity()</find>
       <find>url</find>
@@ -181,6 +191,8 @@
       <find>setfa</find>
       <find>layout_marginBottom=&quot;15dp&quot;</find>
       <find>getCa</find>
+      <find>touchDownPosition</find>
+      <find>touchUpPosition</find>
     </findStrings>
     <replaceStrings>
       <replace>20dp</replace>
@@ -192,7 +204,6 @@
       <replace>xWebView</replace>
       <replace>btnTextShare</replace>
       <replace>layout_row=&quot;0&quot;</replace>
-      <replace>touchUpPositionY</replace>
       <replace>buttonText</replace>
       <replace>btnOk</replace>
       <replace>btn_popup_ok</replace>
@@ -200,6 +211,8 @@
       <replace>parentView</replace>
       <replace>webManager</replace>
       <replace>layout_marginBottom=&quot;14dp&quot;</replace>
+      <replace>touchUpPositionY</replace>
+      <replace>touchMovePosition</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -2460,8 +2473,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/adapter/ChatListAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/popupwindow/TextMenuPopup.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/item_web_group_recycle.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/main.xml" />
@@ -2485,7 +2496,6 @@
         <option value="$PROJECT_DIR$/app/src/main/assets/html/HomePage.html" />
         <option value="$PROJECT_DIR$/app/src/main/res/anim/pop_alert_bottom_exit.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/anim/pop_alert_top_enter.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/control/xViewPager.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/tool/xToast.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/tool/Alert.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/utils/Utils.java" />
@@ -2502,7 +2512,6 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/popup_alert_ok_btn.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/popup_alert_okcancle_btn.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/popupwindow/WebMenuPopup.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/WebFragment.java" />
@@ -2510,11 +2519,15 @@
         <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/popupwindow/AlertPopup.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/utils/Alert.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/popup_web_menu.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/control/xViewPager.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/popup_web_motion_backforward.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/popupwindow/WebMotionBackForwardPopup.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/WebTabFragment.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-5" />
     <option name="y" value="-5" />
     <option name="width" value="1370" />
@@ -2635,6 +2648,12 @@
               <item name="DefenderPlatform" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
+            </path>
+            <path>
+              <item name="DefenderPlatform" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
               <item name="values" type="ddeffd01:AndroidResFolderTypeNode" />
             </path>
             <path>
@@ -2652,17 +2671,16 @@
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/Users/Dustray/AndroidStudioProjects/DefenderPlatform/app/src/main/res/layout/popup_web_menu.xml" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="device.picker.selection" value="80SQBDQ7227AL" />
-    <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable-v24" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../Ninja-master/Ninja-master/Ninja" />
     <property name="settings.editor.selected.configurable" value="instant.run" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Dustray\AndroidStudioProjects\DefenderPlatform\app\src\main\res\drawable" />
-      <recent name="C:\Users\Dustray\AndroidStudioProjects\DefenderPlatform\app\src\main\java\cn\dustray\utils" />
-      <recent name="C:\Users\Dustray\AndroidStudioProjects\DefenderPlatform\app\src\main\res\layout" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Dustray\AndroidStudioProjects\DefenderPlatform\app\src\main\assets\html" />
       <recent name="C:\Users\Dustray\AndroidStudioProjects\DefenderPlatform\app\src\main\res\anim" />
-      <recent name="C:\Users\Dustray\AndroidStudioProjects\DefenderPlatform\app\src\main\assets" />
+      <recent name="C:\Users\Dustray\AndroidStudioProjects\DefenderPlatform\app\src\main\res\animator" />
+      <recent name="C:\Users\Administrator\workspace\DefenderPlatform\app\src\main\res\drawable" />
     </key>
     <key name="android.template.packageName">
       <recent name="cn.dustray.defenderplatform" />
@@ -2675,11 +2693,12 @@
       <recent name="cn.dustray.tool" />
       <recent name="cn.dustray.adapter" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Dustray\AndroidStudioProjects\DefenderPlatform\app\src\main\assets\html" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Dustray\AndroidStudioProjects\DefenderPlatform\app\src\main\res\drawable-v24" />
+      <recent name="C:\Users\Dustray\AndroidStudioProjects\DefenderPlatform\app\src\main\res\layout" />
+      <recent name="C:\Users\Dustray\AndroidStudioProjects\DefenderPlatform\app\src\main\res\drawable" />
+      <recent name="C:\Users\Dustray\AndroidStudioProjects\DefenderPlatform\app\src\main\java\cn\dustray\utils" />
       <recent name="C:\Users\Dustray\AndroidStudioProjects\DefenderPlatform\app\src\main\res\anim" />
-      <recent name="C:\Users\Dustray\AndroidStudioProjects\DefenderPlatform\app\src\main\res\animator" />
-      <recent name="C:\Users\Administrator\workspace\DefenderPlatform\app\src\main\res\drawable" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -2883,27 +2902,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/assets/html/HomePage.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3750">
-          <caret line="150" column="47" selection-start-line="150" selection-start-column="47" selection-end-line="150" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/anim/pop_alert_bottom_exit.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="4" column="23" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/anim/pop_alert_top_enter.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="3" column="23" selection-start-line="3" selection-start-column="23" selection-end-line="3" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/anim/pop_slide_bottom_enter.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
@@ -2919,13 +2917,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/utils/Utils.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/control/xViewPager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1225">
-          <caret line="58" lean-forward="true" selection-start-line="58" selection-end-line="58" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/platforms/android-27/android.jar!/android/os/BaseBundle.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="230">
@@ -3037,16 +3028,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/popup_web_group.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="53" column="39" lean-forward="true" selection-start-line="53" selection-start-column="39" selection-end-line="53" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/utils/DataCacheUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="122">
@@ -3140,28 +3121,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="223" lean-forward="true" selection-start-line="223" selection-end-line="223" />
-          <folding>
-            <element signature="e#3020#3021#0" expanded="true" />
-            <element signature="e#3070#3071#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="275">
           <caret line="11" column="42" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="12" column="66" selection-start-line="12" selection-start-column="66" selection-end-line="12" selection-end-column="66" />
         </state>
       </provider>
     </entry>
@@ -3199,35 +3162,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/popup_web_menu.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
-          <caret line="62" column="34" selection-start-line="62" selection-start-column="34" selection-end-line="62" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/popupwindow/WebMenuPopup.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="134" column="14" selection-start-line="134" selection-start-column="14" selection-end-line="134" selection-end-column="14" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2604#2770#0" expanded="true" />
-            <element signature="e#2769#2770#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/control/xWebView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2750">
-          <caret line="134" column="32" lean-forward="true" selection-start-line="134" selection-start-column="32" selection-end-line="134" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/popupwindow/WebGroupPopup.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1150">
@@ -3238,10 +3172,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/browser/WebViewManager.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/adapter/WebGroupListAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="77" column="28" selection-start-line="77" selection-start-column="28" selection-end-line="77" selection-end-column="28" />
+        <state relative-caret-position="172">
+          <caret line="43" column="24" selection-start-line="43" selection-start-column="24" selection-end-line="43" selection-end-column="24" />
         </state>
       </provider>
     </entry>
@@ -3270,23 +3204,129 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/adapter/WebGroupListAdapter.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="43" column="24" selection-start-line="43" selection-start-column="24" selection-end-line="43" selection-end-column="24" />
+        <state relative-caret-position="222">
+          <caret line="41" column="23" selection-start-line="41" selection-start-column="23" selection-end-line="41" selection-end-column="23" />
+          <folding>
+            <element signature="e#3020#3021#0" expanded="true" />
+            <element signature="e#3070#3071#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/browser/WebViewManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="372">
+          <caret line="77" column="28" selection-start-line="77" selection-start-column="28" selection-end-line="77" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/platforms/android-27/android.jar!/android/view/WindowManager.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/popup_web_group.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="53" column="39" lean-forward="true" selection-start-line="53" selection-start-column="39" selection-end-line="53" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/popup_web_menu.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="81" column="44" selection-start-line="81" selection-start-column="44" selection-end-line="82" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/popupwindow/WebMenuPopup.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1542">
+          <caret line="134" column="14" selection-start-line="134" selection-start-column="14" selection-end-line="134" selection-end-column="14" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="30" column="17" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/control/xWebView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1291">
+          <caret line="134" column="32" selection-start-line="134" selection-start-column="32" selection-end-line="134" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/control/xViewPager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="67" column="52" selection-start-line="67" selection-start-column="32" selection-end-line="67" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/popup_web_motion_backforward.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/popupwindow/WebMotionBackForwardPopup.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="317">
+          <caret line="53" column="62" selection-start-line="53" selection-start-column="62" selection-end-line="53" selection-end-column="62" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/WebTabFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="428">
-          <caret line="250" column="35" selection-start-line="250" selection-start-column="35" selection-end-line="250" selection-end-column="35" />
+        <state relative-caret-position="542">
+          <caret line="211" column="40" selection-start-line="211" selection-start-column="40" selection-end-line="211" selection-end-column="40" />
           <folding>
-            <element signature="e#7108#7207#0" />
-            <element signature="e#8654#8655#0" expanded="true" />
-            <element signature="e#8700#8701#0" expanded="true" />
-            <element signature="e#8926#8927#0" expanded="true" />
-            <element signature="e#8966#8967#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#8797#8798#0" expanded="true" />
+            <element signature="e#8830#8831#0" expanded="true" />
+            <element signature="e#8875#8876#0" expanded="true" />
+            <element signature="e#8912#8913#0" expanded="true" />
+            <element signature="e#8947#8948#0" expanded="true" />
+            <element signature="e#8983#8984#0" expanded="true" />
+            <element signature="e#9025#9026#0" expanded="true" />
+            <element signature="e#9054#9055#0" expanded="true" />
+            <element signature="e#9102#9103#0" expanded="true" />
+            <element signature="e#9163#9164#0" expanded="true" />
+            <element signature="e#9191#9192#0" expanded="true" />
+            <element signature="e#9235#9236#0" expanded="true" />
+            <element signature="e#9264#9265#0" expanded="true" />
+            <element signature="e#9300#9301#0" expanded="true" />
+            <element signature="e#9334#9335#0" expanded="true" />
+            <element signature="e#9380#9381#0" expanded="true" />
+            <element signature="e#9522#9523#0" expanded="true" />
+            <element signature="e#9571#9572#0" expanded="true" />
+            <element signature="e#9946#9947#0" expanded="true" />
+            <element signature="e#9986#9987#0" expanded="true" />
+            <element signature="e#10449#10450#0" expanded="true" />
+            <element signature="e#10495#10496#0" expanded="true" />
+            <element signature="e#10721#10722#0" expanded="true" />
+            <element signature="e#10761#10762#0" expanded="true" />
           </folding>
         </state>
       </provider>
