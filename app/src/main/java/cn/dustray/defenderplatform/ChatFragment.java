@@ -127,6 +127,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                     toolFrag.onDestroy();
                     toolFrag = null;
                 }
+
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     //chatListView.performClick();
                     touchDownPositionY = motionEvent.getY();

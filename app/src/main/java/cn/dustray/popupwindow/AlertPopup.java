@@ -105,14 +105,14 @@ public class AlertPopup extends PopupWindow implements View.OnClickListener {
                 if (canTouch) {
                     if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                         downY = motionEvent.getY();
-                        isTouching = true;
                     } else if (motionEvent.getAction() == MotionEvent.ACTION_MOVE) {
                         if (downY - motionEvent.getY() > 100) {//消失
                             btnExit.setImageResource(R.drawable.ic_btn_menu_up_white);
                             dismiss();
                             canTouch = false;
-                        } else if (downY < motionEvent.getY()) {//锁定
+                        } else if (motionEvent.getY()-downY >100 ) {//锁定
                             btnExit.setImageResource(R.drawable.ic_btn_lock_white);
+                            isTouching = true;
                         }
                     }
                 }

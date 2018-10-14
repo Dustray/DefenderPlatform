@@ -6,5 +6,10 @@
     <color name="colorAccent">#FFA000</color>
     <color name="colorWhite">#FFF</color>
 
+    <color name="colorPrimaryNight">#2f2f2f</color>
+    <color name="colorPrimaryLightNight">#455A64</color>
+    <color name="colorPrimaryDarkNight">#212121</color>
+    <color name="colorAccentNight">#512DA8</color>
+
     <color name="black_overlay">#66000000</color>
 </resources>

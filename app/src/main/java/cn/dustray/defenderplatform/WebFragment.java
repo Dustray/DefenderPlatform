@@ -2,7 +2,10 @@ package cn.dustray.defenderplatform;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
@@ -81,6 +84,7 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
             initFragment(webFragArray);
         }
         //btnBack.setImageBitmap(mainWebView.getCapture());
+
     }
 
     private void initFragment() {
@@ -270,15 +274,7 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
     //设置添加屏幕的背景透明度//不起作用
     public void changeToNightMode() {
         if (isNightMode) {//设置为夜间模式
-            WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
-            lp.alpha = 0.7f;
-            getActivity().getWindow().setAttributes(lp);
-            getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         } else {//设置为日间模式
-            WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
-            lp.alpha = 0.7f;
-            getActivity().getWindow().setAttributes(lp);
-            getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         }
     }
 
@@ -306,13 +302,19 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
     public boolean changeNoPicMode() {
         this.isNoPicMode = !isNoPicMode;
         //webFrag.setShowPicture(!this.isNoPicMode);
-        for(WebTabFragment frag :webFragArray)
+        for (WebTabFragment frag : webFragArray)
             frag.setShowPicture(!this.isNoPicMode);
         return isNoPicMode;
     }
 
     public boolean changeRatote() {
         this.isRatote = !isRatote;
+        if (isRatote) {
+            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+        } else {
+            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+
         return isRatote;
     }
 

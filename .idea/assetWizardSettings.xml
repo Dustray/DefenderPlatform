@@ -23,7 +23,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="jar:file:/D:/Program%20Files/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/navigation/ic_fullscreen_black_24dp.xml" />
+                                                <entry key="url" value="jar:file:/D:/Program%20Files/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/device/ic_screen_lock_rotation_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -33,8 +33,9 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="imageAsset" value="C:\Users\Dustray\AndroidStudioProjects\DefenderPlatform\app\src\main\res\drawable-xxxhdpi\ic_btn_roll_lock_black.png" />
-                                      <entry key="outputName" value="ic_btn_fullscreenon_black" />
+                                      <entry key="assetType" value="IMAGE" />
+                                      <entry key="imageAsset" value="C:\Users\Dustray\AndroidStudioProjects\DefenderPlatform\app\src\main\res\drawable-xxxhdpi\ic_btn_rotateon_black.png" />
+                                      <entry key="outputName" value="ic_btn_rotateon_black" />
                                       <entry key="theme" value="CUSTOM" />
                                       <entry key="themeColor" value="000000" />
                                     </map>

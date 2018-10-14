@@ -52,6 +52,7 @@ public class WebTabFragment extends Fragment {
     private FrameLayout frameLayout;
     private Bundle webState;
     private boolean showPicture = true;
+    public boolean isCaptureChanged = false;
 
     public WebTabFragment() {
         // Required empty public constructor
@@ -143,6 +144,7 @@ public class WebTabFragment extends Fragment {
 
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
+                isCaptureChanged = true;
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
 
                     //chatListView.performClick();
@@ -239,14 +241,16 @@ public class WebTabFragment extends Fragment {
     }
 
     public void generateSnapshot() {
-        Bitmap bmp = mainWebView.getCapture();
-        if (bmp == null) {
-            if (snapshotBmp == null) {
+        if (snapshotBmp == null||isCaptureChanged) {//如果是空或者改变过就获取新截图，否则不做处理
+            Bitmap bmp = mainWebView.getCapture();
+            if (bmp == null) {
                 snapshotBmp = Bitmap.createBitmap(450, 800, Bitmap.Config.RGB_565);
+            }else{
+                snapshotBmp = bmp;
             }
-        } else {
-            snapshotBmp = bmp;
+            isCaptureChanged=false;
         }
+
 
     }
 

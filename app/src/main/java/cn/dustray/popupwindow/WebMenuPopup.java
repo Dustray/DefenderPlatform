@@ -125,7 +125,7 @@ public class WebMenuPopup extends PopupWindow implements View.OnClickListener {
 
         //无图模式
         if (webFragment.isNoPicMode()) {//已打开
-            btnNoPicture.setImageResource(R.drawable.ic_btn_picturemodeon_black);
+            btnNoPicture.setImageResource(R.drawable.ic_btn_picturemodeoff_gray);
             textNoPicure.setText("无图/开");
         } else {//已关闭
             btnNoPicture.setImageResource(R.drawable.ic_btn_picturemodeon_black);
