@@ -53,6 +53,7 @@ public class WebViewManager {
                     webView.saveState(state);
                 Log.i("def", "putin:--WEBVIEW_" + i + ";    " + state.toString() + "(size" + state.size() + ")");
                 outState.putBundle("WEBVIEW_" + i, state);
+                tabFragment.generateSnapshot();
                 saveBitmap(tabFragment.getSnapshot(), i);
             }
         }

@@ -146,7 +146,7 @@ public class WebTabFragment extends Fragment {
         mainWebView.setOnTouchListener(new View.OnTouchListener() {
             float touchDownPositionY = 0, touchMovePositionY = 0, touchUpPositionY = 0;
             float touchDownPositionX = 0, touchMovePositionX = 0, touchUpPositionX = 0;
-            boolean moveFlag = false, isToastEdge = false;
+            boolean moveFlag = false;
             int height = screenHeight;
 
 
@@ -186,14 +186,16 @@ public class WebTabFragment extends Fragment {
                 if (height - touchDownPositionY < 450) {
                     if (touchDownPositionX - touchMovePositionX > 300 && Math.abs(touchMovePositionY - touchDownPositionY) < 100) {
                         //从右往左,前进
-                        xToast.toast(getContext(), "前进");
-
-                            isToastEdge = true;
-
+                        if (canGoForward())
+                            xToast.toast(getContext(), "前进");
+                        else
+                            xToast.toast(getContext(), "别搓了，到头了");
                     } else if (touchMovePositionX - touchDownPositionX > 300 && Math.abs(touchMovePositionY - touchDownPositionY) < 100) {
-                        xToast.toast(getContext(), "后退");
-
-                    } 
+                        if (canGoBack())
+                            xToast.toast(getContext(), "后退");
+                        else
+                            xToast.toast(getContext(), "别搓了，到头了");
+                    }
                     //抬起
                     if (touchDownPositionX - touchUpPositionX > 300 && Math.abs(touchUpPositionY - touchDownPositionY) < 100) {
                         //从右往左,前进

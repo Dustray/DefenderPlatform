@@ -160,8 +160,9 @@ public class MainActivity extends AppCompatActivity
                 if (TextUtils.isEmpty(query)) {
                     //Toast.makeText(MainActivity.this, "请输入查找内容！", Toast.LENGTH_SHORT).show();
                 } else {
+
+                    webFragment.search(query,mainPage.getCurrentItem());
                     switchToWeb();
-                    webFragment.search(query);
                     searchView.clearFocus();
                     searchView.onActionViewCollapsed();
 
@@ -226,6 +227,7 @@ public class MainActivity extends AppCompatActivity
     public void onFragmentInteraction(Uri uri) {
         Toast.makeText(this, "交流,角楼" + uri.toString(), Toast.LENGTH_LONG).show();
     }
+
 
     @Override
     public boolean getViewPagerScrollState() {

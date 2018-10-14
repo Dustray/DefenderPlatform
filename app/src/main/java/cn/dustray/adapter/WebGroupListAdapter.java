@@ -39,7 +39,7 @@ public class WebGroupListAdapter extends RecyclerView.Adapter<WebGroupListAdapte
 
     @Override
     public void onBindViewHolder(Holder holder, final int position) {
-        //holder.setIsRecyclable(false);//混乱临时解决办法
+        holder.setIsRecyclable(false);//混乱临时解决办法
         final WebTabFragment s = list.get(position);
         s.generateSnapshot();
         holder.captureImage.setImageBitmap(s.getSnapshot());
@@ -59,6 +59,8 @@ public class WebGroupListAdapter extends RecyclerView.Adapter<WebGroupListAdapte
                 if (list.size() == 0) {
                     frag.dismiss();
                     ((MainActivity) context).webFragment.createNewFragment();
+                }else{
+                    ((MainActivity) context).webFragment.loadFragment(list.get(list.size()-1));
                 }
                 ((MainActivity) context).webFragment.refreshGroupIcon();
             }

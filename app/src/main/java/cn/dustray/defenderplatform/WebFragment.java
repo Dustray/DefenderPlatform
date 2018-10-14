@@ -1,11 +1,8 @@
 package cn.dustray.defenderplatform;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
@@ -22,11 +19,11 @@ import android.widget.LinearLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.dustray.adapter.WebGroupListAdapter;
 import cn.dustray.browser.WebViewManager;
 import cn.dustray.popupwindow.WebGroupPopup;
 import cn.dustray.popupwindow.WebMenuPopup;
 import cn.dustray.popupwindow.WebSharePopup;
+import cn.dustray.utils.WebUtil;
 import cn.dustray.utils.xToast;
 
 
@@ -54,6 +51,7 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
     private boolean isNoPicMode = false;
     private boolean isRatote = false;
     private boolean isNightMode = false;
+
 
     public WebFragment() {
         // Required empty public constructor
@@ -110,7 +108,9 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
 
         refreshGroupIcon();
     }
-
+public boolean isWebFragNull(){
+        return webFrag == null;
+}
     private void initFragment(List<WebTabFragment> array) {
         webFrag = array.get(array.size() - 1);
         FragmentTransaction transaction = manager.beginTransaction();
@@ -225,25 +225,31 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
         }
     }
 
-    public void search(String searchStr) {
+    public void search(String searchStr, int from) {
         String test = searchStr;
-        test = test.replace("/", "");
-        if (test.endsWith(".cn") || test.endsWith(".com") || test.endsWith(".org") || test.endsWith(".net") || test.endsWith(".xin") ||
-                test.endsWith(".edu") || test.endsWith(".top") || test.endsWith(".cc") || test.endsWith(".tv") || test.endsWith(".co") ||
-                test.endsWith(".site") || test.endsWith(".biz") || test.endsWith(".vip") || test.endsWith(".wang") || test.endsWith(".ltd")) {
+        String processResult = "";
+        // test = test.replace("/", "");
+//        if (test.endsWith(".cn") || test.endsWith(".com") || test.endsWith(".org") || test.endsWith(".net") || test.endsWith(".xin") ||
+//                test.endsWith(".edu") || test.endsWith(".top") || test.endsWith(".cc") || test.endsWith(".tv") || test.endsWith(".co") ||
+//                test.endsWith(".site") || test.endsWith(".biz") || test.endsWith(".vip") || test.endsWith(".wang") || test.endsWith(".ltd")) {
+        if (WebUtil.isURL(test)) {
             //如果是网址
-            if (!test.startsWith("http")) {
+            if (!test.startsWith("http://") && !test.startsWith("https://")) {
                 //如果不以http开头
-                createNewFragment("http://" + searchStr);
+                processResult = "http://" + searchStr;
             } else {
                 //如果以http开头
-                createNewFragment(searchStr);
+                processResult = searchStr;
             }
         } else {
             //如果不是网址
-            createNewFragment("https://m.baidu.com/s?word=" + searchStr);
+            processResult = "https://m.baidu.com/s?word=" + searchStr;
         }
-
+        if (from == 0) {//从chat还是web来的
+            createNewFragment(processResult);
+        } else {
+            webFrag.loadUrl(processResult);
+        }
     }
 
     private void judgeWebState() {
@@ -458,4 +464,5 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
         void onFragmentInteraction(Uri uri);
 
     }
+
 }
