@@ -146,6 +146,7 @@ public class WebTabFragment extends Fragment {
         mainWebView.setOnTouchListener(new View.OnTouchListener() {
             float touchDownPositionY = 0, touchMovePositionY = 0, touchUpPositionY = 0;
             float touchDownPositionX = 0, touchMovePositionX = 0, touchUpPositionX = 0;
+            float touchDownScrollY = 0;
             boolean moveFlag = false;
             int height = screenHeight;
 
@@ -158,6 +159,7 @@ public class WebTabFragment extends Fragment {
                     //chatListView.performClick();
                     touchDownPositionY = motionEvent.getY();
                     touchDownPositionX = motionEvent.getX();
+                    touchDownScrollY = mainWebView.getScrollY();
                     moveFlag = true;
                 }
                 if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
@@ -170,16 +172,19 @@ public class WebTabFragment extends Fragment {
                 if (moveFlag) {
                     touchMovePositionY = motionEvent.getY();
                     touchMovePositionX = motionEvent.getX();
-                    AppBarLayout mainAppBar = getActivity().findViewById(R.id.main_appbar);
-                    if (touchDownPositionY - touchMovePositionY > 50) {
-                        //往上滑 隐藏toolbar和web tool bar
-                        mainAppBar.setExpanded(false, true);
-                        moveFlag = false;
-                    } else if (touchMovePositionY - touchDownPositionY > 50) {
-                        //往下滑 显示lbar和web tool bar
-                        mainAppBar.setExpanded(true, true);
-                        moveFlag = false;
 
+                    AppBarLayout mainAppBar = getActivity().findViewById(R.id.main_appbar);
+                   // xToast.toast(getActivity(), "" + mainWebView.getScrollY());
+                    if (touchDownPositionY - touchMovePositionY > 100) {
+                        //往上滑 隐藏toolbar和web tool bar
+                        if (touchDownScrollY != mainWebView.getScrollY())//webview本身位置没变（问题解决）
+                            mainAppBar.setExpanded(false, true);
+                        moveFlag = false;
+                    } else if (touchMovePositionY - touchDownPositionY > 100) {
+                        //往下滑 显示lbar和web tool bar
+                        if (touchDownScrollY != mainWebView.getScrollY())//webview本身位置没变
+                            mainAppBar.setExpanded(true, true);
+                        moveFlag = false;
                     }
 
                 }
