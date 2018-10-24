@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,7 @@ import cn.dustray.defenderplatform.R;
 import cn.dustray.entity.ChatRecordEntity;
 import cn.dustray.popupwindow.TextMenuPopup;
 
-public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.Holder> {
+public class ChatListAdapter extends RecyclerView.Adapter<ChatHolder> {
 
     Context context;
     List<ChatRecordEntity> list;
@@ -29,54 +30,48 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.Holder
 
     @NonNull
     @Override
-    public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ChatHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_chat_recycle, parent, false);
 
-        final Holder holder = new Holder(view);
-        holder.textContent.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                new TextMenuPopup(context, holder.textContent.getText().toString()).showAtBottom(holder.textContent);
-                return false;
-            }
-        });
-        holder.textContent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Toast.makeText(context, "0---"+holder.textContent.getText().toString() , Toast.LENGTH_LONG).show();
-
-            }
-        });
+        final ChatHolder holder = new ChatHolder(context, view, viewType);
+        //Log.i("Constraints", "" + viewType);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(Holder holder, int position) {
-        holder.setIsRecyclable(false);//混乱临时解决办法
-        ChatRecordEntity s = list.get(position);
+    public void onBindViewHolder(ChatHolder holder, int position) {
+         holder.setIsRecyclable(false);//混乱临时解决办法
+
         RelativeLayout.LayoutParams params1 = (RelativeLayout.LayoutParams) holder.headBtn.getLayoutParams();
-        RelativeLayout.LayoutParams params2 = (RelativeLayout.LayoutParams) holder.textContent.getLayoutParams();
+        RelativeLayout.LayoutParams params2 = (RelativeLayout.LayoutParams) holder.frame.getLayoutParams();
 
-
-        holder.textContent.setText(s.getChatContent());
+        int tempPosition;
         // TODO: 2018/9/30 0030  Fix Bug：刷新混乱
-        if (holder.textContent.getTag() == null) {//tag
-
-            if (list.get(position).getMessageType() == ChatRecordEntity.TYPE_RECEIVED) {//接收的的消息
-                holder.textContent.setBackgroundResource(R.drawable.bubble_left_lightblue);
-                holder.textContent.setTextColor(Color.WHITE);
-                params1.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-                params2.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-            } else {//发送的消息
-                holder.textContent.setBackgroundResource(R.drawable.bubble_right_gray);
-                holder.textContent.setTextColor(Color.BLACK);
-                params1.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-                params2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-            }
-            holder.textContent.setTag(position);//tag
-            holder.headBtn.setLayoutParams(params1);
-            holder.textContent.setLayoutParams(params2);
+        if (holder.frame.getTag() == null) {//tag
+            tempPosition = position;
+            holder.frame.setTag(position);//tag
+        } else {
+            tempPosition = Integer.parseInt(holder.frame.getTag().toString());
         }
+
+        ChatRecordEntity s = list.get(tempPosition);
+        holder.addView(s);
+        //Log.i("Constraints", "" + list.get(position).getTransmitType());
+        if (list.get(tempPosition).getTransmitType() == ChatRecordEntity.TRANSMIT_TYPE_RECEIVED) {//接收的的消息
+            holder.frame.setBackgroundResource(R.drawable.bubble_left_lightblue);
+            // holder.textContent.setTextColor(Color.WHITE);
+            params1.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+            params2.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+        } else {//发送的消息
+            holder.frame.setBackgroundResource(R.drawable.bubble_right_gray);
+            //holder.textContent.setTextColor(Color.BLACK);
+            params1.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            params2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        }
+        //holder.frame.setTag(position);//tag
+        holder.headBtn.setLayoutParams(params1);
+        holder.frame.setLayoutParams(params2);
+
     }
 
     @Override
@@ -84,15 +79,9 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.Holder
         return list.size();
     }
 
-    class Holder extends RecyclerView.ViewHolder {
-        ImageButton headBtn;
-        TextView textContent;
+    @Override
+    public int getItemViewType(int position) {
+        return list.get(position).getMessageType();
 
-        public Holder(View itemView) {
-            super(itemView);
-            headBtn = itemView.findViewById(R.id.chat_list_item_head);
-            textContent = itemView.findViewById(R.id.chat_list_item);
-
-        }
     }
 }

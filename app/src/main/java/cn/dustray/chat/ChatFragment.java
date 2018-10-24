@@ -48,40 +48,8 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
     private Fragment toolFrag;
     private FragmentManager manager;
     private FragmentTransaction transaction;
-    public List<ChatRecordEntity> list = new ArrayList<ChatRecordEntity>() {
-        {
-            add(new ChatRecordEntity("聊天内容1:ss是难受难受难受难受那你是啥", 1));
-            add(new ChatRecordEntity("聊天内容2", 1));
-            add(new ChatRecordEntity("聊天内容3", 2));
-            add(new ChatRecordEntity("聊天内容4：点三四皇妃肯定撒:ss是难受难受难受难受那你是啥就开始的话覅就看好i发大苏打实打实打算", 2));
-            add(new ChatRecordEntity("聊天内容5", 2));
-            add(new ChatRecordEntity("聊天内容6：飒飒飒", 2));
-            add(new ChatRecordEntity("聊天内容7", 1));
-            add(new ChatRecordEntity("聊天内容8", 1));
-            add(new ChatRecordEntity("聊天内容9:ss是难受难受难受难受那你是啥", 1));
-            add(new ChatRecordEntity("聊天内容0热望奇热网奇热网奇热网缺乏大赛官方热舞公认为该文认为", 1));
-            add(new ChatRecordEntity("聊天内容1热热我", 2));
-            add(new ChatRecordEntity("聊天内容2我去热热去辜负他热爱", 2));
-            add(new ChatRecordEntity("聊天内容3", 2));
-            add(new ChatRecordEntity("聊天内容4", 1));
-            add(new ChatRecordEntity("聊天内容5说的是福娃广泛但是我个人", 2));
-            add(new ChatRecordEntity("聊天内容6惹人", 1));
-            add(new ChatRecordEntity("聊天内容7水水水水水水", 1));
-            add(new ChatRecordEntity("聊天内容8", 2));
-            add(new ChatRecordEntity("聊天内容9热舞区分哇 热物权法第七萨福地区发热", 2));
-            add(new ChatRecordEntity("聊天内容0二为秋风无情", 1));
-            add(new ChatRecordEntity("聊天内容1 额", 1));
-            add(new ChatRecordEntity("聊天内容2二为秋风无情天热天热请问天热委托委托人", 2));
-            add(new ChatRecordEntity("聊天内容3二为秋风无情", 2));
-            add(new ChatRecordEntity("聊天内容4恶委屈热望奇热网奇热网去", 1));
-            add(new ChatRecordEntity("聊天内容5", 2));
-            add(new ChatRecordEntity("聊天内容6", 1));
-            add(new ChatRecordEntity("聊天内容7嗯嗯", 1));
-            add(new ChatRecordEntity("聊天内容8热望奇热网清风围棋", 1));
-            add(new ChatRecordEntity("聊天内容9", 2));
-            add(new ChatRecordEntity("聊天内容0", 2));
-        }
-    };
+    public List<ChatRecordEntity> list;
+
 
     public ChatFragment() {
         // Required empty public constructor
@@ -106,6 +74,44 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        list = new ArrayList<ChatRecordEntity>() {
+            {
+                add(new ChatRecordEntity(getActivity(), "聊天内容1:ss是难受难受难受难受那你是啥", 1, ChatRecordEntity.MESSAGE_TYPE_TEXT));
+                add(new ChatRecordEntity(getActivity(), "聊天内容2", 1, ChatRecordEntity.MESSAGE_TYPE_TEXT));
+                add(new ChatRecordEntity(getActivity(), "聊天内容3", 2, ChatRecordEntity.MESSAGE_TYPE_TEXT));
+                add(new ChatRecordEntity(getActivity(), "聊天内容4：点三四皇妃肯定撒:ss是难受难受难受难受那你是啥就开始的话覅就看好i发大苏打实打实打算", 2, ChatRecordEntity.MESSAGE_TYPE_TEXT));
+                add(new ChatRecordEntity(getActivity(), "聊天内容5", 2, ChatRecordEntity.MESSAGE_TYPE_TEXT));
+                add(new ChatRecordEntity(getActivity(), "聊天内容6：飒飒飒", 2, ChatRecordEntity.MESSAGE_TYPE_TEXT));
+                add(new ChatRecordEntity(getActivity(), "聊天内容7", 1, ChatRecordEntity.MESSAGE_TYPE_TEXT));
+                add(new ChatRecordEntity(getActivity(), "聊天内容8", 1, ChatRecordEntity.MESSAGE_TYPE_TEXT));
+                add(new ChatRecordEntity(getActivity(), "聊天内容9:ss是难受难受难受难受那你是啥", 1, ChatRecordEntity.MESSAGE_TYPE_TEXT));
+                add(new ChatRecordEntity(getActivity(), "聊天内容0热望奇热网奇热网奇热网缺乏大赛官方热舞公认为该文认为", 1, ChatRecordEntity.MESSAGE_TYPE_TEXT));
+                add(new ChatRecordEntity(getActivity(), "聊天内容1热热我", 2, ChatRecordEntity.MESSAGE_TYPE_TEXT));
+                add(new ChatRecordEntity(getActivity(), "http://pic15.nipic.com/20110721/16383_123420353000_2.jpg", 2, ChatRecordEntity.MESSAGE_TYPE_IMAGE));
+
+                add(new ChatRecordEntity(getActivity(), "聊天内容2我去热热去辜负他热爱", 2, ChatRecordEntity.MESSAGE_TYPE_TEXT));
+                add(new ChatRecordEntity(getActivity(), "http://pic29.nipic.com/20130511/9252150_174018365301_2.jpg", 2, ChatRecordEntity.MESSAGE_TYPE_IMAGE));
+                add(new ChatRecordEntity(getActivity(), "聊天内容3", 2, ChatRecordEntity.MESSAGE_TYPE_TEXT));
+                add(new ChatRecordEntity(getActivity(), "聊天内容4", 1, ChatRecordEntity.MESSAGE_TYPE_TEXT));
+                add(new ChatRecordEntity(getActivity(), "聊天内容5说的是福娃广泛但是我个人", 2, ChatRecordEntity.MESSAGE_TYPE_TEXT));
+                add(new ChatRecordEntity(getActivity(), "聊天内容6惹人", 1, ChatRecordEntity.MESSAGE_TYPE_TEXT));
+                add(new ChatRecordEntity(getActivity(), "聊天内容7水水水水水水", 1, ChatRecordEntity.MESSAGE_TYPE_TEXT));
+                add(new ChatRecordEntity(getActivity(), "聊天内容8", 2, ChatRecordEntity.MESSAGE_TYPE_TEXT));
+                add(new ChatRecordEntity(getActivity(), "聊天内容9热舞区分哇 热物权法第七萨福地区发热", 2, ChatRecordEntity.MESSAGE_TYPE_TEXT));
+                add(new ChatRecordEntity(getActivity(), "聊天内容0二为秋风无情", 1, ChatRecordEntity.MESSAGE_TYPE_TEXT));
+                add(new ChatRecordEntity(getActivity(), "聊天内容1 额", 1, ChatRecordEntity.MESSAGE_TYPE_TEXT));
+                add(new ChatRecordEntity(getActivity(), "聊天内容2二为秋风无情天热天热请问天热委托委托人", 2, ChatRecordEntity.MESSAGE_TYPE_TEXT));
+                add(new ChatRecordEntity(getActivity(), "聊天内容3二为秋风无情", 2, ChatRecordEntity.MESSAGE_TYPE_TEXT));
+                add(new ChatRecordEntity(getActivity(), "聊天内容4恶委屈热望奇热网奇热网去", 1, ChatRecordEntity.MESSAGE_TYPE_TEXT));
+                add(new ChatRecordEntity(getActivity(), "聊天内容5", 2, ChatRecordEntity.MESSAGE_TYPE_TEXT));
+                add(new ChatRecordEntity(getActivity(), "聊天内容6", 1, ChatRecordEntity.MESSAGE_TYPE_TEXT));
+                add(new ChatRecordEntity(getActivity(), "聊天内容7嗯嗯", 1, ChatRecordEntity.MESSAGE_TYPE_TEXT));
+                add(new ChatRecordEntity(getActivity(), "聊天内容8热望奇热网清风围棋", 1, ChatRecordEntity.MESSAGE_TYPE_TEXT));
+                add(new ChatRecordEntity(getActivity(), "聊天内容9", 2, ChatRecordEntity.MESSAGE_TYPE_TEXT));
+                add(new ChatRecordEntity(getActivity(), "聊天内容0", 2, ChatRecordEntity.MESSAGE_TYPE_TEXT));
+                add(new ChatRecordEntity(getActivity(), "http://www.pptbz.com/pptpic/UploadFiles_6909/201211/2012111719294197.jpg", 2, ChatRecordEntity.MESSAGE_TYPE_IMAGE));
+            }
+        };
         chatListView = getActivity().findViewById(R.id.chat_list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -155,7 +161,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                                 mListener.switchToViewPager(1);
                             }
                         });
-                        alert.popupAlert( "滑动切换已关闭,开启侧滑还是直接切换？", "开启侧滑", "直接切换");
+                        alert.popupAlert("滑动切换已关闭,开启侧滑还是直接切换？", "开启侧滑", "直接切换");
                     }
                 }
                 //点击
@@ -279,7 +285,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
     }
 
     private void sendMessage() {
-        ChatRecordEntity c = new ChatRecordEntity(sendContent.getText().toString(), ChatRecordEntity.TYPE_SENT);
+        ChatRecordEntity c = new ChatRecordEntity(getActivity(), sendContent.getText().toString(), ChatRecordEntity.TRANSMIT_TYPE_SENT, ChatRecordEntity.MESSAGE_TYPE_TEXT);
         list.add(c);
         adapter.notifyItemInserted(list.size());
         chatListView.scrollToPosition(list.size() - 1);
@@ -287,7 +293,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
     }
 
     public void sendMessage(String s) {
-        ChatRecordEntity c = new ChatRecordEntity(s, ChatRecordEntity.TYPE_SENT);
+        ChatRecordEntity c = new ChatRecordEntity(getActivity(), s, ChatRecordEntity.TRANSMIT_TYPE_SENT, ChatRecordEntity.MESSAGE_TYPE_TEXT);
         list.add(c);
         adapter.notifyItemInserted(list.size());
         chatListView.scrollToPosition(list.size() - 1);

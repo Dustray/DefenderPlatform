@@ -1,17 +1,34 @@
 package cn.dustray.entity;
 
+import android.content.Context;
+import android.graphics.Color;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import cn.dustray.defenderplatform.MainActivity;
+import cn.dustray.popupwindow.TextMenuPopup;
+
+import static android.view.View.generateViewId;
+
 public class ChatRecordEntity {
+    private Context context;
+    public static final int TRANSMIT_TYPE_RECEIVED = 1;
+    public static final int TRANSMIT_TYPE_SENT = 2;
+    public static final int MESSAGE_TYPE_TEXT = 1001;
+    public static final int MESSAGE_TYPE_IMAGE = 1002;
 
-    public static final int TYPE_RECEIVED = 1;
-    public static final int TYPE_SENT = 2;
-    public static final int MESSAGE_TYPE_TEXT=1001;
-    public static final int MESSAGE_TYPE_IMAGE=1002;
-    String chatContent;
-    int messageType;
+    private int transmitType;
+    private int messageType;
 
-    public ChatRecordEntity(String chatContent, int messageType) {
+    private String chatContent;
+
+    public ChatRecordEntity(Context context, String chatContent, int transmitType,int messageType) {
         this.chatContent = chatContent;
-        this.messageType = messageType;
+        this.transmitType = transmitType;
+        this.context = context;
+        this.messageType=messageType;
+        //messageType = MESSAGE_TYPE_TEXT;
     }
 
     public String getChatContent() {
@@ -20,6 +37,10 @@ public class ChatRecordEntity {
 
     public void setChatContent(String chatContent) {
         this.chatContent = chatContent;
+    }
+
+    public int getTransmitType() {
+        return transmitType;
     }
 
     public int getMessageType() {

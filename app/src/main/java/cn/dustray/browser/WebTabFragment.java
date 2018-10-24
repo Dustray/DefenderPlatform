@@ -144,7 +144,7 @@ public class WebTabFragment extends Fragment {
             //float touchDownScrollY = 0;//WebView位置
             boolean moveFlag = false;
             int height = screenHeight;
-
+private final static int GO_BACK_FORWARD_LENGTH=200;
 
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -184,23 +184,23 @@ public class WebTabFragment extends Fragment {
 
                 }
                 if (height - touchDownPositionY < 450) {
-                    if (touchDownPositionX - touchMovePositionX > 300 && Math.abs(touchMovePositionY - touchDownPositionY) < 100) {
+                    if (touchDownPositionX - touchMovePositionX > GO_BACK_FORWARD_LENGTH && Math.abs(touchMovePositionY - touchDownPositionY) < 100) {
                         //从右往左,前进
                         if (canGoForward())
                             xToast.toast(getContext(), "前进");
                         else
                             xToast.toast(getContext(), "别搓了，到头了");
-                    } else if (touchMovePositionX - touchDownPositionX > 300 && Math.abs(touchMovePositionY - touchDownPositionY) < 100) {
+                    } else if (touchMovePositionX - touchDownPositionX > GO_BACK_FORWARD_LENGTH && Math.abs(touchMovePositionY - touchDownPositionY) < 100) {
                         if (canGoBack())
                             xToast.toast(getContext(), "后退");
                         else
                             xToast.toast(getContext(), "别搓了，到头了");
                     }
                     //抬起
-                    if (touchDownPositionX - touchUpPositionX > 300 && Math.abs(touchUpPositionY - touchDownPositionY) < 100) {
+                    if (touchDownPositionX - touchUpPositionX > GO_BACK_FORWARD_LENGTH && Math.abs(touchUpPositionY - touchDownPositionY) < 100) {
                         //从右往左,前进
                         goForward();
-                    } else if (touchUpPositionX - touchDownPositionX > 300 && Math.abs(touchUpPositionY - touchDownPositionY) < 100) {
+                    } else if (touchUpPositionX - touchDownPositionX > GO_BACK_FORWARD_LENGTH  && Math.abs(touchUpPositionY - touchDownPositionY) < 100) {
                         goBack();
                     }
 
