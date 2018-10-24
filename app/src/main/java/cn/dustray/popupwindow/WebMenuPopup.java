@@ -12,11 +12,12 @@ import android.widget.PopupWindow;
 import android.view.View;
 import android.widget.TextView;
 
+import cn.dustray.control.xWebPopupWindow;
 import cn.dustray.defenderplatform.MainActivity;
 import cn.dustray.defenderplatform.R;
 import cn.dustray.defenderplatform.WebFragment;
 
-public class WebMenuPopup extends PopupWindow implements View.OnClickListener {
+public class WebMenuPopup extends xWebPopupWindow implements View.OnClickListener {
 
     private Context context;
     private ImageButton btnFullScreen, btnNoPicture, btnRotate, btnScreenshot, btnNightMode;
@@ -25,6 +26,7 @@ public class WebMenuPopup extends PopupWindow implements View.OnClickListener {
     private WebFragment webFragment;
 
     public WebMenuPopup(Context context) {
+        super(context);
         this.context = context;
         webFragment = ((MainActivity) context).webFragment;
         initalize();
@@ -34,7 +36,6 @@ public class WebMenuPopup extends PopupWindow implements View.OnClickListener {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.popup_web_menu, null);
         setContentView(view);
-        initWindow();
         initView();
         changeButtonSettingState();
     }
@@ -73,37 +74,7 @@ public class WebMenuPopup extends PopupWindow implements View.OnClickListener {
 
     }
 
-    private void initWindow() {
-        this.setWidth(WindowManager.LayoutParams.MATCH_PARENT);
-        this.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
-        this.setFocusable(true);
-        this.setOutsideTouchable(true);
-        this.setTouchable(true);
-        this.setElevation(1);
-        this.update();
-        //实例化一个ColorDrawable颜色为半透明
-        ColorDrawable dw = new ColorDrawable(Color.WHITE);        //设置SelectPicPopupWindow弹出窗体的背景
-        this.setBackgroundDrawable(dw);
-        backgroundAlpha((Activity) context, 0.8f);//0.0-1.0
-        this.setOnDismissListener(new OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                backgroundAlpha((Activity) context, 1f);
-            }
-        });
-    }
-
-    //设置添加屏幕的背景透明度
-    public void backgroundAlpha(Activity context, float bgAlpha) {
-        WindowManager.LayoutParams lp = context.getWindow().getAttributes();
-        lp.alpha = bgAlpha;
-        context.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-        context.getWindow().setAttributes(lp);
-    }
-
     public void showAtBottom(View view) {        //弹窗位置设置
-
-        setAnimationStyle(R.style.pop_animation);
         showAtLocation(view, Gravity.BOTTOM, 0, 0);
     }
 
@@ -157,7 +128,6 @@ public class WebMenuPopup extends PopupWindow implements View.OnClickListener {
             //第一组
             case R.id.btn_web_menu_fullscreen:
                 webFragment.changeFullScreen();
-
                 break;
             case R.id.btn_web_menu_nopic:
                 webFragment.changeNoPicMode();
@@ -170,8 +140,6 @@ public class WebMenuPopup extends PopupWindow implements View.OnClickListener {
             case R.id.btn_web_menu_night:
                 webFragment.changeNightMode();
                 break;
-
-
             //第二组
             case R.id.btn_web_menu_home:
                 webFragment.goHome();
@@ -181,7 +149,6 @@ public class WebMenuPopup extends PopupWindow implements View.OnClickListener {
                 break;
             case R.id.btn_web_menu_rolllock:
                 ((MainActivity) context).changePageScroll();
-
                 break;
             case R.id.btn_web_menu_down:
                 break;
