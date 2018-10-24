@@ -5,8 +5,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import cn.dustray.defenderplatform.ChatFragment;
-import cn.dustray.defenderplatform.WebFragment;
+import cn.dustray.chat.ChatFragment;
+import cn.dustray.browser.BrowserFragment;
 
 public class MainViewPagerAdapter extends FragmentPagerAdapter {
 
@@ -14,13 +14,13 @@ public class MainViewPagerAdapter extends FragmentPagerAdapter {
     private String[] titles = new String[]{"聊天", "网页"};
     private Context context;
     private ChatFragment chatFragment;
-    private WebFragment webFragment;
+    private BrowserFragment browserFragment;
 
-    public MainViewPagerAdapter(FragmentManager fm, Context mContext, ChatFragment chatFragment, WebFragment webFragment) {
+    public MainViewPagerAdapter(FragmentManager fm, Context mContext, ChatFragment chatFragment, BrowserFragment browserFragment) {
         super(fm);
         context = mContext;
         this.chatFragment = chatFragment;
-        this.webFragment = webFragment;
+        this.browserFragment = browserFragment;
     }
 
     @Override
@@ -29,7 +29,7 @@ public class MainViewPagerAdapter extends FragmentPagerAdapter {
         if (position == 0) {
             fragment = chatFragment;
         } else if (position == 1) {
-            fragment = webFragment;
+            fragment = browserFragment;
         }
         return fragment;
     }

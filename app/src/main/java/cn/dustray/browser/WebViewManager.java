@@ -16,8 +16,6 @@ import java.util.List;
 import java.util.Set;
 
 import cn.dustray.control.xWebView;
-import cn.dustray.defenderplatform.MainActivity;
-import cn.dustray.defenderplatform.WebTabFragment;
 import cn.dustray.utils.FileUtils;
 import io.reactivex.Scheduler;
 

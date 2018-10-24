@@ -1,4 +1,4 @@
-package cn.dustray.defenderplatform;
+package cn.dustray.chat;
 
 import android.content.Context;
 import android.net.Uri;
@@ -21,7 +21,7 @@ import android.widget.ImageButton;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.dustray.adapter.ChatListAdapter;
+import cn.dustray.defenderplatform.R;
 import cn.dustray.entity.ChatRecordEntity;
 import cn.dustray.popupwindow.WebSharePopup;
 import cn.dustray.utils.Alert;
@@ -50,43 +50,42 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
     private FragmentTransaction transaction;
     public List<ChatRecordEntity> list = new ArrayList<ChatRecordEntity>() {
         {
-            add(new ChatRecordEntity("手势1:ss是难受难受难受难受那你是啥", 1));
-            add(new ChatRecordEntity("手势2", 1));
-            add(new ChatRecordEntity("手势3", 2));
-            add(new ChatRecordEntity("手势4：点三四皇妃肯定撒:ss是难受难受难受难受那你是啥就开始的话覅就看好i发大苏打实打实打算", 2));
-            add(new ChatRecordEntity("手势5", 2));
-            add(new ChatRecordEntity("手势6：飒飒飒", 2));
-            add(new ChatRecordEntity("手势7", 1));
-            add(new ChatRecordEntity("手势8", 1));
-            add(new ChatRecordEntity("手势9:ss是难受难受难受难受那你是啥", 1));
-            add(new ChatRecordEntity("手势0热望奇热网奇热网奇热网缺乏大赛官方热舞公认为该文认为", 1));
-            add(new ChatRecordEntity("手势1热热我", 2));
-            add(new ChatRecordEntity("手势2我去热热去辜负他热爱", 2));
-            add(new ChatRecordEntity("手势3", 2));
-            add(new ChatRecordEntity("手势4", 1));
-            add(new ChatRecordEntity("手势5说的是福娃广泛但是我个人", 2));
-            add(new ChatRecordEntity("手势6惹人", 1));
-            add(new ChatRecordEntity("手势7水水水水水水", 1));
-            add(new ChatRecordEntity("手势8", 2));
-            add(new ChatRecordEntity("手势9热舞区分哇 热物权法第七萨福地区发热", 2));
-            add(new ChatRecordEntity("手势0二为秋风无情", 1));
-            add(new ChatRecordEntity("手势1 额", 1));
-            add(new ChatRecordEntity("手势2二为秋风无情天热天热请问天热委托委托人", 2));
-            add(new ChatRecordEntity("手势3二为秋风无情", 2));
-            add(new ChatRecordEntity("手势4恶委屈热望奇热网奇热网去", 1));
-            add(new ChatRecordEntity("手势5", 2));
-            add(new ChatRecordEntity("手势6", 1));
-            add(new ChatRecordEntity("手势7嗯嗯", 1));
-            add(new ChatRecordEntity("手势8热望奇热网清风围棋", 1));
-            add(new ChatRecordEntity("手势9", 2));
-            add(new ChatRecordEntity("手势0", 2));
+            add(new ChatRecordEntity("聊天内容1:ss是难受难受难受难受那你是啥", 1));
+            add(new ChatRecordEntity("聊天内容2", 1));
+            add(new ChatRecordEntity("聊天内容3", 2));
+            add(new ChatRecordEntity("聊天内容4：点三四皇妃肯定撒:ss是难受难受难受难受那你是啥就开始的话覅就看好i发大苏打实打实打算", 2));
+            add(new ChatRecordEntity("聊天内容5", 2));
+            add(new ChatRecordEntity("聊天内容6：飒飒飒", 2));
+            add(new ChatRecordEntity("聊天内容7", 1));
+            add(new ChatRecordEntity("聊天内容8", 1));
+            add(new ChatRecordEntity("聊天内容9:ss是难受难受难受难受那你是啥", 1));
+            add(new ChatRecordEntity("聊天内容0热望奇热网奇热网奇热网缺乏大赛官方热舞公认为该文认为", 1));
+            add(new ChatRecordEntity("聊天内容1热热我", 2));
+            add(new ChatRecordEntity("聊天内容2我去热热去辜负他热爱", 2));
+            add(new ChatRecordEntity("聊天内容3", 2));
+            add(new ChatRecordEntity("聊天内容4", 1));
+            add(new ChatRecordEntity("聊天内容5说的是福娃广泛但是我个人", 2));
+            add(new ChatRecordEntity("聊天内容6惹人", 1));
+            add(new ChatRecordEntity("聊天内容7水水水水水水", 1));
+            add(new ChatRecordEntity("聊天内容8", 2));
+            add(new ChatRecordEntity("聊天内容9热舞区分哇 热物权法第七萨福地区发热", 2));
+            add(new ChatRecordEntity("聊天内容0二为秋风无情", 1));
+            add(new ChatRecordEntity("聊天内容1 额", 1));
+            add(new ChatRecordEntity("聊天内容2二为秋风无情天热天热请问天热委托委托人", 2));
+            add(new ChatRecordEntity("聊天内容3二为秋风无情", 2));
+            add(new ChatRecordEntity("聊天内容4恶委屈热望奇热网奇热网去", 1));
+            add(new ChatRecordEntity("聊天内容5", 2));
+            add(new ChatRecordEntity("聊天内容6", 1));
+            add(new ChatRecordEntity("聊天内容7嗯嗯", 1));
+            add(new ChatRecordEntity("聊天内容8热望奇热网清风围棋", 1));
+            add(new ChatRecordEntity("聊天内容9", 2));
+            add(new ChatRecordEntity("聊天内容0", 2));
         }
     };
 
     public ChatFragment() {
         // Required empty public constructor
     }
-
 
     public static ChatFragment newInstance() {
         ChatFragment fragment = new ChatFragment();
@@ -156,7 +155,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                                 mListener.switchToViewPager(1);
                             }
                         });
-                        alert.popupAlert(getActivity(), "滑动切换已关闭,开启侧滑还是直接切换？", "开启侧滑", "直接切换");
+                        alert.popupAlert( "滑动切换已关闭,开启侧滑还是直接切换？", "开启侧滑", "直接切换");
                     }
                 }
                 //点击

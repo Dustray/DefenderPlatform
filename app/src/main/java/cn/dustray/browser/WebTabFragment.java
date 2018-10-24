@@ -1,4 +1,4 @@
-package cn.dustray.defenderplatform;
+package cn.dustray.browser;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -25,8 +25,9 @@ import android.widget.ProgressBar;
 
 import java.util.List;
 
-import cn.dustray.browser.WebViewManager;
 import cn.dustray.control.xWebView;
+import cn.dustray.defenderplatform.MainActivity;
+import cn.dustray.defenderplatform.R;
 import cn.dustray.utils.xToast;
 
 import static android.view.View.generateViewId;
@@ -69,10 +70,8 @@ public class WebTabFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         initWebView();
     }
-
 
     private void initWebView() {
         if (mainWebView == null) {
@@ -85,7 +84,7 @@ public class WebTabFragment extends Fragment {
         progressBar = new ProgressBar(getActivity(), null, android.R.attr.progressBarStyleHorizontal);
         frameLayout.addView(progressBar);
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) progressBar.getLayoutParams();
-        params.gravity = Gravity.TOP;
+        params.gravity = Gravity.BOTTOM;
         params.width = WindowManager.LayoutParams.MATCH_PARENT;
         params.height = 5;
         progressBar.setLayoutParams(params);
@@ -99,7 +98,6 @@ public class WebTabFragment extends Fragment {
                 //隐藏toolbar
                 AppBarLayout mainAppBar = getActivity().findViewById(R.id.main_appbar);
                 mainAppBar.setExpanded(false, true);
-
             }
 
             @Override
@@ -109,7 +107,6 @@ public class WebTabFragment extends Fragment {
                     webListener.onWebViewCreateFinished();
                 }
                 progressBar.setVisibility(View.INVISIBLE);
-
             }
 
             @Override
@@ -117,7 +114,6 @@ public class WebTabFragment extends Fragment {
                 super.onReceivedError(view, errorCode, description, failingUrl);
                 mainWebView.loadUrl(homeUrl);
             }
-
         });
 
         mainWebView.setWebChromeClient(new WebChromeClient() {
@@ -126,7 +122,6 @@ public class WebTabFragment extends Fragment {
             public void onProgressChanged(WebView view, int newProgress) {
                 super.onProgressChanged(view, newProgress);
                 progressBar.setProgress(newProgress);
-
             }
 
             @Override
@@ -342,7 +337,7 @@ public class WebTabFragment extends Fragment {
 //                if (webState == null)
 //                    webState = new Bundle(ClassLoader.getSystemClassLoader());
 //                mainWebView.saveState(webState);
-        List<WebTabFragment> array = ((MainActivity) getActivity()).webFragment.webFragArray;
+        List<WebTabFragment> array = ((MainActivity) getActivity()).browserFragment.webFragArray;
         WebViewManager manager = new WebViewManager(getActivity().getApplication(), array, getActivity());
         manager.saveToFile();
     }

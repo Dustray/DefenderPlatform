@@ -1,21 +1,16 @@
 package cn.dustray.popupwindow;
 
-import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.WindowManager;
 import android.widget.ImageButton;
-import android.widget.PopupWindow;
 import android.view.View;
 import android.widget.TextView;
 
 import cn.dustray.control.xWebPopupWindow;
 import cn.dustray.defenderplatform.MainActivity;
 import cn.dustray.defenderplatform.R;
-import cn.dustray.defenderplatform.WebFragment;
+import cn.dustray.browser.BrowserFragment;
 
 public class WebMenuPopup extends xWebPopupWindow implements View.OnClickListener {
 
@@ -23,12 +18,12 @@ public class WebMenuPopup extends xWebPopupWindow implements View.OnClickListene
     private ImageButton btnFullScreen, btnNoPicture, btnRotate, btnScreenshot, btnNightMode;
     private ImageButton btnHome, btnRefresh, btnRollLock, btnExit, btnClean;
     private TextView textFullScreen, textNoPicure, textRotate, textNightMode;
-    private WebFragment webFragment;
+    private BrowserFragment browserFragment;
 
     public WebMenuPopup(Context context) {
         super(context);
         this.context = context;
-        webFragment = ((MainActivity) context).webFragment;
+        browserFragment = ((MainActivity) context).browserFragment;
         initalize();
     }
 
@@ -86,7 +81,7 @@ public class WebMenuPopup extends xWebPopupWindow implements View.OnClickListene
             btnRollLock.setImageResource(R.drawable.ic_btn_roll_lock_black);
         }
         //全屏模式
-        if (webFragment.isFullScreen()) {//已打开
+        if (browserFragment.isFullScreen()) {//已打开
             btnFullScreen.setImageResource(R.drawable.ic_btn_fullscreenoff_gray);
             textFullScreen.setText("全屏/开");
         } else {//已关闭
@@ -95,7 +90,7 @@ public class WebMenuPopup extends xWebPopupWindow implements View.OnClickListene
         }
 
         //无图模式
-        if (webFragment.isNoPicMode()) {//已打开
+        if (browserFragment.isNoPicMode()) {//已打开
             btnNoPicture.setImageResource(R.drawable.ic_btn_picturemodeoff_gray);
             textNoPicure.setText("无图/开");
         } else {//已关闭
@@ -104,7 +99,7 @@ public class WebMenuPopup extends xWebPopupWindow implements View.OnClickListene
         }
 
         //旋转模式
-        if (webFragment.isRatote()) {//已打开
+        if (browserFragment.isRatote()) {//已打开
             btnRotate.setImageResource(R.drawable.ic_btn_rotateoff_gray);
             textRotate.setText("旋转/开");
         } else {//已关闭
@@ -113,7 +108,7 @@ public class WebMenuPopup extends xWebPopupWindow implements View.OnClickListene
         }
 
         //夜间模式
-        if (webFragment.isNightMode()) {//已打开
+        if (browserFragment.isNightMode()) {//已打开
             btnNightMode.setImageResource(R.drawable.ic_btn_nightmodeoff_gray);
             textNightMode.setText("日间模式");
         } else {//已关闭
@@ -127,25 +122,25 @@ public class WebMenuPopup extends xWebPopupWindow implements View.OnClickListene
         switch (view.getId()) {
             //第一组
             case R.id.btn_web_menu_fullscreen:
-                webFragment.changeFullScreen();
+                browserFragment.changeFullScreen();
                 break;
             case R.id.btn_web_menu_nopic:
-                webFragment.changeNoPicMode();
+                browserFragment.changeNoPicMode();
                 break;
             case R.id.btn_web_menu_rotate:
-                webFragment.changeRatote();
+                browserFragment.changeRatote();
                 break;
             case R.id.btn_web_menu_capture:
                 break;
             case R.id.btn_web_menu_night:
-                webFragment.changeNightMode();
+                browserFragment.changeNightMode();
                 break;
             //第二组
             case R.id.btn_web_menu_home:
-                webFragment.goHome();
+                browserFragment.goHome();
                 break;
             case R.id.btn_web_menu_refresh:
-                webFragment.refresh();
+                browserFragment.refresh();
                 break;
             case R.id.btn_web_menu_rolllock:
                 ((MainActivity) context).changePageScroll();
@@ -153,7 +148,7 @@ public class WebMenuPopup extends xWebPopupWindow implements View.OnClickListene
             case R.id.btn_web_menu_down:
                 break;
             case R.id.btn_web_menu_clean:
-                ((MainActivity) context).webFragment.cleanCache();
+                ((MainActivity) context).browserFragment.cleanCache();
                 break;
         }
         dismiss();

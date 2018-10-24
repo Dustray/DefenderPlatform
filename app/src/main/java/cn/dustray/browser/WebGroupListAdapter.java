@@ -1,4 +1,4 @@
-package cn.dustray.adapter;
+package cn.dustray.browser;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -11,7 +11,6 @@ import android.widget.ImageButton;
 import java.util.List;
 import cn.dustray.defenderplatform.MainActivity;
 import cn.dustray.defenderplatform.R;
-import cn.dustray.defenderplatform.WebTabFragment;
 import cn.dustray.popupwindow.WebGroupPopup;
 
 public class WebGroupListAdapter extends RecyclerView.Adapter<WebGroupListAdapter.Holder> {
@@ -46,7 +45,7 @@ public class WebGroupListAdapter extends RecyclerView.Adapter<WebGroupListAdapte
         holder.captureImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity) context).webFragment.loadFragment(s);
+                ((MainActivity) context).browserFragment.loadFragment(s);
             }
         });
         holder.closeBtn.setOnClickListener(new View.OnClickListener() {
@@ -58,11 +57,11 @@ public class WebGroupListAdapter extends RecyclerView.Adapter<WebGroupListAdapte
                 notifyItemRangeChanged(0, list.size());
                 if (list.size() == 0) {
                     frag.dismiss();
-                    ((MainActivity) context).webFragment.createNewFragment();
+                    ((MainActivity) context).browserFragment.createNewFragment();
                 }else{
-                    ((MainActivity) context).webFragment.loadFragment(list.get(list.size()-1));
+                    ((MainActivity) context).browserFragment.loadFragment(list.get(list.size()-1));
                 }
-                ((MainActivity) context).webFragment.refreshGroupIcon();
+                ((MainActivity) context).browserFragment.refreshGroupIcon();
             }
         });
     }
@@ -75,9 +74,9 @@ public class WebGroupListAdapter extends RecyclerView.Adapter<WebGroupListAdapte
         list.clear();
         if (list.size() == 0) {
             frag.dismiss();
-            ((MainActivity) context).webFragment.createNewFragment();
+            ((MainActivity) context).browserFragment.createNewFragment();
         }
-        ((MainActivity) context).webFragment.refreshGroupIcon();
+        ((MainActivity) context).browserFragment.refreshGroupIcon();
     }
 
     @Override

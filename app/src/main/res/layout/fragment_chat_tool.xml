@@ -10,7 +10,7 @@
     android:alignmentMode="alignMargins"
     android:columnCount="4"
     android:rowCount="2"
-    tools:context=".ChatToolFragment">
+    tools:context="cn.dustray.chat.ChatToolFragment">
 
     <RelativeLayout
 

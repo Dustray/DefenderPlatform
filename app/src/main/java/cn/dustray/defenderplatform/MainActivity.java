@@ -28,20 +28,24 @@ import android.widget.Toast;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
 import cn.dustray.adapter.MainViewPagerAdapter;
+import cn.dustray.browser.BrowserFragment;
+import cn.dustray.browser.WebTabFragment;
+import cn.dustray.chat.ChatFragment;
+import cn.dustray.chat.ChatToolFragment;
 import cn.dustray.control.xViewPager;
 import cn.dustray.utils.xToast;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         ChatFragment.OnFragmentInteractionListener,
-        WebFragment.OnFragmentInteractionListener,
+        BrowserFragment.OnFragmentInteractionListener,
         ChatToolFragment.OnListFragmentInteractionListener,
         WebTabFragment.OnFragmentInteractionListener {
 
     private TabLayout titleTab;
     private xViewPager mainPage;
     public ChatFragment chatFragment = ChatFragment.newInstance();
-    public WebFragment webFragment = WebFragment.newInstance();
+    public BrowserFragment browserFragment = BrowserFragment.newInstance();
     private AppBarLayout mainAppBar;
 
     @Override
@@ -71,7 +75,7 @@ public class MainActivity extends AppCompatActivity
     private void initTabPage() {
         titleTab = findViewById(R.id.title_tab);
         mainPage = findViewById(R.id.main_page);
-        MainViewPagerAdapter adapter = new MainViewPagerAdapter(getSupportFragmentManager(), this, chatFragment, webFragment);
+        MainViewPagerAdapter adapter = new MainViewPagerAdapter(getSupportFragmentManager(), this, chatFragment, browserFragment);
 
         mainPage.setAdapter(adapter);
         titleTab.setupWithViewPager(mainPage);
@@ -117,8 +121,8 @@ public class MainActivity extends AppCompatActivity
         int position = mainPage.getCurrentItem();
 
         if (position == 1) {
-            if (webFragment.canGoBack()) {
-                webFragment.goBack();
+            if (browserFragment.canGoBack()) {
+                browserFragment.goBack();
                 return;
             }
         }
@@ -161,7 +165,7 @@ public class MainActivity extends AppCompatActivity
                     //Toast.makeText(MainActivity.this, "请输入查找内容！", Toast.LENGTH_SHORT).show();
                 } else {
 
-                    webFragment.search(query,mainPage.getCurrentItem());
+                    browserFragment.search(query,mainPage.getCurrentItem());
                     switchToWeb();
                     searchView.clearFocus();
                     searchView.onActionViewCollapsed();

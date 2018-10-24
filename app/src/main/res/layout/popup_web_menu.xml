@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:background="#eee"
     android:orientation="vertical"
-    tools:context=".ChatToolFragment">
+    tools:context="cn.dustray.chat.ChatToolFragment">
 
     <RelativeLayout
 

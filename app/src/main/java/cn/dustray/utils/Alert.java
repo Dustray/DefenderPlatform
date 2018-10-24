@@ -8,32 +8,32 @@ import cn.dustray.popupwindow.AlertPopup;
 public class Alert {
     private static boolean lastClickTime = true;//标志字
     private Alert.OnPopupAlertListener mLisenter;
-    Context mContext;
-    private boolean isShowing=false;
+    Context context;
+    private boolean isShowing = false;
 
     public Alert(Context context) {
-        mContext = context;
+        this.context = context;
     }
 
     public void setOnPopupAlertListener(Alert.OnPopupAlertListener mLisenter) {
         this.mLisenter = mLisenter;
     }
 
-    public boolean popupAlert(Context context, String alertContext) {
-        return popupAlert(context, alertContext, null);
+    public boolean popupAlert(String alertContext) {
+        return popupAlert(alertContext, null);
     }
 
     ;
 
-    public boolean popupAlert(Context context, String alertContext, String button1Text) {
-        return popupAlert(context, alertContext, button1Text, null);
+    public boolean popupAlert(String alertContext, String button1Text) {
+        return popupAlert(alertContext, button1Text, null);
     }
 
     ;
 
-    public boolean popupAlert(Context context, String alertContext, String button1Text, String button2Text) {
-        if (lastClickTime&&!isShowing) {//标志字为true可调用Toast
-            isShowing=true;
+    public boolean popupAlert(String alertContext, String button1Text, String button2Text) {
+        if (lastClickTime && !isShowing) {//标志字为true可调用Toast
+            isShowing = true;
             lastClickTime = false;//标志字置false
             //Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
             AlertPopup alert;
@@ -55,9 +55,10 @@ public class Alert {
                     mLisenter.onClickCancle();
 
                 }
+
                 @Override
                 public void onDismiss() {
-                    isShowing=false;
+                    isShowing = false;
                 }
             });
             alert.showAtTop();

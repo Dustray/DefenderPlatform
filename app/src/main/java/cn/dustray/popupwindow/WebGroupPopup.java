@@ -1,25 +1,20 @@
 package cn.dustray.popupwindow;
 
-import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ImageButton;
-import android.widget.PopupWindow;
 
 import java.util.List;
 
-import cn.dustray.adapter.WebGroupListAdapter;
+import cn.dustray.browser.WebGroupListAdapter;
 import cn.dustray.control.xWebPopupWindow;
 import cn.dustray.defenderplatform.MainActivity;
 import cn.dustray.defenderplatform.R;
-import cn.dustray.defenderplatform.WebTabFragment;
+import cn.dustray.browser.WebTabFragment;
 
 public class WebGroupPopup extends xWebPopupWindow implements View.OnClickListener {
 
@@ -76,7 +71,7 @@ public class WebGroupPopup extends xWebPopupWindow implements View.OnClickListen
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_web_add:
-                ((MainActivity) context).webFragment.createNewFragment();
+                ((MainActivity) context).browserFragment.createNewFragment();
                 //webGroupAdapter.saveToFile();
                 break;
             case R.id.btn_web_closeall:

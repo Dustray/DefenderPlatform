@@ -1,4 +1,4 @@
-package cn.dustray.defenderplatform;
+package cn.dustray.browser;
 
 import android.content.Context;
 import android.content.pm.ActivityInfo;
@@ -19,7 +19,7 @@ import android.widget.LinearLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.dustray.browser.WebViewManager;
+import cn.dustray.defenderplatform.R;
 import cn.dustray.popupwindow.WebGroupPopup;
 import cn.dustray.popupwindow.WebMenuPopup;
 import cn.dustray.popupwindow.WebSharePopup;
@@ -27,7 +27,7 @@ import cn.dustray.utils.WebUtil;
 import cn.dustray.utils.xToast;
 
 
-public class WebFragment extends Fragment implements View.OnClickListener, WebTabFragment.OnWebViewCreatedListener
+public class BrowserFragment extends Fragment implements View.OnClickListener, WebTabFragment.OnWebViewCreatedListener
         , View.OnLongClickListener {
 
     private static final String ARG_PARAM1 = "param1";
@@ -53,14 +53,14 @@ public class WebFragment extends Fragment implements View.OnClickListener, WebTa
     private boolean isNightMode = false;
 
 
-    public WebFragment() {
+    public BrowserFragment() {
         // Required empty public constructor
     }
 
 
     // TODO: Rename and change types and number of parameters
-    public static WebFragment newInstance() {
-        WebFragment fragment = new WebFragment();
+    public static BrowserFragment newInstance() {
+        BrowserFragment fragment = new BrowserFragment();
 
         return fragment;
     }

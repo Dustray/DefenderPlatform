@@ -4,7 +4,8 @@ public class ChatRecordEntity {
 
     public static final int TYPE_RECEIVED = 1;
     public static final int TYPE_SENT = 2;
-
+    public static final int MESSAGE_TYPE_TEXT=1001;
+    public static final int MESSAGE_TYPE_IMAGE=1002;
     String chatContent;
     int messageType;
 
