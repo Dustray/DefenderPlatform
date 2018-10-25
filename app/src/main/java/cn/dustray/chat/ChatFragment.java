@@ -87,7 +87,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                 add(new ChatRecordEntity(getActivity(), "聊天内容9:ss是难受难受难受难受那你是啥", 1, ChatRecordEntity.MESSAGE_TYPE_TEXT));
                 add(new ChatRecordEntity(getActivity(), "聊天内容0热望奇热网奇热网奇热网缺乏大赛官方热舞公认为该文认为", 1, ChatRecordEntity.MESSAGE_TYPE_TEXT));
                 add(new ChatRecordEntity(getActivity(), "聊天内容1热热我", 2, ChatRecordEntity.MESSAGE_TYPE_TEXT));
-                add(new ChatRecordEntity(getActivity(), "http://pic15.nipic.com/20110721/16383_123420353000_2.jpg", 2, ChatRecordEntity.MESSAGE_TYPE_IMAGE));
+                add(new ChatRecordEntity(getActivity(), "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1541049260&di=80f49d66102f426b3295b898725d83e5&imgtype=jpg&er=1&src=http%3A%2F%2Fe.hiphotos.baidu.com%2Fnuomi%2Fwh%253D470%252C285%2Fsign%3Db384cb1d94dda144da5c64b68587fc90%2F29381f30e924b899165216366d061d950a7bf656.jpg", 1, ChatRecordEntity.MESSAGE_TYPE_IMAGE));
 
                 add(new ChatRecordEntity(getActivity(), "聊天内容2我去热热去辜负他热爱", 2, ChatRecordEntity.MESSAGE_TYPE_TEXT));
                 add(new ChatRecordEntity(getActivity(), "http://pic29.nipic.com/20130511/9252150_174018365301_2.jpg", 2, ChatRecordEntity.MESSAGE_TYPE_IMAGE));
@@ -95,6 +95,8 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                 add(new ChatRecordEntity(getActivity(), "聊天内容4", 1, ChatRecordEntity.MESSAGE_TYPE_TEXT));
                 add(new ChatRecordEntity(getActivity(), "聊天内容5说的是福娃广泛但是我个人", 2, ChatRecordEntity.MESSAGE_TYPE_TEXT));
                 add(new ChatRecordEntity(getActivity(), "聊天内容6惹人", 1, ChatRecordEntity.MESSAGE_TYPE_TEXT));
+                add(new ChatRecordEntity(getActivity(), "http://pic15.nipic.com/20110721/16383_123420353000_2.jpg", 1, ChatRecordEntity.MESSAGE_TYPE_IMAGE));
+
                 add(new ChatRecordEntity(getActivity(), "聊天内容7水水水水水水", 1, ChatRecordEntity.MESSAGE_TYPE_TEXT));
                 add(new ChatRecordEntity(getActivity(), "聊天内容8", 2, ChatRecordEntity.MESSAGE_TYPE_TEXT));
                 add(new ChatRecordEntity(getActivity(), "聊天内容9热舞区分哇 热物权法第七萨福地区发热", 2, ChatRecordEntity.MESSAGE_TYPE_TEXT));
@@ -141,7 +143,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                 if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                     touchUpPositionY = motionEvent.getY();
                     touchUpPositionX = motionEvent.getX();
-                    if (!chatListView.canScrollVertically(1) && touchDownPositionY - touchUpPositionY > 200) {
+                    if (!chatListView.canScrollVertically(1) && touchDownPositionY - touchUpPositionY > 300) {
                         //判断是否还能往上滑（滑到底）
                         // Toast.makeText(getActivity(), "弹键盘", Toast.LENGTH_LONG).show();
                         showSoftInputFromWindow(sendContent);

@@ -6,7 +6,7 @@
 
             <gradient android:endColor="#e9e9e9" android:startColor="#dddddd" android:type="linear" />
 
-            <padding android:bottom="10dip" android:left="10dip" android:right="10dip" android:top="10dip" />
+            <!--<padding android:bottom="10dip" android:left="10dip" android:right="10dip" android:top="10dip" />-->
             <corners android:bottomLeftRadius="10dip" android:bottomRightRadius="10dip" android:topLeftRadius="10dip" android:topRightRadius="0dip" />
 
 
@@ -17,7 +17,7 @@
 
             <gradient android:endColor="#d9d9d9" android:startColor="#cdcdcd" android:type="linear" />
 
-            <padding android:bottom="10dip" android:left="10dip" android:right="10dip" android:top="10dip" />
+            <!--<padding android:bottom="10dip" android:left="10dip" android:right="10dip" android:top="10dip" />-->
             <corners android:bottomLeftRadius="10dip" android:bottomRightRadius="10dip" android:topLeftRadius="10dip" android:topRightRadius="0dip" />
 
 

@@ -15,11 +15,13 @@ import android.widget.TextView;
 import com.facebook.drawee.drawable.ScalingUtils;
 import com.facebook.drawee.generic.GenericDraweeHierarchy;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
+import com.facebook.drawee.generic.RoundingParams;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import cn.dustray.defenderplatform.R;
 import cn.dustray.entity.ChatRecordEntity;
 import cn.dustray.popupwindow.TextMenuPopup;
+import cn.dustray.utils.PixelConvert;
 
 import static android.view.View.generateViewId;
 
@@ -29,10 +31,12 @@ public class ChatHolder extends RecyclerView.ViewHolder {
     TextView textView;
     SimpleDraweeView imageView;
     RelativeLayout frame;
+    private static int ROUND_CORNER_SIZE;
 
     public ChatHolder(Context context, View itemView, int type) {
         super(itemView);
         this.context = context;
+        ROUND_CORNER_SIZE=PixelConvert.dip2px(context,10);
         headBtn = itemView.findViewById(R.id.chat_list_item_head);
         frame = itemView.findViewById(R.id.chat_list_item_frame);
         switch (type) {
@@ -47,6 +51,7 @@ public class ChatHolder extends RecyclerView.ViewHolder {
 
 
     public void addView(ChatRecordEntity entity) {
+        adjustFrame(entity);
         switch (entity.getMessageType()) {
             case ChatRecordEntity.MESSAGE_TYPE_TEXT:
                 textView.setText(entity.getChatContent());
@@ -57,10 +62,43 @@ public class ChatHolder extends RecyclerView.ViewHolder {
                 break;
             case ChatRecordEntity.MESSAGE_TYPE_IMAGE:
                 //Log.i("Constraints", "" +entity.getChatContent());
+                RoundingParams roundingParams;
+                if (entity.getTransmitType() == ChatRecordEntity.TRANSMIT_TYPE_RECEIVED)
+                    roundingParams = RoundingParams.fromCornersRadii(
+                            0,
+                            ROUND_CORNER_SIZE,
+                            ROUND_CORNER_SIZE,
+                            ROUND_CORNER_SIZE);
+                else
+                    roundingParams = RoundingParams.fromCornersRadii(
+                            ROUND_CORNER_SIZE,
+                            0,
+                            ROUND_CORNER_SIZE,
+                            ROUND_CORNER_SIZE);
+                imageView.getHierarchy().setRoundingParams(roundingParams);
                 Uri uri = Uri.parse(entity.getChatContent());
                 imageView.setImageURI(uri);
                 break;
         }
+    }
+
+    private void adjustFrame(ChatRecordEntity entity) {
+        RelativeLayout.LayoutParams params1 = (RelativeLayout.LayoutParams) headBtn.getLayoutParams();
+        RelativeLayout.LayoutParams params2 = (RelativeLayout.LayoutParams) frame.getLayoutParams();
+        if (entity.getTransmitType() == ChatRecordEntity.TRANSMIT_TYPE_RECEIVED) {//接收的的消息
+            frame.setBackgroundResource(R.drawable.bubble_left_lightblue);
+            // holder.textContent.setTextColor(Color.WHITE);
+            params1.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+            params2.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+        } else {//发送的消息
+            frame.setBackgroundResource(R.drawable.bubble_right_gray);
+            //holder.textContent.setTextColor(Color.BLACK);
+            params1.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            params2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        }
+        //holder.frame.setTag(position);//tag
+        headBtn.setLayoutParams(params1);
+        frame.setLayoutParams(params2);
     }
 
 
@@ -69,6 +107,7 @@ public class ChatHolder extends RecyclerView.ViewHolder {
         textView.setText(" ");
         textView.setTextSize(16f);
         textView.setId(generateViewId());
+        textView.setPadding(ROUND_CORNER_SIZE, ROUND_CORNER_SIZE,ROUND_CORNER_SIZE, ROUND_CORNER_SIZE);
         textView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
@@ -106,10 +145,11 @@ public class ChatHolder extends RecyclerView.ViewHolder {
         frame.addView(imageView);
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) imageView.getLayoutParams();
         params.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        params.width = WindowManager.LayoutParams.MATCH_PARENT;
+        params.width = PixelConvert.dip2px(context, 150);
         imageView.setLayoutParams(params);
         imageView.setAspectRatio(1.33f);
         imageView.getHierarchy().setActualImageScaleType(ScalingUtils.ScaleType.CENTER_CROP);
+
 
     }
 }
