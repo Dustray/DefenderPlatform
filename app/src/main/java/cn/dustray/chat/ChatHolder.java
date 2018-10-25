@@ -19,6 +19,7 @@ import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.generic.RoundingParams;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.common.ResizeOptions;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 
@@ -36,11 +37,13 @@ public class ChatHolder extends RecyclerView.ViewHolder {
     SimpleDraweeView imageView;
     RelativeLayout frame;
     private static int ROUND_CORNER_SIZE;
+    private static int IMAGE_SIZE;
 
     public ChatHolder(Context context, View itemView, int type) {
         super(itemView);
         this.context = context;
         ROUND_CORNER_SIZE=PixelConvert.dip2px(context,10);
+        IMAGE_SIZE=PixelConvert.dip2px(context,150);
         headBtn = itemView.findViewById(R.id.chat_list_item_head);
         frame = itemView.findViewById(R.id.chat_list_item_frame);
         switch (type) {
@@ -85,6 +88,7 @@ public class ChatHolder extends RecyclerView.ViewHolder {
                 //imageView.setImageURI(uri);
                 ImageRequest request = ImageRequestBuilder.newBuilderWithSource(uri)
                         .setProgressiveRenderingEnabled(true)
+                        .setResizeOptions(new ResizeOptions(IMAGE_SIZE, IMAGE_SIZE))
                         .build();
                 DraweeController controller = Fresco.newDraweeControllerBuilder()
                         .setImageRequest(request)
@@ -164,7 +168,7 @@ public class ChatHolder extends RecyclerView.ViewHolder {
         frame.addView(imageView);
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) imageView.getLayoutParams();
         params.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        params.width = PixelConvert.dip2px(context, 150);
+        params.width = IMAGE_SIZE;
         imageView.setLayoutParams(params);
         imageView.setAspectRatio(1f);
         imageView.getHierarchy().setActualImageScaleType(ScalingUtils.ScaleType.CENTER_CROP);

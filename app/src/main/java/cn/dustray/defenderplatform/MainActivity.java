@@ -26,6 +26,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.core.ImagePipelineConfig;
 
 import cn.dustray.adapter.MainViewPagerAdapter;
 import cn.dustray.browser.BrowserFragment;
@@ -55,7 +56,10 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
         mainAppBar = findViewById(R.id.main_appbar);
-        Fresco.initialize(this);//初始化list图片处理
+        ImagePipelineConfig config = ImagePipelineConfig.newBuilder(this)
+                .setDownsampleEnabled(true)
+                .build();
+        Fresco.initialize(this,config);//初始化list图片处理
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
