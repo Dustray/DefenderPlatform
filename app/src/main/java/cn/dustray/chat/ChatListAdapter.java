@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.dustray.defenderplatform.R;
@@ -22,6 +23,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatHolder> {
 
     Context context;
     List<ChatRecordEntity> list;
+    private List<Integer> chatMessageIdList = new ArrayList<>();
 
     public ChatListAdapter(Context context, List<ChatRecordEntity> list) {
         this.context = context;
@@ -40,24 +42,10 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatHolder> {
 
     @Override
     public void onBindViewHolder(ChatHolder holder, int position) {
-         holder.setIsRecyclable(false);//混乱临时解决办法
-
-
-
-        int tempPosition;
-        // TODO: 2018/9/30 0030  Fix Bug：刷新混乱
-        if (holder.frame.getTag() == null) {//tag
-            tempPosition = position;
-            holder.frame.setTag(position);//tag
-        } else {
-            tempPosition = Integer.parseInt(holder.frame.getTag().toString());
-        }
-
-        ChatRecordEntity s = list.get(tempPosition);
+        //holder.setIsRecyclable(false);//混乱临时解决办法,已解决不再需要，留位纪念
+        ChatRecordEntity s = list.get(position);
         holder.addView(s);
         //Log.i("Constraints", "" + list.get(position).getTransmitType());
-
-
     }
 
     @Override

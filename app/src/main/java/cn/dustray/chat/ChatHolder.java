@@ -103,11 +103,15 @@ public class ChatHolder extends RecyclerView.ViewHolder {
         if (entity.getTransmitType() == ChatRecordEntity.TRANSMIT_TYPE_RECEIVED) {//接收的的消息
             frame.setBackgroundResource(R.drawable.bubble_left_lightblue);
             // holder.textContent.setTextColor(Color.WHITE);
+            params1.removeRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            params2.removeRule(RelativeLayout.ALIGN_PARENT_RIGHT);
             params1.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
             params2.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
         } else {//发送的消息
             frame.setBackgroundResource(R.drawable.bubble_right_gray);
             //holder.textContent.setTextColor(Color.BLACK);
+            params1.removeRule(RelativeLayout.ALIGN_PARENT_LEFT);
+            params2.removeRule(RelativeLayout.ALIGN_PARENT_LEFT);
             params1.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
             params2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         }
