@@ -95,7 +95,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                 add(new ChatRecordEntity(getActivity(), "聊天内容4", 1, ChatRecordEntity.MESSAGE_TYPE_TEXT));
                 add(new ChatRecordEntity(getActivity(), "聊天内容5说的是福娃广泛但是我个人", 2, ChatRecordEntity.MESSAGE_TYPE_TEXT));
                 add(new ChatRecordEntity(getActivity(), "聊天内容6惹人", 1, ChatRecordEntity.MESSAGE_TYPE_TEXT));
-                add(new ChatRecordEntity(getActivity(), "http://pic15.nipic.com/20110721/16383_123420353000_2.jpg", 1, ChatRecordEntity.MESSAGE_TYPE_IMAGE));
+                add(new ChatRecordEntity(getActivity(), "http://img.zcool.cn/community/037dd30582481f7a84a0d304f0db5d6.jpg", 1, ChatRecordEntity.MESSAGE_TYPE_IMAGE));
 
                 add(new ChatRecordEntity(getActivity(), "聊天内容7水水水水水水", 1, ChatRecordEntity.MESSAGE_TYPE_TEXT));
                 add(new ChatRecordEntity(getActivity(), "聊天内容8", 2, ChatRecordEntity.MESSAGE_TYPE_TEXT));

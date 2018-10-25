@@ -12,11 +12,15 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.drawable.ScalingUtils;
 import com.facebook.drawee.generic.GenericDraweeHierarchy;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.generic.RoundingParams;
+import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.request.ImageRequest;
+import com.facebook.imagepipeline.request.ImageRequestBuilder;
 
 import cn.dustray.defenderplatform.R;
 import cn.dustray.entity.ChatRecordEntity;
@@ -76,8 +80,19 @@ public class ChatHolder extends RecyclerView.ViewHolder {
                             ROUND_CORNER_SIZE,
                             ROUND_CORNER_SIZE);
                 imageView.getHierarchy().setRoundingParams(roundingParams);
+
                 Uri uri = Uri.parse(entity.getChatContent());
-                imageView.setImageURI(uri);
+                //imageView.setImageURI(uri);
+                ImageRequest request = ImageRequestBuilder.newBuilderWithSource(uri)
+                        .setProgressiveRenderingEnabled(true)
+                        .build();
+                DraweeController controller = Fresco.newDraweeControllerBuilder()
+                        .setImageRequest(request)
+                        .setOldController(imageView.getController())
+                        .setAutoPlayAnimations(true)
+                        .setTapToRetryEnabled(true)
+                        .build();
+               imageView.setController(controller);
                 break;
         }
     }
@@ -147,9 +162,10 @@ public class ChatHolder extends RecyclerView.ViewHolder {
         params.height = WindowManager.LayoutParams.WRAP_CONTENT;
         params.width = PixelConvert.dip2px(context, 150);
         imageView.setLayoutParams(params);
-        imageView.setAspectRatio(1.33f);
+        imageView.setAspectRatio(1f);
         imageView.getHierarchy().setActualImageScaleType(ScalingUtils.ScaleType.CENTER_CROP);
-
-
+        imageView.getHierarchy().setPlaceholderImage(R.drawable.img_picture_loading);//正在加载图片
+        imageView.getHierarchy().setFailureImage(R.drawable.img_picture_load_failed);//加载失败图片
+        imageView.getHierarchy().setRetryImage(R.drawable.img_picture_reload);//重试图片
     }
 }
