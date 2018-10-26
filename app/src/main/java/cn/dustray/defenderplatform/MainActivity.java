@@ -23,6 +23,7 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity
         ImagePipelineConfig config = ImagePipelineConfig.newBuilder(this)
                 .setDownsampleEnabled(true)
                 .build();
-        Fresco.initialize(this,config);//初始化list图片处理
+        Fresco.initialize(this, config);//初始化list图片处理
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -169,7 +170,7 @@ public class MainActivity extends AppCompatActivity
                     //Toast.makeText(MainActivity.this, "请输入查找内容！", Toast.LENGTH_SHORT).show();
                 } else {
 
-                    browserFragment.search(query,mainPage.getCurrentItem());
+                    browserFragment.search(query, mainPage.getCurrentItem());
                     switchToWeb();
                     searchView.clearFocus();
                     searchView.onActionViewCollapsed();

@@ -1,16 +1,6 @@
 package cn.dustray.entity;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import cn.dustray.defenderplatform.MainActivity;
-import cn.dustray.popupwindow.TextMenuPopup;
-
-import static android.view.View.generateViewId;
-
 public class ChatRecordEntity {
     private Context context;
     public static final int TRANSMIT_TYPE_RECEIVED = 1;

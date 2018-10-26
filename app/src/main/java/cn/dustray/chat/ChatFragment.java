@@ -13,10 +13,13 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+
+import com.facebook.drawee.backends.pipeline.Fresco;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,6 +77,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         list = new ArrayList<ChatRecordEntity>() {
             {
                 add(new ChatRecordEntity(getActivity(), "聊天内容1:ss是难受难受难受难受那你是啥", 1, ChatRecordEntity.MESSAGE_TYPE_TEXT));
@@ -182,10 +186,22 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 switch (newState) {
-                    case RecyclerView.SCROLL_STATE_DRAGGING:
-                        hideSoftInputFromWindow(sendContent);
+                    case RecyclerView.SCROLL_STATE_DRAGGING://滑动状态（正在被外部拖拽,一般为用户正在用手指滚动）
+                        hideSoftInputFromWindow(sendContent);//隐藏键盘
+                        //  Fresco.getImagePipeline().pause();//Fresco滑动时停止加载
+                        break;
+                    case RecyclerView.SCROLL_STATE_IDLE://停止滑动状态//空闲状态
+                        // Fresco.getImagePipeline().resume();//Fresco停止滑动时继续加载
+                        break;
+                    case RecyclerView.SCROLL_STATE_SETTLING://滑动后自然沉降的状态（自动滚动开始）
                         break;
                 }
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    Fresco.getImagePipeline().resume();//Fresco停止滑动时继续加载
+                } else {
+                    Fresco.getImagePipeline().pause();//Fresco滑动时停止加载
+                }
+
             }
 
             @Override
@@ -302,7 +318,8 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
     }
 
     public void showSoftInputFromWindow(EditText editText) {
-
+// 设置输入法弹起时不调整当前布局
+        //getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
         editText.requestFocus();
 
         InputMethodManager inputManager = (InputMethodManager) editText.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -313,6 +330,8 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
         editText.clearFocus();
         InputMethodManager inputManager = (InputMethodManager) editText.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         inputManager.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+// 设置输入法弹起时自动调整布局，使之在输入法之上
+        //getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
     }
 
     public void share(String title, String url) {
