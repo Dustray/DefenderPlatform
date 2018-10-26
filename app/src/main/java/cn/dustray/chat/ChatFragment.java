@@ -26,6 +26,7 @@ import java.util.List;
 
 import cn.dustray.defenderplatform.R;
 import cn.dustray.entity.ChatRecordEntity;
+import cn.dustray.entity.LinkEntity;
 import cn.dustray.popupwindow.WebSharePopup;
 import cn.dustray.utils.Alert;
 
@@ -188,10 +189,8 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                 switch (newState) {
                     case RecyclerView.SCROLL_STATE_DRAGGING://滑动状态（正在被外部拖拽,一般为用户正在用手指滚动）
                         hideSoftInputFromWindow(sendContent);//隐藏键盘
-                        //  Fresco.getImagePipeline().pause();//Fresco滑动时停止加载
                         break;
                     case RecyclerView.SCROLL_STATE_IDLE://停止滑动状态//空闲状态
-                        // Fresco.getImagePipeline().resume();//Fresco停止滑动时继续加载
                         break;
                     case RecyclerView.SCROLL_STATE_SETTLING://滑动后自然沉降的状态（自动滚动开始）
                         break;
@@ -304,14 +303,21 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
 
     private void sendMessage() {
         ChatRecordEntity c = new ChatRecordEntity(getActivity(), sendContent.getText().toString(), ChatRecordEntity.TRANSMIT_TYPE_SENT, ChatRecordEntity.MESSAGE_TYPE_TEXT);
-        list.add(c);
-        adapter.notifyItemInserted(list.size());
-        chatListView.scrollToPosition(list.size() - 1);
+        sendMessage(c);
         sendContent.setText("");
     }
 
     public void sendMessage(String s) {
         ChatRecordEntity c = new ChatRecordEntity(getActivity(), s, ChatRecordEntity.TRANSMIT_TYPE_SENT, ChatRecordEntity.MESSAGE_TYPE_TEXT);
+        sendMessage(c);
+    }
+
+    public void sendMessage(LinkEntity entity) {
+        ChatRecordEntity c = new ChatRecordEntity(getActivity(), entity, ChatRecordEntity.TRANSMIT_TYPE_SENT);
+        sendMessage(c);
+    }
+
+    private void sendMessage(ChatRecordEntity c) {
         list.add(c);
         adapter.notifyItemInserted(list.size());
         chatListView.scrollToPosition(list.size() - 1);

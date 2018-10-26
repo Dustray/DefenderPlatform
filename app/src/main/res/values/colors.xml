@@ -12,4 +12,8 @@
     <color name="colorAccentNight">#512DA8</color>
 
     <color name="black_overlay">#66000000</color>
+
+    <color name="light_light_gray">#eeeeee</color>
+
+
 </resources>

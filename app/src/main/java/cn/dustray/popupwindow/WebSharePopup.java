@@ -18,6 +18,7 @@ import android.widget.TextView;
 import cn.dustray.control.xWebPopupWindow;
 import cn.dustray.defenderplatform.MainActivity;
 import cn.dustray.defenderplatform.R;
+import cn.dustray.entity.LinkEntity;
 import cn.dustray.utils.xToast;
 
 public class WebSharePopup extends xWebPopupWindow implements View.OnClickListener {
@@ -65,7 +66,8 @@ public class WebSharePopup extends xWebPopupWindow implements View.OnClickListen
         switch (view.getId()) {
             case R.id.btn_web_share_chat:
                 String shareContent = "[" + title + "] " + url;
-                ((MainActivity) context).chatFragment.sendMessage(shareContent);
+                LinkEntity entity = new LinkEntity(title,"描述",url);
+                ((MainActivity) context).chatFragment.sendMessage(entity);
                 ((MainActivity) context).switchToChat();
                 break;
             case R.id.btn_web_share_copy:
