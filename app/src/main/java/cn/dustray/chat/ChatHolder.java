@@ -152,14 +152,14 @@ public class ChatHolder extends RecyclerView.ViewHolder {
         textView.setTextSize(16f);
         textView.setId(generateViewId());
         textView.setPadding(ROUND_CORNER_SIZE, ROUND_CORNER_SIZE, ROUND_CORNER_SIZE, ROUND_CORNER_SIZE);
-        textView.setOnLongClickListener(new View.OnLongClickListener() {
+        frame.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
                 new TextMenuPopup(context, textView.getText().toString()).showAtBottom(textView);
                 return false;
             }
         });
-        textView.setOnClickListener(new View.OnClickListener() {
+        frame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //xToast.toast(context,"sss");
@@ -199,7 +199,7 @@ public class ChatHolder extends RecyclerView.ViewHolder {
 
     private void initLinkView() {
         textView = new TextView(context);
-        textView.setText("");
+        textView.setText(" ");
         textView.setTextSize(14f);
         textView.setMaxLines(2);
         textView.setTextColor(Color.BLACK);

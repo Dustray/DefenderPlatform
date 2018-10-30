@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">守护者平台</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="navigation_drawer_open">打开导航抽屉</string>
+    <string name="navigation_drawer_close">关闭导航抽屉</string>
+    <string name="nav_header_title">守护者平台</string>
+    <string name="nav_header_subtitle">1360741742@qq.com</string>
+    <string name="nav_header_desc">导航头部</string>
+    <string name="action_settings">设置</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -13,4 +13,76 @@
     <string name="title_activity_web_game">WebGameActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_settings">设置</string>
+
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">通用</string>
+
+    <string name="pref_title_social_recommendations">启用社交推荐</string>
+    <string name="pref_description_social_recommendations">根据您的消息历史记录建议联系人
+    </string>
+
+    <string name="pref_title_display_name">显示名称</string>
+    <string name="pref_default_display_name">约翰·史密斯</string>
+
+    <string name="pref_title_add_friends_to_messages">将朋友添加到邮件中</string>
+    <string-array name="pref_example_list_titles">
+        <item>总是</item>
+        <item>偶尔</item>
+        <item>从不</item>
+    </string-array>
+    <string-array name="pref_example_list_values">
+        <item>1</item>
+        <item>0</item>
+        <item>-1</item>
+    </string-array>
+
+    <!-- Example settings for Data & Sync -->
+    <string name="pref_header_data_sync">日期 &amp; 同步</string>
+
+    <string name="pref_title_sync_frequency">同步频率</string>
+    <string-array name="pref_sync_frequency_titles">
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>3 hours</item>
+        <item>6 hours</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_values">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>-1</item>
+    </string-array>
+
+    <string-array name="list_preference_entries">
+        <item>Entry 1</item>
+        <item>Entry 2</item>
+        <item>Entry 3</item>
+    </string-array>
+
+    <string-array name="list_preference_entry_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="multi_select_list_preference_default_value" />
+
+    <string name="pref_title_system_sync_settings">系统同步设置</string>
+
+    <!-- Example settings for Notifications -->
+    <string name="pref_header_notifications">通知</string>
+
+    <string name="pref_title_new_message_notifications">新消息通知</string>
+
+    <string name="pref_title_ringtone">铃声</string>
+    <string name="pref_ringtone_silent">静音</string>
+
+    <string name="pref_title_vibrate">震动</string>
 </resources>

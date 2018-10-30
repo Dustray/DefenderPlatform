@@ -40,4 +40,9 @@ public class WebGameActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void finish() {
+        super.finish();
+        onDestroy();
+    }
 }

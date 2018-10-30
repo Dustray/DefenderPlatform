@@ -5,33 +5,45 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/nav_rq_code"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
-    </group>
+            android:title="扫一扫" />
 
-    <item android:title="Communicate">
+    </group>
+    <item android:title="聊天">
         <menu>
             <item
-                android:id="@+id/nav_share"
+                android:id="@+id/nav_camera"
+                android:icon="@drawable/ic_menu_camera"
+                android:title="聊天历史" />
+            <item
+                android:id="@+id/nav_gallery"
+                android:icon="@drawable/ic_menu_gallery"
+                android:title="相册" />
+        </menu>
+    </item>
+    <item android:title="浏览器">
+        <menu>
+            <item
+                android:id="@+id/nav_slideshow"
+                android:icon="@drawable/ic_menu_slideshow"
+                android:title="免屏蔽" />
+            <item
+                android:id="@+id/nav_manage"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="浏览历史" />
+        </menu>
+    </item>
+    <item android:title="通用">
+        <menu>
+            <item
+                android:id="@+id/nav_setting"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:title="设置" />
             <item
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:title="退出" />
         </menu>
     </item>
 
