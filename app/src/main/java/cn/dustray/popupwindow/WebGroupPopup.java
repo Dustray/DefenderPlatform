@@ -60,10 +60,10 @@ public class WebGroupPopup extends xWebPopupWindow implements View.OnClickListen
         //new LinearSnapHelper().attachToRecyclerView(webGroupList);
         webGroupAdapter = new WebGroupListAdapter(context, list, this);
         webGroupList.setAdapter(webGroupAdapter);
-
     }
 
     public void showAtBottom(View view) {        //弹窗位置设置
+        webGroupAdapter.notifyDataSetChanged();
         showAtLocation(view, Gravity.BOTTOM, 0, 0);
     }
 

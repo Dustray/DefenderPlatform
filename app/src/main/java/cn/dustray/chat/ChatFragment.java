@@ -342,7 +342,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
 
     public void share(String title, String url) {
 
-        new WebSharePopup(getActivity(), title, url).showAtBottom(sendBtn);
+        new WebSharePopup(getActivity(),true).showAtBottom(sendBtn, title, url);
     }
 
     public interface OnFragmentInteractionListener {

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import java.util.List;
+
 import cn.dustray.defenderplatform.MainActivity;
 import cn.dustray.defenderplatform.R;
 import cn.dustray.popupwindow.WebGroupPopup;
@@ -58,8 +59,8 @@ public class WebGroupListAdapter extends RecyclerView.Adapter<WebGroupListAdapte
                 if (list.size() == 0) {
                     frag.dismiss();
                     ((MainActivity) context).browserFragment.createNewFragment();
-                }else{
-                    ((MainActivity) context).browserFragment.loadFragment(list.get(list.size()-1));
+                } else {
+                    ((MainActivity) context).browserFragment.loadFragment(list.get(list.size() - 1));
                 }
                 ((MainActivity) context).browserFragment.refreshGroupIcon();
             }

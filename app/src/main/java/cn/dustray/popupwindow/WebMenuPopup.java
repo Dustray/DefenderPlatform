@@ -70,6 +70,7 @@ public class WebMenuPopup extends xWebPopupWindow implements View.OnClickListene
     }
 
     public void showAtBottom(View view) {        //弹窗位置设置
+        changeButtonSettingState();
         showAtLocation(view, Gravity.BOTTOM, 0, 0);
     }
 

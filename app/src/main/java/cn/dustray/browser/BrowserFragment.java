@@ -46,6 +46,8 @@ public class BrowserFragment extends Fragment implements View.OnClickListener, W
     private WebTabFragment webFrag;
     private FragmentManager manager;
     private WebGroupPopup webGroupPopup;
+    private WebSharePopup webSharePopup;
+    private WebMenuPopup webMenuPopup;
     //浏览器配置
     private boolean isFullScreen = false;
     private boolean isNoPicMode = false;
@@ -108,9 +110,11 @@ public class BrowserFragment extends Fragment implements View.OnClickListener, W
 
         refreshGroupIcon();
     }
-public boolean isWebFragNull(){
+
+    public boolean isWebFragNull() {
         return webFrag == null;
-}
+    }
+
     private void initFragment(List<WebTabFragment> array) {
         webFrag = array.get(array.size() - 1);
         FragmentTransaction transaction = manager.beginTransaction();
@@ -405,15 +409,23 @@ public boolean isWebFragNull(){
                 judgeWebState();
                 break;
             case R.id.btn_web_tool_menu:
-                new WebMenuPopup(getActivity()).showAtBottom(webToolBar);
+                if (webMenuPopup == null) {
+                    webMenuPopup = new WebMenuPopup(getActivity());
+                }
+                webMenuPopup.showAtBottom(webToolBar);
                 break;
             case R.id.btn_web_tool_group:
                 //webGroupArray.add(mainWebView);
-                webGroupPopup = new WebGroupPopup(getActivity(), webFragArray);
+                if (webGroupPopup == null) {
+                    webGroupPopup = new WebGroupPopup(getActivity(), webFragArray);
+                }
                 webGroupPopup.showAtBottom(webToolBar);
                 break;
             case R.id.btn_web_tool_share:
-                new WebSharePopup(getActivity(), webFrag.mainWebView.getTitle(), webFrag.mainWebView.getUrl()).showAtBottom(webToolBar);
+                if (webSharePopup == null) {
+                    webSharePopup = new WebSharePopup(getActivity());
+                }
+                webSharePopup.showAtBottom(webToolBar, webFrag.mainWebView.getTitle(), webFrag.mainWebView.getUrl());
                 break;
         }
     }

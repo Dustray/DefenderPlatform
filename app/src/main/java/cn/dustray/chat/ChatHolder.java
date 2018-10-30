@@ -31,6 +31,7 @@ import cn.dustray.entity.ChatRecordEntity;
 import cn.dustray.entity.LinkEntity;
 import cn.dustray.popupwindow.TextMenuPopup;
 import cn.dustray.utils.PixelConvert;
+import cn.dustray.utils.xToast;
 
 import static android.view.View.generateViewId;
 
@@ -119,22 +120,20 @@ public class ChatHolder extends RecyclerView.ViewHolder {
         RelativeLayout.LayoutParams params1 = (RelativeLayout.LayoutParams) headBtn.getLayoutParams();
         RelativeLayout.LayoutParams params2 = (RelativeLayout.LayoutParams) frame.getLayoutParams();
         if (entity.getTransmitType() == ChatRecordEntity.TRANSMIT_TYPE_RECEIVED) {//接收的的消息
-            if(entity.getMessageType() == ChatRecordEntity.MESSAGE_TYPE_LINK){
+            if (entity.getMessageType() == ChatRecordEntity.MESSAGE_TYPE_LINK) {//链接格式
                 frame.setBackgroundResource(R.drawable.bubble_left_lightgray);
-
-            }else
-            frame.setBackgroundResource(R.drawable.bubble_left_lightblue);
+            } else
+                frame.setBackgroundResource(R.drawable.bubble_left_lightblue);
             // holder.textContent.setTextColor(Color.WHITE);
             params1.removeRule(RelativeLayout.ALIGN_PARENT_RIGHT);
             params2.removeRule(RelativeLayout.ALIGN_PARENT_RIGHT);
             params1.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
             params2.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
         } else {//发送的消息
-            if(entity.getMessageType() == ChatRecordEntity.MESSAGE_TYPE_LINK){
+            if (entity.getMessageType() == ChatRecordEntity.MESSAGE_TYPE_LINK) {//链接格式
                 frame.setBackgroundResource(R.drawable.bubble_right_lightgray);
-
-            }else
-            frame.setBackgroundResource(R.drawable.bubble_right_gray);
+            } else
+                frame.setBackgroundResource(R.drawable.bubble_right_gray);
             //holder.textContent.setTextColor(Color.BLACK);
             params1.removeRule(RelativeLayout.ALIGN_PARENT_LEFT);
             params2.removeRule(RelativeLayout.ALIGN_PARENT_LEFT);
@@ -163,8 +162,7 @@ public class ChatHolder extends RecyclerView.ViewHolder {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Toast.makeText(context, "0---"+holder.textContent.getText().toString() , Toast.LENGTH_LONG).show();
-
+                //xToast.toast(context,"sss");
             }
         });
         frame.addView(textView);
@@ -219,8 +217,8 @@ public class ChatHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View view) {
                 // Toast.makeText(context, "0---"+holder.textContent.getText().toString() , Toast.LENGTH_LONG).show();
-                ((MainActivity)context).browserFragment.search(link, 0);
-                ((MainActivity)context).switchToWeb();
+                ((MainActivity) context).browserFragment.search(link, 0);
+                ((MainActivity) context).switchToWeb();
             }
         });
         frame.addView(textView);
