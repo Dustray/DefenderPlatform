@@ -1,6 +1,7 @@
 package cn.dustray.defenderplatform;
 
 import android.Manifest;
+import android.app.Application;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;

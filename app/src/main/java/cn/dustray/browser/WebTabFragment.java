@@ -3,6 +3,7 @@ package cn.dustray.browser;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.NonNull;
@@ -18,6 +19,7 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.WindowManager;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
@@ -26,6 +28,7 @@ import android.widget.ProgressBar;
 import java.util.List;
 
 import cn.dustray.control.xWebView;
+import cn.dustray.control.xWebView.xWebViewCilent;
 import cn.dustray.defenderplatform.MainActivity;
 import cn.dustray.defenderplatform.R;
 import cn.dustray.utils.xToast;
@@ -90,7 +93,17 @@ public class WebTabFragment extends Fragment {
         progressBar.setLayoutParams(params);
 
         mainWebView.getSettings().setLoadsImagesAutomatically(showPicture); // 加载图片
-        mainWebView.setWebViewClient(new WebViewClient() {
+        mainWebView.setWebViewClient(new xWebView.xWebViewCilent(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                //该方法在Build.VERSION_CODES.LOLLIPOP以前有效，从Build.VERSION_CODES.LOLLIPOP起，建议使用shouldOverrideUrlLoading(WebView, WebResourceRequest)}
+                boolean flag = mainWebView.openApp(request.getUrl().toString(), getActivity());
+                if (Build.VERSION.SDK_INT < 26) {
+                    return flag;
+                }
+                return !flag;
+                //return super.shouldOverrideUrlLoading(view, request);
+            }
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
@@ -107,12 +120,6 @@ public class WebTabFragment extends Fragment {
                     webListener.onWebViewCreateFinished();
                 }
                 progressBar.setVisibility(View.INVISIBLE);
-            }
-
-            @Override
-            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-                super.onReceivedError(view, errorCode, description, failingUrl);
-                mainWebView.loadUrl(homeUrl);
             }
         });
 
@@ -144,7 +151,7 @@ public class WebTabFragment extends Fragment {
             //float touchDownScrollY = 0;//WebView位置
             boolean moveFlag = false;
             int height = screenHeight;
-private final static int GO_BACK_FORWARD_LENGTH=200;
+            private final static int GO_BACK_FORWARD_LENGTH = 200;
 
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -169,16 +176,16 @@ private final static int GO_BACK_FORWARD_LENGTH=200;
                     touchMovePositionX = motionEvent.getX();
 
                     AppBarLayout mainAppBar = getActivity().findViewById(R.id.main_appbar);
-                   // xToast.toast(getActivity(), "" + mainWebView.getScrollY());
+                    // xToast.toast(getActivity(), "" + mainWebView.getScrollY());
                     if (touchDownPositionY - touchMovePositionY > 100) {
                         //往上滑 隐藏toolbar和web tool bar
                         //if (touchDownScrollY != mainWebView.getScrollY())//webview本身位置没变（问题解决）
-                            mainAppBar.setExpanded(false, true);
+                        mainAppBar.setExpanded(false, true);
                         moveFlag = false;
                     } else if (touchMovePositionY - touchDownPositionY > 100) {
                         //往下滑 显示lbar和web tool bar
                         //if (touchDownScrollY != mainWebView.getScrollY())//webview本身位置没变
-                            mainAppBar.setExpanded(true, true);
+                        mainAppBar.setExpanded(true, true);
                         moveFlag = false;
                     }
 
@@ -200,7 +207,7 @@ private final static int GO_BACK_FORWARD_LENGTH=200;
                     if (touchDownPositionX - touchUpPositionX > GO_BACK_FORWARD_LENGTH && Math.abs(touchUpPositionY - touchDownPositionY) < 100) {
                         //从右往左,前进
                         goForward();
-                    } else if (touchUpPositionX - touchDownPositionX > GO_BACK_FORWARD_LENGTH  && Math.abs(touchUpPositionY - touchDownPositionY) < 100) {
+                    } else if (touchUpPositionX - touchDownPositionX > GO_BACK_FORWARD_LENGTH && Math.abs(touchUpPositionY - touchDownPositionY) < 100) {
                         goBack();
                     }
 
@@ -418,4 +425,6 @@ private final static int GO_BACK_FORWARD_LENGTH=200;
 
         void onOpenNewWebTab(String Url);
     }
+
+
 }
