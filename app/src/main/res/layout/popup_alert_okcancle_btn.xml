@@ -6,71 +6,80 @@
     android:name="cn.dustray.defenderplatform.ChatToolFragment"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#eee"
+    android:background="#0000"
     android:orientation="vertical"
     tools:context="cn.dustray.chat.ChatToolFragment">
 
-
-    <RelativeLayout
-        android:id="@+id/web_share_item"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp">
+        android:layout_margin="7dp"
+        android:background="@drawable/alert_o_white"
+        android:elevation="5dp"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/alert_popup_title"
+        <RelativeLayout
+            android:id="@+id/web_share_item"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:text="滑动切换已关闭，是否开启？"
-            android:textColor="#666"
-            android:textSize="20dp" />
+            android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/alert_popup_title"
-            android:layout_marginTop="5dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btn_alert_ok"
+            <TextView
+                android:id="@+id/alert_popup_title"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginRight="2dp"
-                android:layout_weight="1"
-                android:background="@drawable/btn_alert"
-                android:text="好 的"
-                android:textColor="#fff"
-                android:textSize="16dp" />
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="滑动切换已关闭，是否开启？"
+                android:textColor="#666"
+                android:textSize="20dp" />
 
-            <Button
-                android:id="@+id/btn_alert_cancle"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginLeft="2dp"
-                android:layout_weight="1"
-                android:background="@drawable/btn_alert"
-                android:text="取 消"
-                android:textColor="#fff"
-                android:textSize="16dp" />
-        </LinearLayout>
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/alert_popup_title"
+                android:orientation="horizontal">
 
-    </RelativeLayout>
+                <Button
+                    android:id="@+id/btn_alert_ok"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_alert"
+                    android:text="好 的"
+                    android:textColor="#fff"
+                    android:textSize="16dp" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:elevation="2dp"
-        android:translationZ="3dp">
+                <Button
+                    android:id="@+id/btn_alert_cancle"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_alert"
+                    android:text="取 消"
+                    android:textColor="#fff"
+                    android:textSize="16dp" />
+            </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/btn_alert_popup_up"
+        </RelativeLayout>
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="28dp"
-            android:background="@drawable/btn_web_share"
-            android:src="@drawable/ic_btn_menu_up_white" />
-    </RelativeLayout>
+            android:layout_height="wrap_content">
 
+            <ImageButton
+                android:id="@+id/btn_alert_popup_up"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:background="@drawable/alert_exit_o_gray"
+                android:src="@drawable/ic_btn_menu_up_primary" />
+        </RelativeLayout>
+    </LinearLayout>
 </LinearLayout>

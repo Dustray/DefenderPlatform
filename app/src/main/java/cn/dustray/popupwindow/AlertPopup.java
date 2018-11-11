@@ -111,7 +111,7 @@ public class AlertPopup extends PopupWindow implements View.OnClickListener {
                             dismiss();
                             canTouch = false;
                         } else if (motionEvent.getY()-downY >100 ) {//锁定
-                            btnExit.setImageResource(R.drawable.ic_btn_lock_white);
+                            btnExit.setImageResource(R.drawable.ic_btn_lock_primary);
                             isTouching = true;
                         }
                     }
@@ -129,9 +129,10 @@ public class AlertPopup extends PopupWindow implements View.OnClickListener {
         this.setFocusable(false);
         this.setOutsideTouchable(false);
         this.setTouchable(true);
-        this.setElevation(15);
+        //this.setElevation(15);
         this.update();
-        ColorDrawable dw = new ColorDrawable(Color.WHITE);        //设置SelectPicPopupWindow弹出窗体的背景
+        ColorDrawable dw = new ColorDrawable(Color.WHITE);
+        dw.setAlpha(0);//设置SelectPicPopupWindow弹出窗体的背景
         this.setBackgroundDrawable(dw);
 
 
@@ -139,7 +140,7 @@ public class AlertPopup extends PopupWindow implements View.OnClickListener {
         new Thread() {//使用Thread
             public void run() {
                 try {
-                    Thread.sleep(3000);//延迟1000毫秒
+                    Thread.sleep(4000);//延迟1000毫秒
                     if (!isTouching) {
                         Message msg = new Message();
                         msg.what = 0;

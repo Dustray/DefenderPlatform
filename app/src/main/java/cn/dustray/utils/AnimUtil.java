@@ -15,7 +15,7 @@ public class AnimUtil {
     private Interpolator interpolator = new LinearInterpolator();
 
     public AnimUtil() {
-        duration = 1000; //默认动画时常1s
+        duration = 300; //默认动画时常1s
         start = 0.0f;
         end = 1.0f;
         interpolator = new LinearInterpolator();// 匀速的插值器
