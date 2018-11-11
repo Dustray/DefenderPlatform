@@ -71,8 +71,9 @@ public class WebSharePopup extends xWebPopupWindow implements View.OnClickListen
         btnExit.setOnClickListener(this);
     }
 
-
+    @Override
     public void showAtBottom(View view) {
+        super.showAtBottom(view);
         //弹窗位置设置
         if (url == null)
             throw new NullPointerException("WebSharePopup URL为空");
@@ -93,7 +94,7 @@ public class WebSharePopup extends xWebPopupWindow implements View.OnClickListen
             case R.id.btn_web_share_chat:
                 if (textOnly) {//发送文本格式
                     ((MainActivity) context).chatFragment.sendMessage(url);
-                }else {//发送网页格式
+                } else {//发送网页格式
                     String shareContent = "[" + title + "] " + url;
                     LinkEntity entity = new LinkEntity(title, "描述", url);
                     ((MainActivity) context).chatFragment.sendMessage(entity);

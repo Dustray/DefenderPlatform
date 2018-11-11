@@ -2,10 +2,10 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="false">
         <shape android:useLevel="false">
-            <gradient android:endColor="#fff" android:startColor="#fdfdfd" android:type="linear" />
+            <gradient android:endColor="#fff" android:startColor="#fff" android:type="linear" />
             <!--<padding android:bottom="10dip" android:left="10dip" android:right="10dip" android:top="10dip" />-->
             <corners android:bottomLeftRadius="10dip" android:bottomRightRadius="10dip" android:topLeftRadius="10dip" android:topRightRadius="0dip" />
-            <stroke android:width="1dp" android:color="#eee" />
+            <stroke android:width="0dp" android:color="#eee" />
         </shape>
     </item>
     <item android:state_pressed="true">

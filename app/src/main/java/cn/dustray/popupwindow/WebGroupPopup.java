@@ -62,7 +62,9 @@ public class WebGroupPopup extends xWebPopupWindow implements View.OnClickListen
         webGroupList.setAdapter(webGroupAdapter);
     }
 
+    @Override
     public void showAtBottom(View view) {        //弹窗位置设置
+        super.showAtBottom(view);
         webGroupAdapter.notifyDataSetChanged();
         showAtLocation(view, Gravity.BOTTOM, 0, 0);
     }
