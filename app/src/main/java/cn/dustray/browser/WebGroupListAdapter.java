@@ -3,6 +3,7 @@ package cn.dustray.browser;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,28 +40,31 @@ public class WebGroupListAdapter extends RecyclerView.Adapter<WebGroupListAdapte
 
     @Override
     public void onBindViewHolder(Holder holder, final int position) {
-        holder.setIsRecyclable(false);//混乱临时解决办法
+        //holder.setIsRecyclable(false);//混乱临时解决办法
         final WebTabFragment s = list.get(position);
         s.generateSnapshot();
         holder.captureImage.setImageBitmap(s.getSnapshot());
         holder.captureImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity) context).browserFragment.loadFragment(s);
+                ((MainActivity) context).browserFragment.loadFragment(s,true);
             }
         });
         holder.closeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 notifyItemRemoved(position);
                 s.onDestroy();
                 list.remove(position);
                 notifyItemRangeChanged(0, list.size());
+                //Log.i("def","ss"+list.size());
                 if (list.size() == 0) {
                     frag.dismiss();
+                    //Log.i("def","ssdismiss");
                     ((MainActivity) context).browserFragment.createNewFragment();
                 } else {
-                    ((MainActivity) context).browserFragment.loadFragment(list.get(list.size() - 1));
+                    ((MainActivity) context).browserFragment.loadFragment(list.get(list.size() - 1),false);
                 }
                 ((MainActivity) context).browserFragment.refreshGroupIcon();
             }

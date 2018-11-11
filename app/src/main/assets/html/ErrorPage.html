@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    .head_frame {
+        overflow: hidden;
+    }
+
+    .head_frame>h2 {
+        color: rgb(230, 0, 0);
+        float: left;
+    }
+
+    .head_frame>.go_back_btn {
+        background: #eee;
+        border: 0;
+        margin: 20px 0;
+        border-radius: 6px;
+        padding: 8px 15px;
+        float: right;
+    }
+
+    .head_frame>.go_back_btn:hover {
+        background: #ddd;
+    }
+
+    p {
+        color: #666;
+    }
+</style>
+
+<body>
+<div class="head_frame">
+    <h2>ERROR</h2>
+    <input class="go_back_btn" value="返回" type="button" onclick="goback()" />
+</div>
+<hr/>
+<div>
+    <p>页面出现错误</p>
+</div>
+</body>
+<script>
+    function goback() {
+        window.history.go(-1);
+    }
+</script>
+
+</html>

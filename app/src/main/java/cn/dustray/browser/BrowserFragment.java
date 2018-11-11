@@ -107,7 +107,6 @@ public class BrowserFragment extends Fragment implements View.OnClickListener, W
         transaction.add(R.id.web_main_frag, webFrag);
         transaction.commit();
         webFragArray.add(webFrag);
-
         refreshGroupIcon();
     }
 
@@ -171,8 +170,8 @@ public class BrowserFragment extends Fragment implements View.OnClickListener, W
         initFragment(Url);
     }
 
-    public void loadFragment(WebTabFragment fragment) {
-        if (webGroupPopup != null) {
+    public void loadFragment(WebTabFragment fragment, boolean closePopup) {
+        if (closePopup && webGroupPopup != null) {
             webGroupPopup.dismiss();
         }
         switchContent(webFrag, fragment);

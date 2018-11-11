@@ -74,6 +74,7 @@ public class WebGroupPopup extends xWebPopupWindow implements View.OnClickListen
         switch (view.getId()) {
             case R.id.btn_web_add:
                 ((MainActivity) context).browserFragment.createNewFragment();
+                webGroupList.scrollToPosition(list.size() - 1);
                 //webGroupAdapter.saveToFile();
                 break;
             case R.id.btn_web_closeall:

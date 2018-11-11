@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:layout_centerInParent="true"
     android:layout_margin="5dp"
-    android:elevation="3dp"
-    android:translationZ="1dp">
+    app:cardCornerRadius="10dp"
+    app:cardElevation="3dp">
 
     <ImageButton
         android:id="@+id/web_card_item_image"
@@ -13,7 +14,7 @@
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
         android:adjustViewBounds="true"
-        android:background="@color/colorPrimary"
+        android:background="#0000"
         android:scaleType="centerCrop" />
 
     <ImageButton
@@ -26,6 +27,5 @@
         android:elevation="5dp"
         android:padding="6dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/ic_btn_close_black"
-         />
+        android:src="@drawable/ic_btn_close_black" />
 </android.support.v7.widget.CardView>

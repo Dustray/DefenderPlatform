@@ -194,7 +194,7 @@ public class xWebView extends WebView {
         @Override
         public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
             super.onReceivedError(view, errorCode, description, failingUrl);
-            webView.loadUrl("file:///android_asset/html/HomePage.html");
+            webView.loadUrl("file:///android_asset/html/ErrorPage.html");
         }
         @Override
         public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
