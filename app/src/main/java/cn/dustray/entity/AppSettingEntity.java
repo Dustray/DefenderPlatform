@@ -11,11 +11,19 @@ public class AppSettingEntity {
     public final static String FULL_SCREEN = "pref_full_screen";
     public final static String NIGHT_MODE = "pref_night_mode";
     public final static String RATOTE = "pref_ratote";
-    private static boolean scrollFlag=true;
-    private static boolean fullScreenFlag;
-    private static boolean nightModeFlag;
-    private static boolean ratoteFlag;
+    private static boolean scrollFlag = true;
+    private static boolean fullScreenFlag = false;
+    private static boolean nightModeFlag = false;
+    private static boolean ratoteFlag = false;
     private static SharedPreferences mSharedPreferences;
+
+    public void refreshAll(Context context) {
+        isFullScreenFlag(context);
+        isNightModeFlag(context);
+        isRatoteFlag(context);
+        isScrollFlag(context);
+    }
+
     /**
      * 获取滑动锁定状态(不安全)
      *
@@ -24,6 +32,7 @@ public class AppSettingEntity {
     public static boolean getScrollFlag() {
         return scrollFlag;
     }
+
     /**
      * 获取滑动锁定状态
      *

@@ -14,7 +14,6 @@ import cn.dustray.utils.SettingUtil;
 import cn.dustray.utils.xToast;
 
 public class xViewPager extends ViewPager {
-    private boolean lockRollFlag = true;
     int height=0;
     private Context context;
     public xViewPager(@NonNull Context context) {
@@ -38,36 +37,19 @@ public class xViewPager extends ViewPager {
 
     }
 
-    /**
-     * 切换是否能滑动换页
-     */
-    public boolean changeScrollFlag() {
-        return lockRollFlag=SettingUtil.Scroll.changeScrollFlag(getContext());
-    }
-
-
-    public void setScrollFlagOnly(boolean s) {
-        lockRollFlag = s;
-    }
-    public void setScrollFlag(boolean s) {
-        lockRollFlag = s;
-        SettingUtil.Scroll.setScrollFlag(getContext(),s);
-        xToast.toast(getContext(), "滑动切换已开启");
-    }
-
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         if(getCurrentItem()==1&&height-ev.getY()<450){
             //xToast.toast(context,"ss"+height+"d"+ev.getY());
             return false;
         }
-        return lockRollFlag && super.onInterceptTouchEvent(ev);
+        return SettingUtil.Scroll.getScrollFlagOnly() && super.onInterceptTouchEvent(ev);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
 
-        return lockRollFlag && super.onTouchEvent(ev);
+        return SettingUtil.Scroll.getScrollFlagOnly() && super.onTouchEvent(ev);
 
     }
 

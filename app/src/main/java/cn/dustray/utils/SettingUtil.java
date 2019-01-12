@@ -10,6 +10,7 @@ public class SettingUtil {
     //todo 检测并刷新加载
     public static void detectAndRefresh(Activity activity) {
         FullScreen.changeToFullScreen(activity);//刷新全屏设置
+        Scroll.getScrollFlag(activity);
     }
 
     public static void refreshFullScreen(Activity activity) {
@@ -71,12 +72,37 @@ public class SettingUtil {
             return AppSettingEntity.getScrollFlag();
         }
 
+        /**
+         * 仅获取内存中的标志位，不从Preference中取得
+         *
+         * @return
+         */
+        public static boolean getScrollFlagOnly() {
+            return AppSettingEntity.getScrollFlag();
+        }
+
+        /**
+         * 从Preference中取得标志位
+         *
+         * @param context
+         * @return
+         */
         public static boolean getScrollFlag(Context context) {
             return AppSettingEntity.isScrollFlag(context);
         }
 
+        /**
+         * 设置Preference标志位
+         *
+         * @param context
+         * @param s
+         */
         public static void setScrollFlag(Context context, boolean s) {
             AppSettingEntity.setScrollFlag(context, s);
         }
+    }
+
+    public static class NightMode {
+
     }
 }

@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity
         ChatFragment.OnFragmentInteractionListener,
         BrowserFragment.OnFragmentInteractionListener,
         ChatToolFragment.OnListFragmentInteractionListener,
-        WebTabFragment.OnFragmentInteractionListener ,
+        WebTabFragment.OnFragmentInteractionListener,
         WebGroupPopup.OnPopupInteractionListener,
         WebMenuPopup.OnPopupInteractionListener {
 
@@ -95,13 +95,13 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-
     public boolean getPageScrollState() {
         return SettingUtil.Scroll.getScrollFlag(this);
     }
 
     public void setPageScrollState(boolean s) {
-        mainPage.setScrollFlag(s);
+        SettingUtil.Scroll.setScrollFlag(this, s);
+        xToast.toast(this, "滑动切换已开启");
     }
 
     public void switchToChat() {
@@ -237,7 +237,6 @@ public class MainActivity extends AppCompatActivity
         super.onResume();
         //检测设置并刷新
         SettingUtil.detectAndRefresh(this);
-        mainPage.setScrollFlagOnly(SettingUtil.Scroll.getScrollFlag(this));
     }
 
     @Override
@@ -296,6 +295,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onChangePageScroll() {
-        mainPage.changeScrollFlag();
+        SettingUtil.Scroll.changeScrollFlag(this);
     }
 }
