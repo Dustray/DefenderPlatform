@@ -1,6 +1,7 @@
 package cn.dustray.defenderplatform;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.Application;
 import android.app.SearchManager;
 import android.content.Context;
@@ -36,6 +37,9 @@ import cn.dustray.browser.WebTabFragment;
 import cn.dustray.chat.ChatFragment;
 import cn.dustray.chat.ChatToolFragment;
 import cn.dustray.control.xViewPager;
+import cn.dustray.popupwindow.WebGroupPopup;
+import cn.dustray.popupwindow.WebMenuPopup;
+import cn.dustray.utils.SettingUtil;
 import cn.dustray.utils.xToast;
 
 public class MainActivity extends AppCompatActivity
@@ -43,7 +47,9 @@ public class MainActivity extends AppCompatActivity
         ChatFragment.OnFragmentInteractionListener,
         BrowserFragment.OnFragmentInteractionListener,
         ChatToolFragment.OnListFragmentInteractionListener,
-        WebTabFragment.OnFragmentInteractionListener {
+        WebTabFragment.OnFragmentInteractionListener ,
+        WebGroupPopup.OnPopupInteractionListener,
+        WebMenuPopup.OnPopupInteractionListener {
 
     private TabLayout titleTab;
     private xViewPager mainPage;
@@ -88,12 +94,10 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    public boolean changePageScroll() {
-        return mainPage.changeScrollFlag();
-    }
+
 
     public boolean getPageScrollState() {
-        return mainPage.getScrollFlag();
+        return SettingUtil.Scroll.getScrollFlag(this);
     }
 
     public void setPageScrollState(boolean s) {
@@ -229,6 +233,14 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        //检测设置并刷新
+        SettingUtil.detectAndRefresh(this);
+        mainPage.setScrollFlagOnly(SettingUtil.Scroll.getScrollFlag(this));
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         System.exit(0);
@@ -269,4 +281,21 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    /**
+     * 新建Tab页
+     */
+    @Override
+    public void onCreateNewFragment() {
+        browserFragment.createNewFragment();
+    }
+
+    @Override
+    public void onCleanCache() {
+        browserFragment.cleanCache();
+    }
+
+    @Override
+    public void onChangePageScroll() {
+        mainPage.changeScrollFlag();
+    }
 }

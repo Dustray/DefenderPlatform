@@ -2,9 +2,24 @@
 
     <SwitchPreference
         android:defaultValue="true"
-        android:key="example_switch"
-        android:summary="@string/pref_description_social_recommendations"
-        android:title="@string/pref_title_social_recommendations" />
+        android:key="pref_scroll_change"
+        android:summary="@string/pref_description_scroll_change"
+        android:title="@string/pref_title_scroll_change" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="pref_full_screen"
+        android:summary="@string/pref_description_full_screen"
+        android:title="@string/pref_title_full_screen" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="pref_night_mode"
+        android:summary="@string/pref_description_night_mode"
+        android:title="@string/pref_title_night_mode" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="pref_ratote"
+        android:summary="@string/pref_description_ratote"
+        android:title="@string/pref_title_ratote" />
 
     <!-- NOTE: EditTextPreference accepts EditText attributes. -->
     <!-- NOTE: EditTextPreference's summary should be set to its value by the activity code. -->

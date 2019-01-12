@@ -20,8 +20,17 @@
     <!-- Example General settings -->
     <string name="pref_header_general">通用</string>
 
-    <string name="pref_title_social_recommendations">启用社交推荐</string>
-    <string name="pref_description_social_recommendations">根据您的消息历史记录建议联系人
+    <string name="pref_title_scroll_change">滑动切换主页</string>
+    <string name="pref_description_scroll_change">关闭后将只能通过页面上方按钮切换功能页
+    </string>
+    <string name="pref_title_full_screen">应用全屏</string>
+    <string name="pref_description_full_screen">应用设置为全屏
+    </string>
+    <string name="pref_title_night_mode">夜间模式</string>
+    <string name="pref_description_night_mode">启用夜间模式
+    </string>
+    <string name="pref_title_ratote">屏幕旋转</string>
+    <string name="pref_description_ratote">启用屏幕旋转
     </string>
 
     <string name="pref_title_display_name">显示名称</string>
@@ -40,8 +49,11 @@
     </string-array>
 
     <!-- Example settings for Data & Sync -->
-    <string name="pref_header_data_sync">日期 &amp; 同步</string>
+    <string name="pref_header_web">浏览器</string>
 
+    <string name="pref_title_nopic_mode">无图模式</string>
+    <string name="pref_description_nopic_mode">开启后浏览器将不显示图片
+    </string>
     <string name="pref_title_sync_frequency">同步频率</string>
     <string-array name="pref_sync_frequency_titles">
         <item>15 minutes</item>
@@ -77,7 +89,7 @@
     <string name="pref_title_system_sync_settings">系统同步设置</string>
 
     <!-- Example settings for Notifications -->
-    <string name="pref_header_notifications">通知</string>
+    <string name="pref_header_chat">聊天</string>
 
     <string name="pref_title_new_message_notifications">新消息通知</string>
 

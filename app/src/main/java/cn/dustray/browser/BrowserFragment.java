@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.dustray.defenderplatform.R;
+import cn.dustray.entity.AppSettingEntity;
 import cn.dustray.popupwindow.WebGroupPopup;
 import cn.dustray.popupwindow.WebMenuPopup;
 import cn.dustray.popupwindow.WebSharePopup;
@@ -288,25 +289,7 @@ public class BrowserFragment extends Fragment implements View.OnClickListener, W
     }
 
 
-    public void changeToFullScreen() {
-        if (!isFullScreen) {//设置为非全屏
-            WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
-            lp.flags &= (~WindowManager.LayoutParams.FLAG_FULLSCREEN);
-            getActivity().getWindow().setAttributes(lp);
-            getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        } else {//设置为全屏
-            WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
-            lp.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
-            getActivity().getWindow().setAttributes(lp);
-            getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        }
-    }
 
-    public boolean changeFullScreen() {
-        this.isFullScreen = !isFullScreen;
-        changeToFullScreen();
-        return isFullScreen;
-    }
 
     public boolean changeNoPicMode() {
         this.isNoPicMode = !isNoPicMode;
@@ -331,10 +314,6 @@ public class BrowserFragment extends Fragment implements View.OnClickListener, W
         this.isNightMode = !isNightMode;
         changeToNightMode();
         return isNightMode;
-    }
-
-    public boolean isFullScreen() {
-        return isFullScreen;
     }
 
     public boolean isNoPicMode() {

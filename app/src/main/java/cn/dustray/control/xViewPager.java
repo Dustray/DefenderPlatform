@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 import android.view.WindowManager;
 
 import cn.dustray.defenderplatform.MainActivity;
+import cn.dustray.utils.SettingUtil;
 import cn.dustray.utils.xToast;
 
 public class xViewPager extends ViewPager {
@@ -41,25 +42,16 @@ public class xViewPager extends ViewPager {
      * 切换是否能滑动换页
      */
     public boolean changeScrollFlag() {
-        if (lockRollFlag) {
-            lockRollFlag = false;
-            xToast.toast(getContext(), "滑动切换已关闭");
-        } else {
-            lockRollFlag = true;
-            xToast.toast(getContext(), "滑动切换已开启");
-        }
-
-
-        return lockRollFlag;
+        return lockRollFlag=SettingUtil.Scroll.changeScrollFlag(getContext());
     }
 
-    public boolean getScrollFlag() {
 
-        return lockRollFlag;
+    public void setScrollFlagOnly(boolean s) {
+        lockRollFlag = s;
     }
-
     public void setScrollFlag(boolean s) {
         lockRollFlag = s;
+        SettingUtil.Scroll.setScrollFlag(getContext(),s);
         xToast.toast(getContext(), "滑动切换已开启");
     }
 

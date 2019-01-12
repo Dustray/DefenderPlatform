@@ -23,10 +23,12 @@ public class WebGroupPopup extends xWebPopupWindow implements View.OnClickListen
     private WebGroupListAdapter webGroupAdapter;
     private List<WebTabFragment> list;
     private ImageButton btnWebAdd, btnWebCloseAll, btnExit;
+    private OnPopupInteractionListener mListener;
 
     public WebGroupPopup(Context context, List<WebTabFragment> list) {
         super(context);
         this.context = context;
+        mListener = (OnPopupInteractionListener) context;
         this.list = list;
         init();
 
@@ -73,7 +75,8 @@ public class WebGroupPopup extends xWebPopupWindow implements View.OnClickListen
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_web_add:
-                ((MainActivity) context).browserFragment.createNewFragment();
+                //((MainActivity) context).browserFragment.createNewFragment();
+                mListener.onCreateNewFragment();//新建
                 webGroupList.scrollToPosition(list.size() - 1);
                 //webGroupAdapter.saveToFile();
                 break;
@@ -84,5 +87,9 @@ public class WebGroupPopup extends xWebPopupWindow implements View.OnClickListen
                 break;
         }
         dismiss();
+    }
+
+    public interface OnPopupInteractionListener {
+        void onCreateNewFragment();
     }
 }

@@ -1,6 +1,7 @@
 package cn.dustray.defenderplatform;
 
 import android.annotation.TargetApi;
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -12,14 +13,20 @@ import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.SwitchPreference;
 import android.support.v7.app.ActionBar;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 
 import java.util.List;
+
+import cn.dustray.entity.AppSettingEntity;
+import cn.dustray.utils.SettingUtil;
+import cn.dustray.utils.xToast;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -41,9 +48,11 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {
+
             String stringValue = value.toString();
 
             if (preference instanceof ListPreference) {
+
                 // For list preferences, look up the correct display value in
                 // the preference's 'entries' list.
                 ListPreference listPreference = (ListPreference) preference;
@@ -55,7 +64,9 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                                 ? listPreference.getEntries()[index]
                                 : null);
 
+
             } else if (preference instanceof RingtonePreference) {
+
                 // For ringtone preferences, look up the correct display value
                 // using RingtoneManager.
                 if (TextUtils.isEmpty(stringValue)) {
@@ -78,13 +89,17 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 }
 
             } else {
+
                 // For all other preferences, set the summary to the value's
                 // simple string representation.
                 preference.setSummary(stringValue);
             }
+
             return true;
         }
+
     };
+
 
     /**
      * Helper method to determine if the device has an extra-large screen. For
@@ -167,11 +182,12 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {
-           finish();
+            finish();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
     /**
      * This fragment shows general preferences only. It is used when the
      * activity is showing a two-pane settings UI.

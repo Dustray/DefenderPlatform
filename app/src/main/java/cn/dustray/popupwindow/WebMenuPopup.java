@@ -11,6 +11,7 @@ import cn.dustray.control.xWebPopupWindow;
 import cn.dustray.defenderplatform.MainActivity;
 import cn.dustray.defenderplatform.R;
 import cn.dustray.browser.BrowserFragment;
+import cn.dustray.utils.SettingUtil;
 
 public class WebMenuPopup extends xWebPopupWindow implements View.OnClickListener {
 
@@ -19,10 +20,13 @@ public class WebMenuPopup extends xWebPopupWindow implements View.OnClickListene
     private ImageButton btnHome, btnRefresh, btnRollLock, btnExit, btnClean;
     private TextView textFullScreen, textNoPicure, textRotate, textNightMode;
     private BrowserFragment browserFragment;
+    private OnPopupInteractionListener mListener;
 
     public WebMenuPopup(Context context) {
         super(context);
         this.context = context;
+        mListener = (OnPopupInteractionListener) context;
+
         browserFragment = ((MainActivity) context).browserFragment;
         initalize();
     }
@@ -84,7 +88,7 @@ public class WebMenuPopup extends xWebPopupWindow implements View.OnClickListene
             btnRollLock.setImageResource(R.drawable.ic_btn_roll_lock_black);
         }
         //全屏模式
-        if (browserFragment.isFullScreen()) {//已打开
+        if (SettingUtil.FullScreen.isFullScreen(context)) {//已打开
             btnFullScreen.setImageResource(R.drawable.ic_btn_fullscreenoff_gray);
             textFullScreen.setText("全屏/开");
         } else {//已关闭
@@ -125,7 +129,8 @@ public class WebMenuPopup extends xWebPopupWindow implements View.OnClickListene
         switch (view.getId()) {
             //第一组
             case R.id.btn_web_menu_fullscreen:
-                browserFragment.changeFullScreen();
+                //    browserFragment.changeFullScreen();
+                SettingUtil.FullScreen.changeFullScreen((MainActivity) context);
                 break;
             case R.id.btn_web_menu_nopic:
                 browserFragment.changeNoPicMode();
@@ -146,15 +151,21 @@ public class WebMenuPopup extends xWebPopupWindow implements View.OnClickListene
                 browserFragment.refresh();
                 break;
             case R.id.btn_web_menu_rolllock:
-                ((MainActivity) context).changePageScroll();
+                //((MainActivity) context).changePageScroll();
+                mListener.onChangePageScroll();
                 break;
             case R.id.btn_web_menu_down:
                 break;
             case R.id.btn_web_menu_clean:
-                ((MainActivity) context).browserFragment.cleanCache();
+                //((MainActivity) context).browserFragment.cleanCache();
+                mListener.onCleanCache();
                 break;
         }
         dismiss();
     }
 
+    public interface OnPopupInteractionListener {
+        void onCleanCache();
+        void onChangePageScroll();
+    }
 }
