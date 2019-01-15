@@ -17,6 +17,10 @@ public class AppSettingEntity {
     private static boolean ratoteFlag = false;
     private static SharedPreferences mSharedPreferences;
 
+    /**
+     * 刷新所有缓存
+     * @param context
+     */
     public void refreshAll(Context context) {
         isFullScreenFlag(context);
         isNightModeFlag(context);
@@ -109,6 +113,16 @@ public class AppSettingEntity {
         PreferenceUtil.writeSharedPrefs(context, NIGHT_MODE, _nightModeFlag);
     }
 
+
+    /**
+     * 获取旋转状态(不安全)
+     *
+     * @return
+     */
+    public static boolean getRatoteFlag() {
+        return ratoteFlag;
+    }
+
     /**
      * 获取旋转锁定状态
      *
@@ -131,16 +145,24 @@ public class AppSettingEntity {
         PreferenceUtil.writeSharedPrefs(context, RATOTE, _ratoteFlag);
     }
 
-    public class WebSetting {
-        private boolean noPicModeFlag;
+    public static class WebSetting {
+        public final static String NOPIC_MODE = "pref_nopic_mode";
+        private static boolean noPicModeFlag=false;
 
-        public boolean isNoPicModeFlag() {
+        public static boolean getNoPicMode() {
             return noPicModeFlag;
         }
 
-        public void setNoPicModeFlag(boolean noPicModeFlag) {
-            this.noPicModeFlag = noPicModeFlag;
+        public static boolean isNoPicMode(Context context) {
+            mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+            return noPicModeFlag = mSharedPreferences.getBoolean(NOPIC_MODE, false);
         }
+
+        public static void setNoPicMode(Context context,boolean _noPicModeFlag) {
+            noPicModeFlag = _noPicModeFlag;
+            PreferenceUtil.writeSharedPrefs(context, NOPIC_MODE, _noPicModeFlag);
+        }
+
     }
 
     public class ChatSetting {

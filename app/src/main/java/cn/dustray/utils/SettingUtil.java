@@ -2,6 +2,7 @@ package cn.dustray.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.view.WindowManager;
 
 import cn.dustray.entity.AppSettingEntity;
@@ -11,6 +12,7 @@ public class SettingUtil {
     public static void detectAndRefresh(Activity activity) {
         FullScreen.changeToFullScreen(activity);//刷新全屏设置
         Scroll.getScrollFlag(activity);
+        Ratote.getRatoteFlag(activity);
     }
 
     public static void refreshFullScreen(Activity activity) {
@@ -69,7 +71,7 @@ public class SettingUtil {
                 setScrollFlag(context, true);
                 xToast.toast(context, "滑动切换已开启");
             }
-            return AppSettingEntity.getScrollFlag();
+            return getScrollFlagOnly();
         }
 
         /**
@@ -104,5 +106,55 @@ public class SettingUtil {
 
     public static class NightMode {
 
+    }
+
+    public static class Ratote {
+        public static boolean changeRatoteFlag(Activity activity) {
+            if (getRatoteFlag(activity)) {
+                setRatoteFlag(activity, false);
+                activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            } else {
+                setRatoteFlag(activity, true);
+                activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+            }
+
+            return getRatoteFlagOnly();
+        }
+
+        public static boolean getRatoteFlagOnly() {
+            return AppSettingEntity.getRatoteFlag();
+        }
+
+        public static boolean getRatoteFlag(Context context) {
+            return AppSettingEntity.isRatoteFlag(context);
+        }
+
+        public static void setRatoteFlag(Context context, boolean s) {
+            AppSettingEntity.setRatoteFlag(context, s);
+        }
+    }
+
+    public static class NoPicMode {
+        public static boolean changeNoPicMode(Context context) {
+            if (getNoPicMode(context)) {
+                setNoPicMode(context, false);
+            } else {
+                setNoPicMode(context, true);
+            }
+
+            return getNoPicModeOnly();
+        }
+
+        public static boolean getNoPicModeOnly() {
+            return AppSettingEntity.WebSetting.getNoPicMode();
+        }
+
+        public static boolean getNoPicMode(Context context) {
+            return AppSettingEntity.WebSetting.isNoPicMode(context);
+        }
+
+        public static void setNoPicMode(Context context, boolean s) {
+            AppSettingEntity.WebSetting.setNoPicMode(context, s);
+        }
     }
 }

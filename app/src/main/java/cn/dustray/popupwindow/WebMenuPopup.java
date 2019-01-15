@@ -97,7 +97,7 @@ public class WebMenuPopup extends xWebPopupWindow implements View.OnClickListene
         }
 
         //无图模式
-        if (browserFragment.isNoPicMode()) {//已打开
+        if (SettingUtil.NoPicMode.getNoPicMode(context)) {//已打开
             btnNoPicture.setImageResource(R.drawable.ic_btn_picturemodeoff_gray);
             textNoPicure.setText("无图/开");
         } else {//已关闭
@@ -106,7 +106,7 @@ public class WebMenuPopup extends xWebPopupWindow implements View.OnClickListene
         }
 
         //旋转模式
-        if (browserFragment.isRatote()) {//已打开
+        if (SettingUtil.Ratote.getRatoteFlag(context)) {//已打开
             btnRotate.setImageResource(R.drawable.ic_btn_rotateoff_gray);
             textRotate.setText("旋转/开");
         } else {//已关闭
@@ -136,7 +136,8 @@ public class WebMenuPopup extends xWebPopupWindow implements View.OnClickListene
                 browserFragment.changeNoPicMode();
                 break;
             case R.id.btn_web_menu_rotate:
-                browserFragment.changeRatote();
+                //    browserFragment.changeRatote();
+                SettingUtil.Ratote.changeRatoteFlag((MainActivity) context);
                 break;
             case R.id.btn_web_menu_capture:
                 break;

@@ -44,9 +44,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="32b7c26a-14bf-42cd-bc38-6a0982cc9987" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/cn/dustray/control/xViewPager.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cn/dustray/control/xViewPager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/cn/dustray/browser/BrowserFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cn/dustray/browser/BrowserFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/cn/dustray/entity/AppSettingEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cn/dustray/entity/AppSettingEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/cn/dustray/popupwindow/WebMenuPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cn/dustray/popupwindow/WebMenuPopup.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/cn/dustray/utils/SettingUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cn/dustray/utils/SettingUtil.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -83,11 +92,10 @@
       <file leaf-file-name="BrowserFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/browser/BrowserFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="672">
-              <caret line="291" selection-start-line="291" selection-end-line="291" />
+            <state relative-caret-position="-1546">
+              <caret line="42" selection-start-line="42" selection-end-line="42" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1464#1480#0" expanded="true" />
                 <element signature="e#3625#3626#0" expanded="true" />
                 <element signature="e#3663#3664#0" expanded="true" />
                 <element signature="e#4144#4145#0" expanded="true" />
@@ -104,41 +112,21 @@
                 <element signature="e#5292#5293#0" expanded="true" />
                 <element signature="e#9098#9099#0" expanded="true" />
                 <element signature="e#9134#9135#0" expanded="true" />
-                <element signature="e#11528#11529#0" expanded="true" />
-                <element signature="e#11562#11563#0" expanded="true" />
-                <element signature="e#11595#11596#0" expanded="true" />
-                <element signature="e#11626#11627#0" expanded="true" />
-                <element signature="e#11662#11663#0" expanded="true" />
-                <element signature="e#11696#11697#0" expanded="true" />
-                <element signature="e#15148#15149#0" expanded="true" />
-                <element signature="e#15186#15187#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="222">
-              <caret line="103" column="25" selection-start-line="103" selection-start-column="25" selection-end-line="103" selection-end-column="25" />
+            <state relative-caret-position="850">
+              <caret line="267" column="19" selection-start-line="267" selection-start-column="19" selection-end-line="267" selection-end-column="19" />
               <folding>
-                <element signature="e#2987#3018#0" expanded="true" />
-                <element signature="e#3020#3052#0" expanded="true" />
-                <element signature="e#3764#3765#0" expanded="true" />
-                <element signature="e#3811#3812#0" expanded="true" />
-                <element signature="e#3935#3936#0" expanded="true" />
-                <element signature="e#3977#3978#0" expanded="true" />
-                <element signature="e#4010#4011#0" expanded="true" />
-                <element signature="e#4052#4053#0" expanded="true" />
-                <element signature="e#6142#6384#0" expanded="true" />
-                <element signature="e#6383#6384#0" expanded="true" />
-                <element signature="e#8918#8919#0" expanded="true" />
-                <element signature="e#8955#8956#0" expanded="true" />
-                <element signature="e#9465#9466#0" expanded="true" />
-                <element signature="e#9509#9510#0" expanded="true" />
-                <element signature="e#9685#9686#0" expanded="true" />
-                <element signature="e#9728#9729#0" expanded="true" />
+                <element signature="e#2986#3017#0" expanded="true" />
+                <element signature="e#3019#3051#0" expanded="true" />
+                <element signature="e#6195#6437#0" expanded="true" />
+                <element signature="e#6436#6437#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -147,8 +135,8 @@
       <file leaf-file-name="WebMenuPopup.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/popupwindow/WebMenuPopup.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="222">
-              <caret line="154" column="36" selection-start-line="154" selection-start-column="36" selection-end-line="154" selection-end-column="36" />
+            <state relative-caret-position="212">
+              <caret line="135" column="41" selection-start-line="135" selection-start-column="41" selection-end-line="135" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -157,21 +145,24 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/control/xViewPager.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="112">
-              <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
+              <caret line="38" selection-start-line="38" selection-end-line="38" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SettingUtil.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SettingUtil.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/utils/SettingUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="237">
-              <caret line="90" column="41" selection-start-line="90" selection-start-column="41" selection-end-line="90" selection-end-column="41" />
+            <state relative-caret-position="717">
+              <caret line="137" column="37" selection-start-line="137" selection-start-column="37" selection-end-line="137" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="class#FullScreen#0;class#SettingUtil#0" />
-                <element signature="e#2649#2650#0" expanded="true" />
-                <element signature="e#2712#2713#0" expanded="true" />
+                <element signature="e#2617#2618#0" expanded="true" />
+                <element signature="e#2680#2681#0" expanded="true" />
+                <element signature="class#NightMode#0;class#SettingUtil#0" />
+                <element signature="e#3819#3820#0" expanded="true" />
+                <element signature="e#3882#3883#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -180,19 +171,18 @@
       <file leaf-file-name="AppSettingEntity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/entity/AppSettingEntity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-28">
-              <caret line="19" column="26" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
+            <state relative-caret-position="162">
+              <caret line="147" column="24" selection-start-line="147" selection-start-column="24" selection-end-line="147" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#790#791#0" expanded="true" />
-                <element signature="e#827#828#0" expanded="true" />
-                <element signature="e#1367#1368#0" expanded="true" />
-                <element signature="e#1404#1405#0" expanded="true" />
+                <element signature="method#refreshAll#0;class#AppSettingEntity#0" />
+                <element signature="method#isScrollFlag#0;class#AppSettingEntity#0" />
                 <element signature="method#isNightModeFlag#0;class#AppSettingEntity#0" />
                 <element signature="method#setNightModeFlag#0;class#AppSettingEntity#0" />
-                <element signature="method#isRatoteFlag#0;class#AppSettingEntity#0" />
-                <element signature="method#setRatoteFlag#0;class#AppSettingEntity#0" />
-                <element signature="class#WebSetting#0;class#AppSettingEntity#0" />
+                <element signature="e#3132#3133#0" expanded="true" />
+                <element signature="e#3165#3166#0" expanded="true" />
+                <element signature="e#3989#3990#0" expanded="true" />
+                <element signature="e#4034#4035#0" expanded="true" />
                 <element signature="class#ChatSetting#0;class#AppSettingEntity#0" />
               </folding>
             </state>
@@ -210,7 +200,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>setFatherFrag</find>
       <find>setfa</find>
       <find>layout_marginBottom=&quot;15dp&quot;</find>
       <find>getCa</find>
@@ -240,6 +229,7 @@
       <find>example</find>
       <find>已开启</find>
       <find>Log</find>
+      <find>Ratote</find>
     </findStrings>
     <replaceStrings>
       <replace>20dp</replace>
@@ -2566,15 +2556,15 @@
         <option value="$PROJECT_DIR$/app/src/main/res/xml/pref_headers.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/xml/pref_data_sync.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/utils/PreferenceUtil.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/browser/BrowserFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/SettingsActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/popupwindow/WebMenuPopup.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/xml/pref_general.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/utils/SettingUtil.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/entity/AppSettingEntity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/control/xViewPager.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/entity/AppSettingEntity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/utils/SettingUtil.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/popupwindow/WebMenuPopup.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/browser/BrowserFragment.java" />
       </list>
     </option>
   </component>
@@ -2592,6 +2582,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -2620,20 +2612,6 @@
             <path>
               <item name="DefenderPlatform" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="dustray" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="entity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DefenderPlatform" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="dustray" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DefenderPlatform" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="res" type="d4f16f75:AndroidResFolderNode" />
             </path>
             <path>
@@ -2646,8 +2624,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -2962,13 +2938,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/browser/WebTabFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="100" column="49" selection-start-line="100" selection-start-column="49" selection-end-line="100" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/popupwindow/WebSharePopup.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="325">
@@ -3208,10 +3177,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
           <caret line="83" column="22" selection-start-line="83" selection-start-column="22" selection-end-line="83" selection-end-column="22" />
-          <folding>
-            <element signature="e#2299#2300#0" expanded="true" />
-            <element signature="e#2350#2351#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3245,9 +3210,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="592">
           <caret line="39" column="5" selection-start-line="39" selection-start-column="5" selection-end-line="39" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3256,16 +3218,6 @@
         <state relative-caret-position="230">
           <caret line="21" column="23" selection-start-line="21" selection-start-column="23" selection-end-line="21" selection-end-column="23" />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/xml/pref_data_sync.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="5" column="25" lean-forward="true" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
@@ -3311,13 +3263,75 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/browser/BrowserFragment.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/control/xViewPager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="672">
-          <caret line="291" selection-start-line="291" selection-end-line="291" />
+        <state relative-caret-position="112">
+          <caret line="38" selection-start-line="38" selection-end-line="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/xml/pref_data_sync.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="5" column="36" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="36" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/entity/AppSettingEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="147" column="24" selection-start-line="147" selection-start-column="24" selection-end-line="147" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1464#1480#0" expanded="true" />
+            <element signature="method#refreshAll#0;class#AppSettingEntity#0" />
+            <element signature="method#isScrollFlag#0;class#AppSettingEntity#0" />
+            <element signature="method#isNightModeFlag#0;class#AppSettingEntity#0" />
+            <element signature="method#setNightModeFlag#0;class#AppSettingEntity#0" />
+            <element signature="e#3132#3133#0" expanded="true" />
+            <element signature="e#3165#3166#0" expanded="true" />
+            <element signature="e#3989#3990#0" expanded="true" />
+            <element signature="e#4034#4035#0" expanded="true" />
+            <element signature="class#ChatSetting#0;class#AppSettingEntity#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="850">
+          <caret line="267" column="19" selection-start-line="267" selection-start-column="19" selection-end-line="267" selection-end-column="19" />
+          <folding>
+            <element signature="e#2986#3017#0" expanded="true" />
+            <element signature="e#3019#3051#0" expanded="true" />
+            <element signature="e#6195#6437#0" expanded="true" />
+            <element signature="e#6436#6437#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/popupwindow/WebMenuPopup.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="135" column="41" selection-start-line="135" selection-start-column="41" selection-end-line="135" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/browser/WebTabFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="163">
+          <caret line="280" column="75" lean-forward="true" selection-start-line="280" selection-start-column="75" selection-end-line="280" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/browser/BrowserFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1546">
+          <caret line="42" selection-start-line="42" selection-end-line="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
             <element signature="e#3625#3626#0" expanded="true" />
             <element signature="e#3663#3664#0" expanded="true" />
             <element signature="e#4144#4145#0" expanded="true" />
@@ -3334,86 +3348,22 @@
             <element signature="e#5292#5293#0" expanded="true" />
             <element signature="e#9098#9099#0" expanded="true" />
             <element signature="e#9134#9135#0" expanded="true" />
-            <element signature="e#11528#11529#0" expanded="true" />
-            <element signature="e#11562#11563#0" expanded="true" />
-            <element signature="e#11595#11596#0" expanded="true" />
-            <element signature="e#11626#11627#0" expanded="true" />
-            <element signature="e#11662#11663#0" expanded="true" />
-            <element signature="e#11696#11697#0" expanded="true" />
-            <element signature="e#15148#15149#0" expanded="true" />
-            <element signature="e#15186#15187#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/popupwindow/WebMenuPopup.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="154" column="36" selection-start-line="154" selection-start-column="36" selection-end-line="154" selection-end-column="36" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/utils/SettingUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="90" column="41" selection-start-line="90" selection-start-column="41" selection-end-line="90" selection-end-column="41" />
+        <state relative-caret-position="717">
+          <caret line="137" column="37" selection-start-line="137" selection-start-column="37" selection-end-line="137" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="class#FullScreen#0;class#SettingUtil#0" />
-            <element signature="e#2649#2650#0" expanded="true" />
-            <element signature="e#2712#2713#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/entity/AppSettingEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-28">
-          <caret line="19" column="26" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#790#791#0" expanded="true" />
-            <element signature="e#827#828#0" expanded="true" />
-            <element signature="e#1367#1368#0" expanded="true" />
-            <element signature="e#1404#1405#0" expanded="true" />
-            <element signature="method#isNightModeFlag#0;class#AppSettingEntity#0" />
-            <element signature="method#setNightModeFlag#0;class#AppSettingEntity#0" />
-            <element signature="method#isRatoteFlag#0;class#AppSettingEntity#0" />
-            <element signature="method#setRatoteFlag#0;class#AppSettingEntity#0" />
-            <element signature="class#WebSetting#0;class#AppSettingEntity#0" />
-            <element signature="class#ChatSetting#0;class#AppSettingEntity#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/control/xViewPager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="103" column="25" selection-start-line="103" selection-start-column="25" selection-end-line="103" selection-end-column="25" />
-          <folding>
-            <element signature="e#2987#3018#0" expanded="true" />
-            <element signature="e#3020#3052#0" expanded="true" />
-            <element signature="e#3764#3765#0" expanded="true" />
-            <element signature="e#3811#3812#0" expanded="true" />
-            <element signature="e#3935#3936#0" expanded="true" />
-            <element signature="e#3977#3978#0" expanded="true" />
-            <element signature="e#4010#4011#0" expanded="true" />
-            <element signature="e#4052#4053#0" expanded="true" />
-            <element signature="e#6142#6384#0" expanded="true" />
-            <element signature="e#6383#6384#0" expanded="true" />
-            <element signature="e#8918#8919#0" expanded="true" />
-            <element signature="e#8955#8956#0" expanded="true" />
-            <element signature="e#9465#9466#0" expanded="true" />
-            <element signature="e#9509#9510#0" expanded="true" />
-            <element signature="e#9685#9686#0" expanded="true" />
-            <element signature="e#9728#9729#0" expanded="true" />
+            <element signature="e#2617#2618#0" expanded="true" />
+            <element signature="e#2680#2681#0" expanded="true" />
+            <element signature="class#NightMode#0;class#SettingUtil#0" />
+            <element signature="e#3819#3820#0" expanded="true" />
+            <element signature="e#3882#3883#0" expanded="true" />
           </folding>
         </state>
       </provider>

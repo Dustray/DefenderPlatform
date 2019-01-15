@@ -24,6 +24,7 @@ import cn.dustray.entity.AppSettingEntity;
 import cn.dustray.popupwindow.WebGroupPopup;
 import cn.dustray.popupwindow.WebMenuPopup;
 import cn.dustray.popupwindow.WebSharePopup;
+import cn.dustray.utils.SettingUtil;
 import cn.dustray.utils.WebUtil;
 import cn.dustray.utils.xToast;
 
@@ -50,9 +51,6 @@ public class BrowserFragment extends Fragment implements View.OnClickListener, W
     private WebSharePopup webSharePopup;
     private WebMenuPopup webMenuPopup;
     //浏览器配置
-    private boolean isFullScreen = false;
-    private boolean isNoPicMode = false;
-    private boolean isRatote = false;
     private boolean isNightMode = false;
 
 
@@ -104,7 +102,7 @@ public class BrowserFragment extends Fragment implements View.OnClickListener, W
         if (!Url.equals("")) {
             webFrag.setHomeUrl(Url);
         }
-        webFrag.setShowPicture(!isNoPicMode);
+        webFrag.setShowPicture(!SettingUtil.NoPicMode.getNoPicMode(getContext()));
         transaction.add(R.id.web_main_frag, webFrag);
         transaction.commit();
         webFragArray.add(webFrag);
@@ -274,12 +272,6 @@ public class BrowserFragment extends Fragment implements View.OnClickListener, W
         webFrag.cleanCache();
     }
 
-    public void setBrowserSetting(Boolean isFullScreen, Boolean isNoPicMode, Boolean isRatote, Boolean isNightMode) {
-        this.isFullScreen = (isFullScreen == null) ? this.isFullScreen : isFullScreen;
-        this.isNoPicMode = (isNoPicMode == null) ? this.isNoPicMode : isNoPicMode;
-        this.isRatote = (isRatote == null) ? this.isRatote : isRatote;
-        this.isNightMode = (isNightMode == null) ? this.isNightMode : isNightMode;
-    }
 
     //设置添加屏幕的背景透明度//不起作用
     public void changeToNightMode() {
@@ -288,40 +280,18 @@ public class BrowserFragment extends Fragment implements View.OnClickListener, W
         }
     }
 
-
-
-
     public boolean changeNoPicMode() {
-        this.isNoPicMode = !isNoPicMode;
+        boolean s = SettingUtil.NoPicMode.changeNoPicMode(getContext());
         //webFrag.setShowPicture(!this.isNoPicMode);
         for (WebTabFragment frag : webFragArray)
-            frag.setShowPicture(!this.isNoPicMode);
-        return isNoPicMode;
-    }
-
-    public boolean changeRatote() {
-        this.isRatote = !isRatote;
-        if (isRatote) {
-            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
-        } else {
-            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        }
-
-        return isRatote;
+            frag.setShowPicture(!s);
+        return SettingUtil.NoPicMode.getNoPicModeOnly();
     }
 
     public boolean changeNightMode() {
         this.isNightMode = !isNightMode;
         changeToNightMode();
         return isNightMode;
-    }
-
-    public boolean isNoPicMode() {
-        return isNoPicMode;
-    }
-
-    public boolean isRatote() {
-        return isRatote;
     }
 
     public boolean isNightMode() {
