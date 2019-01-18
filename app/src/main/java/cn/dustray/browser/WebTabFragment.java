@@ -18,19 +18,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.WindowManager;
-import android.webkit.WebChromeClient;
+import android.webkit.GeolocationPermissions;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
 import java.util.List;
 
+import cn.dustray.utils.PreferenceHelper;
 import cn.dustray.control.xWebView;
-import cn.dustray.control.xWebView.xWebViewCilent;
 import cn.dustray.defenderplatform.MainActivity;
 import cn.dustray.defenderplatform.R;
+import cn.dustray.utils.Alert;
+import cn.dustray.webfilter.FilterUtil;
+import cn.dustray.utils.PermissionUtil;
 import cn.dustray.utils.xToast;
 
 import static android.view.View.generateViewId;
@@ -58,6 +60,7 @@ public class WebTabFragment extends Fragment {
     private Bundle webState;
     private boolean showPicture = true;
     public boolean isCaptureChanged = false;
+    private PreferenceHelper spHelper;
 
     public WebTabFragment() {
         // Required empty public constructor
@@ -73,6 +76,7 @@ public class WebTabFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        spHelper = new PreferenceHelper(getActivity());
         initWebView();
     }
 
@@ -93,9 +97,17 @@ public class WebTabFragment extends Fragment {
         progressBar.setLayoutParams(params);
 
         mainWebView.getSettings().setLoadsImagesAutomatically(showPicture); // 加载图片
-        mainWebView.setWebViewClient(new xWebView.xWebViewCilent(){
+        mainWebView.setWebViewClient(new xWebView.xWebViewCilent() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                //过滤
+                FilterUtil sf = new FilterUtil(getActivity());
+                if (!spHelper.getIsNoFilter() && !sf.filterWebsite(request.getUrl().toString())) {
+                    xToast.toast(getActivity(), "已拦截，关键字：" + sf.getFilterKey());
+                    mainWebView.stopLoading();
+                    mainWebView.goBack();
+                }
+
                 //该方法在Build.VERSION_CODES.LOLLIPOP以前有效，从Build.VERSION_CODES.LOLLIPOP起，建议使用shouldOverrideUrlLoading(WebView, WebResourceRequest)}
                 boolean flag = mainWebView.openApp(request.getUrl().toString(), getActivity());
                 if (Build.VERSION.SDK_INT < 26) {
@@ -104,18 +116,24 @@ public class WebTabFragment extends Fragment {
                 return !flag;
                 //return super.shouldOverrideUrlLoading(view, request);
             }
+
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
+
+
                 progressBar.setVisibility(View.VISIBLE);
                 //隐藏toolbar
                 AppBarLayout mainAppBar = getActivity().findViewById(R.id.main_appbar);
                 mainAppBar.setExpanded(false, true);
+
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
+
+
                 if (webListener != null) {
                     webListener.onWebViewCreateFinished();
                 }
@@ -123,7 +141,7 @@ public class WebTabFragment extends Fragment {
             }
         });
 
-        mainWebView.setWebChromeClient(new WebChromeClient() {
+        mainWebView.setWebChromeClient(new xWebView.xWebChromeClient() {
 
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
@@ -139,6 +157,28 @@ public class WebTabFragment extends Fragment {
                 }
                 return true; //super.onCreateWindow(view, isDialog, isUserGesture, resultMsg);
             }
+            //定位回调函数
+            @Override
+            public void onGeolocationPermissionsShowPrompt(final String origin, final GeolocationPermissions.Callback callback) {
+               // super.onGeolocationPermissionsShowPrompt(origin, callback);
+                PermissionUtil.Location(getActivity());
+
+                final boolean remember = true;
+                Alert alert = new Alert(getActivity());
+                alert.setOnPopupAlertListener(new Alert.OnPopupAlertListener() {
+                    @Override
+                    public void onClickOk() {
+                        callback.invoke(origin, true, !remember);
+                    }
+
+                    @Override
+                    public void onClickCancel() {
+                        callback.invoke(origin, true, remember);
+                    }
+                });
+                alert.popupAlert(origin + "允许获取您的地理位置信息吗？", "本次允许", "始终允许");
+            }
+
         });
         WindowManager windowManagers = getActivity().getWindowManager();
         DisplayMetrics outMetrics = new DisplayMetrics();

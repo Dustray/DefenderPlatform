@@ -51,8 +51,8 @@ public class Alert {
                 }
 
                 @Override
-                public void onClickCancle() {
-                    mLisenter.onClickCancle();
+                public void onClickCancel() {
+                    mLisenter.onClickCancel();
 
                 }
 
@@ -80,6 +80,6 @@ public class Alert {
     public interface OnPopupAlertListener {
         void onClickOk();
 
-        void onClickCancle();
+        void onClickCancel();
     }
 }

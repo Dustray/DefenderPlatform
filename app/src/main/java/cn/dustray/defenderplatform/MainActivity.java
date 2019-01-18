@@ -39,6 +39,7 @@ import cn.dustray.chat.ChatToolFragment;
 import cn.dustray.control.xViewPager;
 import cn.dustray.popupwindow.WebGroupPopup;
 import cn.dustray.popupwindow.WebMenuPopup;
+import cn.dustray.utils.BmobUtil;
 import cn.dustray.utils.SettingUtil;
 import cn.dustray.utils.xToast;
 
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity
                 .build();
         Fresco.initialize(this, config);//初始化list图片处理
         setSupportActionBar(toolbar);
-
+        BmobUtil.initialize(this);//Bmob初始化
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);

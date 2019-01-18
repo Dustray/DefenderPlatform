@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -177,7 +176,7 @@ public class AlertPopup extends PopupWindow implements View.OnClickListener {
                 mListener.onClickOk();
                 break;
             case R.id.btn_alert_cancle:
-                mListener.onClickCancle();
+                mListener.onClickCancel();
                 break;
             case R.id.btn_alert_popup_up:
                 break;
@@ -199,7 +198,7 @@ public class AlertPopup extends PopupWindow implements View.OnClickListener {
     public interface OnPopupAlertListener {
         void onClickOk();
 
-        void onClickCancle();
+        void onClickCancel();
 
         void onDismiss();
     }

@@ -164,7 +164,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                             }
 
                             @Override
-                            public void onClickCancle() {
+                            public void onClickCancel() {
                                 mListener.switchToViewPager(1);
                             }
                         });

@@ -16,6 +16,8 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.webkit.CookieManager;
 import android.webkit.GeolocationPermissions;
+import android.webkit.JsPromptResult;
+import android.webkit.JsResult;
 import android.webkit.SslErrorHandler;
 import android.webkit.ValueCallback;
 import android.webkit.WebBackForwardList;
@@ -37,13 +39,13 @@ public class xWebView extends WebView {
 
     static Context context;
     private boolean isFromDatabase = false;
-    private  static xWebView webView ;
+    private static xWebView webView;
 
     public xWebView(Context context) {
         super(context);
         this.context = context;
         init();
-        webView=this;
+        webView = this;
     }
 
     public xWebView(Context context, AttributeSet attrs) {
@@ -74,24 +76,25 @@ public class xWebView extends WebView {
         //自适应屏幕
         this.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         this.getSettings().setLoadWithOverviewMode(true);
-        this.getSettings().setDomStorageEnabled(true);
         this.getSettings().setLoadsImagesAutomatically(true); // 加载图片
         this.getSettings().setAllowFileAccess(true);
         this.getSettings().setAppCacheEnabled(true);
-        this.setBackgroundColor(Color.rgb(250,250,250)); // 设置背景色
+        this.setBackgroundColor(Color.rgb(250, 250, 250)); // 设置背景色
         //this.getBackground().setAlpha(0); // 设置填充透明度 范围：0-255
         //启用地理定位
         this.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
-        this.getSettings().setGeolocationEnabled(true);//启用地理定位
+
         this.getSettings().setDatabaseEnabled(true);//启用数据库
+        this.getSettings().setGeolocationEnabled(true);//启用地理定位
         String dir = context.getApplicationContext().getDir("database", Context.MODE_PRIVATE).getPath();
         this.getSettings().setGeolocationDatabasePath(dir);//设置定位的数据库路径
 
+        this.getSettings().setDomStorageEnabled(true);
         this.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);//不使用网络缓存，开启的话容易导致app膨胀导致卡顿
         this.getSettings().setTextZoom(100);
         //  this.getSettings().setSupportMultipleWindows(true);
         if (Build.VERSION.SDK_INT >= 19) {
-            this.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+            this.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -169,7 +172,7 @@ public class xWebView extends WebView {
                             }
 
                             @Override
-                            public void onClickCancle() {
+                            public void onClickCancel() {
                             }
                         });
                         String appName = context.getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY).get(0).loadLabel(context.getPackageManager()).toString();
@@ -191,16 +194,42 @@ public class xWebView extends WebView {
             super.onScaleChanged(view, oldScale, newScale);//获取滚动位置
             //webview.getScrollY()/newScale*oldScale;
         }
+
         @Override
         public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
             super.onReceivedError(view, errorCode, description, failingUrl);
             webView.loadUrl("file:///android_asset/html/ErrorPage.html");
         }
+
         @Override
         public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
             super.onReceivedSslError(view, handler, error);
             handler.proceed();//接受证书
         }
+    }
+
+    public static class xWebChromeClient extends WebChromeClient {
+
+
+        //页面提示框
+        @Override
+        public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
+            return super.onJsAlert(view, url, message, result);
+        }
+
+        //页面选择框
+        @Override
+        public boolean onJsConfirm(WebView view, String url, String message, JsResult result) {
+            return super.onJsConfirm(view, url, message, result);
+        }
+
+        //页面确认框
+        @Override
+        public boolean onJsPrompt(WebView view, String url, String message, String defaultValue, JsPromptResult result) {
+            return super.onJsPrompt(view, url, message, defaultValue, result);
+        }
+
+
     }
 
 }
