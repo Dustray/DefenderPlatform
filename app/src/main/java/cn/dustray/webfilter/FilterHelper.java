@@ -19,13 +19,17 @@ public class FilterHelper {
 
     public void syncKeyword() {
         List<KeywordEntity> list = getKeywordFromTempCreateOrDeleteTable();
-        for(KeywordEntity entity:list){
+        for (KeywordEntity entity : list) {
 
         }
     }
 
     public List<KeywordEntity> getKeywordFromTempCreateOrDeleteTable() {
-        List<KeywordEntity> list=null;
+        List<KeywordEntity> list = null;
         return list;
+    }
+
+    public int getLastUpdateRecordId() {
+        return 0;
     }
 }
