@@ -3,6 +3,7 @@ package cn.dustray.defenderplatform;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -27,17 +28,24 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.dustray.entity.UserEntity;
+import cn.dustray.user.UserManager;
+import cn.dustray.utils.Alert;
+import cn.dustray.utils.BmobUtil;
+import cn.dustray.utils.xToast;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
 /**
  * A login screen that offers login via email/password.
  */
-public class RegisterActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+public class RegisterActivity extends AppCompatActivity implements LoaderCallbacks<Cursor>, UserManager.onRegisterListener {
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -57,21 +65,35 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
     private UserLoginTask mAuthTask = null;
 
     // UI references.
-    private AutoCompleteTextView mEmailView;
-    private EditText mPasswordView;
+    private AutoCompleteTextView mUserName, mEmailView;
+    private EditText mPasswordView_1, mPasswordView_2;
     private View mProgressView;
     private View mLoginFormView;
+    private Switch isGuardianSwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         // Set up the login form.
+        mUserName = (AutoCompleteTextView) findViewById(R.id.username);
+
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
 
-        mPasswordView = (EditText) findViewById(R.id.password);
-        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        mPasswordView_1 = (EditText) findViewById(R.id.password_1);
+        mPasswordView_1.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
+                if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
+                    attemptLogin();
+                    return true;
+                }
+                return false;
+            }
+        });
+        mPasswordView_2 = (EditText) findViewById(R.id.password_2);
+        mPasswordView_2.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
@@ -89,9 +111,19 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
                 attemptLogin();
             }
         });
+        Button btnToLogin = (Button) findViewById(R.id.btn_tologin);
+        btnToLogin.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+        isGuardianSwitch=findViewById(R.id.is_guardian_switch);
     }
 
     private void populateAutoComplete() {
@@ -149,27 +181,44 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
         }
 
         // Reset errors.
+        mUserName.setError(null);
         mEmailView.setError(null);
-        mPasswordView.setError(null);
+        mPasswordView_1.setError(null);
+        mPasswordView_2.setError(null);
 
         // Store values at the time of the login attempt.
+        String username = mUserName.getText().toString();
         String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
+        String password_1 = mPasswordView_1.getText().toString();
+        String password_2 = mPasswordView_2.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
+        if (!TextUtils.isEmpty(password_1) && !isPasswordValid(password_1)) {
+            mPasswordView_1.setError(getString(R.string.error_invalid_password));
+            focusView = mPasswordView_1;
             cancel = true;
-        }
-
-        // Check for a valid email address.
-        if (TextUtils.isEmpty(email)) {
+        } else if (!TextUtils.isEmpty(password_2) && !password_2.equals(password_1)) {
+            mPasswordView_2.setError(getString(R.string.error_deferent_password));
+            focusView = mPasswordView_2;
+            cancel = true;
+        } else if (TextUtils.isEmpty(username)) {
+            mUserName.setError(getString(R.string.error_field_required));
+            focusView = mUserName;
+            cancel = true;
+        } else if (TextUtils.isEmpty(email)) {
             mEmailView.setError(getString(R.string.error_field_required));
             focusView = mEmailView;
+            cancel = true;
+        } else if (TextUtils.isEmpty(password_1)) {
+            mPasswordView_1.setError(getString(R.string.error_field_required));
+            focusView = mPasswordView_1;
+            cancel = true;
+        } else if (TextUtils.isEmpty(password_2)) {
+            mPasswordView_2.setError(getString(R.string.error_field_required));
+            focusView = mPasswordView_2;
             cancel = true;
         } else if (!isEmailValid(email)) {
             mEmailView.setError(getString(R.string.error_invalid_email));
@@ -185,19 +234,18 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
+            int userType=isGuardianSwitch.isChecked()?UserEntity.USER_GUARDIAN :UserEntity.USER_UNGUARDIAN;
+            mAuthTask = new UserLoginTask(username, email, password_1,userType);
             mAuthTask.execute((Void) null);
         }
     }
 
     private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
-        return email.contains("@");
+        return email.contains("@") && email.contains(".");
     }
 
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        return password.length() > 4;
+        return password.length() >= 6;
     }
 
     /**
@@ -279,6 +327,33 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
         mEmailView.setAdapter(adapter);
     }
 
+    @Override
+    public void registerSuccess() {
+        //String ss = UserManager.getUserEntity().getEmail();
+        xToast.toast(this, "注册成功");
+        finish();
+    }
+
+    @Override
+    public void registerFailed(Exception e) {
+        String msg = e.getMessage();
+        //xToast.toast(this, "注册失败" + msg);
+        if (msg.contains("already taken")) {
+            if (msg.contains("username")) {
+                mUserName.setError("此用户名已存在");
+                mUserName.requestFocus();
+            } else if (msg.contains("email")) {
+                mEmailView.setError("此邮箱已存在");
+                mEmailView.requestFocus();
+            }
+        }else{
+            //Alert alert = new Alert(this);
+            //alert.popupAlert("注册失败，请稍后再试");
+        }
+        mAuthTask = null;
+        showProgress(false);
+    }
+
 
     private interface ProfileQuery {
         String[] PROJECTION = {
@@ -296,24 +371,20 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
      */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
+        private final String mUserName;
         private final String mEmail;
         private final String mPassword;
+        private final int mUserType;
 
-        UserLoginTask(String email, String password) {
+        UserLoginTask(String username, String email, String password, int usertype) {
+            mUserName = username;
             mEmail = email;
             mPassword = password;
+            mUserType= usertype;
         }
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
-
-            try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
-            }
 
             for (String credential : DUMMY_CREDENTIALS) {
                 String[] pieces = credential.split(":");
@@ -322,23 +393,13 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
                     return pieces[1].equals(mPassword);
                 }
             }
+            BmobUtil bmob = new BmobUtil(RegisterActivity.this);
+            //TODO IMEI
 
-            // TODO: register the new account here.
+            bmob.register(mUserName, mPassword, mEmail, mUserType, "000000000000", RegisterActivity.this);
             return true;
         }
 
-        @Override
-        protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
-            showProgress(false);
-
-            if (success) {
-                finish();
-            } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
-            }
-        }
 
         @Override
         protected void onCancelled() {

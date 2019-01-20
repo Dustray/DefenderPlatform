@@ -1,19 +1,12 @@
 package cn.dustray.defenderplatform;
 
-import android.Manifest;
-import android.app.Activity;
-import android.app.Application;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -25,7 +18,7 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -37,8 +30,10 @@ import cn.dustray.browser.WebTabFragment;
 import cn.dustray.chat.ChatFragment;
 import cn.dustray.chat.ChatToolFragment;
 import cn.dustray.control.xViewPager;
+import cn.dustray.entity.UserEntity;
 import cn.dustray.popupwindow.WebGroupPopup;
 import cn.dustray.popupwindow.WebMenuPopup;
+import cn.dustray.user.UserManager;
 import cn.dustray.utils.BmobUtil;
 import cn.dustray.utils.SettingUtil;
 import cn.dustray.utils.xToast;
@@ -50,13 +45,15 @@ public class MainActivity extends AppCompatActivity
         ChatToolFragment.OnListFragmentInteractionListener,
         WebTabFragment.OnFragmentInteractionListener,
         WebGroupPopup.OnPopupInteractionListener,
-        WebMenuPopup.OnPopupInteractionListener {
+        WebMenuPopup.OnPopupInteractionListener{
 
     private TabLayout titleTab;
     private xViewPager mainPage;
     public ChatFragment chatFragment = ChatFragment.newInstance();
     public BrowserFragment browserFragment = BrowserFragment.newInstance();
     private AppBarLayout mainAppBar;
+    private TextView textUserName, textEmail;
+    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,18 +68,71 @@ public class MainActivity extends AppCompatActivity
         Fresco.initialize(this, config);//初始化list图片处理
         setSupportActionBar(toolbar);
         BmobUtil.initialize(this);//Bmob初始化
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        initNavigation();
+        initTabPage();
+
+    }
+
+    private void initNavigation() {
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        initTabPage();
-        checkLocationPermission();
+        View headerLayout = navigationView.getHeaderView(0);
 
+        textUserName = (TextView) headerLayout.findViewById(R.id.text_username);
+        textEmail= (TextView) headerLayout.findViewById(R.id.text_email);
+
+        BmobUtil util = new BmobUtil(this);
+        util.fetchUserInfo(new UserManager.onFetchUserInfoListener() {
+            @Override
+            public void fetchUserInfoSuccess() {
+                refleshUserInfo();
+            }
+
+            @Override
+            public void fetchUserInfoFailed(Exception e) {
+            }
+        });
+    }
+
+    private void refleshUserInfo() {
+        switch (UserManager.getUserType()) {
+            case UserEntity.USER_UNLOGIN:
+                textUserName.setText("登录/注册");
+                textEmail.setText("");
+                break;
+            case UserEntity.USER_GUARDIAN:
+                textUserName.setText(UserManager.getUserEntity().getUsername()+"（守护者）");
+                textEmail.setText(UserManager.getUserEntity().getEmail());
+                break;
+            case UserEntity.USER_UNGUARDIAN:
+                textUserName.setText(UserManager.getUserEntity().getUsername()+"（被守护者）");
+                textEmail.setText(UserManager.getUserEntity().getEmail());
+                break;
+        }
+        textUserName.setOnClickListener(new TextView.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                switch (UserManager.getUserType()) {
+                    case UserEntity.USER_UNLOGIN:
+                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                        break;
+                    case UserEntity.USER_GUARDIAN:
+                    case UserEntity.USER_UNGUARDIAN:
+
+                         startActivity(new Intent(MainActivity.this,MyActivity.class));
+                        break;
+                }
+            }
+        });
     }
 
     private void initTabPage() {
@@ -94,7 +144,6 @@ public class MainActivity extends AppCompatActivity
         titleTab.setupWithViewPager(mainPage);
 
     }
-
 
     public boolean getPageScrollState() {
         return SettingUtil.Scroll.getScrollFlag(this);
@@ -113,19 +162,6 @@ public class MainActivity extends AppCompatActivity
         mainPage.setCurrentItem(1);
     }
 
-    public void checkLocationPermission() {
-        if (Build.VERSION.SDK_INT >= 23) {
-            int checkPermission = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION);
-            if (checkPermission != PackageManager.PERMISSION_GRANTED) {
-
-                ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
-                ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-                // Log.d("TTTT", "弹出提示");
-                //  xToast.toast(this,"申请权限1");
-
-            }
-        }
-    }
 
     @Override
     public void onBackPressed() {
@@ -239,6 +275,8 @@ public class MainActivity extends AppCompatActivity
         super.onResume();
         //检测设置并刷新
         SettingUtil.detectAndRefresh(this);
+
+        refleshUserInfo();
     }
 
     @Override
@@ -299,4 +337,6 @@ public class MainActivity extends AppCompatActivity
     public void onChangePageScroll() {
         SettingUtil.Scroll.changeScrollFlag(this);
     }
+
+
 }

@@ -9,6 +9,7 @@ import java.util.List;
 
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FetchUserInfoListener;
 import cn.bmob.v3.listener.FindListener;
@@ -18,15 +19,14 @@ import cn.bmob.v3.listener.UpdateListener;
 import cn.dustray.defenderplatform.LoginActivity;
 import cn.dustray.entity.UserEntity;
 import cn.dustray.user.UserManageListener;
+import cn.dustray.user.UserManager;
 
 public class BmobUtil {
     public final static String APPLICATION_ID = "ef8924f860423c2d06011449737664ea";
     public Context context;
-    private UserManageListener manageListener;
 
     public BmobUtil(Context context) {
         this.context = context;
-        // manageListener=context;
     }
 
     /**
@@ -48,7 +48,6 @@ public class BmobUtil {
         //.setFileExpiration(2500)
         //.build();
         //Bmob.initialize(config);
-        appLaunchCheck(activity);
     }
 
     /**
@@ -56,10 +55,11 @@ public class BmobUtil {
      *
      * @param activity
      */
-    public static void appLaunchCheck(Activity activity) {
+    public static void appLaunchCheck(final Activity activity) {
         UserEntity bmobUser = UserEntity.getCurrentUser(UserEntity.class);
         if (bmobUser != null) {
             // 允许用户使用应用
+
         } else {
             //缓存用户对象为空时，可打开用户登录界面…
             Intent intent = new Intent(activity, LoginActivity.class);
@@ -76,14 +76,14 @@ public class BmobUtil {
      * @param userType
      * @param deviceIMEI
      */
-    public void register(String userName, String password, String email, int userType, String deviceIMEI) {
+    public void register(String userName, String password, String email, int userType, String deviceIMEI, final UserManager.onRegisterListener mListener) {
         UserEntity ue = new UserEntity();
         ue.setUsername(userName);
         ue.setPassword(password);
         ue.setEmail(email);
         ue.setUserType(userType);
         ue.setDeviceIMEI(deviceIMEI);
-        register(ue);
+        register(ue, mListener);
     }
 
     /**
@@ -91,16 +91,17 @@ public class BmobUtil {
      *
      * @param ue
      */
-    public void register(UserEntity ue) {
+    public void register(UserEntity ue, final UserManager.onRegisterListener mListener) {
+
         ue.signUp(new SaveListener<UserEntity>() {
             @Override
             public void done(UserEntity userEntity, BmobException e) {
                 if (e == null) {
                     // toast("注册成功:" +s.toString());
-                    manageListener.registerSuccess();
+                    mListener.registerSuccess();
                 } else {
                     // loge(e);
-                    manageListener.registerFailed();
+                    mListener.registerFailed(e);
                 }
             }
         });
@@ -112,15 +113,15 @@ public class BmobUtil {
      * @param account
      * @param password
      */
-    public void login(String account, String password) {
+    public void login(String account, String password, final UserManager.onLoginListener mListener) {
 
-        if (account.contains("@")) {//邮箱登录
-            loginWithEmail(account, password);
+        if (account.contains("@") && account.contains(".")) {//邮箱登录
+            loginWithEmail(account, password, mListener);
         } else {
             UserEntity ue = new UserEntity();
             ue.setUsername(account);
             ue.setPassword(password);
-            loginWithName(ue);
+            loginWithName(ue, mListener);
         }
     }
 
@@ -129,7 +130,7 @@ public class BmobUtil {
      *
      * @param ue
      */
-    public void loginWithName(UserEntity ue) {
+    public void loginWithName(UserEntity ue, final UserManager.onLoginListener mListener) {
         ue.login(new SaveListener<UserEntity>() {
             @Override
             public void done(UserEntity userEntity, BmobException e) {
@@ -137,10 +138,10 @@ public class BmobUtil {
                     //toast("登录成功:");
                     //通过BmobUser user = BmobUser.getCurrentUser()获取登录成功后的本地用户信息
                     //如果是自定义用户对象MyUser，可通过MyUser user = BmobUser.getCurrentUser(MyUser.class)获取自定义用户信息
-                    manageListener.loginSuccess();
+                    mListener.loginSuccess();
                 } else {
                     //loge(e);
-                    manageListener.loginFailed();
+                    mListener.loginFailed(e);
                 }
             }
         });
@@ -152,15 +153,15 @@ public class BmobUtil {
      * @param email
      * @param password
      */
-    public void loginWithEmail(String email, String password) {
+    public void loginWithEmail(String email, String password, final UserManager.onLoginListener mListener) {
         UserEntity.loginByAccount(email, password, new LogInListener<UserEntity>() {
             @Override
             public void done(UserEntity user, BmobException e) {
                 if (user != null) {
                     //Log.i("smile","用户登陆成功");
-                    manageListener.loginSuccess();
+                    mListener.loginSuccess();
                 } else {
-                    manageListener.loginFailed();
+                    mListener.loginFailed(e);
                 }
             }
         });
@@ -171,19 +172,24 @@ public class BmobUtil {
      * 更新本地用户信息
      * 注意：需要先登录，否则会报9024错误
      */
-    private void fetchUserInfo() {
-        UserEntity.fetchUserJsonInfo(new FetchUserInfoListener<String>() {
-            @Override
-            public void done(String s, BmobException e) {
-                if (e == null) {
-                    //log("Newest UserInfo is " + s);
-                    //Integer age = (Integer) UserEntity.getObjectByKey("age");获取单个内容
-                    manageListener.fetchUserInfoSuccess();
-                } else {
-                    //log(e);
+    public void fetchUserInfo(final UserManager.onFetchUserInfoListener mListener) {
+        if (UserManager.getUserType() != 0) {
+            UserEntity.fetchUserInfo(new FetchUserInfoListener<BmobUser>() {
+                @Override
+                public void done(BmobUser bmobUser, BmobException e) {
+                    if (e == null) {
+                        final UserEntity myUser = BmobUser.getCurrentUser(UserEntity.class);
+                        //log("Newest UserInfo is " + s);
+                        //Integer age = (Integer) UserEntity.getObjectByKey("age");获取单个内容
+                        mListener.fetchUserInfoSuccess();
+                    } else {
+                        //log(e);
+                        mListener.fetchUserInfoFailed(e);
+                    }
                 }
-            }
-        });
+            });
+
+        }
     }
 
     /**
@@ -198,7 +204,7 @@ public class BmobUtil {
      *
      * @param userName
      */
-    public void queryUser(String userName) {
+    public void queryUser(String userName, final UserManager.onQueryUserListener mListener) {
         BmobQuery<UserEntity> query = new BmobQuery<UserEntity>();
         query.addWhereEqualTo("username", "lucky");
         query.findObjects(new FindListener<UserEntity>() {
@@ -206,10 +212,10 @@ public class BmobUtil {
             public void done(List<UserEntity> object, BmobException e) {
                 if (e == null) {
                     // toast("查询用户成功:"+object.size());
-                    manageListener.queryUserSuccess();
+                    mListener.queryUserSuccess();
                 } else {
                     // toast("更新用户信息失败:" + e.getMessage());
-                    manageListener.queryUserFailed();
+                    mListener.queryUserFailed();
                 }
             }
         });
@@ -228,57 +234,54 @@ public class BmobUtil {
      * @param oldPass
      * @param newPass
      */
-    public void updatePassword(String oldPass, String newPass) {
+    public void updatePassword(String oldPass, String newPass, final UserManager.onUpdatePasswordListener mListener) {
         UserEntity.updateCurrentUserPassword(oldPass, newPass, new UpdateListener() {
 
             @Override
             public void done(BmobException e) {
                 if (e == null) {
                     //toast("密码修改成功，可以用新密码进行登录啦");
-                    manageListener.updatePasswordSuccess();
+                    mListener.updatePasswordSuccess();
                 } else {
                     //toast("失败:" + e.getMessage());
-                    manageListener.updatePasswordFailed();
+                    mListener.updatePasswordFailed();
                 }
             }
 
         });
     }
 
-    public void resetPasswordByEmail(String email) {
+    public void resetPasswordByEmail(String email, final UserManager.onRequestResetPassListener mListener) {
         UserEntity.resetPasswordByEmail(email, new UpdateListener() {
 
             @Override
             public void done(BmobException e) {
                 if (e == null) {
                     //toast("重置密码请求成功，请到" + email + "邮箱进行密码重置操作");
-                    manageListener.requestResetPassSuccess();
+                    mListener.requestResetPassSuccess();
                 } else {
                     //toast("失败:" + e.getMessage());
-                    manageListener.requestResetPassFailed();
+                    mListener.requestResetPassFailed();
                 }
             }
         });
     }
 
 
-    public void emailVerify(String email) {
+    public void emailVerify(String email, final UserManager.onRequestEmailVerifyListener mListener) {
         UserEntity.requestEmailVerify(email, new UpdateListener() {
             @Override
             public void done(BmobException e) {
                 if (e == null) {
                     //toast("请求验证邮件成功，请到" + email + "邮箱中进行激活。");
-                    manageListener.requestEmailVerifySuccess();
+                    mListener.requestEmailVerifySuccess();
                 } else {
                     //toast("失败:" + e.getMessage());
-                    manageListener.requestEmailVerifyFailed();
+                    mListener.requestEmailVerifyFailed();
                 }
             }
         });
     }
 
 
-    public void setUserManageListener(UserManageListener manageListener) {
-        this.manageListener = manageListener;
-    }
 }
