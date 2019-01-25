@@ -92,8 +92,8 @@ public class BrowserFragment extends Fragment implements View.OnClickListener, W
     }
 
     private void initFragment(String Url) {
-
-
+//TODO 此处应用后台重新加载activity， getSupportFragmentManager()返回空指针
+       // if (manager == null) manager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.setCustomAnimations(R.animator.fragment_slide_right_enter, R.animator.fragment_slide_left_exit);
 

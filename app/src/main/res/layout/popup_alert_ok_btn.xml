@@ -43,9 +43,10 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="5dp"
+                style="?android:attr/borderlessButtonStyle"
                 android:background="@drawable/btn_alert"
                 android:text="好 的"
-                android:textColor="#fff"
+                android:textColor="@color/colorPrimary"
                 android:textSize="16dp" />
         </RelativeLayout>
 

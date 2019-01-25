@@ -1,6 +1,7 @@
 package cn.dustray.chat;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -192,9 +193,13 @@ public class ChatHolder extends RecyclerView.ViewHolder {
         imageView.setLayoutParams(params);
         imageView.setAspectRatio(1f);
         imageView.getHierarchy().setActualImageScaleType(ScalingUtils.ScaleType.CENTER_CROP);
-        imageView.getHierarchy().setPlaceholderImage(R.drawable.img_picture_loading);//正在加载图片
-        imageView.getHierarchy().setFailureImage(R.drawable.img_picture_load_failed);//加载失败图片
-        imageView.getHierarchy().setRetryImage(R.drawable.img_picture_reload);//重试图片
+        try {
+            imageView.getHierarchy().setPlaceholderImage(R.drawable.img_picture_loading);//正在加载图片
+            imageView.getHierarchy().setFailureImage(R.drawable.img_picture_load_failed);//加载失败图片
+            imageView.getHierarchy().setRetryImage(R.drawable.img_picture_reload);//重试图片
+        }catch (Resources.NotFoundException ex){
+
+        }
     }
 
     private void initLinkView() {

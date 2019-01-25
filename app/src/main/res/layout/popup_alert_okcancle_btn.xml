@@ -34,15 +34,16 @@
                 android:textColor="#666"
                 android:textSize="20dp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <RelativeLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/alert_popup_title"
-                android:orientation="horizontal">
+                android:layout_alignParentRight="true">
 
                 <Button
                     android:id="@+id/btn_alert_ok"
-                    android:layout_width="match_parent"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
@@ -51,12 +52,14 @@
                     android:layout_weight="1"
                     android:background="@drawable/btn_alert"
                     android:text="好 的"
-                    android:textColor="#fff"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="16dp" />
 
                 <Button
+                    android:layout_toRightOf="@+id/btn_alert_ok"
                     android:id="@+id/btn_alert_cancle"
-                    android:layout_width="match_parent"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:layout_marginLeft="2dp"
                     android:layout_marginTop="5dp"
@@ -65,9 +68,9 @@
                     android:layout_weight="1"
                     android:background="@drawable/btn_alert"
                     android:text="取 消"
-                    android:textColor="#fff"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="16dp" />
-            </LinearLayout>
+            </RelativeLayout>
 
         </RelativeLayout>
 

@@ -100,6 +100,7 @@ public class WebTabFragment extends Fragment {
         mainWebView.setWebViewClient(new xWebView.xWebViewCilent() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                //xToast.toast(getActivity(), "111");
                 //过滤
                 FilterUtil sf = new FilterUtil(getActivity());
                 if (!spHelper.getIsNoFilter() && !sf.filterWebsite(request.getUrl().toString())) {
@@ -110,10 +111,10 @@ public class WebTabFragment extends Fragment {
 
                 //该方法在Build.VERSION_CODES.LOLLIPOP以前有效，从Build.VERSION_CODES.LOLLIPOP起，建议使用shouldOverrideUrlLoading(WebView, WebResourceRequest)}
                 boolean flag = mainWebView.openApp(request.getUrl().toString(), getActivity());
-                if (Build.VERSION.SDK_INT < 26) {
-                    return flag;
-                }
-                return !flag;
+//                if (Build.VERSION.SDK_INT < 26||Build.VERSION.SDK_INT==28) {
+//                    return flag;
+//                }
+                return flag;
                 //return super.shouldOverrideUrlLoading(view, request);
             }
 
@@ -157,26 +158,27 @@ public class WebTabFragment extends Fragment {
                 }
                 return true; //super.onCreateWindow(view, isDialog, isUserGesture, resultMsg);
             }
+
             //定位回调函数
             @Override
             public void onGeolocationPermissionsShowPrompt(final String origin, final GeolocationPermissions.Callback callback) {
                // super.onGeolocationPermissionsShowPrompt(origin, callback);
-                PermissionUtil.Location(getActivity());
+                PermissionUtil.Location(getActivity());//权限申请
 
                 final boolean remember = true;
                 Alert alert = new Alert(getActivity());
                 alert.setOnPopupAlertListener(new Alert.OnPopupAlertListener() {
                     @Override
                     public void onClickOk() {
-                        callback.invoke(origin, true, !remember);
+                        callback.invoke(origin, true, remember);
                     }
 
                     @Override
                     public void onClickCancel() {
-                        callback.invoke(origin, true, remember);
+                        callback.invoke(origin, false, remember);
                     }
                 });
-                alert.popupAlert(origin + "允许获取您的地理位置信息吗？", "本次允许", "始终允许");
+                alert.popupAlert(origin + "想使用你的位置信息。", "允许", "拒绝");
             }
 
         });

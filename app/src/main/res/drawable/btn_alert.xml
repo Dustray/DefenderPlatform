@@ -1,15 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="@color/colorPrimary">
+    android:color="@color/colorPrimaryLight">
     <item>
         <shape>
-            <solid android:color="@color/colorPrimaryLight" />
+            <solid android:color="@color/colorWhite" />
             <corners
-                android:bottomLeftRadius="100dip"
-                android:bottomRightRadius="100dip"
-                android:topLeftRadius="100dip"
-                android:topRightRadius="100dip" />
+            android:bottomLeftRadius="10dip"
+            android:bottomRightRadius="10dip"
+            android:topLeftRadius="10dip"
+            android:topRightRadius="10dip" />
         </shape>
     </item>
 
 </ripple>
+<!--<ripple xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:color="@color/colorPrimary">-->
+    <!--<item>-->
+        <!--<shape>-->
+            <!--<solid android:color="@color/colorPrimaryLight" />-->
+            <!--<corners-->
+                <!--android:bottomLeftRadius="100dip"-->
+                <!--android:bottomRightRadius="100dip"-->
+                <!--android:topLeftRadius="100dip"-->
+                <!--android:topRightRadius="100dip" />-->
+        <!--</shape>-->
+    <!--</item>-->
+
+<!--</ripple>-->

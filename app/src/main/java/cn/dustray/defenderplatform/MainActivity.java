@@ -3,8 +3,10 @@ package cn.dustray.defenderplatform;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.NavigationView;
@@ -34,7 +36,9 @@ import cn.dustray.entity.UserEntity;
 import cn.dustray.popupwindow.WebGroupPopup;
 import cn.dustray.popupwindow.WebMenuPopup;
 import cn.dustray.user.UserManager;
+import cn.dustray.utils.Alert;
 import cn.dustray.utils.BmobUtil;
+import cn.dustray.utils.PermissionUtil;
 import cn.dustray.utils.SettingUtil;
 import cn.dustray.utils.xToast;
 
@@ -45,7 +49,7 @@ public class MainActivity extends AppCompatActivity
         ChatToolFragment.OnListFragmentInteractionListener,
         WebTabFragment.OnFragmentInteractionListener,
         WebGroupPopup.OnPopupInteractionListener,
-        WebMenuPopup.OnPopupInteractionListener{
+        WebMenuPopup.OnPopupInteractionListener {
 
     private TabLayout titleTab;
     private xViewPager mainPage;
@@ -68,7 +72,7 @@ public class MainActivity extends AppCompatActivity
         Fresco.initialize(this, config);//初始化list图片处理
         setSupportActionBar(toolbar);
         BmobUtil.initialize(this);//Bmob初始化
-
+        PermissionUtil.Location(this);//权限申请
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -87,7 +91,7 @@ public class MainActivity extends AppCompatActivity
         View headerLayout = navigationView.getHeaderView(0);
 
         textUserName = (TextView) headerLayout.findViewById(R.id.text_username);
-        textEmail= (TextView) headerLayout.findViewById(R.id.text_email);
+        textEmail = (TextView) headerLayout.findViewById(R.id.text_email);
 
         BmobUtil util = new BmobUtil(this);
         util.fetchUserInfo(new UserManager.onFetchUserInfoListener() {
@@ -109,11 +113,11 @@ public class MainActivity extends AppCompatActivity
                 textEmail.setText("");
                 break;
             case UserEntity.USER_GUARDIAN:
-                textUserName.setText(UserManager.getUserEntity().getUsername()+"（守护者）");
+                textUserName.setText(UserManager.getUserEntity().getUsername() + "（守护者）");
                 textEmail.setText(UserManager.getUserEntity().getEmail());
                 break;
             case UserEntity.USER_UNGUARDIAN:
-                textUserName.setText(UserManager.getUserEntity().getUsername()+"（被守护者）");
+                textUserName.setText(UserManager.getUserEntity().getUsername() + "（被守护者）");
                 textEmail.setText(UserManager.getUserEntity().getEmail());
                 break;
         }
@@ -128,7 +132,7 @@ public class MainActivity extends AppCompatActivity
                     case UserEntity.USER_GUARDIAN:
                     case UserEntity.USER_UNGUARDIAN:
 
-                         startActivity(new Intent(MainActivity.this,MyActivity.class));
+                        startActivity(new Intent(MainActivity.this, MyActivity.class));
                         break;
                 }
             }
@@ -338,5 +342,43 @@ public class MainActivity extends AppCompatActivity
         SettingUtil.Scroll.changeScrollFlag(this);
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        // xToast.toast(this, "ss" + requestCode + grantResults[0]);
+        switch (requestCode) {
+            case 200://刚才的识别码
+            case 201:
+                if (grantResults.length > 0) {
+                    if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {//用户同意权限,执行我们的操作
+                        //startLocaion();//开始定位
+                    } else {//用户拒绝之后,当然我们也可以弹出一个窗口,直接跳转到系统设置页面
+                        Alert alert = new Alert(this);
+                        alert.setOnPopupAlertListener(new Alert.OnPopupAlertListener() {
+                            @Override
+                            public void onClickOk() {
+                                PermissionUtil.Location(MainActivity.this);//权限申请
+                            }
 
+                            @Override
+                            public void onClickCancel() {
+
+                            }
+                        });
+                        alert.popupAlert("应用需获取定位权限，请允许。", "确定");
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+        //getSupportFragmentManager();
+
+    }
 }
