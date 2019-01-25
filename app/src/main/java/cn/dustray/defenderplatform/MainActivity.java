@@ -20,6 +20,7 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
-        mainAppBar = findViewById(R.id.main_appbar);
+       mainAppBar = findViewById(R.id.main_appbar);
         ImagePipelineConfig config = ImagePipelineConfig.newBuilder(this)
                 .setDownsampleEnabled(true)
                 .build();
@@ -352,19 +353,23 @@ public class MainActivity extends AppCompatActivity
                     if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {//用户同意权限,执行我们的操作
                         //startLocaion();//开始定位
                     } else {//用户拒绝之后,当然我们也可以弹出一个窗口,直接跳转到系统设置页面
-                        Alert alert = new Alert(this);
-                        alert.setOnPopupAlertListener(new Alert.OnPopupAlertListener() {
-                            @Override
-                            public void onClickOk() {
-                                PermissionUtil.Location(MainActivity.this);//权限申请
-                            }
+                        try {
+                            Alert alert = new Alert(this);
+                            alert.setOnPopupAlertListener(new Alert.OnPopupAlertListener() {
+                                @Override
+                                public void onClickOk() {
+                                    PermissionUtil.Location(MainActivity.this);//权限申请
+                                }
 
-                            @Override
-                            public void onClickCancel() {
+                                @Override
+                                public void onClickCancel() {
 
-                            }
-                        });
-                        alert.popupAlert("应用需获取定位权限，请允许。", "确定");
+                                }
+                            });
+                            alert.popupAlert("xToast.toast(this, \"ss\" + requestCode + grantResults[0]);", "确定");
+                        }catch (WindowManager.BadTokenException ex){
+                            xToast.toast(this, "xToast.toast(this, \"ss\" + requestCode + grantResults[0]);" );
+                        }
                     }
                 }
                 break;
@@ -377,8 +382,12 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-        super.onSaveInstanceState(outState, outPersistentState);
-        //getSupportFragmentManager();
+        //super.onSaveInstanceState(outState, outPersistentState);
 
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        //super.onSaveInstanceState(outState);//注释掉暂时解决fragment中getactivity（）空
     }
 }
