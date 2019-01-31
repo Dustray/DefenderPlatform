@@ -38,7 +38,6 @@ import cn.dustray.utils.xToast;
 public class xWebView extends WebView {
 
     static Context context;
-    private boolean isFromDatabase = false;
     private static xWebView webView;
 
     public xWebView(Context context) {

@@ -1,6 +1,8 @@
 package cn.dustray.browser;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
@@ -10,6 +12,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -19,10 +22,14 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.WindowManager;
 import android.webkit.GeolocationPermissions;
+import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
+
+import com.just.agentweb.AgentWeb;
 
 import java.util.List;
 
@@ -49,7 +56,7 @@ public class WebTabFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public xWebView mainWebView;
+    public AgentWeb mainWebView;
     private ProgressBar progressBar;
 
     private OnFragmentInteractionListener mListener;
@@ -82,12 +89,16 @@ public class WebTabFragment extends Fragment {
 
     private void initWebView() {
         if (mainWebView == null) {
-            mainWebView = new xWebView(getActivity().getApplicationContext());
-            mainWebView.setId(generateViewId());
+            mainWebView = AgentWeb.with(this)
+                    .setAgentWebParent(frameLayout, new FrameLayout.LayoutParams(-1, -1))
+                    .useDefaultIndicator()//进度条
+                    .setWebChromeClient(mWebChromeClient)
+                    .setWebViewClient(mWebViewClient)
+                    .createAgentWeb()
+                    .ready()
+                    .go(homeUrl);
         }
         frameLayout = getView().findViewById(R.id.web_frame);
-        frameLayout.addView(mainWebView);
-        //xToast.toast(getActivity(), "addnew");
         progressBar = new ProgressBar(getActivity(), null, android.R.attr.progressBarStyleHorizontal);
         frameLayout.addView(progressBar);
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) progressBar.getLayoutParams();
@@ -96,98 +107,14 @@ public class WebTabFragment extends Fragment {
         params.height = 5;
         progressBar.setLayoutParams(params);
 
-        mainWebView.getSettings().setLoadsImagesAutomatically(showPicture); // 加载图片
-        mainWebView.setWebViewClient(new xWebView.xWebViewCilent() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                //xToast.toast(getActivity(), "111");
-                //过滤
-                FilterUtil sf = new FilterUtil(getActivity());
-                if (!spHelper.getIsNoFilter() && !sf.filterWebsite(request.getUrl().toString())) {
-                    xToast.toast(getActivity(), "已拦截，关键字：" + sf.getFilterKey());
-                    mainWebView.stopLoading();
-                    mainWebView.goBack();
-                }
-
-                //该方法在Build.VERSION_CODES.LOLLIPOP以前有效，从Build.VERSION_CODES.LOLLIPOP起，建议使用shouldOverrideUrlLoading(WebView, WebResourceRequest)}
-                boolean flag = mainWebView.openApp(request.getUrl().toString(), getActivity());
-//                if (Build.VERSION.SDK_INT < 26||Build.VERSION.SDK_INT==28) {
-//                    return flag;
-//                }
-                return flag;
-                //return super.shouldOverrideUrlLoading(view, request);
-            }
-
-            @Override
-            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                super.onPageStarted(view, url, favicon);
 
 
-                progressBar.setVisibility(View.VISIBLE);
-                //隐藏toolbar
-                AppBarLayout mainAppBar = getActivity().findViewById(R.id.main_appbar);
-                mainAppBar.setExpanded(false, true);
-
-            }
-
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(view, url);
-
-
-                if (webListener != null) {
-                    webListener.onWebViewCreateFinished();
-                }
-                progressBar.setVisibility(View.INVISIBLE);
-            }
-        });
-
-        mainWebView.setWebChromeClient(new xWebView.xWebChromeClient() {
-
-            @Override
-            public void onProgressChanged(WebView view, int newProgress) {
-                super.onProgressChanged(view, newProgress);
-                progressBar.setProgress(newProgress);
-            }
-
-            @Override
-            public boolean onCreateWindow(WebView view, boolean isDialog, boolean isUserGesture, Message resultMsg) {
-
-                if (webListener != null) {
-                    webListener.onOpenNewWebTab(view.getUrl());
-                }
-                return true; //super.onCreateWindow(view, isDialog, isUserGesture, resultMsg);
-            }
-
-            //定位回调函数
-            @Override
-            public void onGeolocationPermissionsShowPrompt(final String origin, final GeolocationPermissions.Callback callback) {
-               // super.onGeolocationPermissionsShowPrompt(origin, callback);
-                PermissionUtil.Location(getActivity());//权限申请
-
-                final boolean remember = true;
-                Alert alert = new Alert(getActivity());
-                alert.setOnPopupAlertListener(new Alert.OnPopupAlertListener() {
-                    @Override
-                    public void onClickOk() {
-                        callback.invoke(origin, true, remember);
-                    }
-
-                    @Override
-                    public void onClickCancel() {
-                        callback.invoke(origin, false, remember);
-                    }
-                });
-                alert.popupAlert(origin + "想使用你的位置信息。", "允许", "拒绝");
-            }
-
-        });
         WindowManager windowManagers = getActivity().getWindowManager();
         DisplayMetrics outMetrics = new DisplayMetrics();
         windowManagers.getDefaultDisplay().getMetrics(outMetrics);
         //int width = outMetrics.widthPixels;
         final int screenHeight = outMetrics.heightPixels;
-        mainWebView.setOnTouchListener(new View.OnTouchListener() {
+        mainWebView.getWebCreator().getWebView().setOnTouchListener(new View.OnTouchListener() {
             float touchDownPositionY = 0, touchMovePositionY = 0, touchUpPositionY = 0;
             float touchDownPositionX = 0, touchMovePositionX = 0, touchUpPositionX = 0;
             //float touchDownScrollY = 0;//WebView位置
@@ -260,7 +187,7 @@ public class WebTabFragment extends Fragment {
         });
 
         if (webState != null) {
-            mainWebView.restoreState(webState);
+            mainWebView.getWebCreator().getWebView().restoreState(webState);
 
         } else {
             loadUrl(homeUrl);
@@ -270,8 +197,132 @@ public class WebTabFragment extends Fragment {
             webListener.onWebViewCreateFinished();
         }
     }
+    private WebViewClient mWebViewClient=new WebViewClient(){
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+            //xToast.toast(getActivity(), "111");
+            //过滤
+            FilterUtil sf = new FilterUtil(getActivity());
+            if (!spHelper.getIsNoFilter() && !sf.filterWebsite(request.getUrl().toString())) {
+                xToast.toast(getActivity(), "已拦截，关键字：" + sf.getFilterKey());
+                mainWebView.getUrlLoader().stopLoading();
+                mainWebView.back();
+            }
 
-    public void setWebView(xWebView web) {
+            //该方法在Build.VERSION_CODES.LOLLIPOP以前有效，从Build.VERSION_CODES.LOLLIPOP起，建议使用shouldOverrideUrlLoading(WebView, WebResourceRequest)}
+            boolean flag = openApp(request.getUrl().toString(), getActivity());
+//                if (Build.VERSION.SDK_INT < 26||Build.VERSION.SDK_INT==28) {
+//                    return flag;
+//                }
+            return flag;
+            //return super.shouldOverrideUrlLoading(view, request);
+        }
+
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+            super.onPageStarted(view, url, favicon);
+
+
+            progressBar.setVisibility(View.VISIBLE);
+            //隐藏toolbar
+            AppBarLayout mainAppBar = getActivity().findViewById(R.id.main_appbar);
+            mainAppBar.setExpanded(false, true);
+
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            super.onPageFinished(view, url);
+
+
+            if (webListener != null) {
+                webListener.onWebViewCreateFinished();
+            }
+            progressBar.setVisibility(View.INVISIBLE);
+        }
+    };
+    private WebChromeClient mWebChromeClient=new WebChromeClient(){
+        @Override
+        public void onProgressChanged(WebView view, int newProgress) {
+            super.onProgressChanged(view, newProgress);
+            progressBar.setProgress(newProgress);
+        }
+
+        @Override
+        public boolean onCreateWindow(WebView view, boolean isDialog, boolean isUserGesture, Message resultMsg) {
+
+            if (webListener != null) {
+                webListener.onOpenNewWebTab(view.getUrl());
+            }
+            return true; //super.onCreateWindow(view, isDialog, isUserGesture, resultMsg);
+        }
+
+        //定位回调函数
+        @Override
+        public void onGeolocationPermissionsShowPrompt(final String origin, final GeolocationPermissions.Callback callback) {
+            // super.onGeolocationPermissionsShowPrompt(origin, callback);
+            PermissionUtil.Location(getActivity());//权限申请
+
+            final boolean remember = true;
+            Alert alert = new Alert(getActivity());
+            alert.setOnPopupAlertListener(new Alert.OnPopupAlertListener() {
+                @Override
+                public void onClickOk() {
+                    callback.invoke(origin, true, remember);
+                }
+
+                @Override
+                public void onClickCancel() {
+                    callback.invoke(origin, false, remember);
+                }
+            });
+            alert.popupAlert(origin + "想使用你的位置信息。", "允许", "拒绝");
+        }
+    };
+    //判断app是否安装
+    private boolean isInstall(Intent intent) {
+        //Log.i("browser", "非https--->");
+        return getContext().getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY).size() > 0;
+    }
+    //打开app
+    public boolean openApp(String url, final Context activityContext) {
+        if (TextUtils.isEmpty(url)) return false;
+        try {
+            if (!url.startsWith("http") && !url.startsWith("https") && !url.startsWith("ftp")) {
+
+                // Log.i("browser", "非https--->"+url);
+                Uri uri = Uri.parse(url);
+                String host = uri.getHost();
+                String scheme = uri.getScheme();
+                //host 和 scheme 都不能为null
+                if (!TextUtils.isEmpty(host) && !TextUtils.isEmpty(scheme)) {
+                    final Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                    if (isInstall(intent)) {
+                        //Log.i("browser", "已安装");
+                        Alert alert = new Alert(activityContext);
+                        alert.setOnPopupAlertListener(new Alert.OnPopupAlertListener() {
+                            @Override
+                            public void onClickOk() {
+                                getActivity().startActivity(intent);
+                                xToast.toast(getContext(), "正在跳转，请稍后");
+                            }
+
+                            @Override
+                            public void onClickCancel() {
+                            }
+                        });
+                        String appName = getContext().getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY).get(0).loadLabel(getContext().getPackageManager()).toString();
+                        alert.popupAlert("网站请求打开“" + appName + "”，是否同意？", "同意");
+                        return true;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        return false;
+    }
+    public void setWebView(AgentWeb web) {
         mainWebView = web;
     }
 
@@ -292,44 +343,43 @@ public class WebTabFragment extends Fragment {
     }
 
     public void goHome() {
-        mainWebView.loadUrl(homeUrl);
+        mainWebView.getUrlLoader().loadUrl(homeUrl);
     }
 
     public void refresh() {
-        mainWebView.reload();
+        mainWebView.getUrlLoader().reload();
     }
 
     public boolean canGoBack() {
-        return mainWebView.canGoBack();
+        return mainWebView.getWebCreator().getWebView().canGoBack();
     }
 
-    public void goBack() {
-        if (mainWebView.canGoBack())
-            mainWebView.goBack();
+    public boolean goBack() {
+          return  mainWebView.back();
     }
 
     public boolean canGoForward() {
-        return mainWebView.canGoForward();
+        return mainWebView.getWebCreator().getWebView().canGoForward();
     }
 
     public void goForward() {
-        if (mainWebView.canGoForward())
-            mainWebView.goForward();
+        if (mainWebView.getWebCreator().getWebView().canGoForward())
+            mainWebView.getWebCreator().getWebView().goForward();
     }
 
     public void setShowPicture(boolean showPicture) {
         this.showPicture = showPicture;
         if (mainWebView != null)
-            mainWebView.getSettings().setLoadsImagesAutomatically(showPicture); // 加载图片
+            mainWebView.getAgentWebSettings().getWebSettings().setLoadsImagesAutomatically(showPicture); // 加载图片
     }
 
     public void loadUrl(String str) {
-        mainWebView.loadUrl(str);
+        mainWebView.getUrlLoader().loadUrl(str);
     }
 
     public void generateSnapshot() {
         if (snapshotBmp == null || isCaptureChanged) {//如果是空或者改变过就获取新截图，否则不做处理
-            Bitmap bmp = mainWebView.getCapture();
+            Bitmap bmp =getCapture();
             if (bmp == null) {
                 snapshotBmp = Bitmap.createBitmap(450, 800, Bitmap.Config.RGB_565);
             } else {
@@ -339,6 +389,21 @@ public class WebTabFragment extends Fragment {
         }
 
 
+    }
+    public Bitmap getCapture() {
+        this.destroyDrawingCache();
+        this.setDrawingCacheEnabled(true);//设置能否缓存图片信息（drawing cache）
+        this.buildDrawingCache();
+        Bitmap temp = this.getDrawingCache();
+        Bitmap bmp;
+//        if (temp == null) {
+//            bmp = Bitmap.createBitmap(450, 800, Bitmap.Config.RGB_565);
+//        } else {
+        if (temp == null) return null;
+        bmp = Bitmap.createScaledBitmap(temp, 450, 800, true);
+        //}
+        //this.setDrawingCacheEnabled(false);
+        return bmp;
     }
 
     public void setSnapshotBmp(Bitmap snapshotBmp) {

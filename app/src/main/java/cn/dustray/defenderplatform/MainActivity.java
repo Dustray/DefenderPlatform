@@ -388,6 +388,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        //super.onSaveInstanceState(outState);//注释掉暂时解决fragment中getactivity（）空
+        //super.onSaveInstanceState(outState);//注释掉暂时解决fragment中getActivity()空
     }
 }
