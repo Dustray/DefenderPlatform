@@ -34,8 +34,8 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="info" />
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="def" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
   <component name="CMakeSettings">
     <configurations>
@@ -54,7 +54,13 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/cn/dustray/browser/BrowserFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cn/dustray/browser/BrowserFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/cn/dustray/browser/WebTabFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cn/dustray/browser/WebTabFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/cn/dustray/chat/ChatHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cn/dustray/chat/ChatHolder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/cn/dustray/utils/PermissionUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cn/dustray/utils/PermissionUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/btn_alert.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/btn_alert.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/popup_alert_ok_btn.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/popup_alert_ok_btn.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/popup_alert_okcancle_btn.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/popup_alert_okcancle_btn.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -90,8 +96,8 @@
       <file leaf-file-name="WebTabFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/browser/WebTabFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6598">
-              <caret line="388" selection-start-line="388" selection-end-line="388" />
+            <state relative-caret-position="142">
+              <caret line="165" column="53" selection-start-line="165" selection-start-column="53" selection-end-line="165" selection-end-column="53" />
             </state>
           </provider>
         </entry>
@@ -99,29 +105,15 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="281">
-              <caret line="390" column="78" selection-start-line="390" selection-start-column="78" selection-end-line="390" selection-end-column="78" />
+            <state relative-caret-position="131">
+              <caret line="378" column="35" selection-start-line="378" selection-start-column="16" selection-end-line="378" selection-end-column="35" />
               <folding>
-                <element signature="e#3203#3234#0" expanded="true" />
-                <element signature="e#3236#3268#0" expanded="true" />
-                <element signature="e#4890#5481#0" expanded="true" />
-                <element signature="e#5480#5481#0" expanded="true" />
-                <element signature="e#6029#6030#0" expanded="true" />
-                <element signature="e#6090#6091#0" expanded="true" />
-                <element signature="e#6269#6270#0" expanded="true" />
-                <element signature="e#6311#6312#0" expanded="true" />
-                <element signature="e#6344#6345#0" expanded="true" />
-                <element signature="e#6386#6387#0" expanded="true" />
-                <element signature="e#7670#7912#0" expanded="true" />
-                <element signature="e#7911#7912#0" expanded="true" />
-                <element signature="e#10853#10854#0" expanded="true" />
-                <element signature="e#10890#10891#0" expanded="true" />
-                <element signature="e#11301#11302#0" expanded="true" />
-                <element signature="e#11352#11353#0" expanded="true" />
-                <element signature="e#11400#11401#0" expanded="true" />
-                <element signature="e#11444#11445#0" expanded="true" />
-                <element signature="e#11498#11499#0" expanded="true" />
-                <element signature="e#11555#11556#0" expanded="true" />
+                <element signature="e#3101#3132#0" expanded="true" />
+                <element signature="e#3134#3166#0" expanded="true" />
+                <element signature="e#4788#5379#0" expanded="true" />
+                <element signature="e#5378#5379#0" expanded="true" />
+                <element signature="e#7568#7810#0" expanded="true" />
+                <element signature="e#7809#7810#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -130,30 +122,8 @@
       <file leaf-file-name="BrowserFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/browser/BrowserFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-7840">
-              <caret line="97" column="33" selection-start-line="97" selection-start-column="33" selection-end-line="97" selection-end-column="33" />
-              <folding>
-                <element signature="e#3826#3827#0" expanded="true" />
-                <element signature="e#3864#3865#0" expanded="true" />
-                <element signature="e#4345#4346#0" expanded="true" />
-                <element signature="e#4377#4378#0" expanded="true" />
-                <element signature="e#4406#4407#0" expanded="true" />
-                <element signature="e#4439#4440#0" expanded="true" />
-                <element signature="e#4473#4474#0" expanded="true" />
-                <element signature="e#4515#4516#0" expanded="true" />
-                <element signature="e#4543#4544#0" expanded="true" />
-                <element signature="e#4575#4576#0" expanded="true" />
-                <element signature="e#5381#5382#0" expanded="true" />
-                <element signature="e#5411#5412#0" expanded="true" />
-                <element signature="e#5460#5461#0" expanded="true" />
-                <element signature="e#5493#5494#0" expanded="true" />
-                <element signature="e#9299#9300#0" expanded="true" />
-                <element signature="e#9335#9336#0" expanded="true" />
-                <element signature="e#9973#9974#0" expanded="true" />
-                <element signature="e#10007#10008#0" expanded="true" />
-                <element signature="e#13459#13460#0" expanded="true" />
-                <element signature="e#13497#13498#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="116">
+              <caret line="94" column="59" selection-start-line="94" selection-start-column="59" selection-end-line="94" selection-end-column="59" />
             </state>
           </provider>
         </entry>
@@ -163,6 +133,15 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="122">
               <caret line="162" selection-start-line="162" selection-end-line="162" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Alert.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/utils/Alert.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="63" selection-start-line="63" selection-end-line="63" />
             </state>
           </provider>
         </entry>
@@ -2872,7 +2851,7 @@
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32914925" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.32914925" />
-      <window_info active="true" anchor="bottom" id="Logcat" order="10" sideWeight="0.49798927" visible="true" weight="0.30404463" />
+      <window_info active="true" anchor="bottom" id="Logcat" order="10" sideWeight="0.49798927" visible="true" weight="0.33891213" />
       <window_info id="Captures" order="4" weight="0.25" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Designer" order="2" />
@@ -3242,6 +3221,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/utils/Alert.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="63" selection-start-line="63" selection-end-line="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/browser/WebTabFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="165" column="53" selection-start-line="165" selection-start-column="53" selection-end-line="165" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.support/support-fragment/27.1.1/94732bda44fba11302c58e459b7c1f47e7521bf9/support-fragment-27.1.1-sources.jar!/android/support/v4/app/FragmentController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -3260,74 +3253,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/browser/WebTabFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6598">
-          <caret line="388" selection-start-line="388" selection-end-line="388" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/utils/Alert.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="28" selection-start-line="28" selection-end-line="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/browser/BrowserFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-7840">
-          <caret line="97" column="33" selection-start-line="97" selection-start-column="33" selection-end-line="97" selection-end-column="33" />
-          <folding>
-            <element signature="e#3826#3827#0" expanded="true" />
-            <element signature="e#3864#3865#0" expanded="true" />
-            <element signature="e#4345#4346#0" expanded="true" />
-            <element signature="e#4377#4378#0" expanded="true" />
-            <element signature="e#4406#4407#0" expanded="true" />
-            <element signature="e#4439#4440#0" expanded="true" />
-            <element signature="e#4473#4474#0" expanded="true" />
-            <element signature="e#4515#4516#0" expanded="true" />
-            <element signature="e#4543#4544#0" expanded="true" />
-            <element signature="e#4575#4576#0" expanded="true" />
-            <element signature="e#5381#5382#0" expanded="true" />
-            <element signature="e#5411#5412#0" expanded="true" />
-            <element signature="e#5460#5461#0" expanded="true" />
-            <element signature="e#5493#5494#0" expanded="true" />
-            <element signature="e#9299#9300#0" expanded="true" />
-            <element signature="e#9335#9336#0" expanded="true" />
-            <element signature="e#9973#9974#0" expanded="true" />
-            <element signature="e#10007#10008#0" expanded="true" />
-            <element signature="e#13459#13460#0" expanded="true" />
-            <element signature="e#13497#13498#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="116">
+          <caret line="94" column="59" selection-start-line="94" selection-start-column="59" selection-end-line="94" selection-end-column="59" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="390" column="78" selection-start-line="390" selection-start-column="78" selection-end-line="390" selection-end-column="78" />
+        <state relative-caret-position="131">
+          <caret line="378" column="35" selection-start-line="378" selection-start-column="16" selection-end-line="378" selection-end-column="35" />
           <folding>
-            <element signature="e#3203#3234#0" expanded="true" />
-            <element signature="e#3236#3268#0" expanded="true" />
-            <element signature="e#4890#5481#0" expanded="true" />
-            <element signature="e#5480#5481#0" expanded="true" />
-            <element signature="e#6029#6030#0" expanded="true" />
-            <element signature="e#6090#6091#0" expanded="true" />
-            <element signature="e#6269#6270#0" expanded="true" />
-            <element signature="e#6311#6312#0" expanded="true" />
-            <element signature="e#6344#6345#0" expanded="true" />
-            <element signature="e#6386#6387#0" expanded="true" />
-            <element signature="e#7670#7912#0" expanded="true" />
-            <element signature="e#7911#7912#0" expanded="true" />
-            <element signature="e#10853#10854#0" expanded="true" />
-            <element signature="e#10890#10891#0" expanded="true" />
-            <element signature="e#11301#11302#0" expanded="true" />
-            <element signature="e#11352#11353#0" expanded="true" />
-            <element signature="e#11400#11401#0" expanded="true" />
-            <element signature="e#11444#11445#0" expanded="true" />
-            <element signature="e#11498#11499#0" expanded="true" />
-            <element signature="e#11555#11556#0" expanded="true" />
+            <element signature="e#3101#3132#0" expanded="true" />
+            <element signature="e#3134#3166#0" expanded="true" />
+            <element signature="e#4788#5379#0" expanded="true" />
+            <element signature="e#5378#5379#0" expanded="true" />
+            <element signature="e#7568#7810#0" expanded="true" />
+            <element signature="e#7809#7810#0" expanded="true" />
           </folding>
         </state>
       </provider>
