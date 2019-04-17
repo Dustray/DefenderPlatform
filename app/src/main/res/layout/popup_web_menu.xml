@@ -35,300 +35,205 @@
         android:rowCount="2">
 
         <!--第一行-->
-        <RelativeLayout
+        <cn.dustray.control.xButtonLayout
 
+            android:id="@+id/btn_web_menu_rotate"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_row="0"
             android:layout_rowWeight="1"
+            android:layout_gravity="center"
             android:layout_column="2"
-            android:layout_columnWeight="1">
+            android:layout_columnWeight="1"
 
-            <ImageButton
-                android:id="@+id/btn_web_menu_rotate"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/btn_web_menu_add"
-                android:paddingBottom="19dp"
-                android:scaleType="center"
-                android:src="@drawable/ic_btn_rotateon_black" />
+            app:open_image="@drawable/ic_btn_rotateoff_gray"
+            app:close_image="@drawable/ic_btn_rotateon_black"
+            app:open_text="旋转/关"
+            app:close_text="旋转/开"
+            android:background="@drawable/btn_web_menu_add">
 
-            <TextView
-                android:id="@+id/text_web_menu_rotate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="14dp"
-                android:gravity="center"
-                android:text="旋转/关"
-                android:textColor="#666"
-                android:textSize="13dp" />
-        </RelativeLayout>
+        </cn.dustray.control.xButtonLayout>
 
-        <RelativeLayout
-
+        <cn.dustray.control.xButtonLayout
+            android:id="@+id/btn_web_menu_fullscreen"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_row="0"
+            android:layout_gravity="center"
             android:layout_rowWeight="1"
             android:layout_column="0"
-            android:layout_columnWeight="1">
+            android:layout_columnWeight="1"
 
-            <ImageButton
-                android:id="@+id/btn_web_menu_fullscreen"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/btn_web_menu_add"
-                android:paddingBottom="19dp"
-                android:scaleType="center"
-                android:src="@drawable/ic_btn_fullscreenon_black" />
+            app:open_image="@drawable/ic_btn_fullscreenon_black"
+            app:close_image="@drawable/ic_btn_fullscreenoff_gray"
+            app:open_text="全屏/关"
+            app:close_text="全屏/开"
+            android:background="@drawable/btn_web_menu_add"
 
-            <TextView
-                android:id="@+id/text_web_menu_fullscreen"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="14dp"
-                android:gravity="center"
-                android:text="全屏/关"
-                android:textColor="#666"
-                android:textSize="13dp" />
-        </RelativeLayout>
+            >
 
-        <RelativeLayout
+
+        </cn.dustray.control.xButtonLayout>
+
+        <cn.dustray.control.xButtonLayout
+            android:id="@+id/btn_web_menu_capture"
 
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_gravity="center"
             android:layout_row="0"
             android:layout_rowWeight="1"
             android:layout_column="3"
-            android:layout_columnWeight="1">
+            android:layout_columnWeight="1"
 
-            <ImageButton
-                android:id="@+id/btn_web_menu_capture"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/btn_web_menu_add"
-                android:paddingBottom="19dp"
-                android:scaleType="center"
-                android:src="@drawable/ic_btn_screenshot_black" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="14dp"
-                android:gravity="center"
-                android:text="截图"
-                android:textColor="#666"
-                android:textSize="13dp" />
-        </RelativeLayout>
+            app:open_image="@drawable/ic_btn_screenshot_black"
+            app:close_image="@drawable/ic_btn_screenshot_black"
+            app:open_text="截图"
+            app:close_text="截图"
+            android:background="@drawable/btn_web_menu_add">
 
-        <RelativeLayout
+
+        </cn.dustray.control.xButtonLayout>
+
+        <cn.dustray.control.xButtonLayout
+            android:id="@+id/btn_web_menu_nopic"
 
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_gravity="center"
             android:layout_row="0"
             android:layout_rowWeight="1"
             android:layout_column="1"
-            android:layout_columnWeight="1">
+            android:layout_columnWeight="1"
 
-            <ImageButton
-                android:id="@+id/btn_web_menu_nopic"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/btn_web_menu_add"
-                android:paddingBottom="19dp"
-                android:scaleType="center"
-                android:src="@drawable/ic_btn_picturemodeon_black" />
+            app:open_image="@drawable/ic_btn_picturemodeon_black"
+            app:close_image="@drawable/ic_btn_picturemodeoff_gray"
+            app:open_text="无图/关"
+            app:close_text="无图/开"
 
-            <TextView
-                android:id="@+id/text_web_menu_nopic"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="14dp"
-                android:gravity="center"
-                android:text="无图/关"
-                android:textColor="#666"
-                android:textSize="13dp" />
-        </RelativeLayout>
+            android:background="@drawable/btn_web_menu_add">
 
-        <RelativeLayout
+        </cn.dustray.control.xButtonLayout>
 
+        <cn.dustray.control.xButtonLayout
+            android:id="@+id/btn_web_menu_night"
+
+            android:layout_gravity="center"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_row="0"
             android:layout_rowWeight="1"
             android:layout_column="4"
-            android:layout_columnWeight="1">
+            android:layout_columnWeight="1"
+            app:open_image="@drawable/ic_btn_picturemodeon_black"
+            app:close_image="@drawable/ic_btn_picturemodeoff_gray"
+            app:open_text="夜间/关"
+            app:close_text="夜间/开"
 
-            <ImageButton
-                android:id="@+id/btn_web_menu_night"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/btn_web_menu_add"
-                android:paddingBottom="19dp"
-                android:scaleType="center"
-                android:src="@drawable/ic_btn_nightmodeon_black" />
+            android:background="@drawable/btn_web_menu_add"
+            >
 
-            <TextView
-                android:id="@+id/text_web_menu_night"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="14dp"
-                android:gravity="center"
-                android:text="夜间模式"
-                android:textColor="#666"
-                android:textSize="13dp" />
-        </RelativeLayout>
+
+        </cn.dustray.control.xButtonLayout>
 
 
         <!--第二行-->
-        <RelativeLayout
+        <cn.dustray.control.xButtonLayout
+            android:id="@+id/btn_web_menu_home"
 
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_row="1"
             android:layout_rowWeight="1"
+            android:layout_gravity="center"
             android:layout_column="2"
-            android:layout_columnWeight="1">
+            android:layout_columnWeight="1"
 
-            <ImageButton
-                android:id="@+id/btn_web_menu_home"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/btn_web_menu_add"
-                android:paddingBottom="19dp"
-                android:scaleType="center"
-                android:src="@drawable/ic_btn_home_black" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="14dp"
-                android:gravity="center"
-                android:text="主页"
-                android:textColor="#666"
-                android:textSize="13dp" />
-        </RelativeLayout>
+            app:open_image="@drawable/ic_btn_home_black"
+            app:close_image="@drawable/ic_btn_home_black"
+            app:open_text="主页"
+            app:close_text="主页"
 
-        <RelativeLayout
+            android:background="@drawable/btn_web_menu_add">
+
+        </cn.dustray.control.xButtonLayout>
+
+        <cn.dustray.control.xButtonLayout
 
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_row="1"
             android:layout_rowWeight="1"
+            android:layout_gravity="center"
             android:layout_column="0"
-            android:layout_columnWeight="1">
+            android:layout_columnWeight="1"
+            app:open_image="@drawable/ic_btn_collect_black"
+            app:close_image="@drawable/ic_btn_collect_black"
+            app:open_text="添加书签"
+            app:close_text="添加书签"
 
-            <ImageButton
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/btn_web_menu_add"
-                android:paddingBottom="19dp"
-                android:scaleType="center"
-                android:src="@drawable/ic_btn_collect_black" />
+            android:background="@drawable/btn_web_menu_add">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="14dp"
-                android:gravity="center"
-                android:text="添加书签"
-                android:textColor="#666"
-                android:textSize="13dp" />
-        </RelativeLayout>
+        </cn.dustray.control.xButtonLayout>
 
-        <RelativeLayout
+        <cn.dustray.control.xButtonLayout
 
+            android:id="@+id/btn_web_menu_rolllock"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_row="1"
+            android:layout_gravity="center"
             android:layout_rowWeight="1"
             android:layout_column="3"
-            android:layout_columnWeight="1">
+            android:layout_columnWeight="1"
+            app:open_image="@drawable/ic_btn_roll_lock_black"
+            app:close_image="@drawable/ic_btn_roll_unlock_black"
+            app:open_text="侧滑/关"
+            app:close_text="侧滑/开"
 
-            <ImageButton
-                android:id="@+id/btn_web_menu_rolllock"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/btn_web_menu_add"
-                android:paddingBottom="19dp"
-                android:scaleType="center"
-                android:src="@drawable/ic_btn_roll_unlock_black" />
+            android:background="@drawable/btn_web_menu_add">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="14dp"
-                android:gravity="center"
-                android:text="锁定侧滑"
-                android:textColor="#666"
-                android:textSize="13dp" />
-        </RelativeLayout>
+        </cn.dustray.control.xButtonLayout>
 
-        <RelativeLayout
+        <cn.dustray.control.xButtonLayout
+            android:id="@+id/btn_web_menu_refresh"
 
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_row="1"
+            android:layout_gravity="center"
             android:layout_rowWeight="1"
             android:layout_column="1"
-            android:layout_columnWeight="1">
+            android:layout_columnWeight="1"
+            app:open_image="@drawable/ic_btn_refresh_black"
+            app:close_image="@drawable/ic_btn_refresh_black"
+            app:open_text="刷新"
+            app:close_text="刷新"
 
-            <ImageButton
-                android:id="@+id/btn_web_menu_refresh"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/btn_web_menu_add"
-                android:paddingBottom="19dp"
-                android:scaleType="center"
-                android:src="@drawable/ic_btn_refresh_black" />
+            android:background="@drawable/btn_web_menu_add">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="14dp"
-                android:gravity="center"
-                android:text="刷新"
-                android:textColor="#666"
-                android:textSize="13dp" />
-        </RelativeLayout>
+        </cn.dustray.control.xButtonLayout>
 
-        <RelativeLayout
+        <cn.dustray.control.xButtonLayout
 
+            android:id="@+id/btn_web_menu_clean"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_row="1"
+            android:layout_gravity="center"
             android:layout_rowWeight="1"
             android:layout_column="4"
-            android:layout_columnWeight="1">
+            android:layout_columnWeight="1"
+            app:open_image="@drawable/ic_btn_delete_black"
+            app:close_image="@drawable/ic_btn_delete_black"
+            app:open_text="清空缓存"
+            app:close_text="清空缓存"
 
-            <ImageButton
-                android:id="@+id/btn_web_menu_clean"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/btn_web_menu_add"
-                android:paddingBottom="19dp"
-                android:scaleType="center"
-                android:src="@drawable/ic_btn_delete_black" />
+            android:background="@drawable/btn_web_menu_add">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="14dp"
-                android:gravity="center"
-                android:text="清空缓存"
-                android:textColor="#666"
-                android:textSize="13dp" />
-        </RelativeLayout>
+        </cn.dustray.control.xButtonLayout>
 
     </GridLayout>
 

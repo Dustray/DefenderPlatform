@@ -8,5 +8,13 @@
         <attr name="metaButtonBarStyle" format="reference" />
         <attr name="metaButtonBarButtonStyle" format="reference" />
     </declare-styleable>
+    <declare-styleable name="xButtonLayout">
+
+        <attr name="open_image" format="reference"/>
+        <attr name="close_image" format="reference"/>
+        <attr name="open_text" format="string"/>
+        <attr name="close_text" format="string"/>
+
+    </declare-styleable>
 
 </resources>
