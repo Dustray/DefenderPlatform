@@ -34,8 +34,8 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="info" />
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="browser" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
   <component name="CMakeSettings">
     <configurations>
@@ -52,7 +52,6 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/cn/dustray/browser/BrowserFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cn/dustray/browser/BrowserFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/MainActivity.java" afterDir="false" />
     </list>
@@ -90,7 +89,7 @@
         <counts>
           <entry key="class" value="2" />
           <entry key="gradle" value="2" />
-          <entry key="java" value="9" />
+          <entry key="java" value="13" />
           <entry key="xml" value="3" />
         </counts>
       </usages-collector>
@@ -98,30 +97,31 @@
         <counts>
           <entry key="CLASS" value="2" />
           <entry key="Groovy" value="2" />
-          <entry key="JAVA" value="9" />
+          <entry key="JAVA" value="13" />
           <entry key="XML" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gradle" value="4" />
-          <entry key="java" value="1075" />
+          <entry key="java" value="1456" />
           <entry key="xml" value="240" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Groovy" value="4" />
-          <entry key="JAVA" value="1075" />
+          <entry key="JAVA" value="1456" />
           <entry key="XML" value="240" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="3" />
           <entry key="project.open.time.18" value="1" />
+          <entry key="project.open.time.35" value="1" />
           <entry key="project.open.time.45" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.opened" value="3" />
         </counts>
       </usages-collector>
     </session>
@@ -130,12 +130,12 @@
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/popup_web_menu.xml">
+          <provider editor-type-id="android-designer2" />
           <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="1496">
               <caret line="68" column="32" selection-start-line="68" selection-start-column="32" selection-end-line="68" selection-end-column="32" />
             </state>
           </provider>
-          <provider editor-type-id="android-designer2" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -161,22 +161,53 @@
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+          <provider editor-type-id="android-manifest" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4">
+            <state relative-caret-position="1254">
               <caret line="57" column="75" selection-start-line="57" selection-start-column="75" selection-end-line="57" selection-end-column="75" />
             </state>
           </provider>
-          <provider editor-type-id="android-manifest" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="422" column="8" lean-forward="true" selection-start-line="422" selection-start-column="8" selection-end-line="422" selection-end-column="8" />
+            <state relative-caret-position="2447">
+              <caret line="210" column="53" selection-start-line="210" selection-start-column="50" selection-end-line="210" selection-end-column="53" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/browser/WebTabFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="280">
+              <caret line="79" selection-start-line="79" selection-end-line="79" />
               <folding>
-                <element signature="e#6168#6169#0" expanded="true" />
-                <element signature="e#6210#6211#0" expanded="true" />
+                <element signature="e#6497#6498#0" expanded="true" />
+                <element signature="e#6584#6585#0" expanded="true" />
+                <element signature="e#6665#6666#0" expanded="true" />
+                <element signature="e#6753#6754#0" expanded="true" />
+                <element signature="e#11203#11204#0" expanded="true" />
+                <element signature="e#11236#11237#0" expanded="true" />
+                <element signature="e#11281#11282#0" expanded="true" />
+                <element signature="e#11318#11319#0" expanded="true" />
+                <element signature="e#11353#11354#0" expanded="true" />
+                <element signature="e#11389#11390#0" expanded="true" />
+                <element signature="e#11431#11432#0" expanded="true" />
+                <element signature="e#11460#11461#0" expanded="true" />
+                <element signature="e#11508#11509#0" expanded="true" />
+                <element signature="e#11569#11570#0" expanded="true" />
+                <element signature="e#11597#11598#0" expanded="true" />
+                <element signature="e#11641#11642#0" expanded="true" />
+                <element signature="e#11670#11671#0" expanded="true" />
+                <element signature="e#11706#11707#0" expanded="true" />
+                <element signature="e#11740#11741#0" expanded="true" />
+                <element signature="e#11786#11787#0" expanded="true" />
+                <element signature="e#11928#11929#0" expanded="true" />
+                <element signature="e#11977#11978#0" expanded="true" />
+                <element signature="e#12352#12353#0" expanded="true" />
+                <element signature="e#12392#12393#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -185,39 +216,14 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/browser/BrowserFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="99" column="9" lean-forward="true" selection-start-line="99" selection-start-column="9" selection-end-line="101" selection-end-column="11" />
+            <state relative-caret-position="214">
+              <caret line="114" column="36" lean-forward="true" selection-start-line="114" selection-start-column="36" selection-end-line="114" selection-end-column="36" />
               <folding>
-                <element signature="e#3741#3742#0" expanded="true" />
-                <element signature="e#3779#3780#0" expanded="true" />
-                <element signature="e#4260#4261#0" expanded="true" />
-                <element signature="e#4292#4293#0" expanded="true" />
-                <element signature="e#4321#4322#0" expanded="true" />
-                <element signature="e#4354#4355#0" expanded="true" />
-                <element signature="e#4388#4389#0" expanded="true" />
-                <element signature="e#4430#4431#0" expanded="true" />
-                <element signature="e#4458#4459#0" expanded="true" />
-                <element signature="e#4490#4491#0" expanded="true" />
-                <element signature="e#5296#5297#0" expanded="true" />
-                <element signature="e#5326#5327#0" expanded="true" />
-                <element signature="e#5375#5376#0" expanded="true" />
-                <element signature="e#5408#5409#0" expanded="true" />
-                <element signature="e#9214#9215#0" expanded="true" />
-                <element signature="e#9250#9251#0" expanded="true" />
-                <element signature="e#9888#9889#0" expanded="true" />
-                <element signature="e#9922#9923#0" expanded="true" />
-                <element signature="e#13374#13375#0" expanded="true" />
-                <element signature="e#13412#13413#0" expanded="true" />
+                <element signature="e#5578#5579#0" expanded="true" />
+                <element signature="e#5608#5609#0" expanded="true" />
+                <element signature="e#5657#5658#0" expanded="true" />
+                <element signature="e#5690#5691#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/popupwindow/WebGroupPopup.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="649">
-              <caret line="91" column="36" selection-start-line="91" selection-start-column="36" selection-end-line="91" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -234,7 +240,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>mHandler</find>
       <find>ele</find>
       <find>dism</find>
       <find>add</find>
@@ -262,8 +267,9 @@
       <find>btn_web_menu_down</find>
       <find>layout_width=&quot;40dp&quot;</find>
       <find>1</find>
-      <find>beginTransaction()</find>
       <find>onSaveInstanceState</find>
+      <find>beginTransaction()</find>
+      <find>onCreateNewFragment</find>
     </findStrings>
     <replaceStrings>
       <replace>20dp</replace>
@@ -2598,8 +2604,8 @@
         <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/popupwindow/WebMenuPopup.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/popup_web_menu.xml" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/browser/BrowserFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/MainActivity.java" />
       </list>
     </option>
   </component>
@@ -2617,6 +2623,40 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="AndroidView">
+        <subPane>
+          <expand>
+            <path>
+              <item name="DefenderPlatform" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+            </path>
+            <path>
+              <item name="DefenderPlatform" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+            </path>
+            <path>
+              <item name="DefenderPlatform" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="dustray" type="cbb59c9e:AndroidPsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="DefenderPlatform" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="dustray" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="popupwindow" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="DefenderPlatform" type="1abcf292:AndroidViewProjectNode" />
+              <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -2644,54 +2684,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView">
-        <subPane>
-          <expand>
-            <path>
-              <item name="DefenderPlatform" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-            </path>
-            <path>
-              <item name="DefenderPlatform" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-            </path>
-            <path>
-              <item name="DefenderPlatform" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="dustray" type="cbb59c9e:AndroidPsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DefenderPlatform" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="dustray" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="browser" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DefenderPlatform" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="dustray" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="defenderplatform" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DefenderPlatform" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="dustray" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="popupwindow" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DefenderPlatform" type="1abcf292:AndroidViewProjectNode" />
-              <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2864,7 +2856,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="878" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18699732" />
@@ -2885,7 +2877,7 @@
       <window_info anchor="bottom" id="Build" order="7" weight="0.3261745" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5020107" side_tool="true" weight="0.32078102" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32914925" />
-      <window_info active="true" anchor="bottom" id="Logcat" order="10" sideWeight="0.49798927" visible="true" weight="0.33825505" />
+      <window_info active="true" anchor="bottom" id="Logcat" order="10" sideWeight="0.49798927" visible="true" weight="0.33691275" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.32914925" />
       <window_info anchor="bottom" id="Android Profiler" order="12" weight="0.32914925" />
       <window_info anchor="bottom" id="Statistic" order="13" />
@@ -2904,14 +2896,19 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/cn/dustray/browser/BrowserFragment.java</url>
+          <line>100</line>
+          <properties />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/user/UserManageListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/webfilter/FilterUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="25">
@@ -2934,12 +2931,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/activity_main_drawer.xml">
+      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
           <caret line="27" column="28" selection-start-line="27" selection-start-column="28" selection-end-line="27" selection-end-column="28" />
         </state>
       </provider>
-      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/utils/BmobUtil.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -2949,12 +2946,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/nav_header_main.xml">
+      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="287">
           <caret line="23" column="38" selection-start-line="23" selection-start-column="38" selection-end-line="23" selection-end-column="38" />
         </state>
       </provider>
-      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/RegisterActivity.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -2978,35 +2975,35 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml">
+      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="212">
           <caret line="65" lean-forward="true" selection-start-line="65" selection-end-line="65" />
         </state>
       </provider>
-      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_register.xml">
+      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1325">
           <caret line="85" column="25" lean-forward="true" selection-start-line="85" selection-start-column="25" selection-end-line="85" selection-end-column="25" />
         </state>
       </provider>
-      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_my.xml">
+      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-25" />
       </provider>
-      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/control/xActivity.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_shielding.xml">
+      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="25">
           <caret line="20" column="44" selection-start-line="20" selection-start-column="44" selection-end-line="20" selection-end-column="44" />
         </state>
       </provider>
-      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/MyActivity.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -3030,20 +3027,20 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/popup_alert_ok_btn.xml">
+      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="235">
           <caret line="46" column="52" lean-forward="true" selection-start-line="46" selection-start-column="52" selection-end-line="46" selection-end-column="52" />
         </state>
       </provider>
-      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/popup_alert_okcancle_btn.xml">
+      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="307">
           <caret line="70" column="58" lean-forward="true" selection-start-line="70" selection-start-column="39" selection-end-line="70" selection-end-column="58" />
         </state>
       </provider>
-      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/img_picture_loading.jpg">
       <provider selected="true" editor-type-id="images" />
@@ -3104,39 +3101,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/browser/WebTabFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="348" column="34" lean-forward="true" selection-start-line="348" selection-start-column="34" selection-end-line="348" selection-end-column="34" />
-          <folding>
-            <element signature="e#6497#6498#0" expanded="true" />
-            <element signature="e#6584#6585#0" expanded="true" />
-            <element signature="e#6665#6666#0" expanded="true" />
-            <element signature="e#6753#6754#0" expanded="true" />
-            <element signature="e#11203#11204#0" expanded="true" />
-            <element signature="e#11236#11237#0" expanded="true" />
-            <element signature="e#11281#11282#0" expanded="true" />
-            <element signature="e#11318#11319#0" expanded="true" />
-            <element signature="e#11353#11354#0" expanded="true" />
-            <element signature="e#11389#11390#0" expanded="true" />
-            <element signature="e#11431#11432#0" expanded="true" />
-            <element signature="e#11460#11461#0" expanded="true" />
-            <element signature="e#11508#11509#0" expanded="true" />
-            <element signature="e#11569#11570#0" expanded="true" />
-            <element signature="e#11597#11598#0" expanded="true" />
-            <element signature="e#11641#11642#0" expanded="true" />
-            <element signature="e#11670#11671#0" expanded="true" />
-            <element signature="e#11706#11707#0" expanded="true" />
-            <element signature="e#11740#11741#0" expanded="true" />
-            <element signature="e#11786#11787#0" expanded="true" />
-            <element signature="e#11928#11929#0" expanded="true" />
-            <element signature="e#11977#11978#0" expanded="true" />
-            <element signature="e#12352#12353#0" expanded="true" />
-            <element signature="e#12392#12393#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.support/support-fragment/27.1.1/94732bda44fba11302c58e459b7c1f47e7521bf9/support-fragment-27.1.1-sources.jar!/android/support/v4/app/FragmentController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -3152,28 +3116,28 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_main.xml">
+      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="242">
           <caret line="11" column="20" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
         </state>
       </provider>
-      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/app_bar_main.xml">
+      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="49" selection-start-line="49" selection-end-line="49" />
         </state>
       </provider>
-      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="22">
           <caret line="1" column="39" selection-start-line="1" selection-start-column="39" selection-end-line="1" selection-end-column="39" />
         </state>
       </provider>
-      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
       <provider selected="true" editor-type-id="text-editor">
@@ -3217,24 +3181,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/popup_web_menu.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="68" column="32" selection-start-line="68" selection-start-column="32" selection-end-line="68" selection-end-column="32" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/control/xButtonLayout.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1166">
-          <caret line="68" column="52" selection-start-line="68" selection-start-column="52" selection-end-line="68" selection-end-column="53" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/popupwindow/WebMenuPopup.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="286">
@@ -3249,13 +3195,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/utils/PixelConvert.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="8" column="28" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/browser/WebGroupListAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-440">
@@ -3263,57 +3202,102 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.support/support-fragment/27.1.1/94732bda44fba11302c58e459b7c1f47e7521bf9/support-fragment-27.1.1-sources.jar!/android/support/v4/app/Fragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4">
+        <state relative-caret-position="155">
+          <caret line="626" column="25" selection-start-line="626" selection-start-column="25" selection-end-line="626" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/popup_web_menu.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1496">
+          <caret line="68" column="32" selection-start-line="68" selection-start-column="32" selection-end-line="68" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/control/xButtonLayout.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1166">
+          <caret line="68" column="52" selection-start-line="68" selection-start-column="52" selection-end-line="68" selection-end-column="53" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/utils/PixelConvert.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="8" column="28" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1254">
           <caret line="57" column="75" selection-start-line="57" selection-start-column="75" selection-end-line="57" selection-end-column="75" />
         </state>
       </provider>
-      <provider editor-type-id="android-manifest" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/popupwindow/WebGroupPopup.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="649">
-          <caret line="91" column="36" selection-start-line="91" selection-start-column="36" selection-end-line="91" selection-end-column="36" />
+        <state relative-caret-position="246">
+          <caret line="92" column="32" selection-start-line="92" selection-start-column="13" selection-end-line="92" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/browser/WebTabFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="79" selection-start-line="79" selection-end-line="79" />
+          <folding>
+            <element signature="e#6497#6498#0" expanded="true" />
+            <element signature="e#6584#6585#0" expanded="true" />
+            <element signature="e#6665#6666#0" expanded="true" />
+            <element signature="e#6753#6754#0" expanded="true" />
+            <element signature="e#11203#11204#0" expanded="true" />
+            <element signature="e#11236#11237#0" expanded="true" />
+            <element signature="e#11281#11282#0" expanded="true" />
+            <element signature="e#11318#11319#0" expanded="true" />
+            <element signature="e#11353#11354#0" expanded="true" />
+            <element signature="e#11389#11390#0" expanded="true" />
+            <element signature="e#11431#11432#0" expanded="true" />
+            <element signature="e#11460#11461#0" expanded="true" />
+            <element signature="e#11508#11509#0" expanded="true" />
+            <element signature="e#11569#11570#0" expanded="true" />
+            <element signature="e#11597#11598#0" expanded="true" />
+            <element signature="e#11641#11642#0" expanded="true" />
+            <element signature="e#11670#11671#0" expanded="true" />
+            <element signature="e#11706#11707#0" expanded="true" />
+            <element signature="e#11740#11741#0" expanded="true" />
+            <element signature="e#11786#11787#0" expanded="true" />
+            <element signature="e#11928#11929#0" expanded="true" />
+            <element signature="e#11977#11978#0" expanded="true" />
+            <element signature="e#12352#12353#0" expanded="true" />
+            <element signature="e#12392#12393#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="422" column="8" lean-forward="true" selection-start-line="422" selection-start-column="8" selection-end-line="422" selection-end-column="8" />
-          <folding>
-            <element signature="e#6168#6169#0" expanded="true" />
-            <element signature="e#6210#6211#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="2447">
+          <caret line="210" column="53" selection-start-line="210" selection-start-column="50" selection-end-line="210" selection-end-column="53" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/browser/BrowserFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="99" column="9" lean-forward="true" selection-start-line="99" selection-start-column="9" selection-end-line="101" selection-end-column="11" />
+        <state relative-caret-position="214">
+          <caret line="114" column="36" lean-forward="true" selection-start-line="114" selection-start-column="36" selection-end-line="114" selection-end-column="36" />
           <folding>
-            <element signature="e#3741#3742#0" expanded="true" />
-            <element signature="e#3779#3780#0" expanded="true" />
-            <element signature="e#4260#4261#0" expanded="true" />
-            <element signature="e#4292#4293#0" expanded="true" />
-            <element signature="e#4321#4322#0" expanded="true" />
-            <element signature="e#4354#4355#0" expanded="true" />
-            <element signature="e#4388#4389#0" expanded="true" />
-            <element signature="e#4430#4431#0" expanded="true" />
-            <element signature="e#4458#4459#0" expanded="true" />
-            <element signature="e#4490#4491#0" expanded="true" />
-            <element signature="e#5296#5297#0" expanded="true" />
-            <element signature="e#5326#5327#0" expanded="true" />
-            <element signature="e#5375#5376#0" expanded="true" />
-            <element signature="e#5408#5409#0" expanded="true" />
-            <element signature="e#9214#9215#0" expanded="true" />
-            <element signature="e#9250#9251#0" expanded="true" />
-            <element signature="e#9888#9889#0" expanded="true" />
-            <element signature="e#9922#9923#0" expanded="true" />
-            <element signature="e#13374#13375#0" expanded="true" />
-            <element signature="e#13412#13413#0" expanded="true" />
+            <element signature="e#5578#5579#0" expanded="true" />
+            <element signature="e#5608#5609#0" expanded="true" />
+            <element signature="e#5657#5658#0" expanded="true" />
+            <element signature="e#5690#5691#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -35,6 +35,7 @@ public class BrowserFragment extends Fragment implements View.OnClickListener, W
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+public String newTabUrl;
 
     private String mParam1;
     private String mParam2;
@@ -75,6 +76,7 @@ public class BrowserFragment extends Fragment implements View.OnClickListener, W
         webManager.readSavedStateFromDisk();
         //FragmentManager
         manager = getActivity().getSupportFragmentManager();
+        Log.i("browser","aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         //初始化webtoolbar
         initWebToolBar();
         //xToast.toast(getActivity(), "s" + webFragArray.size());
@@ -84,7 +86,10 @@ public class BrowserFragment extends Fragment implements View.OnClickListener, W
             initFragment(webFragArray);
         }
         //btnBack.setImageBitmap(mainWebView.getCapture());
-
+        if(newTabUrl!=null){
+            initFragment( newTabUrl);
+            newTabUrl=null;
+        }
     }
 
     private void initFragment() {
@@ -100,6 +105,7 @@ public class BrowserFragment extends Fragment implements View.OnClickListener, W
 //        if (manager == null){
 //            manager = getActivity().getSupportFragmentManager();
 //        }
+        Log.i("browser","bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.setCustomAnimations(R.animator.fragment_slide_right_enter, R.animator.fragment_slide_left_exit);
 
@@ -428,7 +434,6 @@ public class BrowserFragment extends Fragment implements View.OnClickListener, W
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
-
     }
 
 }

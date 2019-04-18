@@ -84,8 +84,27 @@ public class MainActivity extends AppCompatActivity
         initTabPage();
 
         // 处理 作为三方浏览器打开传过来的值
-        getDataFromBrowser(getIntent());
+        Log.i("browser","222222222222222222222222222222222222222222222");
+       // getDataFromBrowser(getIntent());
+        Uri data = getIntent().getData();
+        //browserFragment.createNewFragment("https://baidu.com/");
 
+        if (data != null) {
+            xToast.toast(this,"url"+data.toString());
+            try {
+                String scheme = data.getScheme();
+                String host = data.getHost();
+                String path = data.getPath();
+                String text = "Scheme: " + scheme + "\n" + "host: " + host + "\n" + "path: " + path;
+                String url = scheme + "://" + host + path;
+                browserFragment.newTabUrl=url;
+                //xToast.toast(this,"sssssss");
+                switchToWeb();
+            } catch (Exception e) {
+                e.printStackTrace();
+                Log.i("browser","eeeeeeeeeeeeeeeeeeer"+e.toString());
+            }
+        }
     }
 
     private void initNavigation() {
@@ -179,6 +198,7 @@ public class MainActivity extends AppCompatActivity
      */
     private void getDataFromBrowser(Intent intent) {
         Uri data = intent.getData();
+        //browserFragment.createNewFragment("https://baidu.com/");
 
         if (data != null) {
             xToast.toast(this,"url"+data.toString());
@@ -187,12 +207,9 @@ public class MainActivity extends AppCompatActivity
                 String host = data.getHost();
                 String path = data.getPath();
                 String text = "Scheme: " + scheme + "\n" + "host: " + host + "\n" + "path: " + path;
-                //Log.e("data", text);
                 String url = scheme + "://" + host + path;
-            //    webView.loadUrl(url);
-
                 browserFragment.createNewFragment(url);
-                xToast.toast(this,"sssssss");
+                //xToast.toast(this,"sssssss");
                 switchToWeb();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -309,12 +326,19 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         //检测设置并刷新
         SettingUtil.detectAndRefresh(this);
 
         refleshUserInfo();
+
     }
 
     @Override
@@ -336,6 +360,7 @@ public class MainActivity extends AppCompatActivity
     public void onFragmentInteraction(Uri uri) {
         Toast.makeText(this, "交流,角楼" + uri.toString(), Toast.LENGTH_LONG).show();
     }
+
 
 
     @Override
@@ -416,6 +441,11 @@ public class MainActivity extends AppCompatActivity
         }
 
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 
     @Override
