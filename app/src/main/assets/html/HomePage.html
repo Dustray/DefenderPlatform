@@ -1,170 +1,136 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-cn">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <meta name=”Keywords” Content="导航,网址导航,搜索,开发,简洁">
+    <meta name=”Description” Content="简洁、好看的网址导航">
+    <title>微寒导航</title>
+    <link href="css/navigation.css" rel="stylesheet" type="text/css">
+    <link href='css/tab.css' rel='stylesheet' type='text/css'>
+    <link href='css/manage.css' rel='stylesheet' type='text/css'>
+    <link rel="icon" href="image/logo.png" sizes="32x32">
+    <script src="https://www.jq22.com/jquery/1.7.2/jquery.min.js"></script>
+    <script src="js/tabulous.js"></script>
 </head>
 <style>
-    body {
-        color: #444;
-        margin: 0px;
-    }
-
-    .head {
-        text-align: center;
-    }
-    .main-content{
-        
-        margin: 10px;
-    }
-    .content-search,
-    .content-go {
-        font-size: 15px;
-        box-sizing: border-box;
-        position: relative;
-        width: 100%;
-        height: 40px;
-    }
-
-
-    .content-search>.search-text {
-        position: absolute;
-        height: 40px;
-        width: 100%;
-        z-index: 1;
-        float: left;
-        border-radius: 20px;
-        outline: 0 !important;
-        border: 0 solid;
-        background-color: #eee;
-        display: inherit;
-        padding-left: 10px;
-        padding-right: 85px;
-    }
-
-    .content-search>.search-submit {
-        position: relative;
-        z-index: 2;
-        margin:4px;
-        float: right;
-        background-color: #1E90FF;
-        color: #fff;
-        border-radius: 20px;
-        border: 0px solid;
-        width: 75px;
-        height: 32px;
-        outline: none;
-    }
-
-    .content-search .search-submit:hover {
-        background-color: #0E80EF;
-    }
-
-    .content-go>.search-text {
-        position: absolute;
-        height: 40px;
-        width: 100%;
-        z-index: 1;
-        float: left;
-        border-radius: 2px;
-        outline: 0 !important;
-        border: 0 solid;
-        background-color: #f2f2f2;
-        display: inherit;
-        padding-left: 10px;
-        padding-right: 85px;
-
-    }
-
-    .content-go>.search-submit {
-        position: relative;
-        z-index: 2;
-        margin:5px;
-        float: right;
-        background-color: #ddd;
-        color: #444;
-        border-radius: 2px;
-        border: 0px solid;
-        width:80px;
-        height: 30px;
-        outline: none;
-    }
-
-    .content-go .search-submit:hover {
-        background-color: #ccc;
-    }
-
-    .link {
-        margin: 10px 0;
-        text-align: center;
-    }
-
-    .link a {
-        color: #444;
-        display: inline-block;
-        width: 20%;
-        height: 22px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        text-align: center;
-        white-space: nowrap;
-        font-size: 15px;
-        text-decoration: none;
-        background: #f0f0f0;
-        margin: 5px 0;
-        padding: 5px;
-        border-radius: 4px;
-    }
-
-    .link p {
-        color: #1E90FF;
-        font-weight: 600;
-    }
-
-    .image {
-        text-align: center;
-    }
 </style>
 
 <body onkeydown="_key()">
-<div style="background: #ddd;padding: 5px;">
     <div class="content-go">
-        <input id="go-text" placeholder="请输入网址" class=" content-go search-text" type="text" />
-        <input id="go-submit" class=" content-go search-submit" type="button" onclick="go()" value="转到" />
-    </div></div>
-    <div class="head">
-        <h2>首页</h2>
+        <!-- <div class="content-go">
+            <input id="go-text" placeholder="请输入网址" class=" content-go search-text" type="text" />
+            <input id="go-submit" class=" content-go search-submit" type="button" onclick="go()" value="转到" />
+        </div> -->
+        <p>支持996：9点睡，9点起，每天工作6小时</p>
     </div>
-    <div class="main-content">
+    <div class="head trans-all">
+        <div class="title" style="overflow:hidden;">
+            <img src="https://image.dustray.cn/vicold/head_image.png" />
 
-    <div class="content-search">
-        <input id="search-text" placeholder="请输入搜索内容" class=" content-search search-text" type="text" />
-        <input id="search-submit" class=" content-search search-submit" type="button" onclick="submit()" value="百度一下" />
+            <p>v1.0</p>
+        </div>
+        <!-- <p>vicold.com</p> -->
     </div>
-    <div class="link">
-        <p>常用</p>
-        <a href="https://s.weibo.com/top/summary?cate=realtimehot">微博热搜</a>
-        <a href="https://m.ithome.com/" />IT之家</a>
-        <a href="https://dustray.cn/" />Dustray</a>
-        <p>工具</p>
-        <a href="http://cn.bing.com/">Bing搜索</a>
-        <a href="http://cn.bing.com/translator/">Bing翻译</a>
-        <a href="https://m.amap.com/">高德地图</a>
-        <a href="https://tool.lu/">在线工具</a>
-        <p>教育</p>
-        <a href=" https://www.chsi.com.cn/ ">学信网</a>
-        <a href="https://yz.chsi.com.cn/ ">研招网</a>
+    <div class="contrainer">
+        <div class="main-content">
+            <div class="content-search">
+                <div class="search-text-frame">
+                    <input id="search-text" placeholder="请输入搜索内容" class=" search-text trans-all" type="text"
+                        autocomplete="off" onfocus="this.select()" />
+                </div>
+
+                <div class="search-submit-frame">
+                    <input id="search-submit" class="search-submit" type="button" onclick="submit(0)"
+                        value="百&nbsp;度" />
+                    <input id="search-submit" class="search-submit" type="button" onclick="submit(1)"
+                        value="必&nbsp;应" />
+                    <input id="search-submit" class="search-submit" type="button" onclick="submit(2)"
+                        value="谷&nbsp;歌" />
+                    <input id="search-submit" class="search-submit" type="button" onclick="submit(3)" value="GitHub" />
+                    <input id="search-submit" class="search-submit" type="button" onclick="submit(4)"
+                        value="磁&nbsp;力" />
+                    <input id="search-submit" class="search-submit" type="button" onclick="submit(5)"
+                        value="翻&nbsp;译" />
+                    <input id="search-submit" class="search-submit" type="button" onclick="submit(6)"
+                        value="图&nbsp;片" />
+                    <input id="search-submit" class="search-submit" type="button" onclick="submit(7)"
+                        value="翻&nbsp;译" />
+                </div>
+            </div>
+
+            <div class="tabs trans-all" id="tabs">
+                <ul class='horizontal '>
+                    <li rel="tab-1" class="selectActive">综合</li>
+                    <li rel="tab-2">娱乐</li>
+                    <li rel="tab-3">资讯</li>
+                    <li rel="tab-4">影音</li>
+                    <li rel="tab-5">工具</li>
+                    <li rel="tab-6">开发者</li>
+                    <li rel="tab-7">资源</li>
+                    <li rel="tab-8">教育</li>
+                </ul>
+                <!----------------------11111111111111111111---------------------->
+                <div rel='tab-1' id="tab-1">
+                    <!-- <div class="item-frame">
+                        <a href="https://s.weibo.com/top/summary?cate=realtimehot">
+                            <img
+                                src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1554284896296&di=1213ee69dd88c9ff362feeb474e1a8dd&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F14%2F80%2F70%2F85e58PIC5Ri_1024.jpg" />
+                            微博热搜
+                        </a>
+                    </div> -->
+
+                </div>
+                <!----------------------22222222222222222222---------------------->
+                <div rel='tab-2' id="tab-2">
+
+                </div>
+                <!----------------------33333333333333333333---------------------->
+                <div rel='tab-3' id="tab-3">
+
+                </div>
+                <!----------------------44444444444444444444---------------------->
+                <div rel='tab-4' id="tab-4">
+
+                </div>
+                <!----------------------55555555555555555555---------------------->
+                <div rel='tab-5' id="tab-5">
+
+                </div>
+                <!----------------------66666666666666666666---------------------->
+                <div rel='tab-6' id="tab-6">
+
+                </div>
+                <!----------------------77777777777777777777---------------------->
+                <div rel='tab-7' id="tab-7">
+
+                </div>
+                <!----------------------88888888888888888888---------------------->
+                <div rel='tab-8' id="tab-8">
+
+                </div>
+
+            </div>
+            <!--End tabs-->
+
+            <!-- <div class="image">
+                <img
+                    src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1539083023061&di=fe74b9c32ab074772cf3c09621a801d4&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F78310a55b319ebc4092170d98926cffc1e171610.jpg" />
+            </div> -->
+            <div class="site-manage">
+                <p>站点管理</p>
+                <div class="tool-link ">
+                    <a class="trans-all"
+                        href="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAO__cwTRKlURFJBSTAzV1FPSkM0VjM1RzVLOUdWNTdWNS4u">添加网站</a>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="image">
-        <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1539083023061&di=fe74b9c32ab074772cf3c09621a801d4&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F78310a55b319ebc4092170d98926cffc1e171610.jpg"
-        />
-    </div>
-</div>
 </body>
 <script>
+    $("#search-text").focus();
     function go() {
         var text = document.getElementById('go-text').value;
         if (text == "") return;
@@ -175,10 +141,30 @@
         alert(text);
         window.location.href = text;
     }
-    function submit() {
+    function submit(type) {
         var text = document.getElementById('search-text').value;
-        if (text == "") return;
-        window.location.href = "https://m.baidu.com/s?word=" + text;
+        if (text == "") return; //为空不响应
+        // if (text.focus()==false) return; //不聚焦不响应
+        $("#search-text").select();
+        switch (type) {
+            case 0:
+                window.open("https://baidu.com/s?word=" + text); break;
+            case 1:
+                window.open("https://cn.bing.com/search?q=" + text); break;
+            case 2:
+                window.open("https://www.google.com/search?q=" + text); break;
+            case 3:
+                window.open("https://github.com/search?q=" + text); break;
+            case 4:
+                window.open("https://www.cilimao.cc/search?word=" + text); break;
+            case 5:
+                window.open("https://baidu.com/s?word=" + text); break;
+            case 6:
+                window.open("https://image.baidu.com/search/index?tn=baiduimage&ipn=r&ct=201326592&cl=2&lm=-1&st=-1&fm=result&fr=&sf=1&fmq=1554340401104_R&pv=&ic=&nc=1&z=&hd=&latest=&copyright=&se=1&showtab=0&fb=0&width=&height=&face=0&istype=2&ie=utf-8&word=" + text); break;
+            case 7:
+                window.open("https://fanyi.baidu.com/?aldtype=85#zh/en/" + text); break;
+        }
+
     }
     function _key() {
         if (event.keyCode == 13) {
@@ -187,10 +173,49 @@
             if (gos == document.activeElement) {
                 go();
             } else if (searchs == document.activeElement) {
-                submit();
+                submit(0);
             }
         }
     }
+</script>
+
+<script type="text/javascript">
+    tabs_takes.init("tabs");
+</script>
+
+<script src="js/Bmob-1.7.0.min.js"></script>
+<script>
+
+    Bmob.initialize("3bd9d47d34a53d71e471d833b9b4ac6d", "17c0e0f3a6387f922e044502621a5d2a");
+    // function Person(address, createdAt, isEntertainment, linkIcon, linkName, linkType, objectId, updatedAt) {
+    //     this.address = address; 
+    //     this.createdAt = createdAt; 
+    //     this.isEntertainment = isEntertainment;
+    //     this.linkIcon = linkIcon;
+    //     this.linkName = linkName;
+    //     this.linkType = linkType;
+    //     this.objectId = objectId; 
+    //     this.updatedAt = updatedAt;
+    // }
+
+    // var list = new Array(Person);
+    function showLinkItem(link) {
+        for (var i = 0; i < link.length; i++) {
+            var elem = "<div class=\"item-frame trans-all\">"
+                + "<a href=\"" + link[i].address + "\"  target=\"_blank\">"
+                + "<img src=\" " + link[i].linkIcon + "\" /><p>"
+                + link[i].linkName
+                + "</p></a> </div>";
+            $("#tab-" + link[i].linkType).append(elem);
+        }
+    }
+    const query = Bmob.Query("link");
+    query.find().then(res => {
+        // console.log(res)
+        // list = res;
+        //console.log(list[0].address);
+        showLinkItem(res);
+    });
 
 </script>
 

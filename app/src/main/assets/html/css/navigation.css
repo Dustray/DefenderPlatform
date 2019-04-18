@@ -1,0 +1,315 @@
+body {
+    color: #444;
+    margin: 0;
+    font-family: 'Microsoft YaHei';
+    /* background-image: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1554365501049&di=a79839c60599927dd9280e3931a471ed&imgtype=0&src=http%3A%2F%2Fimg.pptjia.com%2Fimage%2F20180321%2F989a0dbcccf3a519a1d8f2604e68a7e2.jpg); */
+    /* background-image: url(../image/background.png); */
+    background-image: url(../image/background_continuity.png);
+}
+
+input {
+    -webkit-appearance: none;
+    /*解决iphone safari上的圆角问题*/
+    border-radius: 0;
+}
+
+a, p, li, img {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.content-go p,
+.head p,
+.site-manage{
+    cursor: default;
+}
+
+.head {
+    text-align: center;
+    margin: 35px 5px;
+}
+
+.head>.title {
+    margin: 0 auto;
+    display: inline-block;
+    color: #fff;
+}
+
+.head>.title>img {
+    width: 300px;
+    height: 100px;
+    float: left;
+}
+
+.head>.title>h1 {
+    font-size: 40px;
+    margin: 5px;
+    float: left;
+}
+
+.head>.title>p {
+    float: left;
+    padding-top: 15px;
+}
+
+/* .head>p {
+    font-style: italic;
+    color: #ddd;
+    margin: 0;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+} */
+
+.contrainer {
+    overflow: hidden;
+    padding: 5px;
+}
+
+.main-content {
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+@media (max-width: 480px) {
+    .head>.title>img {
+        width: 210px;
+        height: 70px;
+    }
+}
+
+@media (min-width: 480px) {
+    .head>.title>img {
+        width: 240px;
+        height: 80px;
+    }
+    .main-content {
+        width: 100%;
+    }
+}
+
+@media (min-width: 768px) {
+    .head>.title>img {
+        width: 270px;
+        height: 90px;
+    }
+    .main-content {
+        width: 736px;
+    }
+}
+
+@media (min-width: 980px) {
+    .head>.title>img {
+        width: 300px;
+        height: 100px;
+    }
+    .main-content {
+        width: 950px;
+    }
+}
+
+.content-search, .content-go {
+    font-size: 15px;
+    width: 100%;
+}
+
+.content-search {}
+
+.content-search>.search-text-frame {
+    margin: 0 auto;
+}
+
+.content-search>.search-submit-frame {
+    overflow: hidden;
+    background-color: #e2dbbe;
+    margin: 0 auto;
+}
+
+.content-search .search-text {
+    height: 40px;
+    width: 100%;
+    background-color: #eee;
+    display: block;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    font-size: 17px;
+    color: #333;
+    border: 0 solid;
+    border-radius: 4px 4px 0 0;
+    outline: none;
+}
+
+.content-search .search-text:focus {
+    box-shadow: 0 0 15px #fff;
+}
+
+.content-search .search-submit {
+    float: left;
+    background-color: #e2dbbe;
+    color: #777;
+    border-width: 0px 0px 5px 0px;
+    border-style: solid;
+    border-color: #d2bdae;
+    width: 25%;
+    height: 35px;
+    outline: none;
+    /* 标准的语法 */
+    transition: all .5s;
+    /* Firefox 4 */
+    -moz-transition: all .5s;
+    /* Safari 和 Chrome */
+    -webkit-transition: all .5s;
+    /* Opera */
+    -o-transition: all .5s;
+}
+
+.content-search .search-submit:hover {
+    /* background-color: #0E80EF; */
+    cursor: pointer;
+    /* Safari 5.1 - 6.0 */
+    background: -webkit-linear-gradient(#e2dbbe, #d2bdae);
+    /* Opera 11.1 - 12.0 */
+    background: -o-linear-gradient(#e2dbbe, #d2bdae);
+    /* Firefox 3.6 - 15 */
+    background: -moz-linear-gradient(#e2dbbe, #d2bdae);
+    /* 标准的语法 */
+    background: linear-gradient(#e2dbbe, #d2bdae);
+}
+
+@media (max-width: 480px) {
+    .content-search .search-submit {
+        height: 40px;
+        width: 25%;
+    }
+    .content-search>.search-text-frame {
+        width: 100%;
+    }
+    .content-search>.search-submit-frame {
+        width: 100%;
+    }
+}
+
+@media (min-width: 480px) {
+    .content-search .search-submit {
+        width: 25%;
+    }
+    .content-search>.search-text-frame {
+        width: 100%;
+    }
+    .content-search>.search-submit-frame {
+        width: 100%;
+    }
+}
+
+@media (min-width: 768px) {
+    .content-search .search-submit {
+        width: 12.5%;
+    }
+    .content-search>.search-text-frame {
+        width: 600px;
+    }
+    .content-search>.search-submit-frame {
+        width: 600px;
+    }
+    .head {
+        margin: 50px;
+    }
+}
+
+@media (min-width: 980px) {
+    .content-search .search-submit {
+        width: 12.5%;
+    }
+    .content-search>.search-text-frame {
+        width: 600px;
+    }
+    .content-search>.search-submit-frame {
+        width: 600px;
+    }
+    .head {
+        margin: 60px;
+    }
+}
+
+.content-go {
+    height: 40px;
+    text-align: center;
+    color: #fff;
+    overflow: hidden;
+    background: rgba(233, 233, 233, 0.4);
+    ;
+}
+
+.content-go>p {
+    margin: 0;
+    padding: 10px;
+}
+
+/* 
+.content-go>.search-text {
+    position: absolute;
+    height: 40px;
+    width: 100%;
+    z-index: 1;
+    float: left;
+    border-radius: 2px;
+    outline: 0 !important;
+    border: 0 solid;
+    background-color: #f2f2f2;
+    display: inherit;
+    padding-left: 10px;
+    padding-right: 85px;
+}
+
+.content-go>.search-submit {
+    position: relative;
+    z-index: 2;
+    margin: 5px;
+    float: right;
+    background-color: #ddd;
+    color: #444;
+    border-radius: 2px;
+    border: 0px solid;
+    width: 80px;
+    height: 30px;
+    outline: none;
+}
+
+.content-go .search-submit:hover {
+    background-color: #ccc;
+} */
+
+/*---------------------------------------------------------------------------*/
+
+/*------------------------------------Tab------------------------------------*/
+
+/*---------------------------------------------------------------------------*/
+
+ul, ol, li {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style: none;
+}
+
+/*---------------------------------------------------------------------------*/
+
+/*----------------------------------Tab End----------------------------------*/
+
+/*---------------------------------------------------------------------------*/
+
+.trans-all {
+    /* 标准的语法 */
+    transition: all .5s;
+    /* Firefox 4 */
+    -moz-transition: all .5s;
+    /* Safari 和 Chrome */
+    -webkit-transition: all .5s;
+    /* Opera */
+    -o-transition: all .5s;
+}

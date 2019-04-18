@@ -1,0 +1,138 @@
+.tabs {
+	width: 100%;
+	border: 0 solid;
+	border-radius: 0;
+	background: #f6f6f6;
+	margin-top: 30px;
+}
+
+.tabs>div {
+	padding: 10px;
+	overflow: hidden;
+}
+
+.tabs .horizontal {
+	width: 100%;
+	display: block;
+	overflow: hidden;
+}
+
+.tabs .horizontal li {
+	float: left;
+	list-style: none;
+	height: 35px;
+	line-height: 35px;
+	background-color: rgba(233, 233, 233, 0.8);
+	width: 12.5%;
+	text-align: center;
+	cursor: pointer;
+	font-size: 15px;
+	color: rgba(0, 153, 255, 1);
+	transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+}
+
+.tabs .horizontal li:hover {
+	background-color: rgba(255, 255, 255, 0.8);
+}
+
+.tabs .horizontal li.selectActive {
+	background-color: rgba(226, 219, 190, 1);
+	color: rgba(0, 153, 255, 1);
+	cursor: default;
+}
+
+/*------------item------------*/
+
+.item-frame {
+	width: 10%;
+	float: left;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+
+.item-frame>a {
+	padding: 10px 5px;
+	text-decoration: none;
+	display: block;
+	height: 25px;
+	font-size: 15px;
+	color: #555;
+	overflow: hidden;
+}
+
+.item-frame:hover {
+	background-color: #ddd;
+}
+
+.item-frame>a>img {
+	width: 22px;
+	vertical-align: text-bottom;
+	height: 22px;
+	margin-right: 2px;
+}
+
+.item-frame>a>p {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	display: inline;
+}
+
+@media (max-width: 480px) {
+	/*手机屏幕，图标和文字上下排列*/
+	.tabs {
+		margin-top: 15px;
+	}
+	.item-frame {
+		padding: 5px 5px;
+		width: 25%;
+	}
+	.item-frame>a {
+		text-align: center;
+		height: 50px;
+	}
+	.item-frame>a>img {
+		margin: 0;
+		height: 27px;
+		width: 27px;
+	}
+	.item-frame>a>p {
+		margin: 0;
+		display: block;
+	}
+	.tabs .horizontal li {
+		height: 40px;
+		line-height: 40px;
+	}
+}
+
+@media (min-width: 480px) {
+	.item-frame {
+		width: 25%;
+	}
+}
+
+@media (min-width: 570px) {
+	.item-frame {
+		width: 20%;
+	}
+}
+
+@media (min-width: 768px) {
+	.item-frame {
+		width: 20%;
+	}
+	.item-frame>a {
+		font-size: 17px;
+	}
+}
+
+@media (min-width: 980px) {
+	.item-frame {
+		width: 16.66666666%;
+	}
+	.item-frame>a {
+		font-size: 17px;
+	}
+}
