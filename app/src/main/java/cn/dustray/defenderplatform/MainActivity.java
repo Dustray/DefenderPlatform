@@ -17,6 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -81,6 +82,9 @@ public class MainActivity extends AppCompatActivity
 
         initNavigation();
         initTabPage();
+
+        // 处理 作为三方浏览器打开传过来的值
+        getDataFromBrowser(getIntent());
 
     }
 
@@ -166,6 +170,36 @@ public class MainActivity extends AppCompatActivity
         mainPage.setCurrentItem(1);
     }
 
+    /**
+     * 作为三方浏览器打开传过来的值
+     * Scheme: https
+     * host: www.jianshu.com
+     * path: /p/1cbaf784c29c
+     * url = scheme + "://" + host + path;
+     */
+    private void getDataFromBrowser(Intent intent) {
+        Uri data = intent.getData();
+
+        if (data != null) {
+            xToast.toast(this,"url"+data.toString());
+            try {
+                String scheme = data.getScheme();
+                String host = data.getHost();
+                String path = data.getPath();
+                String text = "Scheme: " + scheme + "\n" + "host: " + host + "\n" + "path: " + path;
+                //Log.e("data", text);
+                String url = scheme + "://" + host + path;
+            //    webView.loadUrl(url);
+
+                browserFragment.createNewFragment(url);
+                xToast.toast(this,"sssssss");
+                switchToWeb();
+            } catch (Exception e) {
+                e.printStackTrace();
+                Log.i("browser","eeeeeeeeeeeeeeeeeeer"+e.toString());
+            }
+        }
+    }
 
     @Override
     public void onBackPressed() {
@@ -288,7 +322,16 @@ public class MainActivity extends AppCompatActivity
         super.onDestroy();
         System.exit(0);
     }
-
+    /**
+     * 使用singleTask启动模式的Activity在系统中只会存在一个实例。
+     * 如果这个实例已经存在，intent就会通过onNewIntent传递到这个Activity。
+     * 否则新的Activity实例被创建。
+     */
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        getDataFromBrowser(intent);
+    }
     @Override
     public void onFragmentInteraction(Uri uri) {
         Toast.makeText(this, "交流,角楼" + uri.toString(), Toast.LENGTH_LONG).show();

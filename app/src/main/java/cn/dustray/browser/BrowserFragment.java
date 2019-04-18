@@ -9,6 +9,7 @@ import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -93,7 +94,12 @@ public class BrowserFragment extends Fragment implements View.OnClickListener, W
 
     private void initFragment(String Url) {
 //TODO 此处应用后台重新加载activity， getSupportFragmentManager()返回空指针
-       // if (manager == null) manager = getActivity().getSupportFragmentManager();
+//        if(getActivity()==null){
+//            Log.i("browser","activity is null");
+//        }
+//        if (manager == null){
+//            manager = getActivity().getSupportFragmentManager();
+//        }
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.setCustomAnimations(R.animator.fragment_slide_right_enter, R.animator.fragment_slide_left_exit);
 
