@@ -17,6 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -82,7 +83,24 @@ public class MainActivity extends AppCompatActivity
         initNavigation();
         initTabPage();
 
-        getDataFromBrowser(getIntent());
+        //getDataFromBrowser(getIntent());
+        Uri data = getIntent().getData();
+        //browserFragment.createNewFragment("https://baidu.com/");
+        if (data != null) {
+            xToast.toast(this,"url"+data.toString());
+            try {
+                String scheme = data.getScheme();
+                String host = data.getHost();
+                String path = data.getPath();
+                String text = "Scheme: " + scheme + "\n" + "host: " + host + "\n" + "path: " + path;
+                String url = scheme + "://" + host + path;
+                browserFragment.createNewFragment(getSupportFragmentManager(),url);
+                switchToWeb();
+            } catch (Exception e) {
+                e.printStackTrace();
+                Log.i("browser","start:"+e.toString());
+            }
+        }
     }
 
     private void initNavigation() {
@@ -191,6 +209,7 @@ public class MainActivity extends AppCompatActivity
                 switchToWeb();
             } catch (Exception e) {
                 e.printStackTrace();
+                Log.i("browser","newintent:"+e.toString());
             }
         }
     }
@@ -321,6 +340,12 @@ public class MainActivity extends AppCompatActivity
     protected void onDestroy() {
         super.onDestroy();
         System.exit(0);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        getDataFromBrowser( intent);
     }
 
     @Override

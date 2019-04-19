@@ -34,7 +34,7 @@ public class BrowserFragment extends Fragment implements View.OnClickListener, W
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-public String newTabUrl;
+    public String newTabUrl;
 
     private String mParam1;
     private String mParam2;
@@ -84,9 +84,9 @@ public String newTabUrl;
             initFragment(webFragArray);
         }
         //btnBack.setImageBitmap(mainWebView.getCapture());
-        if(newTabUrl!=null){
-            initFragment( newTabUrl);
-            newTabUrl=null;
+        if (newTabUrl != null) {
+            initFragment(newTabUrl);
+            newTabUrl = null;
         }
     }
 
@@ -98,7 +98,7 @@ public String newTabUrl;
     private void initFragment(String Url) {
 //TODO 此处应用后台重新加载activity， getSupportFragmentManager()返回空指针
 
-       // if (manager == null) manager = getActivity().getSupportFragmentManager();
+        // if (manager == null) manager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.setCustomAnimations(R.animator.fragment_slide_right_enter, R.animator.fragment_slide_left_exit);
 
@@ -171,6 +171,12 @@ public String newTabUrl;
     }
 
     public void createNewFragment(String Url) {
+        initFragment(Url);
+    }
+
+    public void createNewFragment(FragmentManager manager, String Url) {
+        if (this.manager == null)
+            this.manager = manager;
         initFragment(Url);
     }
 
