@@ -8,6 +8,7 @@ import cn.bmob.v3.BmobObject;
 
 public class KeywordEntity extends BmobObject {
     private String keyword;
+    private int state;
 
     public String getKeyword() {
         return keyword;
@@ -15,5 +16,13 @@ public class KeywordEntity extends BmobObject {
 
     public void setKeyword(String keyword) {
         this.keyword = keyword;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
     }
 }

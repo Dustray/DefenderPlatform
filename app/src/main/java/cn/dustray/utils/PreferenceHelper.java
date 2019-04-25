@@ -175,4 +175,27 @@ public class PreferenceHelper {
         mEditor.putBoolean("IsNoFilter", isit);
         mEditor.commit();
     }
+
+
+    /**
+     * 获取更新标志日期
+     *
+     * @return
+     */
+    public String getLastUpdateDate() {
+        String isNoFilter = sharedPreferences.getString("LastUpdateDate", "2019-01-01 10:00:00");
+        return isNoFilter;
+    }
+
+    /**
+     * 保存更新标志日期
+     *
+     * @param isit
+     */
+    public void setLastUpdateDate(String isit) {
+
+        SharedPreferences.Editor mEditor = sharedPreferences.edit();
+        mEditor.putString("LastUpdateDate", isit);
+        mEditor.commit();
+    }
 }
