@@ -29,7 +29,7 @@ public class KeywordListActivity extends AppCompatActivity implements View.OnCli
     private EditText inputAdd;
     private Button btnAdd;
     private KeywordListAdapter adapter;
-    private FilterHelper filterHelper ;
+    private FilterHelper filterHelper;
     List<KeywordEntity> list;
 
     @Override
@@ -72,6 +72,18 @@ public class KeywordListActivity extends AppCompatActivity implements View.OnCli
         list = filterHelper.getKeywordList();
         Log.i("filter", "打开页面，从SQLite中取出" + list.size() + "个数据");
         adapter = new KeywordListAdapter(this, list);
+        adapter.setItemClickListener(new KeywordListAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int postion) {
+                xToast.toast(KeywordListActivity.this, "点击");
+            }
+
+            @Override
+            public void onItemLongClick(View view, int postion) {
+                xToast.toast(KeywordListActivity.this, "长按");
+
+            }
+        });
         filterHelper.updateKeywordFromBmob(this);
         rvKeyword.setAdapter(adapter);
     }
@@ -90,7 +102,7 @@ public class KeywordListActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_add:
-                filterHelper.addToDatebase(this,inputAdd.getText().toString());
+                filterHelper.addToDatebase(this, inputAdd.getText().toString());
         }
     }
 
@@ -99,13 +111,13 @@ public class KeywordListActivity extends AppCompatActivity implements View.OnCli
     public void onDownloaded(List<KeywordEntity> list) {
         Log.i("filter", "从Bmob取回后，从SQLite中取出" + list.size() + "个数据");
         adapter.sync(list);
-        xToast.toast(this,"同步完成");
+        xToast.toast(this, "同步完成");
     }
 
     @Override
     public void onInsertSuccess(List<KeywordEntity> list) {
         Log.i("filter", "插入成功后，从SQLite中取出" + list.size() + "个数据");
         adapter.sync(list);
-        xToast.toast(this,"添加成功");
+        xToast.toast(this, "添加成功");
     }
 }

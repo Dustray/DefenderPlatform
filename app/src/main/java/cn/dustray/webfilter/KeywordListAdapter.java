@@ -16,15 +16,22 @@ import cn.dustray.defenderplatform.R;
 public class KeywordListAdapter extends RecyclerView.Adapter<KeywordListAdapter.KeywordHolder> {
     private Context context;
     private List<KeywordEntity> list;
+    private OnItemClickListener itemClickListener;
 
     public KeywordListAdapter(Context context, List<KeywordEntity> list) {
         this.context = context;
         this.list = list;
     }
-public void sync(List<KeywordEntity> list){
-    this.list = list;
-    notifyDataSetChanged();
-}
+
+    public void sync(List<KeywordEntity> list) {
+        this.list = list;
+        notifyDataSetChanged();
+    }
+
+    public void setItemClickListener(OnItemClickListener itemClickListener) {
+        this.itemClickListener = itemClickListener;
+    }
+
     @NonNull
     @Override
     public KeywordHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -36,16 +43,30 @@ public void sync(List<KeywordEntity> list){
     }
 
     @Override
-    public void onBindViewHolder(@NonNull KeywordHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final KeywordHolder holder, final int position) {
         KeywordEntity ke = list.get(position);
         holder.setText(ke.getKeyword());
         holder.setId(ke.getObjectId());
+        holder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                itemClickListener.onItemClick(holder.tvKeyword, position);
+            }
+        });
+        holder.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                itemClickListener.onItemLongClick(holder.tvKeyword, position);
+                return false;
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return list.size();
     }
+
 
     public class KeywordHolder extends RecyclerView.ViewHolder {
 
@@ -64,5 +85,19 @@ public void sync(List<KeywordEntity> list){
         public void setId(String objectId) {
             id = objectId;
         }
+
+        public void setOnClickListener(View.OnClickListener listener) {
+            tvKeyword.setOnClickListener(listener);
+        }
+
+        public void setOnLongClickListener(View.OnLongClickListener listener) {
+            tvKeyword.setOnLongClickListener(listener);
+        }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(View view, int postion);
+
+        void onItemLongClick(View view, int postion);
     }
 }
