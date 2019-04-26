@@ -86,6 +86,7 @@ public class FilterHelper {
                     Log.i("filter", "新保存的时间" + new PreferenceHelper(context).getLastUpdateDate());
                     Log.i("filter", "----------第三步，重新将sqlite中显示出来---------------");
                     listener.onDownloaded(fs.getKeywordList());
+
                     fs.close();
                 } else {
                     Log.i("filter", "从Bmob获取异常：" + e.toString());
@@ -95,7 +96,7 @@ public class FilterHelper {
     }
 
     /**
-     * 删除keyword
+     * 云端删除keyword
      */
     public void deleteKeyword(final String id) {
         final KeywordEntity ke = new KeywordEntity();

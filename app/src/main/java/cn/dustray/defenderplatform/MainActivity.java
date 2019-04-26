@@ -308,7 +308,7 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
         }else if (id == R.id.nav_keyword_list) {//屏蔽关键字列表
             Intent intent = new Intent(this, KeywordListActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent,0);
         }  else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_setting) {
@@ -436,6 +436,15 @@ public class MainActivity extends AppCompatActivity
         }
 
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+    //结果处理函数，当从secondActivity中返回时调用此函数
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==0 && resultCode==RESULT_OK){
+            xToast.toast(this, "拦截关键字已更新");
+            browserFragment.refleshFilterData();
+        }
     }
 
     @Override

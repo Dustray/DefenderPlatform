@@ -1,6 +1,7 @@
 package cn.dustray.defenderplatform;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -89,9 +90,17 @@ public class KeywordListActivity extends AppCompatActivity implements View.OnCli
     }
 
     @Override
+    public void finish() {
+        super.finish();
+
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {
+            Intent intent = getIntent();
+            setResult(RESULT_OK, intent);
             finish();
             return true;
         }
@@ -99,10 +108,19 @@ public class KeywordListActivity extends AppCompatActivity implements View.OnCli
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = getIntent();
+        setResult(RESULT_OK, intent);
+    }
+
+    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_add:
                 filterHelper.addToDatebase(this, inputAdd.getText().toString());
+                inputAdd.setText("");
+                break;
         }
     }
 
@@ -111,7 +129,8 @@ public class KeywordListActivity extends AppCompatActivity implements View.OnCli
     public void onDownloaded(List<KeywordEntity> list) {
         Log.i("filter", "从Bmob取回后，从SQLite中取出" + list.size() + "个数据");
         adapter.sync(list);
-        xToast.toast(this, "同步完成");
+        xToast.toast(this, "已同步");
+        //TODO 返回activity刷新了
     }
 
 }

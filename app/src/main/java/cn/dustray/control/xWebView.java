@@ -198,7 +198,7 @@ public class xWebView extends WebView {
         @Override
         public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
             super.onReceivedError(view, errorCode, description, failingUrl);
-            webView.loadUrl("file:///android_asset/html/ErrorPage.html");
+            webView.loadUrl("file:///android_asset/html/ErrorPage.html?code="+errorCode+"&description="+description);
         }
 
         @Override

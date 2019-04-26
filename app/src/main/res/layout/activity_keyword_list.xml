@@ -9,30 +9,31 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="43dp"
+        android:layout_height="48dp"
         android:background="@color/colorWhite"
-        android:padding="4dp">
+        android:elevation="2dp"
+        android:translationZ="2dp"
+        android:padding="5dp">
 
         <EditText
             android:id="@+id/input_add"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="38dp"
             android:background="@drawable/input_o_gray"
             android:hint="输入屏蔽关键字，例“baidu.com”"
             android:paddingLeft="13dp"
-            android:paddingRight="65dp"  />
+            android:paddingRight="65dp" />
 
         <Button
             android:id="@+id/btn_add"
-            style="?android:attr/borderlessButtonStyle"
             android:layout_width="55dp"
-            android:layout_height="31dp"
+            android:layout_height="34dp"
             android:layout_alignParentRight="true"
             android:layout_marginLeft="5px"
             android:layout_marginTop="2dp"
             android:layout_marginRight="2dp"
             android:background="@drawable/btn_o_lightblue"
-            android:text="添 加"
+            android:text="添加"
             android:textColor="@color/colorWhite" />
     </RelativeLayout>
 

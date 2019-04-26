@@ -314,6 +314,10 @@ public class BrowserFragment extends Fragment implements View.OnClickListener, W
         return isNightMode;
     }
 
+    public void refleshFilterData() {
+        sf.refleshData();
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

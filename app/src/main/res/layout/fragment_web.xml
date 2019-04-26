@@ -17,7 +17,7 @@
     <LinearLayout
         android:id="@+id/web_tool_bar"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="48dp"
         android:layout_alignParentBottom="true"
         android:background="#fff"
 

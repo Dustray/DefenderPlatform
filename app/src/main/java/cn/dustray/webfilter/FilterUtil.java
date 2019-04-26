@@ -96,6 +96,10 @@ public class FilterUtil implements FilterHelper.OnSyncListener {
         return result;
     }
 
+    public void refleshData() {
+        initData();
+    }
+
     private void initData() {
         FilterHelper fh = new FilterHelper();
         keywordList = fh.getKeywordList();

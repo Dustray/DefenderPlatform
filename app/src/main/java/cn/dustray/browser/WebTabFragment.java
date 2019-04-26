@@ -104,7 +104,7 @@ public class WebTabFragment extends Fragment {
                 //过滤
                 //if (!spHelper.getIsNoFilter() && !sf.filterWebsite(request.getUrl().toString())) {
 
-                //xToast.toast(getContext(),"正在匹配");
+                //xToast.toast(getContext(),"正在匹配1");
                 if (!webListener.onWebUrlCanLoad(request.getUrl().toString())) {
                     xToast.toast(getActivity(), "已拦截，关键字："+webListener.showWebUrlFilterKeyword());
                     mainWebView.stopLoading();
@@ -122,7 +122,7 @@ public class WebTabFragment extends Fragment {
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                //xToast.toast(getContext(),"正在匹配");
+                //xToast.toast(getContext(),"正在匹配2");
                 if (!webListener.onWebUrlCanLoad(url)) {
                     xToast.toast(getActivity(), "已拦截，关键字："+webListener.showWebUrlFilterKeyword());
                     mainWebView.stopLoading();
