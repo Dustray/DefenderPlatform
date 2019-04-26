@@ -1,6 +1,7 @@
 package cn.dustray.webfilter;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,6 +19,11 @@ import cn.dustray.utils.PreferenceHelper;
 
 public class FilterHelper {
 
+    private OnSyncListener listener;
+
+    public void setOnSyncListener(OnSyncListener listener){
+        this.listener=listener;
+    }
     /**
      * 从bmob获取全部keyword
      *
@@ -35,6 +41,7 @@ public class FilterHelper {
                     if (object.size() == 0) return;
                     FilterSQLite fs = new FilterSQLite();
                     fs.recordKeywordToSqlite(object, false);
+                    fs.close();
                     new PreferenceHelper(context).setLastUpdateDate(sdf.format(new Date()));//设置本次更新日期
                 } else {
                     // ...
@@ -63,13 +70,22 @@ public class FilterHelper {
             @Override
             public void done(List<KeywordEntity> object, BmobException e) {
                 if (e == null) {
+                    Log.i("filter","从Bmob获取："+object.size()+"个");
                     // 同步
                     if (object.size() == 0) return;
                     FilterSQLite fs = new FilterSQLite();
+
+                    Log.i("filter", "----------第二步，转存Bmob至sqlite--------------" );
                     fs.recordKeywordToSqlite(object, true);
                     new PreferenceHelper(context).setLastUpdateDate(sdf.format(new Date()));//设置本次更新日期
+
+                    Log.i("filter", "----------第三步，重新将sqlite中显示出来---------------" );
+
+                    listener.onDownloaded(fs.getKeywordList() );
+                    fs.close();
                 } else {
-                    // ...
+
+                    Log.i("filter","从Bmob获取异常："+e.toString());
 
                 }
             }
@@ -87,15 +103,28 @@ public class FilterHelper {
             public void done(BmobException e) {
                 if (e == null) {
                     //  toast("删除成功:"+p2.getUpdatedAt());
-                    new FilterSQLite().deleteKeyword(id);
+                    FilterSQLite fs = new FilterSQLite();
+                    fs.deleteKeyword(id);
+                    fs.close();
                 } else {
                     //toast("删除失败：" + e.getMessage());
                 }
             }
         });
     }
+
+    /**
+     * 从本地获取list
+     * @return
+     */
     public List<KeywordEntity> getKeywordList(){
-        List<KeywordEntity> list = new FilterSQLite().getKeywordList();
+        FilterSQLite fs = new FilterSQLite();
+        List<KeywordEntity> list = fs.getKeywordList();
+        fs.close();
         return list;
+    }
+
+    public interface  OnSyncListener{
+        void onDownloaded( List<KeywordEntity> list);
     }
 }

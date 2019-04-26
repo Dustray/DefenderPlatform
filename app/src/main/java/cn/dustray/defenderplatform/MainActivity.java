@@ -306,7 +306,10 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_slideshow) {
             Intent intent = new Intent(this, ShieldingActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_manage) {
+        }else if (id == R.id.nav_keyword_list) {//屏蔽关键字列表
+            Intent intent = new Intent(this, KeywordListActivity.class);
+            startActivity(intent);
+        }  else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_setting) {
             Intent intent = new Intent(this, SettingsActivity.class);
