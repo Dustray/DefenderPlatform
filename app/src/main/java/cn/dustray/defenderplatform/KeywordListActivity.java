@@ -75,14 +75,15 @@ public class KeywordListActivity extends AppCompatActivity implements View.OnCli
         adapter = new KeywordListAdapter(this, list);
         adapter.setItemClickListener(new KeywordListAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(View view, int postion) {
+            public void onItemClick(View view, int position) {
                 xToast.toast(KeywordListActivity.this, "点击");
             }
 
             @Override
-            public void onItemLongClick(View view, int postion) {
-                xToast.toast(KeywordListActivity.this, "长按");
+            public void onItemLongClick(View view, int position) {
+                xToast.toast(KeywordListActivity.this, "正在删除");
 
+                filterHelper.deleteKeyword(list.get(position).getObjectId(),KeywordListActivity.this,position);
             }
         });
         filterHelper.updateKeywordFromBmob(this);
@@ -109,9 +110,9 @@ public class KeywordListActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         Intent intent = getIntent();
         setResult(RESULT_OK, intent);
+        super.onBackPressed();
     }
 
     @Override
@@ -126,11 +127,17 @@ public class KeywordListActivity extends AppCompatActivity implements View.OnCli
 
 
     @Override
-    public void onDownloaded(List<KeywordEntity> list) {
+    public void InsertSuccess(List<KeywordEntity> list) {
         Log.i("filter", "从Bmob取回后，从SQLite中取出" + list.size() + "个数据");
-        adapter.sync(list);
+        adapter.insert(list);
         xToast.toast(this, "已同步");
-        //TODO 返回activity刷新了
     }
 
+
+    @Override
+    public void onDeleteSuccess(int itemPosition) {
+        Log.i("filter", "从Bmob取回后，从SQLite中取出" + list.size() + "个数据");
+        adapter.delete(itemPosition);
+        xToast.toast(this, "删除成功");
+    }
 }

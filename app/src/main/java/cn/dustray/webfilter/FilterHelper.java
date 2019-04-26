@@ -35,7 +35,7 @@ public class FilterHelper {
     public void getAllKeywordFromBmob(final Context context) {
         final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         BmobQuery<KeywordEntity> query = new BmobQuery<>();
-        query.addWhereNotEqualTo("state", "0");
+        query.addWhereNotEqualTo("state", "-1");
         query.findObjects(new FindListener<KeywordEntity>() {
             @Override
             public void done(List<KeywordEntity> object, BmobException e) {
@@ -85,7 +85,7 @@ public class FilterHelper {
                     new PreferenceHelper(context).setLastUpdateDate(sdf.format(new Date()));//设置本次更新日期
                     Log.i("filter", "新保存的时间" + new PreferenceHelper(context).getLastUpdateDate());
                     Log.i("filter", "----------第三步，重新将sqlite中显示出来---------------");
-                    listener.onDownloaded(fs.getKeywordList());
+                    listener.InsertSuccess(fs.getKeywordList());
 
                     fs.close();
                 } else {
@@ -98,7 +98,7 @@ public class FilterHelper {
     /**
      * 云端删除keyword
      */
-    public void deleteKeyword(final String id) {
+    public void deleteKeywordDepth(final String id) {
         final KeywordEntity ke = new KeywordEntity();
         ke.setObjectId(id);
         ke.delete(new UpdateListener() {
@@ -116,6 +116,27 @@ public class FilterHelper {
         });
     }
 
+    /**
+     * 删除keyword(修改标记位)
+     * @param id
+     */
+    public void deleteKeyword(final String id, final Context context, final int position) {
+        final KeywordEntity ke = new KeywordEntity();
+        ke.setState(-1);
+        ke.update(id, new UpdateListener() {
+
+            @Override
+            public void done(BmobException e) {
+                if(e==null){
+                   listener.onDeleteSuccess(position);
+                   // toast("更新成功:"+p2.getUpdatedAt());
+                }else{
+                  //  toast("更新失败：" + e.getMessage());
+                }
+            }
+
+        });
+    }
     /**
      * 从本地获取list
      *
@@ -187,6 +208,7 @@ public class FilterHelper {
     }
 
     public interface OnSyncListener {
-        void onDownloaded(List<KeywordEntity> list);
+        void InsertSuccess(List<KeywordEntity> list);
+        void onDeleteSuccess(int itemPosition);
     }
 }

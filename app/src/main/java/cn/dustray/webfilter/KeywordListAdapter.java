@@ -23,9 +23,17 @@ public class KeywordListAdapter extends RecyclerView.Adapter<KeywordListAdapter.
         this.list = list;
     }
 
-    public void sync(List<KeywordEntity> list) {
-        this.list = list;
-        notifyDataSetChanged();
+    public void insert(List<KeywordEntity> list) {
+        this.list=list;
+        notifyItemRangeChanged(0,list.size());
+    }
+
+    public void delete(int position) {
+        list.remove(position);
+        notifyItemRemoved(position);
+        if (position != list.size()) {
+            notifyItemRangeChanged(position, list.size() - position);
+        }
     }
 
     public void setItemClickListener(OnItemClickListener itemClickListener) {
@@ -96,8 +104,8 @@ public class KeywordListAdapter extends RecyclerView.Adapter<KeywordListAdapter.
     }
 
     public interface OnItemClickListener {
-        void onItemClick(View view, int postion);
+        void onItemClick(View view, int position);
 
-        void onItemLongClick(View view, int postion);
+        void onItemLongClick(View view, int position);
     }
 }

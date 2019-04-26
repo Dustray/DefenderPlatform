@@ -110,7 +110,14 @@ public class FilterUtil implements FilterHelper.OnSyncListener {
     }
 
     @Override
-    public void onDownloaded(List<KeywordEntity> list) {
+    public void InsertSuccess(List<KeywordEntity> list) {
         keywordList = list;
+    }
+
+
+
+    @Override
+    public void onDeleteSuccess(int itemPosition) {
+
     }
 }
