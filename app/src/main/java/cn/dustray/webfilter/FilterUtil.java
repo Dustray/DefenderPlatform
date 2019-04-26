@@ -11,6 +11,7 @@ import java.util.List;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
+import cn.dustray.utils.xToast;
 import cn.dustray.webfilter.KeywordEntity;
 
 
@@ -18,44 +19,46 @@ import cn.dustray.webfilter.KeywordEntity;
  * Created by Dustray on 2016/11/8 0008.
  */
 
-public class FilterUtil {
-    private List<KeywordEntity> keywordList = new ArrayList<KeywordEntity>();
+public class FilterUtil implements FilterHelper.OnSyncListener {
+    private List<KeywordEntity> keywordList = new ArrayList<>();
     private SQLiteDatabase db;
     private Context mContext;
     private String theKey = "";
 
     public FilterUtil(Context mContext) {
         this.mContext = mContext;
+        initData();
     }
 
     public FilterUtil(Context mContext, SQLiteDatabase db) {
         this.mContext = mContext;
         this.db = db;
+        initData();
     }
 
     //网页链接过滤
     public boolean filterWebsite(String url) {
-        boolean result = true;
         if (url == null) {
-            return result;
+            return true;
         }
-        String keyword[] = {"weibo", "tieba", "taobao","tmail", "mbd.baidu", "ithome", "video", "image.baidu", "news", "qq.com", "sohu.com", "huanqiu.com", "xinhuanet.com", "3g.163.com", "s.pae.baidu", "chinanews"};
+        //String keyword[] = {"weibo", "tieba", "taobao", "tmail", "mbd.baidu", "ithome", "video", "image.baidu", "news", "qq.com", "sohu.com", "huanqiu.com", "xinhuanet.com", "3g.163.com", "s.pae.baidu", "chinanews"};
         //initData();
         //getKeyword();
-//        for (KeywordEntity ke : keywordList) {
-//
-//            if (url.contains(ke.getKeyword())) {
-//                theKey = ke.getKeyword();
+        for (KeywordEntity ke : keywordList) {
+
+            //xToast.toast(mContext,"正在匹配"+ke.getKeyword());
+            if (url.contains(ke.getKeyword())) {
+                theKey = ke.getKeyword();
+                return false;
+            }
+        }
+//        for (int i = 0; i < keyword.length; i++) {
+//            if (url.contains(keyword[i])) {
+//                theKey = keyword[i];
 //                result = false;
 //            }
 //        }
-        for(int i=0;i<keyword.length;i++){
-            if (url.contains(keyword[i])) {
-                theKey = keyword[i];
-                result = false;
-            }
-        }
-        return result;
+        return true;
     }
 
     //获取拦截关键字
@@ -64,7 +67,7 @@ public class FilterUtil {
     }
 
     private void getKeyword() {
-                /*查询所有信息*/
+        /*查询所有信息*/
         Cursor c = db.rawQuery("select * from allkeyword", null);
         if (c != null) {
             while (c.moveToNext()) {
@@ -80,12 +83,12 @@ public class FilterUtil {
     public boolean filterKeyWord(String html) {
         boolean result = true, isDouble = false;
 
-        String keyword[] = {"新闻网","朋友圈", "日报", "记者", "日讯", "近日", "媒体", "报道", "依法", "调查", "摄影师", "网友", "爆料", "微博", "全国", "新华", "央视"};
+        String keyword[] = {"新闻网", "朋友圈", "日报", "记者", "日讯", "近日", "媒体", "报道", "依法", "调查", "摄影师", "网友", "爆料", "微博", "全国", "新华", "央视"};
         for (int i = 0; i < keyword.length; i++) {
-            if (html.contains(keyword[i])&&isDouble) {
-                theKey += "/"+keyword[i];
+            if (html.contains(keyword[i]) && isDouble) {
+                theKey += "/" + keyword[i];
                 result = false;
-            } else if(html.contains(keyword[i])){
+            } else if (html.contains(keyword[i])) {
                 theKey = keyword[i];
                 isDouble = true;
             }
@@ -94,31 +97,16 @@ public class FilterUtil {
     }
 
     private void initData() {
+        FilterHelper fh = new FilterHelper();
+        keywordList = fh.getKeywordList();
+//        xToast.toast(mContext,"已同步"+keywordList.size());
+        fh.setOnSyncListener(this);
+        fh.updateKeywordFromBmob(mContext);
 
-        BmobQuery<KeywordEntity> query = new BmobQuery<KeywordEntity>();
-        query.setLimit(50);
-        //执行查询方法
-        query.findObjects(new FindListener<KeywordEntity>() {
-            @Override
-            public void done(List<KeywordEntity> object, BmobException e) {
-                if (e == null) {
-                    keywordList = object;
-                    //MyToast.toast(AddKeywordActivity.this, "查询成功：共" + object.size() + "条数据。");
-//                    for (KeywordEntity ke : object) {
-//                        //获得playerName的信息
-//                        ke.getKeyword();
-//                        //获得数据的objectId信息
-//                        ke.getObjectId();
-//                        //获得createdAt数据创建时间（注意是：createdAt，不是createAt）
-//                        ke.getCreatedAt();
-//                    }
-                } else {
-                    //Log.i("bmob","失败："+e.getMessage()+","+e.getErrorCode());
-                    //MyToast.toast(AddKeywordActivity.this, "失败：" + e.getMessage() + "," + e.getErrorCode());
+    }
 
-                }
-            }
-        });
-
+    @Override
+    public void onDownloaded(List<KeywordEntity> list) {
+        keywordList = list;
     }
 }

@@ -114,10 +114,4 @@ public class KeywordListActivity extends AppCompatActivity implements View.OnCli
         xToast.toast(this, "同步完成");
     }
 
-    @Override
-    public void onInsertSuccess(List<KeywordEntity> list) {
-        Log.i("filter", "插入成功后，从SQLite中取出" + list.size() + "个数据");
-        adapter.sync(list);
-        xToast.toast(this, "添加成功");
-    }
 }

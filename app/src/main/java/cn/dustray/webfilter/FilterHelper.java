@@ -187,7 +187,5 @@ public class FilterHelper {
 
     public interface OnSyncListener {
         void onDownloaded(List<KeywordEntity> list);
-
-        void onInsertSuccess(List<KeywordEntity> list);
     }
 }

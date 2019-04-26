@@ -27,6 +27,7 @@ import cn.dustray.popupwindow.WebSharePopup;
 import cn.dustray.utils.SettingUtil;
 import cn.dustray.utils.WebUtil;
 import cn.dustray.utils.xToast;
+import cn.dustray.webfilter.FilterUtil;
 
 
 public class BrowserFragment extends Fragment implements View.OnClickListener, WebTabFragment.OnWebViewCreatedListener
@@ -51,6 +52,7 @@ public class BrowserFragment extends Fragment implements View.OnClickListener, W
     private WebGroupPopup webGroupPopup;
     private WebSharePopup webSharePopup;
     private WebMenuPopup webMenuPopup;
+    private FilterUtil sf;
     //浏览器配置
     private boolean isNightMode = false;
 
@@ -77,6 +79,9 @@ public class BrowserFragment extends Fragment implements View.OnClickListener, W
         manager = getActivity().getSupportFragmentManager();
         //初始化webtoolbar
         initWebToolBar();
+        //初始化屏蔽引擎
+        sf = new FilterUtil(getActivity());
+
         //xToast.toast(getActivity(), "s" + webFragArray.size());
         if (webFragArray.size() == 0) {//未从文件中获取缓存的页面
             initFragment();
@@ -417,6 +422,16 @@ public class BrowserFragment extends Fragment implements View.OnClickListener, W
     @Override
     public void onOpenNewWebTab(String Url) {
         createNewFragment(Url);
+    }
+
+    @Override
+    public boolean onWebUrlCanLoad(String url) {
+        return sf.filterWebsite(url);
+    }
+
+    @Override
+    public String showWebUrlFilterKeyword() {
+        return sf.getFilterKey();
     }
 
 

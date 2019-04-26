@@ -102,9 +102,11 @@ public class WebTabFragment extends Fragment {
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 //xToast.toast(getActivity(), "111");
                 //过滤
-                FilterUtil sf = new FilterUtil(getActivity());
-                if (!spHelper.getIsNoFilter() && !sf.filterWebsite(request.getUrl().toString())) {
-                    xToast.toast(getActivity(), "已拦截，关键字：" + sf.getFilterKey());
+                //if (!spHelper.getIsNoFilter() && !sf.filterWebsite(request.getUrl().toString())) {
+
+                //xToast.toast(getContext(),"正在匹配");
+                if (!webListener.onWebUrlCanLoad(request.getUrl().toString())) {
+                    xToast.toast(getActivity(), "已拦截，关键字："+webListener.showWebUrlFilterKeyword());
                     mainWebView.stopLoading();
                     mainWebView.goBack();
                 }
@@ -116,6 +118,23 @@ public class WebTabFragment extends Fragment {
 //                }
                 return flag;
                 //return super.shouldOverrideUrlLoading(view, request);
+            }
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                //xToast.toast(getContext(),"正在匹配");
+                if (!webListener.onWebUrlCanLoad(url)) {
+                    xToast.toast(getActivity(), "已拦截，关键字："+webListener.showWebUrlFilterKeyword());
+                    mainWebView.stopLoading();
+                    mainWebView.goBack();
+                }
+
+                //该方法在Build.VERSION_CODES.LOLLIPOP以前有效，从Build.VERSION_CODES.LOLLIPOP起，建议使用shouldOverrideUrlLoading(WebView, WebResourceRequest)}
+                boolean flag = mainWebView.openApp(url, getActivity());
+//                if (Build.VERSION.SDK_INT < 26||Build.VERSION.SDK_INT==28) {
+//                    return flag;
+//                }
+                return flag;
             }
 
             @Override
@@ -162,7 +181,7 @@ public class WebTabFragment extends Fragment {
             //定位回调函数
             @Override
             public void onGeolocationPermissionsShowPrompt(final String origin, final GeolocationPermissions.Callback callback) {
-               // super.onGeolocationPermissionsShowPrompt(origin, callback);
+                // super.onGeolocationPermissionsShowPrompt(origin, callback);
                 PermissionUtil.Location(getActivity());//权限申请
 
                 final boolean remember = true;
@@ -466,6 +485,9 @@ public class WebTabFragment extends Fragment {
         void onWebViewCreateFinished();
 
         void onOpenNewWebTab(String Url);
+
+        boolean onWebUrlCanLoad(String url);
+        String showWebUrlFilterKeyword();
     }
 
 
