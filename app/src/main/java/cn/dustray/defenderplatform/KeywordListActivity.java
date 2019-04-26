@@ -23,14 +23,15 @@ import cn.dustray.webfilter.FilterHelper;
 import cn.dustray.webfilter.KeywordEntity;
 import cn.dustray.webfilter.KeywordListAdapter;
 
-public class KeywordListActivity extends AppCompatActivity implements View.OnClickListener {
+public class KeywordListActivity extends AppCompatActivity implements View.OnClickListener, FilterHelper.OnSyncListener {
 
     private RecyclerView rvKeyword;
     private EditText inputAdd;
     private Button btnAdd;
     private KeywordListAdapter adapter;
+    private FilterHelper filterHelper ;
+    List<KeywordEntity> list;
 
-    List<KeywordEntity> list ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +39,9 @@ public class KeywordListActivity extends AppCompatActivity implements View.OnCli
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("免屏蔽");
         initView();
+        initData();
     }
+
 
     private void initView() {
 //        for (int i = 0; i < 10; i++) {
@@ -58,20 +61,16 @@ public class KeywordListActivity extends AppCompatActivity implements View.OnCli
         rvKeyword.setLayoutManager(layoutManager);
         rvKeyword.addItemDecoration(new xRecycleViewDivider(
                 this, LinearLayoutManager.VERTICAL, 3, getResources().getColor(R.color.black_overlay)));
+    }
 
+    private void initData() {
 
-        FilterHelper filterHelper = new FilterHelper();
-        filterHelper.setOnSyncListener(new FilterHelper.OnSyncListener() {
-            @Override
-            public void onDownloaded( List<KeywordEntity> list) {
-                Log.i("filter","从Bmob取回后，从SQLite中取出"+list.size()+"个数据");
-                adapter.sync(list);
-            }
-        });
+        filterHelper = new FilterHelper();
+        filterHelper.setOnSyncListener(this);
 
-        Log.i("filter", "----------第一步，先将sqlite存的展示出来--------------" );
+        Log.i("filter", "----------第一步，先将sqlite存的展示出来--------------");
         list = filterHelper.getKeywordList();
-        Log.i("filter","打开页面，从SQLite中取出"+list.size()+"个数据");
+        Log.i("filter", "打开页面，从SQLite中取出" + list.size() + "个数据");
         adapter = new KeywordListAdapter(this, list);
         filterHelper.updateKeywordFromBmob(this);
         rvKeyword.setAdapter(adapter);
@@ -89,6 +88,24 @@ public class KeywordListActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_add:
+                filterHelper.addToDatebase(this,inputAdd.getText().toString());
+        }
+    }
 
+
+    @Override
+    public void onDownloaded(List<KeywordEntity> list) {
+        Log.i("filter", "从Bmob取回后，从SQLite中取出" + list.size() + "个数据");
+        adapter.sync(list);
+        xToast.toast(this,"同步完成");
+    }
+
+    @Override
+    public void onInsertSuccess(List<KeywordEntity> list) {
+        Log.i("filter", "插入成功后，从SQLite中取出" + list.size() + "个数据");
+        adapter.sync(list);
+        xToast.toast(this,"添加成功");
     }
 }

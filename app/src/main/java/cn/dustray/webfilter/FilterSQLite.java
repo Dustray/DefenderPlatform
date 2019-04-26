@@ -5,7 +5,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class FilterSQLite {
@@ -39,25 +41,21 @@ public class FilterSQLite {
         Cursor cursor = null;
         try {
             //查询获得游标
-            cursor = db.query("keywordEntity", null, null, null, null, null, "updateAt desc");
+            cursor = db.query("keywordEntity", null, null, null, null, null, "updateAt   desc");
 
             //判断游标是否为空
-            if (cursor != null) {
+            if (cursor != null && cursor.getCount() > 0) {
                 cursor.moveToFirst();
                 //遍历游标
-                do{
-//                for (int i = 0; i < cursor.getCount(); i++) {
+                do {
                     KeywordEntity ke = new KeywordEntity();
-                    Log.i("filter", "来自sqlite的getKeyword ...keyword:" + cursor.getString(1) + "总共：" + cursor.getCount());
-                    //cursor.move(i);
-                    //获得ID
+                    //Log.i("filter", "来自sqlite的getKeyword ...keyword:" + cursor.getString(1) + "总共：" + cursor.getCount());
                     ke.setObjectId(cursor.getString(0));
                     ke.setKeyword(cursor.getString(1));
                     //ke.setCreateAt(cursor.getString(2));
                     ke.setUpdatedAt(cursor.getString(3));
                     list.add(ke);
-                   // cursor.moveToNext();
-                }while(cursor.moveToNext());
+                } while (cursor.moveToNext());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -88,18 +86,8 @@ public class FilterSQLite {
                 Log.i("filter", "已存在，删除现有：" + ke.getKeyword());
                 deleteKeyword(ke.getObjectId());//删除
             } else {
-                ContentValues cValue = new ContentValues();
-                try {
-                    //添加用户名
-                    cValue.put("objectId", ke.getObjectId());
-                    cValue.put("keyword", ke.getKeyword());
-                    //cValue.put("createAt", ke.getCreatedAt());
-                    cValue.put("updateAt", ke.getUpdatedAt());
-                    db.insert("keywordEntity", null, cValue);
-                } catch (Exception e) {
-
-                    Log.i("filter", "设置到SQLite中异常：" + e.toString());
-                }
+                //插入
+                insertKeyword(ke.getObjectId(), ke.getKeyword(), ke.getUpdatedAt());
                 //db.execSQL("insert into keywordEntity(objectId,keyword,updateAt) values('" +ke.getObjectId()+"','"+ ke.getKeyword() +"',datetime('"+ke.getUpdatedAt()+ "'))");
             }
         }
@@ -109,19 +97,41 @@ public class FilterSQLite {
      * 修改
      *
      * @param id
-     * @param keyword
+     * @param datetime
      */
-    private void updateKeyword(String id, String keyword) {
+    private void updateKeyword(String id, String datetime) {
 //实例化内容值
         ContentValues values = new ContentValues();
 //在values中添加内容
-        values.put("keyword", keyword);
+        values.put("updateAt", datetime);
 //修改条件
         String whereClause = "id=?";
 //修改添加参数
         String[] whereArgs = {id};
 //修改
         db.update("keywordEntity", values, whereClause, whereArgs);
+    }
+
+    /**
+     * 插入行
+     *
+     * @param id
+     * @param Keyword
+     * @param datetime
+     */
+    public void insertKeyword(String id, String Keyword, String datetime) {
+        ContentValues cValue = new ContentValues();
+        try {
+            //添加用户名
+            cValue.put("objectId", id);
+            cValue.put("keyword", Keyword);
+            //cValue.put("createAt", ke.getCreatedAt());
+            cValue.put("updateAt", datetime);
+            db.insert("keywordEntity", null, cValue);
+        } catch (Exception e) {
+
+            Log.i("filter", "添加一行到SQLite中异常：" + e.toString());
+        }
     }
 
     /**
