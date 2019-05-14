@@ -1,0 +1,24 @@
+a,input{
+    border: 0 solid ;
+}
+.tool-item-style-frame>.tool-item-frame {
+    width: 25%;
+}
+.tool-item-style-frame .style_blue {
+    background: #3c9bff;
+}
+
+.tool-item-style-frame .style_black {
+    background: #2f2f2f;
+}
+
+.tool-item-style-frame .style_red {
+    background: #ff3c3c;
+}
+.tool-item-style-frame .style_green {
+    background: #0dacb1;
+}
+
+
+
+

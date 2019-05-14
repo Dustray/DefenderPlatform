@@ -1,10 +1,16 @@
+/* 整个滚动条 */
+
+::-webkit-scrollbar {
+    width: 0px;
+}
+
 body {
     color: #444;
     margin: 0;
     font-family: 'Microsoft YaHei';
     /* background-image: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1554365501049&di=a79839c60599927dd9280e3931a471ed&imgtype=0&src=http%3A%2F%2Fimg.pptjia.com%2Fimage%2F20180321%2F989a0dbcccf3a519a1d8f2604e68a7e2.jpg); */
     /* background-image: url(../image/background.png); */
-    background-image: url(../image/background_continuity.png);
+    background-image: url(../image/background_continuity_blue.png);
 }
 
 input {
@@ -19,9 +25,27 @@ a, p, li, img {
     -ms-user-select: none;
     user-select: none;
 }
-.content-go p,
-.head p,
-.site-manage{
+
+.trans-all {
+    /* 标准的语法 */
+    transition: all .5s;
+    /* Firefox 4 */
+    -moz-transition: all .5s;
+    /* Safari 和 Chrome */
+    -webkit-transition: all .5s;
+    /* Opera */
+    -o-transition: all .5s;
+}
+
+/*-----------------------------------通用结束-----------------------------------*/
+
+/*-----------------------------------------------------------------------------*/
+
+/*-----------------------------------HeadCSS-----------------------------------*/
+
+/*-----------------------------------------------------------------------------*/
+
+.top-frame p, .head p, .site-manage {
     cursor: default;
 }
 
@@ -52,13 +76,6 @@ a, p, li, img {
     float: left;
     padding-top: 15px;
 }
-
-/* .head>p {
-    font-style: italic;
-    color: #ddd;
-    margin: 0;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-} */
 
 .contrainer {
     overflow: hidden;
@@ -107,7 +124,19 @@ a, p, li, img {
     }
 }
 
-.content-search, .content-go {
+/*-----------------------------------------------------------------------------*/
+
+/*----------------------------------Head End-----------------------------------*/
+
+/*-----------------------------------------------------------------------------*/
+
+/*-----------------------------------------------------------------------------*/
+
+/*----------------------------------SearchCSS----------------------------------*/
+
+/*-----------------------------------------------------------------------------*/
+
+.content-search, .top-frame {
     font-size: 15px;
     width: 100%;
 }
@@ -146,24 +175,21 @@ a, p, li, img {
     box-shadow: 0 0 15px #fff;
 }
 
-.content-search .search-submit {
+.content-search>.search-submit-frame>div {
     float: left;
+    width: 25%;
+    height: 35px;
+}
+
+.content-search .search-submit {
     background-color: #e2dbbe;
     color: #777;
     border-width: 0px 0px 5px 0px;
     border-style: solid;
     border-color: #d2bdae;
-    width: 25%;
+    width: 100%;
     height: 35px;
     outline: none;
-    /* 标准的语法 */
-    transition: all .5s;
-    /* Firefox 4 */
-    -moz-transition: all .5s;
-    /* Safari 和 Chrome */
-    -webkit-transition: all .5s;
-    /* Opera */
-    -o-transition: all .5s;
 }
 
 .content-search .search-submit:hover {
@@ -180,39 +206,49 @@ a, p, li, img {
 }
 
 @media (max-width: 480px) {
-    .content-search .search-submit {
-        height: 40px;
-        width: 25%;
-    }
     .content-search>.search-text-frame {
         width: 100%;
     }
     .content-search>.search-submit-frame {
+        width: 100%;
+    }
+    .content-search>.search-submit-frame>div {
+        height: 40px;
+        width: 25%;
+    }
+    .content-search .search-submit {
+        height: 40px;
         width: 100%;
     }
 }
 
 @media (min-width: 480px) {
-    .content-search .search-submit {
-        width: 25%;
-    }
     .content-search>.search-text-frame {
         width: 100%;
     }
     .content-search>.search-submit-frame {
+        width: 100%;
+    }
+    .content-search>.search-submit-frame>div {
+        width: 25%;
+    }
+    .content-search .search-submit {
         width: 100%;
     }
 }
 
 @media (min-width: 768px) {
-    .content-search .search-submit {
-        width: 12.5%;
-    }
     .content-search>.search-text-frame {
         width: 600px;
     }
     .content-search>.search-submit-frame {
         width: 600px;
+    }
+    .content-search>.search-submit-frame>div {
+        width: 12.5%;
+    }
+    .content-search .search-submit {
+        width: 100%;
     }
     .head {
         margin: 50px;
@@ -220,21 +256,24 @@ a, p, li, img {
 }
 
 @media (min-width: 980px) {
-    .content-search .search-submit {
-        width: 12.5%;
-    }
     .content-search>.search-text-frame {
         width: 600px;
     }
     .content-search>.search-submit-frame {
         width: 600px;
     }
+    .content-search>.search-submit-frame>div {
+        width: 12.5%;
+    }
+    .content-search .search-submit {
+        width: 100%;
+    }
     .head {
         margin: 60px;
     }
 }
 
-.content-go {
+.top-frame {
     height: 40px;
     text-align: center;
     color: #fff;
@@ -243,50 +282,22 @@ a, p, li, img {
     ;
 }
 
-.content-go>p {
+.top-frame>p {
     margin: 0;
     padding: 10px;
 }
 
-/* 
-.content-go>.search-text {
-    position: absolute;
-    height: 40px;
-    width: 100%;
-    z-index: 1;
-    float: left;
-    border-radius: 2px;
-    outline: 0 !important;
-    border: 0 solid;
-    background-color: #f2f2f2;
-    display: inherit;
-    padding-left: 10px;
-    padding-right: 85px;
-}
+/*--------------------------------------------------------------------------*/
 
-.content-go>.search-submit {
-    position: relative;
-    z-index: 2;
-    margin: 5px;
-    float: right;
-    background-color: #ddd;
-    color: #444;
-    border-radius: 2px;
-    border: 0px solid;
-    width: 80px;
-    height: 30px;
-    outline: none;
-}
+/*-------------------------------Search End---------------------------------*/
 
-.content-go .search-submit:hover {
-    background-color: #ccc;
-} */
+/*--------------------------------------------------------------------------*/
 
-/*---------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------*/
 
-/*------------------------------------Tab------------------------------------*/
+/*----------------------------------TabCSS----------------------------------*/
 
-/*---------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------*/
 
 ul, ol, li {
     margin: 0;
@@ -297,19 +308,294 @@ li {
     list-style: none;
 }
 
+.tabs {
+    width: 100%;
+    border: 0 solid;
+    border-radius: 0;
+    background: #f6f6f6;
+    margin-top: 30px;
+}
+
+.tabs>div {
+    padding: 10px;
+    overflow: hidden;
+}
+
+.tabs .horizontal {
+    width: 100%;
+    display: block;
+    overflow: hidden;
+}
+
+.tabs .horizontal li {
+    float: left;
+    list-style: none;
+    height: 35px;
+    line-height: 35px;
+    background-color: rgba(233, 233, 233, 0.8);
+    width: 12.5%;
+    text-align: center;
+    cursor: pointer;
+    font-size: 15px;
+    color: #3c9bff;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+}
+
+.tabs .horizontal li:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.tabs .horizontal li.selectActive {
+    background-color: rgba(226, 219, 190, 1);
+    color: #3c9bff;
+    cursor: default;
+}
+
+/*------------item------------*/
+
+.item-frame {
+    width: 10%;
+    float: left;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+.item-frame>a {
+    padding: 10px 5px 10px 5px;
+    text-decoration: none;
+    display: block;
+    height: 25px;
+    font-size: 15px;
+    color: #555;
+    overflow: hidden;
+}
+
+.item-frame:hover {
+    background-color: #ddd;
+}
+
+.item-frame>a>img {
+    width: 22px;
+    vertical-align: text-bottom;
+    height: 22px;
+    margin-right: 2px;
+}
+
+.item-frame>a>p {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: inline;
+}
+
+@media (max-width: 480px) {
+    /*手机屏幕，图标和文字上下排列*/
+    .tabs {
+        margin-top: 15px;
+    }
+    .item-frame {
+        padding: 5px 5px;
+        width: 25%;
+    }
+    .item-frame>a {
+        text-align: center;
+        height: 50px;
+    }
+    .item-frame>a>img {
+        margin: 0;
+        height: 27px;
+        width: 27px;
+    }
+    .item-frame>a>p {
+        margin: 0;
+        display: block;
+    }
+    .tabs .horizontal li {
+        height: 40px;
+        line-height: 40px;
+    }
+}
+
+@media (min-width: 480px) {
+    .item-frame {
+        width: 25%;
+    }
+}
+
+@media (min-width: 570px) {
+    .item-frame {
+        width: 20%;
+    }
+}
+
+@media (min-width: 768px) {
+    .item-frame {
+        width: 20%;
+    }
+    .item-frame>a {
+        font-size: 17px;
+    }
+}
+
+@media (min-width: 980px) {
+    .item-frame {
+        width: 16.66666666%;
+    }
+    .item-frame>a {
+        font-size: 17px;
+    }
+}
+
 /*---------------------------------------------------------------------------*/
 
 /*----------------------------------Tab End----------------------------------*/
 
 /*---------------------------------------------------------------------------*/
 
-.trans-all {
-    /* 标准的语法 */
-    transition: all .5s;
-    /* Firefox 4 */
-    -moz-transition: all .5s;
-    /* Safari 和 Chrome */
-    -webkit-transition: all .5s;
-    /* Opera */
-    -o-transition: all .5s;
+/*--------------------------------------------------------------------------*/
+
+/*----------------------------------ManageCSS----------------------------------*/
+
+/*--------------------------------------------------------------------------*/
+
+.site-manage {
+    width: 100%;
+    border: 0 solid;
+    border-radius: 0 0 4px 4px;
+    background: #f6f6f6;
+    margin-top: 30px;
 }
+
+.site-manage>p {
+    height: 35px;
+    line-height: 35px;
+    font-size: 15px;
+    display: block;
+    text-align: center;
+    color: #3c9bff;
+    background-color: rgba(233, 233, 233, 0.8);
+    padding: 0;
+    margin: 0;
+}
+
+.site-manage>.tool-link {
+    width: 100%;
+    overflow: hidden;
+    padding: 10px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+.site-manage>.tool-link>div {
+    width: 50%;
+    float: left;
+}
+
+.tool-item-style-frame, .tool-item-link-frame {
+    text-align: center;
+    overflow: hidden;
+    background: rgba(200, 200, 200, 0.3);
+    border-radius: 4px;
+    width: auto;
+}
+
+.tool-item-style-frame {
+    margin-right: 5px;
+}
+
+.tool-item-link-frame {
+    margin-left: 5px;
+}
+
+.tool-item-style-frame>p, .tool-item-link-frame>p {
+    color: #3c9bff;
+    margin: 5px 0 0 0;
+}
+
+
+.tool-item-link-frame>.tool-item-frame {
+    width: 100%;
+}
+
+.tool-item-frame {
+    width: 70px;
+    float: left;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    padding: 5px;
+}
+
+.tool-item-frame>a {
+    padding: 5px 5px 10px 5px;
+    text-decoration: none;
+    display: block;
+    font-size: 12px;
+    color: #555;
+    overflow: hidden;
+    text-align: center;
+    height: 50px;
+}
+
+.tool-item-frame>a>img {
+    width: 18px;
+    height: 18px;
+    border: 0 solid #999;
+    padding: 10px;
+    background-color: #999;
+    border-radius: 50px;
+    margin: 0 auto;
+    display: block;
+}
+
+.tool-item-frame>a>p {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: inline;
+    margin: 0;
+    display: block;
+}
+
+.tool-item-style-frame>.tool-item-frame>a>div {
+    width: 34px;
+    height: 34px;
+    border: 2px solid #000;
+    border-radius: 50px;
+    vertical-align: text-bottom;
+    margin: 0 auto;
+}
+
+@media (max-width: 500px) {
+    .site-manage>.tool-link>div {
+        width: 100%;
+    }
+    .tool-item-style-frame {
+        margin-right: 0;
+    }
+    .tool-item-link-frame {
+        margin-left: 0;
+        margin-top: 5px;
+    }
+}
+
+@media (min-width: 380px) {}
+
+@media (max-width: 480px) {
+    .site-manage {
+        margin-top: 15px;
+    }
+}
+
+@media (min-width: 480px) {}
+
+@media (min-width: 768px) {}
+
+@media (min-width: 980px) {}
+
+/*---------------------------------------------------------------------------*/
+
+/*----------------------------------Manage End----------------------------------*/
+
+/*---------------------------------------------------------------------------*/

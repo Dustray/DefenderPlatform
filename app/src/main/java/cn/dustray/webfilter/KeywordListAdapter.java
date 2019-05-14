@@ -34,6 +34,7 @@ public class KeywordListAdapter extends RecyclerView.Adapter<KeywordListAdapter.
         if (position != list.size()) {
             notifyItemRangeChanged(position, list.size() - position);
         }
+        
     }
 
     public void setItemClickListener(OnItemClickListener itemClickListener) {

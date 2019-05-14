@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import cn.dustray.utils.xToast;
 
@@ -15,6 +16,7 @@ public class ShieldingActivity extends AppCompatActivity {
 
     public static String SHIELDING_STATE="正在屏蔽网站";
     public  static String UNSHIELDING_STATE="正在免屏蔽";
+    private TextView tvRemainTime;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +35,8 @@ public class ShieldingActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        tvRemainTime=findViewById(R.id.tv_remain_time);
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

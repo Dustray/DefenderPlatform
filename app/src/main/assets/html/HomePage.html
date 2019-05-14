@@ -8,22 +8,53 @@
     <meta name=”Keywords” Content="导航,网址导航,搜索,开发,简洁">
     <meta name=”Description” Content="简洁、好看的网址导航">
     <title>微寒导航</title>
+
+    <link href="css/all.css" rel="stylesheet" type="text/css">
     <link href="css/navigation.css" rel="stylesheet" type="text/css">
-    <link href='css/tab.css' rel='stylesheet' type='text/css'>
-    <link href='css/manage.css' rel='stylesheet' type='text/css'>
+    <!-- <link href='css/navigation_ios.css' rel='stylesheet' type='text/css'> -->
     <link rel="icon" href="image/logo.png" sizes="32x32">
+    <script>
+
+        var currentstyle = -1;
+        window.onload = function () {
+
+
+            var i = getCookie("currentstyle");
+            currentstyle = i;
+            if (i != null) {
+                if (i === "0") {//蓝色，默认
+                    loadjscssfile("css/navigation.css", "css")
+                    removejscssfile("css/navigation_ios.css", "css")
+                    removejscssfile("css/navigation_red.css", "css")
+                    removejscssfile("css/navigation_green.css", "css")
+                } else if (i === "1") {//黑色
+                    loadjscssfile("css/navigation_ios.css", "css")
+                    removejscssfile("css/navigation_red.css", "css")
+                    removejscssfile("css/navigation.css", "css")
+                    removejscssfile("css/navigation_green.css", "css")
+                } else if (i === "2") {//红色
+                    loadjscssfile("css/navigation_red.css", "css")
+                    removejscssfile("css/navigation.css", "css")
+                    removejscssfile("css/navigation_ios.css", "css")
+                    removejscssfile("css/navigation_green.css", "css")
+                }else if (i === "3") {//绿色
+                    loadjscssfile("css/navigation_green.css", "css")
+                    removejscssfile("css/navigation.css", "css")
+                    removejscssfile("css/navigation_ios.css", "css")
+                    removejscssfile("css/navigation_red.css", "css")
+                }  else return;
+            }
+        }
+
+    </script>
     <script src="https://www.jq22.com/jquery/1.7.2/jquery.min.js"></script>
     <script src="js/tabulous.js"></script>
 </head>
 <style>
 </style>
 
-<body onkeydown="_key()">
-    <div class="content-go">
-        <!-- <div class="content-go">
-            <input id="go-text" placeholder="请输入网址" class=" content-go search-text" type="text" />
-            <input id="go-submit" class=" content-go search-submit" type="button" onclick="go()" value="转到" />
-        </div> -->
+<body onkeydown="_key()" class="trans-all">
+    <div class="top-frame">
         <p>支持996：9点睡，9点起，每天工作6小时</p>
     </div>
     <div class="head trans-all">
@@ -36,28 +67,45 @@
     </div>
     <div class="contrainer">
         <div class="main-content">
-            <div class="content-search">
+            <div class="content-search trans-all">
                 <div class="search-text-frame">
                     <input id="search-text" placeholder="请输入搜索内容" class=" search-text trans-all" type="text"
                         autocomplete="off" onfocus="this.select()" />
                 </div>
 
-                <div class="search-submit-frame">
-                    <input id="search-submit" class="search-submit" type="button" onclick="submit(0)"
-                        value="百&nbsp;度" />
-                    <input id="search-submit" class="search-submit" type="button" onclick="submit(1)"
-                        value="必&nbsp;应" />
-                    <input id="search-submit" class="search-submit" type="button" onclick="submit(2)"
-                        value="谷&nbsp;歌" />
-                    <input id="search-submit" class="search-submit" type="button" onclick="submit(3)" value="GitHub" />
-                    <input id="search-submit" class="search-submit" type="button" onclick="submit(4)"
-                        value="磁&nbsp;力" />
-                    <input id="search-submit" class="search-submit" type="button" onclick="submit(5)"
-                        value="翻&nbsp;译" />
-                    <input id="search-submit" class="search-submit" type="button" onclick="submit(6)"
-                        value="图&nbsp;片" />
-                    <input id="search-submit" class="search-submit" type="button" onclick="submit(7)"
-                        value="翻&nbsp;译" />
+                <div class="search-submit-frame trans-all ">
+                    <div>
+                        <input id="search-submit" class="search-submit  trans-all " type="button" onclick="submit(0)"
+                            value="百度" />
+                    </div>
+                    <div>
+                        <input id="search-submit" class="search-submit trans-all" type="button" onclick="submit(1)"
+                            value="必应" />
+                    </div>
+                    <div>
+                        <input id="search-submit" class="search-submit trans-all" type="button" onclick="submit(2)"
+                            value="谷歌" />
+                    </div>
+                    <div>
+                        <input id="search-submit" class="search-submit trans-all" type="button" onclick="submit(3)"
+                            value="GitHub" />
+                    </div>
+                    <div>
+                        <input id="search-submit" class="search-submit trans-all" type="button" onclick="submit(4)"
+                            value="磁力" />
+                    </div>
+                    <div>
+                        <input id="search-submit" class="search-submit trans-all" type="button" onclick="submit(5)"
+                            value="翻译" />
+                    </div>
+                    <div>
+                        <input id="search-submit" class="search-submit trans-all" type="button" onclick="submit(6)"
+                            value="图片" />
+                    </div>
+                    <div>
+                        <input id="search-submit" class="search-submit trans-all" type="button" onclick="submit(7)"
+                            value="翻译" />
+                    </div>
                 </div>
             </div>
 
@@ -68,7 +116,7 @@
                     <li rel="tab-3">资讯</li>
                     <li rel="tab-4">影音</li>
                     <li rel="tab-5">工具</li>
-                    <li rel="tab-6">开发者</li>
+                    <li rel="tab-6">开发</li>
                     <li rel="tab-7">资源</li>
                     <li rel="tab-8">教育</li>
                 </ul>
@@ -119,11 +167,47 @@
                 <img
                     src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1539083023061&di=fe74b9c32ab074772cf3c09621a801d4&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F78310a55b319ebc4092170d98926cffc1e171610.jpg" />
             </div> -->
-            <div class="site-manage">
-                <p>站点管理</p>
-                <div class="tool-link ">
-                    <a class="trans-all"
-                        href="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAO__cwTRKlURFJBSTAzV1FPSkM0VjM1RzVLOUdWNTdWNS4u">添加网站</a>
+            <div class="site-manage trans-all">
+                <p>站点工具</p>
+                <div class="tool-link trans-all">
+                    <div>
+                        <div class="tool-item-style-frame trans-all">
+                            <p>主题</p>
+                            <div class="tool-item-frame">
+                                <a href="javascript:void(0);" class="web-style-blue" onclick="changeStyle(0) ">
+                                    <div class=" style_blue trans-all"></div>清湛蓝
+                                </a>
+                            </div>
+
+                            <div class="tool-item-frame ">
+                                <a href="javascript:void(0);" class="web-style-black" onclick="changeStyle(1) ">
+                                    <div class="style_black trans-all"></div>墨岩黑
+                                </a>
+                            </div>
+                            <div class="tool-item-frame ">
+                                    <a href="javascript:void(0);" class="web-style-black" onclick="changeStyle(2) ">
+                                        <div class="style_red trans-all"></div>中国红
+                                    </a>
+                                </div>
+                                <div class="tool-item-frame ">
+                                    <a href="javascript:void(0);" class="web-style-black" onclick="changeStyle(3) ">
+                                        <div class="style_green trans-all"></div>极光绿
+                                    </a>
+                                </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="tool-item-link-frame trans-all">
+                            <p>工具链接</p>
+                            <div class="tool-item-frame">
+                                <a target="_blank"
+                                    href="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAO__cwTRKlURFJBSTAzV1FPSkM0VjM1RzVLOUdWNTdWNS4u">
+                                    <img class="trans-all" src="image/add.png" />
+                                    推荐链接
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -203,7 +287,7 @@
         for (var i = 0; i < link.length; i++) {
             var elem = "<div class=\"item-frame trans-all\">"
                 + "<a href=\"" + link[i].address + "\"  target=\"_blank\">"
-                + "<img src=\" " + link[i].linkIcon + "\" /><p>"
+                + "<img src=\" " + link[i].linkIcon + "\"  class=\"trans-all\"/><p>"
                 + link[i].linkName
                 + "</p></a> </div>";
             $("#tab-" + link[i].linkType).append(elem);
@@ -217,6 +301,93 @@
         showLinkItem(res);
     });
 
+</script>
+<script>
+
+    function changeStyle(type) {
+        if (currentstyle == type) return;
+        if (type == 0) {//蓝色，默认
+            loadjscssfile("css/navigation.css", "css")
+            removejscssfile("css/navigation_ios.css", "css")
+            removejscssfile("css/navigation_red.css", "css")
+                    removejscssfile("css/navigation_green.css", "css")
+        } else if (type == 1) {//黑色
+            loadjscssfile("css/navigation_ios.css", "css")
+            removejscssfile("css/navigation_red.css", "css")
+            removejscssfile("css/navigation.css", "css")
+                    removejscssfile("css/navigation_green.css", "css")
+        } else if (type == 2) {//红色
+            loadjscssfile("css/navigation_red.css", "css")
+            removejscssfile("css/navigation.css", "css")
+            removejscssfile("css/navigation_ios.css", "css")
+                    removejscssfile("css/navigation_green.css", "css")
+        }else if (type == 3) {//红色
+            loadjscssfile("css/navigation_green.css", "css")
+            removejscssfile("css/navigation.css", "css")
+            removejscssfile("css/navigation_ios.css", "css")
+                    removejscssfile("css/navigation_red.css", "css")
+        } else return;
+        setCookie("currentstyle", type);
+        currentstyle = type;
+    }
+
+    //添加一个css
+    function loadjscssfile(filename, filetype) {
+        if (filetype == "js") {
+            var fileref = document.createElement('script')
+            fileref.setAttribute("type", "text/javascript")
+            fileref.setAttribute("src", filename)
+        }
+        else if (filetype == "css") {
+            var fileref = document.createElement("link")
+            fileref.setAttribute("rel", "stylesheet")
+            fileref.setAttribute("type", "text/css")
+            fileref.setAttribute("href", filename)
+        }
+        if (typeof fileref != "undefined")
+            document.getElementsByTagName("head")[0].appendChild(fileref)
+
+    }
+
+    //移动已经加载过的js/css
+    function removejscssfile(filename, filetype) {
+        var targetelement = (filetype == "js") ? "script" : (filetype == "css") ? "link" : "none"
+        var targetattr = (filetype == "js") ? "src" : (filetype == "css") ? "href" : "none"
+        var allsuspects = document.getElementsByTagName(targetelement)
+        for (var i = allsuspects.length; i >= 0; i--) {
+            if (allsuspects[i] && allsuspects[i].getAttribute(targetattr) != null && allsuspects[i].getAttribute(targetattr).indexOf(filename) != -1)
+                allsuspects[i].parentNode.removeChild(allsuspects[i])
+        }
+    }
+
+    //设置cookies
+    function setCookie(name, value) {
+        var Days = 30;
+        var exp = new Date();
+        exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
+        //alert(value+ name + "=" + escape(value) + ";expires=" + exp.toGMTString());
+        document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
+    }
+    //获取cookies
+    function getCookie(Name) {
+        var search = Name + "="//查询检索的值
+        var returnvalue = "";//返回值
+        if (document.cookie.length > 0) {
+            sd = document.cookie.indexOf(search);
+            //alert("ss");
+            if (sd != -1) {
+                sd += search.length;
+                end = document.cookie.indexOf(";", sd);
+
+                if (end == -1)
+                    end = document.cookie.length;
+                //unescape() 函数可对通过 escape() 编码的字符串进行解码。
+                //alert(document.cookie.substring(sd, end));
+                returnvalue = unescape(document.cookie.substring(sd, end));
+            }
+        }
+        return returnvalue;
+    }
 </script>
 
 </html>
