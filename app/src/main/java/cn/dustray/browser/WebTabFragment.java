@@ -103,10 +103,11 @@ public class WebTabFragment extends Fragment {
                 //if (!spHelper.getIsNoFilter() && !sf.filterWebsite(request.getUrl().toString())) {
 
                 //xToast.toast(getContext(),"正在匹配1");
-                if (!webListener.onWebUrlCanLoad(request.getUrl().toString())) {
-                    xToast.toast(getActivity(), "已拦截，关键字："+webListener.showWebUrlFilterKeyword());
+                if (!spHelper.getIsNoFilter() && !webListener.onWebUrlCanLoad(request.getUrl().toString())) {
+                    xToast.toast(getActivity(), "已拦截，关键字：" + webListener.showWebUrlFilterKeyword());
                     mainWebView.stopLoading();
-                    mainWebView.goBack();
+                    if (!mainWebView.canGoForward())
+                        mainWebView.goBack();
                 }
 
                 //该方法在Build.VERSION_CODES.LOLLIPOP以前有效，从Build.VERSION_CODES.LOLLIPOP起，建议使用shouldOverrideUrlLoading(WebView, WebResourceRequest)}
@@ -121,10 +122,11 @@ public class WebTabFragment extends Fragment {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 //xToast.toast(getContext(),"正在匹配2");
-                if (!webListener.onWebUrlCanLoad(url)) {
-                    xToast.toast(getActivity(), "已拦截，关键字："+webListener.showWebUrlFilterKeyword());
+                if (!spHelper.getIsNoFilter() && !webListener.onWebUrlCanLoad(url)) {
+                    xToast.toast(getActivity(), "已拦截，关键字：" + webListener.showWebUrlFilterKeyword());
                     mainWebView.stopLoading();
-                    mainWebView.goBack();
+                    if (!mainWebView.canGoForward())
+                        mainWebView.goBack();
                 }
 
                 //该方法在Build.VERSION_CODES.LOLLIPOP以前有效，从Build.VERSION_CODES.LOLLIPOP起，建议使用shouldOverrideUrlLoading(WebView, WebResourceRequest)}
@@ -485,6 +487,7 @@ public class WebTabFragment extends Fragment {
         void onOpenNewWebTab(String Url);
 
         boolean onWebUrlCanLoad(String url);
+
         String showWebUrlFilterKeyword();
     }
 

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.PersistableBundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
@@ -28,6 +29,8 @@ import android.widget.Toast;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.UpdateListener;
 import cn.dustray.adapter.MainViewPagerAdapter;
 import cn.dustray.browser.BrowserFragment;
 import cn.dustray.browser.WebTabFragment;
@@ -40,9 +43,11 @@ import cn.dustray.popupwindow.WebMenuPopup;
 import cn.dustray.user.UserManager;
 import cn.dustray.utils.Alert;
 import cn.dustray.utils.BmobUtil;
+import cn.dustray.utils.FilterPreferenceHelper;
 import cn.dustray.utils.PermissionUtil;
 import cn.dustray.utils.SettingUtil;
 import cn.dustray.utils.xToast;
+import cn.dustray.webfilter.NoFilterEntity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -60,6 +65,11 @@ public class MainActivity extends AppCompatActivity
     private AppBarLayout mainAppBar;
     private TextView textUserName, textEmail;
     private NavigationView navigationView;
+
+    private int noFilterTime = 0, noFilterTimeTemp = 0;//单位秒
+    private boolean isActivityPause = false;
+    private FilterPreferenceHelper spHelper;
+    private timeCount tc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +93,7 @@ public class MainActivity extends AppCompatActivity
 
         initNavigation();
         initTabPage();
-
+        initNoFilterTimer();//初始化免屏蔽计时
         //getDataFromBrowser(getIntent());
         Uri data = getIntent().getData();
         //browserFragment.createNewFragment("https://baidu.com/");
@@ -125,7 +135,15 @@ public class MainActivity extends AppCompatActivity
             }
         });
     }
-
+    private void initNoFilterTimer() {
+        spHelper = new FilterPreferenceHelper(MainActivity.this);
+        spHelper.setIsNoFilter(false);
+        if (spHelper.getIsNoFilter()) {
+            tc = new timeCount(spHelper.getNoFilterTime(), 1000);
+            noFilterTimeTemp = spHelper.getNoFilterTime() / 1000;
+            tc.start();
+        }
+    }
     private void refleshUserInfo() {
         switch (UserManager.getUserType()) {
             case UserEntity.USER_UNLOGIN:
@@ -327,6 +345,7 @@ public class MainActivity extends AppCompatActivity
     protected void onStart() {
         super.onStart();
 
+        isActivityPause = false;
     }
 
     @Override
@@ -335,8 +354,20 @@ public class MainActivity extends AppCompatActivity
         //检测设置并刷新
         SettingUtil.detectAndRefresh(this);
 
+        isActivityPause = false;
+        initNoFilterTimer();//初始化计时
         refleshUserInfo();
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        isActivityPause = true;
+        if (spHelper.getIsNoFilter()) {
+            tc.onFinish();
+            tc.cancel();
+        }
     }
 
     @Override
@@ -457,5 +488,84 @@ public class MainActivity extends AppCompatActivity
         super.onSaveInstanceState(outState, outPersistentState);
         //getSupportFragmentManager();
 
+    }
+
+
+    public class timeCount extends CountDownTimer {
+
+        public timeCount(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);
+        }
+
+        @Override
+        public void onTick(long l) {
+            noFilterTime = (int) (l / 1000);//单位秒
+
+            if (noFilterTime == 1) {
+                spHelper.setIsNoFilter(false);
+                isActivityPause = true;
+                Alert alert = new Alert(MainActivity.this);
+                alert.setOnPopupAlertListener(new Alert.OnPopupAlertListener() {
+                    @Override
+                    public void onClickOk() {
+                        Intent intent = new Intent(MainActivity.this, ShieldingActivity.class);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onClickCancel() {
+                    }
+                });
+                alert.popupAlert( "您的免屏蔽时长已到，是否重新申请？", "好的");
+                onFinish();
+            }
+//            if (noFilterTimeTemp - noFilterTime >= 1 && !isActivityPause && spHelper.getIsNoFilter()) {
+//                if (noFilterTime < 59)
+//                    MyToast.toast(MainActivity.this, "测试" + noFilterTimeTemp + "s" + noFilterTime);
+//            }
+            if (noFilterTimeTemp / 60 - noFilterTime / 60 >= 1 && !isActivityPause && spHelper.getIsNoFilter()) {
+                spHelper.setNoFilterTime(noFilterTime * 1000);
+
+                updateNoFilterTimeToNet();
+                //MyToast.toast(MainActivity.this, "时长已刷新，还剩" + noFilterTime/60+"分钟");
+                ////tvNoFilterToolbarHint.setText("剩余时长：" + (noFilterTime / 60 + 1) + "分钟");
+                //MyToast.toast(MainActivity.this, "测试时长已刷新" + noFilterTimeTemp + "s" + noFilterTime);
+                noFilterTimeTemp = noFilterTime;
+            }
+//            btnRegisterGoStep.setText(l / 1000 + "");
+//            btnRegisterGoStep.setEnabled(false);
+//            btnRegisterGoStep.setBackgroundResource(R.drawable.xml_btn_color_accent);
+        }
+
+        @Override
+        public void onFinish() {
+            spHelper.setNoFilterTime(noFilterTime * 1000);
+        }
+
+        /**
+         * 修改time到Bmob
+         */
+        private void updateNoFilterTimeToNet() {
+            NoFilterEntity nfe = new NoFilterEntity();
+            nfe.setNoFilterTime(noFilterTime / 60);
+            if (spHelper.getNoFilterID() != null) {
+                nfe.update(spHelper.getNoFilterID(), new UpdateListener() {
+                    @Override
+                    public void done(BmobException e) {
+                        if (e == null) {
+
+                            //MyToast.toast(ApplyNoFilterActivity.this, "修改数据成功");
+                        } else {
+                            //MyToast.toast(MainActivity.this, "修改数据失败：" + e.getMessage());
+                        }
+                    }
+
+                });
+            } else {
+                xToast.toast(MainActivity.this, "如果长时间没有出现此条Toast，请删除");
+                tc.onFinish();
+                tc.cancel();
+            }
+        }
     }
 }
