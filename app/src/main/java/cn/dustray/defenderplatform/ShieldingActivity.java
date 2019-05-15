@@ -80,19 +80,19 @@ public class ShieldingActivity extends AppCompatActivity implements View.OnClick
                     xToast.toast(ShieldingActivity.this, "您的免屏蔽时长已用尽");
                     startNofilterBtn.setBackgroundResource(R.color.colorDanger);
                     //startNofilterBtn.setText("时长已用尽");
-                    tvNoFilterState.setText("免屏蔽时长已用尽");
+                    getSupportActionBar().setTitle("免屏蔽时长已用尽");
                     spHelper.setIsNoFilter(false);
                 } else if (!spHelper.getIsNoFilter()) {//免屏蔽开启
                     xToast.toast(ShieldingActivity.this, "免屏蔽已开启");
                     startNofilterBtn.setBackgroundResource(R.color.colorSafe);
                     //startNofilterBtn.setText("暂停");
-                    tvNoFilterState.setText("免屏蔽已开启");
+                    getSupportActionBar().setTitle("免屏蔽已开启");
                     spHelper.setIsNoFilter(true);
                 } else if (spHelper.getIsNoFilter()) {//关闭
                     xToast.toast(ShieldingActivity.this, "免屏蔽已关闭");
                     startNofilterBtn.setBackgroundResource(R.color.colorPrimary);
                     //startNofilterBtn.setText("开始");
-                    tvNoFilterState.setText("免屏蔽已关闭");
+                    getSupportActionBar().setTitle("免屏蔽已关闭");
                     spHelper.setIsNoFilter(false);
                 }
 

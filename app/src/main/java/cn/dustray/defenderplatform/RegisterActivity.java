@@ -364,21 +364,24 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
     public void registerSuccess() {
         //String ss = UserManager.getUserEntity().getEmail();
         xToast.toast(this, "注册成功");
-        //添加免屏蔽信息
-        NoFilterEntity nfe = new NoFilterEntity();
-        nfe.setUserEntity(BmobUser.getCurrentUser(UserEntity.class));
-        nfe.setNoFilterTime(0);
-        nfe.setWaitingForApplyTime(0);
-        nfe.save(new SaveListener<String>() {
-            @Override
-            public void done(String objectId, BmobException e) {
-                if (e == null) {
-                    //toast("添加数据成功，返回objectId为："+objectId);
-                } else {
-                    //toast("创建数据失败：" + e.getMessage());
+        UserEntity user = BmobUser.getCurrentUser(UserEntity.class);
+        if (user.getUserType() == UserEntity.USER_GUARDIAN) {
+            //添加免屏蔽信息
+            NoFilterEntity nfe = new NoFilterEntity();
+            nfe.setUserEntity(BmobUser.getCurrentUser(UserEntity.class));
+            nfe.setNoFilterTime(0);
+            nfe.setWaitingForApplyTime(0);
+            nfe.save(new SaveListener<String>() {
+                @Override
+                public void done(String objectId, BmobException e) {
+                    if (e == null) {
+                        //toast("添加数据成功，返回objectId为："+objectId);
+                    } else {
+                        //toast("创建数据失败：" + e.getMessage());
+                    }
                 }
-            }
-        });
+            });
+        }
         finish();
     }
 
@@ -397,7 +400,7 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
         } else {
             //Alert alert = new Alert(this);
             //alert.popupAlert("注册失败，请稍后再试");
-            xToast.toast(this,e.toString());
+            xToast.toast(this, e.toString());
         }
         mAuthTask = null;
         showProgress(false);
