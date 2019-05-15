@@ -50,7 +50,7 @@ public class ShieldingActivity extends AppCompatActivity implements View.OnClick
     private boolean isSubmit = false, isApply = false;
     private PopupWindow mPopUpWindow;
     private int userType = 0;
-    private int waitingForApplyTime=0;
+    private int waitingForApplyTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,8 +139,11 @@ public class ShieldingActivity extends AppCompatActivity implements View.OnClick
 
     private void getAllNoFilterTimeFromNet() {
         BmobQuery<NoFilterEntity> query = new BmobQuery<NoFilterEntity>();
-        query.addWhereEqualTo("userEntity", BmobUser.getCurrentUser(UserEntity.class));
-
+        UserEntity userEntity = BmobUser.getCurrentUser(UserEntity.class);
+        if (userEntity.isGuardian())
+            query.addWhereEqualTo("userEntity", userEntity);
+        else
+            query.addWhereEqualTo("userEntity", userEntity.getGuardianUserEntity());
         //执行查询方法
         query.findObjects(new FindListener<NoFilterEntity>() {
             @Override
@@ -190,12 +193,12 @@ public class ShieldingActivity extends AppCompatActivity implements View.OnClick
         } else {
             nfe.setWaitingForApplyTime(0);
         }
-        nfe.setUserEntity( BmobUser.getCurrentUser(UserEntity.class));
+        nfe.setUserEntity(BmobUser.getCurrentUser(UserEntity.class));
         nfe.save(new SaveListener<String>() {
             @Override
             public void done(String objectId, BmobException e) {
                 if (e == null) {
-                    spHelper.setNoFilterID(objectId);
+                    //spHelper.setNoFilterID(objectId);////？？？？？？？？
                     getAllNoFilterTimeFromNet();
                     //getNoFilterTimeFromNet();
                     xToast.toast(ShieldingActivity.this, "添加数据成功");
@@ -302,7 +305,7 @@ public class ShieldingActivity extends AppCompatActivity implements View.OnClick
             finish();
             return true;
         } else if (id == R.id.shield_apply) {
-            xToast.toast(this, "s");
+            showShareWindow();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -359,7 +362,7 @@ public class ShieldingActivity extends AppCompatActivity implements View.OnClick
             initPopupView(mContentView);
         }
 //显示申请时长详情
-        if ( waitingForApplyTime> 0) {
+        if (waitingForApplyTime > 0) {
             nofilterTimeBtn.setBackgroundResource(R.color.colorDanger);
             applyTimeEdt.setText("" + waitingForApplyTime);
             applyPwdEdt.setText("");
@@ -383,6 +386,6 @@ public class ShieldingActivity extends AppCompatActivity implements View.OnClick
         nofilterTimeBtn = (Button) mContentView.findViewById(R.id.btn_nofilter_time);
         nofilterTimeBtn.setOnClickListener(this);
         applyPwdEdt = (TextInputEditText) mContentView.findViewById(R.id.edt_apply_pwd);
-        applyTimeEdt = (TextInputEditText)mContentView. findViewById(R.id.edt_apply_time);
+        applyTimeEdt = (TextInputEditText) mContentView.findViewById(R.id.edt_apply_time);
     }
 }

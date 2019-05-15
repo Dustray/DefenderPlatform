@@ -38,5 +38,10 @@ public class UserEntity extends BmobUser {//guardian
     public void setGuardianUserEntity(UserEntity guardianUserEntity) {
         this.guardianUserEntity = guardianUserEntity;
     }
-
+public boolean isGuardian(){
+        return userType==USER_GUARDIAN;
+}
+    public boolean isUnGuardian(){
+        return userType==USER_UNGUARDIAN;
+    }
 }
