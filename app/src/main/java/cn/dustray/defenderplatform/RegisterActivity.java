@@ -28,6 +28,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -35,11 +36,17 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.SaveListener;
 import cn.dustray.entity.UserEntity;
 import cn.dustray.user.UserManager;
 import cn.dustray.utils.Alert;
 import cn.dustray.utils.BmobUtil;
 import cn.dustray.utils.xToast;
+import cn.dustray.webfilter.NoFilterEntity;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -66,7 +73,7 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
     private UserLoginTask mAuthTask = null;
 
     // UI references.
-    private AutoCompleteTextView mUserName, mEmailView;
+    private AutoCompleteTextView mUserName, mEmailView, mGuardianEmail;
     private EditText mPasswordView_1, mPasswordView_2;
     private View mProgressView;
     private View mLoginFormView;
@@ -124,10 +131,21 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
                 finish();
             }
         });
-
+        mGuardianEmail = findViewById(R.id.guardian_email);
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
-        isGuardianSwitch=findViewById(R.id.is_guardian_switch);
+        isGuardianSwitch = findViewById(R.id.is_guardian_switch);
+        isGuardianSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    mGuardianEmail.setVisibility(View.GONE);
+                } else {
+
+                    mGuardianEmail.setVisibility(View.VISIBLE);
+                }
+            }
+        });
     }
 
     private void populateAutoComplete() {
@@ -189,13 +207,14 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
         mEmailView.setError(null);
         mPasswordView_1.setError(null);
         mPasswordView_2.setError(null);
+        mGuardianEmail.setError(null);
 
         // Store values at the time of the login attempt.
         String username = mUserName.getText().toString();
         String email = mEmailView.getText().toString();
         String password_1 = mPasswordView_1.getText().toString();
         String password_2 = mPasswordView_2.getText().toString();
-
+        String gEmail = mGuardianEmail.getText().toString();
         boolean cancel = false;
         View focusView = null;
 
@@ -228,6 +247,16 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
             mEmailView.setError(getString(R.string.error_invalid_email));
             focusView = mEmailView;
             cancel = true;
+        } else if (!isGuardianSwitch.isChecked()) {
+            if (TextUtils.isEmpty(gEmail)) {
+                mGuardianEmail.setError(getString(R.string.error_field_required));
+                focusView = mGuardianEmail;
+                cancel = true;
+            } else if (!isEmailValid(gEmail)) {
+                mGuardianEmail.setError(getString(R.string.error_invalid_email));
+                focusView = mGuardianEmail;
+                cancel = true;
+            }
         }
 
         if (cancel) {
@@ -238,8 +267,8 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            int userType=isGuardianSwitch.isChecked()?UserEntity.USER_GUARDIAN :UserEntity.USER_UNGUARDIAN;
-            mAuthTask = new UserLoginTask(username, email, password_1,userType);
+            int userType = isGuardianSwitch.isChecked() ? UserEntity.USER_GUARDIAN : UserEntity.USER_UNGUARDIAN;
+            mAuthTask = new UserLoginTask(username, email, password_1, userType, gEmail, isGuardianSwitch.isChecked());
             mAuthTask.execute((Void) null);
         }
     }
@@ -335,6 +364,21 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
     public void registerSuccess() {
         //String ss = UserManager.getUserEntity().getEmail();
         xToast.toast(this, "注册成功");
+        //添加免屏蔽信息
+        NoFilterEntity nfe = new NoFilterEntity();
+        nfe.setUserEntity(BmobUser.getCurrentUser(UserEntity.class));
+        nfe.setNoFilterTime(0);
+        nfe.setWaitingForApplyTime(0);
+        nfe.save(new SaveListener<String>() {
+            @Override
+            public void done(String objectId, BmobException e) {
+                if (e == null) {
+                    //toast("添加数据成功，返回objectId为："+objectId);
+                } else {
+                    //toast("创建数据失败：" + e.getMessage());
+                }
+            }
+        });
         finish();
     }
 
@@ -350,9 +394,10 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
                 mEmailView.setError("此邮箱已存在");
                 mEmailView.requestFocus();
             }
-        }else{
+        } else {
             //Alert alert = new Alert(this);
             //alert.popupAlert("注册失败，请稍后再试");
+            xToast.toast(this,e.toString());
         }
         mAuthTask = null;
         showProgress(false);
@@ -368,6 +413,7 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
         int ADDRESS = 0;
         int IS_PRIMARY = 1;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -377,6 +423,7 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
         }
         return super.onOptionsItemSelected(item);
     }
+
     /**
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
@@ -387,12 +434,17 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
         private final String mEmail;
         private final String mPassword;
         private final int mUserType;
+        private final String guardianUserEmail;
+        private final boolean isGuardian;
 
-        UserLoginTask(String username, String email, String password, int usertype) {
+
+        UserLoginTask(String username, String email, String password, int usertype, String guardianUserEmail, boolean isGuardian) {
             mUserName = username;
             mEmail = email;
             mPassword = password;
-            mUserType= usertype;
+            mUserType = usertype;
+            this.guardianUserEmail = guardianUserEmail;
+            this.isGuardian = isGuardian;
         }
 
         @Override
@@ -405,10 +457,33 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
                     return pieces[1].equals(mPassword);
                 }
             }
-            BmobUtil bmob = new BmobUtil(RegisterActivity.this);
-            //TODO IMEI
+            if (isGuardian) {
+                BmobUtil bmob = new BmobUtil(RegisterActivity.this);
+                //TODO IMEI
+                bmob.register(mUserName, mPassword, mEmail, mUserType, "000000000000", RegisterActivity.this);
+            } else {
+                BmobQuery<UserEntity> categoryBmobQuery = new BmobQuery<>();
+                categoryBmobQuery.addWhereEqualTo("email", guardianUserEmail);
+                //xToast.toast(RegisterActivity.this,guardianUserEmail);
+                categoryBmobQuery.addWhereEqualTo("userType", UserEntity.USER_GUARDIAN);
+                categoryBmobQuery.findObjects(new FindListener<UserEntity>() {
+                    @Override
+                    public void done(List<UserEntity> object, BmobException e) {
 
-            bmob.register(mUserName, mPassword, mEmail, mUserType, "000000000000", RegisterActivity.this);
+                        if (e == null && object.size() > 0) {
+                            BmobUtil bmob = new BmobUtil(RegisterActivity.this);
+                            //TODO IMEI
+                            bmob.register(mUserName, mPassword, mEmail, mUserType, object.get(0), "000000000000", RegisterActivity.this);
+
+                        } else {
+                            mGuardianEmail.setError("未查询到此账号");
+                            mGuardianEmail.requestFocus();
+                            showProgress(false);
+                        }
+                    }
+                });
+            }
+
             return true;
         }
 

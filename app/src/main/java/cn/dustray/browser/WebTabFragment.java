@@ -3,7 +3,6 @@ package cn.dustray.browser;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.NonNull;
@@ -26,12 +25,11 @@ import android.widget.ProgressBar;
 
 import java.util.List;
 
-import cn.dustray.utils.PreferenceHelper;
+import cn.dustray.utils.FilterPreferenceHelper;
 import cn.dustray.control.xWebView;
 import cn.dustray.defenderplatform.MainActivity;
 import cn.dustray.defenderplatform.R;
 import cn.dustray.utils.Alert;
-import cn.dustray.webfilter.FilterUtil;
 import cn.dustray.utils.PermissionUtil;
 import cn.dustray.utils.xToast;
 
@@ -60,7 +58,7 @@ public class WebTabFragment extends Fragment {
     private Bundle webState;
     private boolean showPicture = true;
     public boolean isCaptureChanged = false;
-    private PreferenceHelper spHelper;
+    private FilterPreferenceHelper spHelper;
 
     public WebTabFragment() {
         // Required empty public constructor
@@ -76,7 +74,7 @@ public class WebTabFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        spHelper = new PreferenceHelper(getActivity());
+        spHelper = new FilterPreferenceHelper(getActivity());
         initWebView();
     }
 

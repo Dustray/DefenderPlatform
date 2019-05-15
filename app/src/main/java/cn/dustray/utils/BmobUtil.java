@@ -67,6 +67,8 @@ public class BmobUtil {
         }
     }
 
+
+
     /**
      * 注册
      *
@@ -77,15 +79,19 @@ public class BmobUtil {
      * @param deviceIMEI
      */
     public void register(String userName, String password, String email, int userType, String deviceIMEI, final UserManager.onRegisterListener mListener) {
+        register(userName,password,email,userType,null,deviceIMEI,mListener);
+    }
+
+    public void register(String userName, String password, String email, int userType,UserEntity userEntity, String deviceIMEI, final UserManager.onRegisterListener mListener) {
         UserEntity ue = new UserEntity();
         ue.setUsername(userName);
         ue.setPassword(password);
         ue.setEmail(email);
         ue.setUserType(userType);
+        ue.setGuardianUserEntity(userEntity);
         ue.setDeviceIMEI(deviceIMEI);
         register(ue, mListener);
     }
-
     /**
      * 注册
      *

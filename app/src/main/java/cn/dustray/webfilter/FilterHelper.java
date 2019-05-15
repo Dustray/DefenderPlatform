@@ -5,10 +5,8 @@ import android.util.Log;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Filter;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobDate;
@@ -16,8 +14,7 @@ import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
-import cn.dustray.utils.PreferenceHelper;
-import cn.dustray.utils.xToast;
+import cn.dustray.utils.FilterPreferenceHelper;
 
 public class FilterHelper {
 
@@ -45,7 +42,7 @@ public class FilterHelper {
                     FilterSQLite fs = new FilterSQLite();
                     fs.recordKeywordToSqlite(object, false);
                     fs.close();
-                    new PreferenceHelper(context).setLastUpdateDate(sdf.format(new Date()));//设置本次更新日期
+                    new FilterPreferenceHelper(context).setLastUpdateDate(sdf.format(new Date()));//设置本次更新日期
                 } else {
                     // ...
                 }
@@ -58,7 +55,7 @@ public class FilterHelper {
      */
     public void updateKeywordFromBmob(final Context context) {
 
-        final String createdAt = new PreferenceHelper(context).getLastUpdateDate();//获取上次更新日期"2018-11-23 10:30:00"
+        final String createdAt = new FilterPreferenceHelper(context).getLastUpdateDate();//获取上次更新日期"2018-11-23 10:30:00"
         Log.i("filter", "保存的时间" + createdAt);
         final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date createdAtDate = null;
@@ -82,8 +79,8 @@ public class FilterHelper {
                     fs.recordKeywordToSqlite(object, true);
                     Log.i("filter", "比较" + bmobCreatedAtDate.getDate() + "///" + object.get(0).getUpdatedAt());
                     Log.i("filter", "当前的时间" + sdf.format(new Date()));
-                    new PreferenceHelper(context).setLastUpdateDate(sdf.format(new Date()));//设置本次更新日期
-                    Log.i("filter", "新保存的时间" + new PreferenceHelper(context).getLastUpdateDate());
+                    new FilterPreferenceHelper(context).setLastUpdateDate(sdf.format(new Date()));//设置本次更新日期
+                    Log.i("filter", "新保存的时间" + new FilterPreferenceHelper(context).getLastUpdateDate());
                     Log.i("filter", "----------第三步，重新将sqlite中显示出来---------------");
                     listener.InsertSuccess(fs.getKeywordList());
 
@@ -166,7 +163,7 @@ public class FilterHelper {
 //                    FilterSQLite fs = new FilterSQLite();
 //                    fs.recordKeywordToSqlite(object, false);
 //                    fs.close();
-//                    new PreferenceHelper(context).setLastUpdateDate(sdf.format(new Date()));//设置本次更新日期
+//                    new FilterPreferenceHelper(context).setLastUpdateDate(sdf.format(new Date()));//设置本次更新日期
 //                } else {
 //                    // ...
 //                }
@@ -193,7 +190,7 @@ public class FilterHelper {
 //                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //                    String date = sdf.format(new Date());
 //                    fs.insertKeyword(objectId, keyword, date);
-//                    //new PreferenceHelper(context).setLastUpdateDate(date);//设置本次更新日期
+//                    //new FilterPreferenceHelper(context).setLastUpdateDate(date);//设置本次更新日期
 ////                    Log.i("filter", "s" + fs.getKeywordList().size());
 //                    listener.onInsertSuccess(fs.getKeywordList());
 //                    fs.close();
