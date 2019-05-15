@@ -98,18 +98,18 @@ public class MainActivity extends AppCompatActivity
         Uri data = getIntent().getData();
         //browserFragment.createNewFragment("https://baidu.com/");
         if (data != null) {
-            xToast.toast(this,"url"+data.toString());
+            xToast.toast(this, "url" + data.toString());
             try {
                 String scheme = data.getScheme();
                 String host = data.getHost();
                 String path = data.getPath();
                 String text = "Scheme: " + scheme + "\n" + "host: " + host + "\n" + "path: " + path;
                 String url = scheme + "://" + host + path;
-                browserFragment.createNewFragment(getSupportFragmentManager(),url);
+                browserFragment.createNewFragment(getSupportFragmentManager(), url);
                 switchToWeb();
             } catch (Exception e) {
                 e.printStackTrace();
-                Log.i("browser","start:"+e.toString());
+                Log.i("browser", "start:" + e.toString());
             }
         }
     }
@@ -135,6 +135,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
     }
+
     private void initNoFilterTimer() {
         spHelper = new FilterPreferenceHelper(MainActivity.this);
         spHelper.setIsNoFilter(false);
@@ -144,6 +145,7 @@ public class MainActivity extends AppCompatActivity
             tc.start();
         }
     }
+
     private void refleshUserInfo() {
         switch (UserManager.getUserType()) {
             case UserEntity.USER_UNLOGIN:
@@ -216,7 +218,7 @@ public class MainActivity extends AppCompatActivity
         //browserFragment.createNewFragment("https://baidu.com/");
 
         if (data != null) {
-            xToast.toast(this,"url"+data.toString());
+            xToast.toast(this, "url" + data.toString());
             try {
                 String scheme = data.getScheme();
                 String host = data.getHost();
@@ -228,10 +230,11 @@ public class MainActivity extends AppCompatActivity
                 switchToWeb();
             } catch (Exception e) {
                 e.printStackTrace();
-                Log.i("browser","newintent:"+e.toString());
+                Log.i("browser", "newintent:" + e.toString());
             }
         }
     }
+
     @Override
     public void onBackPressed() {
         int position = mainPage.getCurrentItem();
@@ -324,10 +327,10 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_slideshow) {
             Intent intent = new Intent(this, ShieldingActivity.class);
             startActivity(intent);
-        }else if (id == R.id.nav_keyword_list) {//屏蔽关键字列表
+        } else if (id == R.id.nav_keyword_list) {//屏蔽关键字列表
             Intent intent = new Intent(this, KeywordListActivity.class);
-            startActivityForResult(intent,0);
-        }  else if (id == R.id.nav_manage) {
+            startActivityForResult(intent, 0);
+        } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_setting) {
             Intent intent = new Intent(this, SettingsActivity.class);
@@ -379,14 +382,13 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        getDataFromBrowser( intent);
+        getDataFromBrowser(intent);
     }
 
     @Override
     public void onFragmentInteraction(Uri uri) {
         Toast.makeText(this, "交流,角楼" + uri.toString(), Toast.LENGTH_LONG).show();
     }
-
 
 
     @Override
@@ -468,11 +470,12 @@ public class MainActivity extends AppCompatActivity
 
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
+
     //结果处理函数，当从secondActivity中返回时调用此函数
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==0 && resultCode==RESULT_OK){
+        if (requestCode == 0 && resultCode == RESULT_OK) {
             xToast.toast(this, "拦截关键字已更新");
             browserFragment.refleshFilterData();
         }
@@ -516,7 +519,7 @@ public class MainActivity extends AppCompatActivity
                     public void onClickCancel() {
                     }
                 });
-                alert.popupAlert( "您的免屏蔽时长已到，是否重新申请？", "好的");
+                alert.popupAlert("您的免屏蔽时长已到，是否重新申请？", "好的");
                 onFinish();
             }
 //            if (noFilterTimeTemp - noFilterTime >= 1 && !isActivityPause && spHelper.getIsNoFilter()) {

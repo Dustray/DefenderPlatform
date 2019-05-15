@@ -101,37 +101,6 @@ public class ShieldingActivity extends AppCompatActivity implements View.OnClick
         });
     }
 
-    /**
-     * 查询一条Nofilter Time
-     */
-    private void getNoFilterTimeFromNet() {
-        BmobQuery<NoFilterEntity> bmobQuery = new BmobQuery<NoFilterEntity>();
-        bmobQuery.addWhereEqualTo("userEntity", BmobUser.getCurrentUser(UserEntity.class));
-        bmobQuery.include("userEntity");//包含作者信息
-        bmobQuery.findObjects(new FindListener<NoFilterEntity>() {
-            @Override
-            public void done(List<NoFilterEntity> list, BmobException e) {
-                if (e == null) {
-                    if (list.size() == 0) {
-
-                    } else {
-                        NoFilterEntity nfe = list.get(0);
-                        spHelper.setNoFilterTime(nfe.getNoFilterTime() * 60 * 1000);
-                        tvRemainTime.setText("当前剩余时长：" + nfe.getNoFilterTime() + "分钟");
-                        //spHelper.setNoFilterTime(noFilterTime*1000);
-
-                        judgeIsNoFilter();
-
-                    }
-
-                    //MyToast.toast(ApplyNoFilterActivity.this, "成功");
-                } else {
-                    xToast.toast(ShieldingActivity.this, "失败：" + e.getMessage() + "," + e.getErrorCode());
-                }
-            }
-
-        });
-    }
 
     /**
      * 查询多条Nofilter Time
@@ -339,7 +308,7 @@ public class ShieldingActivity extends AppCompatActivity implements View.OnClick
                         updateApplyTimeToNet(0);
                         applyTimeEdt.setText("");
                         applyPwdEdt.setText("");
-                        nofilterTimeBtn.setBackgroundResource(R.color.colorSafe);
+                        //nofilterTimeBtn.setBackgroundResource(R.color.colorSafe);
                         nofilterTimeBtn.setText("确认");
                         isApply = false;
                     } else {
@@ -356,14 +325,14 @@ public class ShieldingActivity extends AppCompatActivity implements View.OnClick
         View mContentView = LayoutInflater.from(this).inflate(R.layout.popup_nofilter_apply, null);
 
         if (mPopUpWindow == null) {
-            mPopUpWindow = new PopupWindow(mContentView, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT, true);
-            mPopUpWindow.setBackgroundDrawable(new ColorDrawable(0x00000000));
+            mPopUpWindow = new PopupWindow(mContentView, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, true);
+            //mPopUpWindow.setBackgroundDrawable(new ColorDrawable(0x99000000));
             mPopUpWindow.setOutsideTouchable(true);
             initPopupView(mContentView);
         }
 //显示申请时长详情
         if (waitingForApplyTime > 0) {
-            nofilterTimeBtn.setBackgroundResource(R.color.colorDanger);
+            //nofilterTimeBtn.setBackgroundResource(R.color.colorDanger);
             applyTimeEdt.setText("" + waitingForApplyTime);
             applyPwdEdt.setText("");
             if (spHelper.getUserType() == 1) {//监督者
@@ -373,7 +342,7 @@ public class ShieldingActivity extends AppCompatActivity implements View.OnClick
                 isApply = true;
             }
         } else {
-            nofilterTimeBtn.setBackgroundResource(R.color.colorSafe);
+            //nofilterTimeBtn.setBackgroundResource(R.color.colorSafe);
             nofilterTimeBtn.setText("确定");
             applyTimeEdt.setText("");
             applyPwdEdt.setText("");
