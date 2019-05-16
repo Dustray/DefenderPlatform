@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity
         initNavigation();
         initTabPage();
         initNoFilterTimer();//初始化免屏蔽计时
+        spHelper.setIsNoFilter(false);
         //getDataFromBrowser(getIntent());
         Uri data = getIntent().getData();
         //browserFragment.createNewFragment("https://baidu.com/");
@@ -138,7 +139,7 @@ public class MainActivity extends AppCompatActivity
 
     private void initNoFilterTimer() {
         spHelper = new FilterPreferenceHelper(MainActivity.this);
-        spHelper.setIsNoFilter(false);
+
         if (spHelper.getIsNoFilter()) {
             tc = new timeCount(spHelper.getNoFilterTime(), 1000);
             noFilterTimeTemp = spHelper.getNoFilterTime() / 1000;
