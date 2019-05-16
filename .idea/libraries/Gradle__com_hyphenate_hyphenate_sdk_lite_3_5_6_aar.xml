@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: com.hyphenate:hyphenate-sdk-lite:3.5.6@aar">
+    <ANNOTATIONS>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0e998b7f59d49f0725e9193786bbfa3b/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0e998b7f59d49f0725e9193786bbfa3b/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0e998b7f59d49f0725e9193786bbfa3b/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.hyphenate/hyphenate-sdk-lite/3.5.6/cd94fc6f934e81bbd3fd869278a4740e8338c9e2/hyphenate-sdk-lite-3.5.6-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
