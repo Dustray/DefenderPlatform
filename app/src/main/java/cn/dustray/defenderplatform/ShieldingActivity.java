@@ -196,7 +196,9 @@ public class ShieldingActivity extends AppCompatActivity implements View.OnClick
             public void done(BmobException e) {
                 if (e == null) {
                     getAllNoFilterTimeFromNet();
-                    xToast.toast(ShieldingActivity.this, "修改数据成功");
+                    xToast.toast(ShieldingActivity.this, "已提交");
+                    if (mPopUpWindow != null)
+                        mPopUpWindow.dismiss();
                 } else {
                     submitNoFilterTimeToNet();
                     xToast.toast(ShieldingActivity.this, "修改数据失败：" + e.getMessage());
@@ -223,7 +225,7 @@ public class ShieldingActivity extends AppCompatActivity implements View.OnClick
 
                 } else {
 
-                    xToast.toast(ShieldingActivity.this, "修改数据失败,请通知监护者添加一次开通：" + e.getMessage());
+                    xToast.toast(ShieldingActivity.this, "修改数据失败:" + e.getMessage());
                 }
             }
         });
@@ -249,38 +251,21 @@ public class ShieldingActivity extends AppCompatActivity implements View.OnClick
     }
 
     public void applyDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyAlertDialogStyle);
-        builder.setTitle("警告");
-        builder.setMessage("申请免屏蔽时长将清空当前已有时长，是否继续？");
-        builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
 
-            }
-        });
-        builder.setNegativeButton("否", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
-        });
-        builder.show();
 
         Alert alert = new Alert(this);
         alert.setOnPopupAlertListener(new Alert.OnPopupAlertListener() {
             @Override
             public void onClickOk() {
                 updateApplyTimeToNet(Integer.parseInt(applyTimeEdt.getText().toString()));
-
+                if (mPopUpWindow != null)
+                    mPopUpWindow.dismiss();
             }
-
             @Override
             public void onClickCancel() {
-
-
             }
         });
-        alert.popupAlert(this.getWindow().getDecorView(),"申请免屏蔽时长将清空当前已有时长，是否继续？", "继续");
+        alert.popupAlert(this.getWindow().getDecorView(), "申请免屏蔽时长将清空当前已有时长，是否继续？", "继续");
     }
 
 
@@ -291,7 +276,7 @@ public class ShieldingActivity extends AppCompatActivity implements View.OnClick
             finish();
             return true;
         } else if (id == R.id.shield_apply) {
-            showShareWindow();
+            showApplyWindow();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -307,7 +292,7 @@ public class ShieldingActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_nofilter_time:
-                if (spHelper.getUserType() == UserEntity.USER_GUARDIAN)
+                if (BmobUser.getCurrentUser(UserEntity.class).isGuardian())
                     if (TextUtils.isEmpty(applyPwdEdt.getText())) {
                         xToast.toast(ShieldingActivity.this, "密码不能为空");
                     } else if (applyPwdEdt.getText().toString().equals(spHelper.getRegisterPassword())) {
@@ -316,7 +301,7 @@ public class ShieldingActivity extends AppCompatActivity implements View.OnClick
                     } else {
                         xToast.toast(ShieldingActivity.this, "密码错误" + applyPwdEdt.getText());
                     }
-                else if (spHelper.getUserType() == UserEntity.USER_UNGUARDIAN) {
+                else if (BmobUser.getCurrentUser(UserEntity.class).isUnGuardian()) {
                     if (applyTimeEdt.getText().toString().equals("")) {
                         xToast.toast(ShieldingActivity.this, "未执行任何操作");
                     } else if (Integer.parseInt(applyTimeEdt.getText().toString()) == 0) {
@@ -329,6 +314,7 @@ public class ShieldingActivity extends AppCompatActivity implements View.OnClick
                         nofilterTimeBtn.setText("确认");
                         isApply = false;
                     } else {
+                        //xToast.toast(ShieldingActivity.this, "eee" );
                         applyDialog();
                     }
                 }
@@ -338,12 +324,12 @@ public class ShieldingActivity extends AppCompatActivity implements View.OnClick
 
     }
 
-    public void showShareWindow() {
+    public void showApplyWindow() {
         View mContentView = LayoutInflater.from(this).inflate(R.layout.popup_nofilter_apply, null);
 
         if (mPopUpWindow == null) {
             mPopUpWindow = new PopupWindow(mContentView, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, true);
-            //mPopUpWindow.setBackgroundDrawable(new ColorDrawable(0x99000000));
+            mPopUpWindow.setBackgroundDrawable(new ColorDrawable(0x00000000));
             mPopUpWindow.setOutsideTouchable(true);
             initPopupView(mContentView);
         }
