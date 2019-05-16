@@ -168,7 +168,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                                 mListener.switchToViewPager(1);
                             }
                         });
-                        alert.popupAlert("滑动切换已关闭,开启侧滑还是直接切换？", "开启侧滑", "直接切换");
+                        alert.popupAlert(getActivity().getWindow().getDecorView(),"滑动切换已关闭,开启侧滑还是直接切换？", "开启侧滑", "直接切换");
                     }
                 }
                 //点击

@@ -30,6 +30,7 @@ import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 import cn.dustray.entity.UserEntity;
+import cn.dustray.utils.Alert;
 import cn.dustray.utils.FilterPreferenceHelper;
 import cn.dustray.utils.xToast;
 import cn.dustray.webfilter.NoFilterEntity;
@@ -254,7 +255,7 @@ public class ShieldingActivity extends AppCompatActivity implements View.OnClick
         builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                updateApplyTimeToNet(Integer.parseInt(applyTimeEdt.getText().toString()));
+
             }
         });
         builder.setNegativeButton("否", new DialogInterface.OnClickListener() {
@@ -264,6 +265,22 @@ public class ShieldingActivity extends AppCompatActivity implements View.OnClick
             }
         });
         builder.show();
+
+        Alert alert = new Alert(this);
+        alert.setOnPopupAlertListener(new Alert.OnPopupAlertListener() {
+            @Override
+            public void onClickOk() {
+                updateApplyTimeToNet(Integer.parseInt(applyTimeEdt.getText().toString()));
+
+            }
+
+            @Override
+            public void onClickCancel() {
+
+
+            }
+        });
+        alert.popupAlert(this.getWindow().getDecorView(),"申请免屏蔽时长将清空当前已有时长，是否继续？", "继续");
     }
 
 
@@ -290,7 +307,7 @@ public class ShieldingActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_nofilter_time:
-                if (spHelper.getUserType() == 1)
+                if (spHelper.getUserType() == UserEntity.USER_GUARDIAN)
                     if (TextUtils.isEmpty(applyPwdEdt.getText())) {
                         xToast.toast(ShieldingActivity.this, "密码不能为空");
                     } else if (applyPwdEdt.getText().toString().equals(spHelper.getRegisterPassword())) {
@@ -299,7 +316,7 @@ public class ShieldingActivity extends AppCompatActivity implements View.OnClick
                     } else {
                         xToast.toast(ShieldingActivity.this, "密码错误" + applyPwdEdt.getText());
                     }
-                else if (spHelper.getUserType() == 2) {
+                else if (spHelper.getUserType() == UserEntity.USER_UNGUARDIAN) {
                     if (applyTimeEdt.getText().toString().equals("")) {
                         xToast.toast(ShieldingActivity.this, "未执行任何操作");
                     } else if (Integer.parseInt(applyTimeEdt.getText().toString()) == 0) {
@@ -356,5 +373,7 @@ public class ShieldingActivity extends AppCompatActivity implements View.OnClick
         nofilterTimeBtn.setOnClickListener(this);
         applyPwdEdt = (TextInputEditText) mContentView.findViewById(R.id.edt_apply_pwd);
         applyTimeEdt = (TextInputEditText) mContentView.findViewById(R.id.edt_apply_time);
+        if (BmobUser.getCurrentUser(UserEntity.class).isUnGuardian())
+            applyPwdEdt.setVisibility(View.GONE);
     }
 }

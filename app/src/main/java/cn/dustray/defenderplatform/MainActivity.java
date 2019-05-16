@@ -460,7 +460,7 @@ public class MainActivity extends AppCompatActivity
 
                             }
                         });
-                        alert.popupAlert("应用需获取定位权限，请允许。", "确定");
+                        alert.popupAlert(this.getWindow().getDecorView(),"应用需获取定位权限，请允许。", "确定");
                     }
                 }
                 break;
@@ -519,7 +519,7 @@ public class MainActivity extends AppCompatActivity
                     public void onClickCancel() {
                     }
                 });
-                alert.popupAlert("您的免屏蔽时长已到，是否重新申请？", "好的");
+                alert.popupAlert(MainActivity.this.getWindow().getDecorView(),"您的免屏蔽时长已到，是否重新申请？", "好的");
                 onFinish();
             }
 //            if (noFilterTimeTemp - noFilterTime >= 1 && !isActivityPause && spHelper.getIsNoFilter()) {
@@ -550,13 +550,14 @@ public class MainActivity extends AppCompatActivity
          */
         private void updateNoFilterTimeToNet() {
             NoFilterEntity nfe = new NoFilterEntity();
+            final String[][] a = new String[1][1];
             nfe.setNoFilterTime(noFilterTime / 60);
             if (spHelper.getNoFilterID() != null) {
                 nfe.update(spHelper.getNoFilterID(), new UpdateListener() {
                     @Override
                     public void done(BmobException e) {
                         if (e == null) {
-
+a[0] = new String [6];
                             //MyToast.toast(ApplyNoFilterActivity.this, "修改数据成功");
                         } else {
                             //MyToast.toast(MainActivity.this, "修改数据失败：" + e.getMessage());

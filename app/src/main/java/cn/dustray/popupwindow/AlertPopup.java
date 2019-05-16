@@ -30,7 +30,7 @@ public class AlertPopup extends PopupWindow implements View.OnClickListener {
     private TextView textalertContext;
     private LinearLayout alertFrame;
     private OnPopupAlertListener mListener;
-    private xViewPager parentView;
+    //
     private boolean isTouching = false;
     private static int ALERT_TYPE = 0;
 
@@ -135,7 +135,7 @@ public class AlertPopup extends PopupWindow implements View.OnClickListener {
         this.setBackgroundDrawable(dw);
 
 
-        parentView = ((MainActivity) context).findViewById(R.id.main_page);
+        //parentView = ((MainActivity) context).findViewById(R.id.main_page);
         new Thread() {//使用Thread
             public void run() {
                 try {
@@ -158,7 +158,7 @@ public class AlertPopup extends PopupWindow implements View.OnClickListener {
         this.mListener = mListener;
     }
 
-    public void showAtTop() {        //弹窗位置设置
+    public void showAtTop(View parentView) {        //弹窗位置设置
         setAnimationStyle(R.style.pop_animation_2);
         showAtLocation(parentView, Gravity.TOP, 0, 0);
     }

@@ -36,6 +36,7 @@ import java.util.List;
 
 import cn.dustray.user.UserManager;
 import cn.dustray.utils.BmobUtil;
+import cn.dustray.utils.FilterPreferenceHelper;
 import cn.dustray.utils.xToast;
 
 import static android.Manifest.permission.READ_CONTACTS;
@@ -67,6 +68,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private FilterPreferenceHelper spHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +77,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // Set up the login form.
+        spHelper = new FilterPreferenceHelper(this);
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
 
@@ -290,7 +293,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     @Override
     public void loginSuccess() {
-
+        spHelper.setRegisterPassword(mPasswordView.getText().toString());
         finish();
     }
 

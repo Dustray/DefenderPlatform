@@ -45,6 +45,7 @@ import cn.dustray.entity.UserEntity;
 import cn.dustray.user.UserManager;
 import cn.dustray.utils.Alert;
 import cn.dustray.utils.BmobUtil;
+import cn.dustray.utils.FilterPreferenceHelper;
 import cn.dustray.utils.xToast;
 import cn.dustray.webfilter.NoFilterEntity;
 
@@ -78,6 +79,7 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
     private View mProgressView;
     private View mLoginFormView;
     private Switch isGuardianSwitch;
+    private FilterPreferenceHelper spHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +87,7 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
         setContentView(R.layout.activity_register);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        spHelper = new FilterPreferenceHelper(this);
 
         // Set up the login form.
         mUserName = (AutoCompleteTextView) findViewById(R.id.username);
@@ -364,6 +367,7 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
     public void registerSuccess() {
         //String ss = UserManager.getUserEntity().getEmail();
         xToast.toast(this, "注册成功");
+        spHelper.setRegisterPassword(mPasswordView_1.getText().toString());
         UserEntity user = BmobUser.getCurrentUser(UserEntity.class);
         if (user.getUserType() == UserEntity.USER_GUARDIAN) {
             //添加免屏蔽信息

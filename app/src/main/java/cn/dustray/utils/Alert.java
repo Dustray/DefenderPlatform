@@ -1,6 +1,7 @@
 package cn.dustray.utils;
 
 import android.content.Context;
+import android.view.View;
 
 import cn.dustray.popupwindow.AlertPopup;
 
@@ -10,7 +11,7 @@ public class Alert {
     private Alert.OnPopupAlertListener mLisenter;
     Context context;
     private boolean isShowing = false;
-
+    private View parentView;
     public Alert(Context context) {
         this.context = context;
     }
@@ -19,19 +20,19 @@ public class Alert {
         this.mLisenter = mLisenter;
     }
 
-    public boolean popupAlert(String alertContext) {
-        return popupAlert(alertContext, null);
+    public boolean popupAlert(View parentView,String alertContext) {
+        return popupAlert(parentView,alertContext, null);
     }
 
     ;
 
-    public boolean popupAlert(String alertContext, String button1Text) {
-        return popupAlert(alertContext, button1Text, null);
+    public boolean popupAlert(View parentView,String alertContext, String button1Text) {
+        return popupAlert(parentView,alertContext, button1Text, null);
     }
 
     ;
 
-    public boolean popupAlert(String alertContext, String button1Text, String button2Text) {
+    public boolean popupAlert(View parentView,String alertContext, String button1Text, String button2Text) {
         if (lastClickTime && !isShowing) {//标志字为true可调用Toast
             isShowing = true;
             lastClickTime = false;//标志字置false
@@ -61,7 +62,7 @@ public class Alert {
                     isShowing = false;
                 }
             });
-            alert.showAtTop();
+            alert.showAtTop(parentView);
             new Thread() {//使用Thread
                 public void run() {
                     try {

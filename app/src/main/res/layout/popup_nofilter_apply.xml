@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="7dp"
         android:background="@drawable/alert_o_white"
-        android:elevation="5dp"
+        android:elevation="3dp"
         android:orientation="vertical"
         android:padding="10dp">
 

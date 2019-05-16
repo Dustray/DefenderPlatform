@@ -176,7 +176,7 @@ public class xWebView extends WebView {
                             }
                         });
                         String appName = context.getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY).get(0).loadLabel(context.getPackageManager()).toString();
-                        alert.popupAlert("网站请求打开“" + appName + "”，是否同意？", "同意");
+                        alert.popupAlert(((MainActivity)context).getWindow().getDecorView(),"网站请求打开“" + appName + "”，是否同意？", "同意");
                         return true;
                     }
                 }
