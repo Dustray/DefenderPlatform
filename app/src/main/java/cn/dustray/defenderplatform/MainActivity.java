@@ -23,6 +23,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Gallery;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -70,6 +72,11 @@ public class MainActivity extends AppCompatActivity
     private boolean isActivityPause = false;
     private FilterPreferenceHelper spHelper;
     private timeCount tc;
+    //免屏蔽提醒框
+    private LinearLayout noFilterRemind;
+    private ImageView noFilterRemindRed;
+    private TextView noFilterRemindText;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +101,7 @@ public class MainActivity extends AppCompatActivity
         initNavigation();
         initTabPage();
         initNoFilterTimer();//初始化免屏蔽计时
+        initNoFilterRemindView();
         spHelper.setIsNoFilter(false);
         //getDataFromBrowser(getIntent());
         Uri data = getIntent().getData();
@@ -137,13 +145,33 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
+    private void initNoFilterRemindView() {
+        noFilterRemind = findViewById(R.id.no_filter_remind);
+        noFilterRemindRed = findViewById(R.id.no_filter_remind_red);
+        noFilterRemindText = findViewById(R.id.no_filter_remind_text);
+
+        noFilterRemind.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,ShieldingActivity.class));
+            }
+        });
+        if (spHelper.getIsNoFilter()) {
+            noFilterRemind.setVisibility(View.VISIBLE);
+        }else{
+            noFilterRemind.setVisibility(View.GONE);
+        }
+    }
+
     private void initNoFilterTimer() {
         spHelper = new FilterPreferenceHelper(MainActivity.this);
 
         if (spHelper.getIsNoFilter()) {
+            if(tc!=null)tc.cancel();
             tc = new timeCount(spHelper.getNoFilterTime(), 1000);
             noFilterTimeTemp = spHelper.getNoFilterTime() / 1000;
             tc.start();
+
         }
     }
 
@@ -360,8 +388,8 @@ public class MainActivity extends AppCompatActivity
 
         isActivityPause = false;
         initNoFilterTimer();//初始化计时
+        initNoFilterRemindView();
         refleshUserInfo();
-
     }
 
     @Override
@@ -461,7 +489,7 @@ public class MainActivity extends AppCompatActivity
 
                             }
                         });
-                        alert.popupAlert(this.getWindow().getDecorView(),"应用需获取定位权限，请允许。", "确定");
+                        alert.popupAlert(this.getWindow().getDecorView(), "应用需获取定位权限，请允许。", "确定");
                     }
                 }
                 break;
@@ -496,6 +524,7 @@ public class MainActivity extends AppCompatActivity
 
 
     public class timeCount extends CountDownTimer {
+        private boolean redFlag = true;
 
         public timeCount(long millisInFuture, long countDownInterval) {
             super(millisInFuture, countDownInterval);
@@ -504,7 +533,15 @@ public class MainActivity extends AppCompatActivity
         @Override
         public void onTick(long l) {
             noFilterTime = (int) (l / 1000);//单位秒
-
+            //noFilterRemind= fi
+            if (redFlag) {
+                noFilterRemindRed.setVisibility(View.INVISIBLE);
+                redFlag = false;
+            } else {
+                noFilterRemindRed.setVisibility(View.VISIBLE);
+                redFlag = true;
+            }
+            noFilterRemindText.setText((noFilterTime-1) + "");
             if (noFilterTime == 1) {
                 spHelper.setIsNoFilter(false);
                 isActivityPause = true;
@@ -520,7 +557,7 @@ public class MainActivity extends AppCompatActivity
                     public void onClickCancel() {
                     }
                 });
-                alert.popupAlert(MainActivity.this.getWindow().getDecorView(),"您的免屏蔽时长已到，是否重新申请？", "好的");
+                alert.popupAlert(MainActivity.this.getWindow().getDecorView(), "您的免屏蔽时长已到，是否重新申请？", "好的");
                 onFinish();
             }
 //            if (noFilterTimeTemp - noFilterTime >= 1 && !isActivityPause && spHelper.getIsNoFilter()) {
@@ -544,6 +581,8 @@ public class MainActivity extends AppCompatActivity
         @Override
         public void onFinish() {
             spHelper.setNoFilterTime(noFilterTime * 1000);
+
+            noFilterRemind.setVisibility(View.INVISIBLE);
         }
 
         /**
@@ -558,7 +597,7 @@ public class MainActivity extends AppCompatActivity
                     @Override
                     public void done(BmobException e) {
                         if (e == null) {
-a[0] = new String [6];
+                            a[0] = new String[6];
                             //MyToast.toast(ApplyNoFilterActivity.this, "修改数据成功");
                         } else {
                             //MyToast.toast(MainActivity.this, "修改数据失败：" + e.getMessage());
@@ -572,5 +611,6 @@ a[0] = new String [6];
                 tc.cancel();
             }
         }
+
     }
 }
