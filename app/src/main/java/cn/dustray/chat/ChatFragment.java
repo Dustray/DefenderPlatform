@@ -200,7 +200,6 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                 } else {
                     Fresco.getImagePipeline().pause();//Fresco滑动时停止加载
                 }
-
             }
 
             @Override
@@ -230,7 +229,6 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                     }
                 } else {
                     // 此处为失去焦点时的处理内容
-
                 }
             }
 

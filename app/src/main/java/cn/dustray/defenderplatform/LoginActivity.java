@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -30,6 +31,12 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.hyphenate.EMCallBack;
+import com.hyphenate.EMError;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.exceptions.HyphenateException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -294,9 +301,39 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     @Override
     public void loginSuccess() {
         spHelper.setRegisterPassword(mPasswordView.getText().toString());
+        loginEaseMob(mEmailView.getText().toString(),mPasswordView.getText().toString());
         finish();
     }
+    public void loginEaseMob(final String username, final String pwd) {
+        new Thread(new Runnable() {
+            public void run() {
+                EMClient.getInstance().login(username,pwd,new EMCallBack() {//回调
+                    @Override
+                    public void onSuccess() {
+                        EMClient.getInstance().groupManager().loadAllGroups();
+                        EMClient.getInstance().chatManager().loadAllConversations();
+                        //Log.d("main", "登录聊天服务器成功！");
+                        Looper.prepare();
+                        Toast.makeText(LoginActivity.this,"登录聊天服务器成功",Toast.LENGTH_LONG).show();
+                        Looper.loop();
+                    }
 
+                    @Override
+                    public void onProgress(int progress, String status) {
+
+                    }
+
+                    @Override
+                    public void onError(int code, String message) {
+                        // Log.d("main", "登录聊天服务器失败！");
+                        Looper.prepare();
+                        Toast.makeText(LoginActivity.this,"登录聊天服务器失败",Toast.LENGTH_LONG).show();
+                        Looper.loop();
+                    }
+                });
+            }
+        }).start();
+    }
     @Override
     public void loginFailed(Exception e) {
         String msg = e.getMessage();
