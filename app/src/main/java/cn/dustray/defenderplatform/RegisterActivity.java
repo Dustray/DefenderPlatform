@@ -33,6 +33,10 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.hyphenate.EMError;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.exceptions.HyphenateException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -366,9 +370,13 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
     @Override
     public void registerSuccess() {
         //String ss = UserManager.getUserEntity().getEmail();
-        xToast.toast(this, "注册成功");
+        //xToast.toast(this, "注册成功");
         spHelper.setRegisterPassword(mPasswordView_1.getText().toString());
         UserEntity user = BmobUser.getCurrentUser(UserEntity.class);
+
+        //注册失败会抛出HyphenateExceptiontry
+        registerEaseMob(mUserName.getText().toString(), mPasswordView_1.getText().toString());//同步方法
+
         if (user.getUserType() == UserEntity.USER_GUARDIAN) {
             //添加免屏蔽信息
             NoFilterEntity nfe = new NoFilterEntity();
@@ -387,6 +395,34 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
             });
         }
         finish();
+    }
+
+    public void registerEaseMob(final String username, final String pwd) {
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+                    EMClient.getInstance().createAccount(username, pwd);
+                } catch (final HyphenateException e) {
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            int errorCode = e.getErrorCode();
+                            xToast.toast(RegisterActivity.this, "环信注册失败" + e.toString() + e.getErrorCode());
+                            if (errorCode == EMError.NETWORK_ERROR) {
+                                // Toast.makeText(getApplicationContext(), getResources().getString(R.string.network_anomalies), Toast.LENGTH_SHORT).show();
+                            } else if (errorCode == EMError.USER_ALREADY_EXIST) {
+                                // Toast.makeText(getApplicationContext(), getResources().getString(R.string.User_already_exists), Toast.LENGTH_SHORT).show();
+                            } else if (errorCode == EMError.USER_AUTHENTICATION_FAILED) {
+                                // Toast.makeText(getApplicationContext(), getResources().getString(R.string.registration_failed_without_permission), Toast.LENGTH_SHORT).show();
+                            } else if (errorCode == EMError.USER_ILLEGAL_ARGUMENT) {
+                                // Toast.makeText(getApplicationContext(), getResources().getString(R.string.illegal_user_name),Toast.LENGTH_SHORT).show();
+                            } else {
+                                // Toast.makeText(getApplicationContext(), getResources().getString(R.string.Registration_failed), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+            }
+        }).start();
     }
 
     @Override
@@ -468,6 +504,7 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
                 BmobUtil bmob = new BmobUtil(RegisterActivity.this);
                 //TODO IMEI
                 bmob.register(mUserName, mPassword, mEmail, mUserType, "000000000000", RegisterActivity.this);
+
             } else {
                 BmobQuery<UserEntity> categoryBmobQuery = new BmobQuery<>();
                 categoryBmobQuery.addWhereEqualTo("email", guardianUserEmail);

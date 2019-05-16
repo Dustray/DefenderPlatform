@@ -45,6 +45,7 @@ import cn.dustray.popupwindow.WebMenuPopup;
 import cn.dustray.user.UserManager;
 import cn.dustray.utils.Alert;
 import cn.dustray.utils.BmobUtil;
+import cn.dustray.utils.EasemobUtil;
 import cn.dustray.utils.FilterPreferenceHelper;
 import cn.dustray.utils.PermissionUtil;
 import cn.dustray.utils.SettingUtil;
@@ -91,6 +92,7 @@ public class MainActivity extends AppCompatActivity
         Fresco.initialize(this, config);//初始化list图片处理
         setSupportActionBar(toolbar);
         BmobUtil.initialize(this);//Bmob初始化
+        EasemobUtil.initialize(this);
         PermissionUtil.Location(this);//权限申请
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
