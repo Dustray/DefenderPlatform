@@ -397,37 +397,7 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
                 }
             });
         } else if (user.getUserType() == UserEntity.USER_UNGUARDIAN) {
-            //更新被监护人表绑定监护人
-//            UserEntity ue = new UserEntity();
-//            ue.setGuardianUserEntity(user);
-//            ue.update(guardianSwitchId, new UpdateListener() {
-//
-//                @Override
-//                public void done(BmobException e) {
-//                    if (e == null) {
-//                        //toast("更新成功:"+p2.getUpdatedAt());
-//                    } else {
-//                        // toast("更新失败：" + e.getMessage());
-//                        xToast.toast(RegisterActivity.this,"se//"+e.toString());
-//                    }
-//                }
-//
-//            });
-            //or
-//            UserEntity ue = guardianSwitchId;
-//            ue.setGuardianUserEntity(user);
-//            user.update(new UpdateListener() {
-//                @Override
-//                public void done(BmobException e) {
-//                    if (e == null) {
-//                        //Snackbar.make(view, "更新用户信息成功：" + user.getAge(), Snackbar.LENGTH_LONG).show();
-//                    } else {
-//                        //  Snackbar.make(view, "更新用户信息失败：" + e.getMessage(), Snackbar.LENGTH_LONG).show();
-//                        // Log.e("error", e.getMessage());
-//                        xToast.toast(RegisterActivity.this, "se//" + e.toString());
-//                    }
-//                }
-//            });
+
             //查找UserEntity表里面id为guardianSwitchId的用户名
             BmobQuery<UserEntity> bmobQuery = new BmobQuery<UserEntity>();
             bmobQuery.getObject(guardianSwitchId.getObjectId(), new QueryListener<UserEntity>() {

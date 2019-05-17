@@ -3,6 +3,7 @@ package cn.dustray.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.widget.Toast;
 
 
 import java.util.List;
@@ -68,7 +69,6 @@ public class BmobUtil {
     }
 
 
-
     /**
      * 注册
      *
@@ -79,10 +79,10 @@ public class BmobUtil {
      * @param deviceIMEI
      */
     public void register(String userName, String password, String email, int userType, String deviceIMEI, final UserManager.onRegisterListener mListener) {
-        register(userName,password,email,userType,null,deviceIMEI,mListener);
+        register(userName, password, email, userType, null, deviceIMEI, mListener);
     }
 
-    public void register(String userName, String password, String email, int userType,UserEntity userEntity, String deviceIMEI, final UserManager.onRegisterListener mListener) {
+    public void register(String userName, String password, String email, int userType, UserEntity userEntity, String deviceIMEI, final UserManager.onRegisterListener mListener) {
         UserEntity ue = new UserEntity();
         ue.setUsername(userName);
         ue.setPassword(password);
@@ -92,6 +92,7 @@ public class BmobUtil {
         ue.setDeviceIMEI(deviceIMEI);
         register(ue, mListener);
     }
+
     /**
      * 注册
      *
@@ -290,5 +291,33 @@ public class BmobUtil {
         });
     }
 
+    public void upGradeChatToUserName() {
+        /**
+         * 查询用户表设置ChatToUserName
+         */
+        final UserEntity user = UserEntity.getCurrentUser(UserEntity.class);
+
+        BmobQuery<UserEntity> bmobQuery = new BmobQuery<>();
+        if (user.isUnGuardian()) {
+            bmobQuery.addWhereEqualTo("objectId", user.getGuardianUserEntity().getObjectId());
+        } else if (user.isGuardian()) {
+            bmobQuery.addWhereEqualTo("guardianUserEntity", user.getObjectId());
+        }
+        bmobQuery.findObjects(new FindListener<UserEntity>() {
+            @Override
+            public void done(List<UserEntity> object, BmobException e) {
+                if (e == null) {
+                    if (object.size() > 0) {
+                        FilterPreferenceHelper spHelper = new FilterPreferenceHelper(context);
+                        spHelper.setChatToUserName(object.get(0).getUsername());
+                        // Snackbar.make(view, "查询成功", Snackbar.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(context, user.getGuardianUserEntity().getObjectId() + "//" + e.toString(), Toast.LENGTH_LONG).show();
+                    //Snackbar.make(view, "查询失败：" + e.getMessage(), Snackbar.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
 
 }

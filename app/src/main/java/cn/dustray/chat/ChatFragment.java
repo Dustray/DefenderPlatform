@@ -38,6 +38,7 @@ import cn.dustray.entity.LinkEntity;
 import cn.dustray.entity.UserEntity;
 import cn.dustray.popupwindow.WebSharePopup;
 import cn.dustray.utils.Alert;
+import cn.dustray.utils.BmobUtil;
 import cn.dustray.utils.FilterPreferenceHelper;
 import cn.dustray.utils.xToast;
 
@@ -64,7 +65,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
     private FragmentManager manager;
     private FragmentTransaction transaction;
     public List<ChatRecordEntity> list;
-    private UserEntity chatToObjectUser;
+    //private UserEntity chatToObjectUser;
     //Ease
     private EMMessageListener msgListener;
     private FilterPreferenceHelper spHelper;
@@ -219,7 +220,10 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
         moToolBtn = getActivity().findViewById(R.id.chat_moretool_btn);
         moToolBtn.setOnClickListener(this);
         spHelper = new FilterPreferenceHelper(getActivity());
-
+        if (BmobUser.isLogin() && spHelper.getChatToUserName().equals("")) {
+            BmobUtil u = new BmobUtil(getActivity());
+            u.upGradeChatToUserName();
+        }
 
     }
 
@@ -229,21 +233,20 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_chat, container, false);
 
-        chatToObjectUser = BmobUser.getCurrentUser(UserEntity.class);
         initReceiveMessageFromEase();
         return view;
     }
 
     public void initReceiveMessageFromEase() {
-        chatToObjectUser = BmobUser.getCurrentUser(UserEntity.class);
-        if (chatToObjectUser == null) return;
+        if (!BmobUser.isLogin()) return;
         msgListener = new EMMessageListener() {
 
             @Override
             public void onMessageReceived(List<EMMessage> messages) {
-                xToast.toast(getActivity(), "收到一条新消息："+messages.size());
+                xToast.toast(getActivity(), "收到一条新消息：" + messages.size());
                 //收到消息
                 for (EMMessage msg : messages) {
+                   // if(msg.getType()=EMMessage.)
                     ChatRecordEntity c = new ChatRecordEntity(getActivity(), msg.getBody().toString(), ChatRecordEntity.TRANSMIT_TYPE_RECEIVED, ChatRecordEntity.MESSAGE_TYPE_TEXT);
                     sendMessage(c);
 
@@ -295,8 +298,8 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
 
         //创建一条文本消息，content为消息文字内容，toChatUsername为对方用户或者群聊的id，后文皆是如此
 
-         EMMessage message = EMMessage.createTxtSendMessage(content, spHelper.getChatToUserName());
-         EMClient.getInstance().chatManager().sendMessage(message);
+        EMMessage message = EMMessage.createTxtSendMessage(content, spHelper.getChatToUserName());
+        EMClient.getInstance().chatManager().sendMessage(message);
 
     }
 
@@ -325,13 +328,19 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (msgListener != null)
+            EMClient.getInstance().chatManager().removeMessageListener(msgListener);
+    }
+
+    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.chat_send_btn:
                 if (sendContent.getText().toString().equals(""))
                     return;
-                chatToObjectUser = BmobUser.getCurrentUser(UserEntity.class);
-                if (chatToObjectUser == null) {
+                if (!BmobUser.isLogin()) {
                     Alert alert = new Alert(getActivity());
                     alert.setOnPopupAlertListener(new Alert.OnPopupAlertListener() {
                         @Override

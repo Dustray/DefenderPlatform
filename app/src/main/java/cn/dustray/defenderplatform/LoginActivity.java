@@ -323,29 +323,30 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 //            }
 //        });
         /**
-         * 查询用户表
+         * 查询用户表设置ChatToUserName
          */
-        UserEntity user = UserEntity.getCurrentUser(UserEntity.class);
-
-        BmobQuery<UserEntity> bmobQuery = new BmobQuery<>();
-        if (user.isUnGuardian()) {
-            bmobQuery.addWhereEqualTo("objectId", user.getGuardianUserEntity().getObjectId());
-        } else if (user.isGuardian()) {
-            bmobQuery.addWhereEqualTo("guardianUserEntity", user.getObjectId());
-        }
-        bmobQuery.findObjects(new FindListener<UserEntity>() {
-            @Override
-            public void done(List<UserEntity> object, BmobException e) {
-                if (e == null) {
-                    spHelper.setChatToUserName(object.get(0).getUsername());
-                    // Snackbar.make(view, "查询成功", Snackbar.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(LoginActivity.this, BmobUser.getCurrentUser(UserEntity.class).getGuardianUserEntity().getObjectId() + "//" + e.toString(), Toast.LENGTH_LONG).show();
-                    //Snackbar.make(view, "查询失败：" + e.getMessage(), Snackbar.LENGTH_LONG).show();
-                }
-            }
-        });
-
+//        UserEntity user = UserEntity.getCurrentUser(UserEntity.class);
+//
+//        BmobQuery<UserEntity> bmobQuery = new BmobQuery<>();
+//        if (user.isUnGuardian()) {
+//            bmobQuery.addWhereEqualTo("objectId", user.getGuardianUserEntity().getObjectId());
+//        } else if (user.isGuardian()) {
+//            bmobQuery.addWhereEqualTo("guardianUserEntity", user.getObjectId());
+//        }
+//        bmobQuery.findObjects(new FindListener<UserEntity>() {
+//            @Override
+//            public void done(List<UserEntity> object, BmobException e) {
+//                if (e == null) {
+//                    spHelper.setChatToUserName(object.get(0).getUsername());
+//                    // Snackbar.make(view, "查询成功", Snackbar.LENGTH_LONG).show();
+//                } else {
+//                    Toast.makeText(LoginActivity.this, BmobUser.getCurrentUser(UserEntity.class).getGuardianUserEntity().getObjectId() + "//" + e.toString(), Toast.LENGTH_LONG).show();
+//                    //Snackbar.make(view, "查询失败：" + e.getMessage(), Snackbar.LENGTH_LONG).show();
+//                }
+//            }
+//        });
+        BmobUtil u = new BmobUtil(this);
+        u.upGradeChatToUserName();
 
         loginEaseMob(mEmailView.getText().toString(), mPasswordView.getText().toString());
         finish();
