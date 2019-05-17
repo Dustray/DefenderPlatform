@@ -338,9 +338,9 @@ public class ShieldingActivity extends AppCompatActivity implements View.OnClick
             //nofilterTimeBtn.setBackgroundResource(R.color.colorDanger);
             applyTimeEdt.setText("" + waitingForApplyTime);
             applyPwdEdt.setText("");
-            if (spHelper.getUserType() == 1) {//监督者
+            if (BmobUser.getCurrentUser(UserEntity.class).isGuardian()) {//监督者
                 nofilterTimeBtn.setText("修改");
-            } else if (spHelper.getUserType() == 2) {//被监督者
+            } else if (BmobUser.getCurrentUser(UserEntity.class).isUnGuardian()) {//被监督者
                 nofilterTimeBtn.setText("取消");
                 isApply = true;
             }

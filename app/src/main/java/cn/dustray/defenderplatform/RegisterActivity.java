@@ -44,7 +44,9 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.QueryListener;
 import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.listener.UpdateListener;
 import cn.dustray.entity.UserEntity;
 import cn.dustray.user.UserManager;
 import cn.dustray.utils.Alert;
@@ -84,6 +86,7 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
     private View mLoginFormView;
     private Switch isGuardianSwitch;
     private FilterPreferenceHelper spHelper;
+    private UserEntity guardianSwitchId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -393,6 +396,51 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
                     }
                 }
             });
+        } else if (user.getUserType() == UserEntity.USER_UNGUARDIAN) {
+            //更新被监护人表绑定监护人
+//            UserEntity ue = new UserEntity();
+//            ue.setGuardianUserEntity(user);
+//            ue.update(guardianSwitchId, new UpdateListener() {
+//
+//                @Override
+//                public void done(BmobException e) {
+//                    if (e == null) {
+//                        //toast("更新成功:"+p2.getUpdatedAt());
+//                    } else {
+//                        // toast("更新失败：" + e.getMessage());
+//                        xToast.toast(RegisterActivity.this,"se//"+e.toString());
+//                    }
+//                }
+//
+//            });
+            //or
+//            UserEntity ue = guardianSwitchId;
+//            ue.setGuardianUserEntity(user);
+//            user.update(new UpdateListener() {
+//                @Override
+//                public void done(BmobException e) {
+//                    if (e == null) {
+//                        //Snackbar.make(view, "更新用户信息成功：" + user.getAge(), Snackbar.LENGTH_LONG).show();
+//                    } else {
+//                        //  Snackbar.make(view, "更新用户信息失败：" + e.getMessage(), Snackbar.LENGTH_LONG).show();
+//                        // Log.e("error", e.getMessage());
+//                        xToast.toast(RegisterActivity.this, "se//" + e.toString());
+//                    }
+//                }
+//            });
+            //查找UserEntity表里面id为guardianSwitchId的用户名
+            BmobQuery<UserEntity> bmobQuery = new BmobQuery<UserEntity>();
+            bmobQuery.getObject(guardianSwitchId.getObjectId(), new QueryListener<UserEntity>() {
+                @Override
+                public void done(UserEntity object, BmobException e) {
+                    if (e == null) {
+                        spHelper.setChatToUserName(object.getUsername());
+                        //  toast("查询成功");
+                    } else {
+                        // toast("查询失败：" + e.getMessage());
+                    }
+                }
+            });
         }
         finish();
     }
@@ -515,6 +563,7 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
                     public void done(List<UserEntity> object, BmobException e) {
 
                         if (e == null && object.size() > 0) {
+                            guardianSwitchId = object.get(0);
                             BmobUtil bmob = new BmobUtil(RegisterActivity.this);
                             //TODO IMEI
                             bmob.register(mUserName, mPassword, mEmail, mUserType, object.get(0), "000000000000", RegisterActivity.this);

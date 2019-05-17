@@ -21,6 +21,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,6 +42,12 @@ import com.hyphenate.exceptions.HyphenateException;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.QueryListener;
+import cn.dustray.entity.UserEntity;
 import cn.dustray.user.UserManager;
 import cn.dustray.utils.BmobUtil;
 import cn.dustray.utils.FilterPreferenceHelper;
@@ -301,20 +308,60 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     @Override
     public void loginSuccess() {
         spHelper.setRegisterPassword(mPasswordView.getText().toString());
-        loginEaseMob(mEmailView.getText().toString(),mPasswordView.getText().toString());
+        //查找UserEntity表里面id为guardianSwitchId的用户名
+//        BmobQuery<UserEntity> bmobQuery = new BmobQuery<UserEntity>();
+//        bmobQuery.getObject(BmobUser.getCurrentUser(UserEntity.class).getGuardianUserEntity().getObjectId(), new QueryListener<UserEntity>() {
+//            @Override
+//            public void done(UserEntity object, BmobException e) {
+//                if(e==null){
+//                    spHelper.setChatToUserName(object.getUsername());
+//                    //  toast("查询成功");
+//                }else{
+//                    Toast.makeText(LoginActivity.this,BmobUser.getCurrentUser(UserEntity.class).getGuardianUserEntity().getObjectId()+"//"+e.toString(),Toast.LENGTH_LONG).show();
+//                    // toast("查询失败：" + e.getMessage());
+//                }
+//            }
+//        });
+        /**
+         * 查询用户表
+         */
+        UserEntity user = UserEntity.getCurrentUser(UserEntity.class);
+
+        BmobQuery<UserEntity> bmobQuery = new BmobQuery<>();
+        if (user.isUnGuardian()) {
+            bmobQuery.addWhereEqualTo("objectId", user.getGuardianUserEntity().getObjectId());
+        } else if (user.isGuardian()) {
+            bmobQuery.addWhereEqualTo("guardianUserEntity", user.getObjectId());
+        }
+        bmobQuery.findObjects(new FindListener<UserEntity>() {
+            @Override
+            public void done(List<UserEntity> object, BmobException e) {
+                if (e == null) {
+                    spHelper.setChatToUserName(object.get(0).getUsername());
+                    // Snackbar.make(view, "查询成功", Snackbar.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(LoginActivity.this, BmobUser.getCurrentUser(UserEntity.class).getGuardianUserEntity().getObjectId() + "//" + e.toString(), Toast.LENGTH_LONG).show();
+                    //Snackbar.make(view, "查询失败：" + e.getMessage(), Snackbar.LENGTH_LONG).show();
+                }
+            }
+        });
+
+
+        loginEaseMob(mEmailView.getText().toString(), mPasswordView.getText().toString());
         finish();
     }
+
     public void loginEaseMob(final String username, final String pwd) {
         new Thread(new Runnable() {
             public void run() {
-                EMClient.getInstance().login(username,pwd,new EMCallBack() {//回调
+                EMClient.getInstance().login(username, pwd, new EMCallBack() {//回调
                     @Override
                     public void onSuccess() {
                         EMClient.getInstance().groupManager().loadAllGroups();
                         EMClient.getInstance().chatManager().loadAllConversations();
                         //Log.d("main", "登录聊天服务器成功！");
                         Looper.prepare();
-                        Toast.makeText(LoginActivity.this,"登录聊天服务器成功",Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this, "登录聊天服务器成功", Toast.LENGTH_LONG).show();
                         Looper.loop();
                     }
 
@@ -327,13 +374,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     public void onError(int code, String message) {
                         // Log.d("main", "登录聊天服务器失败！");
                         Looper.prepare();
-                        Toast.makeText(LoginActivity.this,"登录聊天服务器失败",Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this, "登录聊天服务器失败", Toast.LENGTH_LONG).show();
                         Looper.loop();
                     }
                 });
             }
         }).start();
     }
+
     @Override
     public void loginFailed(Exception e) {
         String msg = e.getMessage();
@@ -361,6 +409,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         int ADDRESS = 0;
         int IS_PRIMARY = 1;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -370,6 +419,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
         return super.onOptionsItemSelected(item);
     }
+
     /**
      * Represents an asynchronous login/registration task used to authenticate
      * the user.

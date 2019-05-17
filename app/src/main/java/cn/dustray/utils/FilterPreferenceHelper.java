@@ -107,27 +107,26 @@ public class FilterPreferenceHelper {
     }
 
     /**
-     * 保存用户类型：1为监护人，2为被监护人
+     * 保存聊天对象用户
      *
-     * @param type
+     * @param name
      */
-    public void setUserType(int type) {
+    public void setChatToUserName(String name) {
 
         SharedPreferences.Editor mEditor = sharedPreferences.edit();
-        mEditor.putInt("UserType", type);
+        mEditor.putString("ChatToUserName", name);
         mEditor.commit();
     }
 
 
     /**
-     * 获取用户类型：1为监护人，2为被监护人
+     * 获取聊天对象用户
      *
      * @return
      */
-    public int getUserType() {
-        int time = sharedPreferences.getInt("UserType", 0);
-        return time;
-
+    public String getChatToUserName() {
+        String name = sharedPreferences.getString("ChatToUserName", "");
+        return name;
     }
 
     /**

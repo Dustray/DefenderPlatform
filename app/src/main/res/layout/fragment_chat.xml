@@ -13,9 +13,10 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/chat_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/chat_input_area"
+            android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="48dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
         <RelativeLayout

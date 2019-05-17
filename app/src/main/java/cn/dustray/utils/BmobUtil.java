@@ -137,6 +137,7 @@ public class BmobUtil {
      * @param ue
      */
     public void loginWithName(UserEntity ue, final UserManager.onLoginListener mListener) {
+
         ue.login(new SaveListener<UserEntity>() {
             @Override
             public void done(UserEntity userEntity, BmobException e) {

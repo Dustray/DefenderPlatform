@@ -1,6 +1,7 @@
 package cn.dustray.chat;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,15 +21,25 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.hyphenate.EMMessageListener;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMConversation;
+import com.hyphenate.chat.EMMessage;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.bmob.v3.BmobUser;
+import cn.dustray.defenderplatform.LoginActivity;
 import cn.dustray.defenderplatform.R;
+import cn.dustray.defenderplatform.RegisterActivity;
 import cn.dustray.entity.ChatRecordEntity;
 import cn.dustray.entity.LinkEntity;
+import cn.dustray.entity.UserEntity;
 import cn.dustray.popupwindow.WebSharePopup;
 import cn.dustray.utils.Alert;
+import cn.dustray.utils.FilterPreferenceHelper;
+import cn.dustray.utils.xToast;
 
 
 public class ChatFragment extends Fragment implements View.OnClickListener {
@@ -53,7 +64,10 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
     private FragmentManager manager;
     private FragmentTransaction transaction;
     public List<ChatRecordEntity> list;
-
+    private UserEntity chatToObjectUser;
+    //Ease
+    private EMMessageListener msgListener;
+    private FilterPreferenceHelper spHelper;
 
     public ChatFragment() {
         // Required empty public constructor
@@ -81,42 +95,11 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
 
         list = new ArrayList<ChatRecordEntity>() {
             {
-                add(new ChatRecordEntity(getActivity(), "聊天内容1:ss是难受难受难受难受那你是啥", 1, ChatRecordEntity.MESSAGE_TYPE_TEXT));
-                add(new ChatRecordEntity(getActivity(), "聊天内容2", 1, ChatRecordEntity.MESSAGE_TYPE_TEXT));
+                add(new ChatRecordEntity(getActivity(), "聊天内容1:ss是难受难受难受难受那你是啥", ChatRecordEntity.TRANSMIT_TYPE_RECEIVED, ChatRecordEntity.MESSAGE_TYPE_TEXT));
                 add(new ChatRecordEntity(getActivity(), "聊天内容3", 2, ChatRecordEntity.MESSAGE_TYPE_TEXT));
-                add(new ChatRecordEntity(getActivity(), "聊天内容4：点三四皇妃肯定撒:ss是难受难受难受难受那你是啥就开始的话覅就看好i发大苏打实打实打算", 2, ChatRecordEntity.MESSAGE_TYPE_TEXT));
-                add(new ChatRecordEntity(getActivity(), "聊天内容5", 2, ChatRecordEntity.MESSAGE_TYPE_TEXT));
-                add(new ChatRecordEntity(getActivity(), "聊天内容6：飒飒飒", 2, ChatRecordEntity.MESSAGE_TYPE_TEXT));
-                add(new ChatRecordEntity(getActivity(), "聊天内容7", 1, ChatRecordEntity.MESSAGE_TYPE_TEXT));
-                add(new ChatRecordEntity(getActivity(), "聊天内容8", 1, ChatRecordEntity.MESSAGE_TYPE_TEXT));
-                add(new ChatRecordEntity(getActivity(), "聊天内容9:ss是难受难受难受难受那你是啥", 1, ChatRecordEntity.MESSAGE_TYPE_TEXT));
-                add(new ChatRecordEntity(getActivity(), "聊天内容0热望奇热网奇热网奇热网缺乏大赛官方热舞公认为该文认为", 1, ChatRecordEntity.MESSAGE_TYPE_TEXT));
-                add(new ChatRecordEntity(getActivity(), "聊天内容1热热我", 2, ChatRecordEntity.MESSAGE_TYPE_TEXT));
-                add(new ChatRecordEntity(getActivity(), "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1541049260&di=80f49d66102f426b3295b898725d83e5&imgtype=jpg&er=1&src=http%3A%2F%2Fe.hiphotos.baidu.com%2Fnuomi%2Fwh%253D470%252C285%2Fsign%3Db384cb1d94dda144da5c64b68587fc90%2F29381f30e924b899165216366d061d950a7bf656.jpg", 1, ChatRecordEntity.MESSAGE_TYPE_IMAGE));
-
-                add(new ChatRecordEntity(getActivity(), "聊天内容2我去热热去辜负他热爱", 2, ChatRecordEntity.MESSAGE_TYPE_TEXT));
-                add(new ChatRecordEntity(getActivity(), "http://pic29.nipic.com/20130511/9252150_174018365301_2.jpg", 2, ChatRecordEntity.MESSAGE_TYPE_IMAGE));
-                add(new ChatRecordEntity(getActivity(), "聊天内容3", 2, ChatRecordEntity.MESSAGE_TYPE_TEXT));
-                add(new ChatRecordEntity(getActivity(), "聊天内容4", 1, ChatRecordEntity.MESSAGE_TYPE_TEXT));
-                add(new ChatRecordEntity(getActivity(), "聊天内容5说的是福娃广泛但是我个人", 2, ChatRecordEntity.MESSAGE_TYPE_TEXT));
-                add(new ChatRecordEntity(getActivity(), "聊天内容6惹人", 1, ChatRecordEntity.MESSAGE_TYPE_TEXT));
                 add(new ChatRecordEntity(getActivity(), "http://img.zcool.cn/community/037dd30582481f7a84a0d304f0db5d6.jpg", 1, ChatRecordEntity.MESSAGE_TYPE_IMAGE));
-
                 add(new ChatRecordEntity(getActivity(), "聊天内容7水水水水水水", 1, ChatRecordEntity.MESSAGE_TYPE_TEXT));
                 add(new ChatRecordEntity(getActivity(), "聊天内容8", 2, ChatRecordEntity.MESSAGE_TYPE_TEXT));
-                add(new ChatRecordEntity(getActivity(), "聊天内容9热舞区分哇 热物权法第七萨福地区发热", 2, ChatRecordEntity.MESSAGE_TYPE_TEXT));
-                add(new ChatRecordEntity(getActivity(), "聊天内容0二为秋风无情", 1, ChatRecordEntity.MESSAGE_TYPE_TEXT));
-                add(new ChatRecordEntity(getActivity(), "聊天内容1 额", 1, ChatRecordEntity.MESSAGE_TYPE_TEXT));
-                add(new ChatRecordEntity(getActivity(), "聊天内容2二为秋风无情天热天热请问天热委托委托人", 2, ChatRecordEntity.MESSAGE_TYPE_TEXT));
-                add(new ChatRecordEntity(getActivity(), "聊天内容3二为秋风无情", 2, ChatRecordEntity.MESSAGE_TYPE_TEXT));
-                add(new ChatRecordEntity(getActivity(), "聊天内容4恶委屈热望奇热网奇热网去", 1, ChatRecordEntity.MESSAGE_TYPE_TEXT));
-                add(new ChatRecordEntity(getActivity(), "聊天内容5", 2, ChatRecordEntity.MESSAGE_TYPE_TEXT));
-                add(new ChatRecordEntity(getActivity(), "聊天内容6", 1, ChatRecordEntity.MESSAGE_TYPE_TEXT));
-                add(new ChatRecordEntity(getActivity(), "聊天内容7嗯嗯", 1, ChatRecordEntity.MESSAGE_TYPE_TEXT));
-                add(new ChatRecordEntity(getActivity(), "聊天内容8热望奇热网清风围棋", 1, ChatRecordEntity.MESSAGE_TYPE_TEXT));
-                add(new ChatRecordEntity(getActivity(), "聊天内容9", 2, ChatRecordEntity.MESSAGE_TYPE_TEXT));
-                add(new ChatRecordEntity(getActivity(), "聊天内容0", 2, ChatRecordEntity.MESSAGE_TYPE_TEXT));
-                add(new ChatRecordEntity(getActivity(), "http://www.pptbz.com/pptpic/UploadFiles_6909/201211/2012111719294197.jpg", 2, ChatRecordEntity.MESSAGE_TYPE_IMAGE));
             }
         };
         chatListView = getActivity().findViewById(R.id.chat_list);
@@ -168,7 +151,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                                 mListener.switchToViewPager(1);
                             }
                         });
-                        alert.popupAlert(getActivity().getWindow().getDecorView(),"滑动切换已关闭,开启侧滑还是直接切换？", "开启侧滑", "直接切换");
+                        alert.popupAlert(getActivity().getWindow().getDecorView(), "滑动切换已关闭,开启侧滑还是直接切换？", "开启侧滑", "直接切换");
                     }
                 }
                 //点击
@@ -235,6 +218,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
         });
         moToolBtn = getActivity().findViewById(R.id.chat_moretool_btn);
         moToolBtn.setOnClickListener(this);
+        spHelper = new FilterPreferenceHelper(getActivity());
 
 
     }
@@ -243,7 +227,76 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chat, container, false);
+        View view = inflater.inflate(R.layout.fragment_chat, container, false);
+
+        chatToObjectUser = BmobUser.getCurrentUser(UserEntity.class);
+        initReceiveMessageFromEase();
+        return view;
+    }
+
+    public void initReceiveMessageFromEase() {
+        chatToObjectUser = BmobUser.getCurrentUser(UserEntity.class);
+        if (chatToObjectUser == null) return;
+        msgListener = new EMMessageListener() {
+
+            @Override
+            public void onMessageReceived(List<EMMessage> messages) {
+                xToast.toast(getActivity(), "收到一条新消息："+messages.size());
+                //收到消息
+                for (EMMessage msg : messages) {
+                    ChatRecordEntity c = new ChatRecordEntity(getActivity(), msg.getBody().toString(), ChatRecordEntity.TRANSMIT_TYPE_RECEIVED, ChatRecordEntity.MESSAGE_TYPE_TEXT);
+                    sendMessage(c);
+
+                }
+            }
+
+            @Override
+            public void onCmdMessageReceived(List<EMMessage> messages) {
+                //收到透传消息
+            }
+
+            @Override
+            public void onMessageRead(List<EMMessage> messages) {
+                //收到已读回执
+            }
+
+            @Override
+            public void onMessageDelivered(List<EMMessage> message) {
+                //收到已送达回执
+            }
+
+            @Override
+            public void onMessageRecalled(List<EMMessage> messages) {
+                //消息被撤回
+            }
+
+            @Override
+            public void onMessageChanged(EMMessage message, Object change) {
+                //消息状态变动
+            }
+        };
+
+        EMClient.getInstance().chatManager().addMessageListener(msgListener);
+
+//                EMConversation conversation = EMClient.getInstance().chatManager().getConversation(chatToObjectUser.getGuardianUserEntity().getUsername());
+//                //获取此会话的所有消息
+//                List<EMMessage> messages = conversation.getAllMessages();
+
+        //SDK初始化加载的聊天记录为20条，到顶时需要去DB里获取更多
+        //获取startMsgId之前的pagesize条消息，此方法获取的messages SDK会自动存入到此会话中，APP中无需再次把获取到的messages添加到会话中
+        // List<EMMessage> messages = conversation.loadMoreMsgFromDB(startMsgId, pagesize);
+
+    }
+
+    public void sendMessageToEase(String content) {
+//        chatToObjectUser = BmobUser.getCurrentUser(UserEntity.class);
+//        if (chatToObjectUser == null) return;
+        // xToast.toast(getActivity(), content+"sss" + spHelper.getChatToUserName());
+
+        //创建一条文本消息，content为消息文字内容，toChatUsername为对方用户或者群聊的id，后文皆是如此
+
+         EMMessage message = EMMessage.createTxtSendMessage(content, spHelper.getChatToUserName());
+         EMClient.getInstance().chatManager().sendMessage(message);
 
     }
 
@@ -277,7 +330,42 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
             case R.id.chat_send_btn:
                 if (sendContent.getText().toString().equals(""))
                     return;
+                chatToObjectUser = BmobUser.getCurrentUser(UserEntity.class);
+                if (chatToObjectUser == null) {
+                    Alert alert = new Alert(getActivity());
+                    alert.setOnPopupAlertListener(new Alert.OnPopupAlertListener() {
+                        @Override
+                        public void onClickOk() {
+                            getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
+                        }
+
+                        @Override
+                        public void onClickCancel() {
+                        }
+                    });
+                    alert.popupAlert(getActivity().getWindow().getDecorView(), "您还未登录,是否立即登录。", "是");
+                    return;
+                }
+
+                if (spHelper.getChatToUserName().equals("")) {
+                    Alert alert = new Alert(getActivity());
+                    alert.setOnPopupAlertListener(new Alert.OnPopupAlertListener() {
+                        @Override
+                        public void onClickOk() {
+                        }
+
+                        @Override
+                        public void onClickCancel() {
+                        }
+                    });
+                    alert.popupAlert(getActivity().getWindow().getDecorView(), "此账号还未绑定被守护者账号，请绑定后重新登录");
+                    return;
+                }
                 sendMessage();
+                //xToast.toast(getActivity(), sendContent.getText().toString() + "sss");
+                sendMessageToEase(sendContent.getText().toString());
+
+                sendContent.setText("");
                 break;
             case R.id.chat_moretool_btn:
                 manager = getActivity().getSupportFragmentManager();
@@ -302,7 +390,6 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
     private void sendMessage() {
         ChatRecordEntity c = new ChatRecordEntity(getActivity(), sendContent.getText().toString(), ChatRecordEntity.TRANSMIT_TYPE_SENT, ChatRecordEntity.MESSAGE_TYPE_TEXT);
         sendMessage(c);
-        sendContent.setText("");
     }
 
     public void sendMessage(String s) {
@@ -340,7 +427,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
 
     public void share(String title, String url) {
 
-        new WebSharePopup(getActivity(),true).showAtBottom(sendBtn, title, url);
+        new WebSharePopup(getActivity(), true).showAtBottom(sendBtn, title, url);
     }
 
     public interface OnFragmentInteractionListener {
