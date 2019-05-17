@@ -130,6 +130,9 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/cn/dustray/chat/ChatFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cn/dustray/chat/ChatFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/cn/dustray/chat/ChatHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cn/dustray/chat/ChatHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/cn/dustray/popupwindow/WebSharePopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cn/dustray/popupwindow/WebSharePopup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_chat.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_chat.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -154,73 +157,53 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/chat/ChatFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="304" column="26" selection-start-line="304" selection-start-column="26" selection-end-line="304" selection-end-column="26" />
+            <state relative-caret-position="265">
+              <caret line="259" column="70" selection-start-line="259" selection-start-column="70" selection-end-line="259" selection-end-column="70" />
               <folding>
                 <element signature="class#4040:6945" />
-                <element signature="e#10324#11269#0" expanded="true" />
-                <element signature="e#11268#11269#0" expanded="true" />
-                <element signature="e#12146#13533#0" expanded="true" />
-                <element signature="e#12498#13499#0" expanded="true" />
-                <element signature="e#13498#13499#0" expanded="true" />
-                <element signature="e#13532#13533#0" expanded="true" />
+                <element signature="e#10324#12298#0" expanded="true" />
+                <element signature="e#12297#12298#0" expanded="true" />
+                <element signature="e#13175#16177#0" expanded="true" />
+                <element signature="e#13710#16143#0" expanded="true" />
+                <element signature="e#16142#16143#0" expanded="true" />
+                <element signature="e#16176#16177#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.hyphenate/hyphenate-sdk-lite/3.5.6/cd94fc6f934e81bbd3fd869278a4740e8338c9e2/hyphenate-sdk-lite-3.5.6-sources.jar!/com/hyphenate/chat/EMMessage.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/chat/ChatListAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="265">
-              <caret line="248" column="53" selection-start-line="248" selection-start-column="23" selection-end-line="248" selection-end-column="53" />
+            <state relative-caret-position="58">
+              <caret line="21" column="62" selection-start-line="21" selection-start-column="62" selection-end-line="21" selection-end-column="62" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/utils/BmobUtil.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/chat/ChatHolder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3477">
-              <caret line="313" column="21" selection-start-line="313" selection-start-column="21" selection-end-line="313" selection-end-column="21" />
-              <folding>
-                <element signature="e#9483#10273#0" expanded="true" />
-                <element signature="e#10272#10273#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="484">
+              <caret line="113" column="62" selection-start-line="113" selection-start-column="51" selection-end-line="113" selection-end-column="62" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/LoginActivity.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/entity/ChatRecordEntity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="335">
-              <caret line="347" selection-start-line="347" selection-end-line="348" selection-end-column="34" />
+            <state relative-caret-position="264">
+              <caret line="12" column="28" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="28" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_chat.xml">
-          <provider editor-type-id="android-designer2" />
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/popupwindow/WebSharePopup.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="15" column="47" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="47" />
-              <folding>
-                <element signature="e#834#874#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/utils/EasemobUtil.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="520">
-              <caret line="57" column="23" selection-start-line="57" selection-start-column="23" selection-end-line="57" selection-end-column="23" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="297">
+              <caret line="100" column="67" selection-start-line="100" selection-start-column="67" selection-end-line="100" selection-end-column="67" />
             </state>
           </provider>
         </entry>
@@ -228,12 +211,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/chat/ChatHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="18" column="4" selection-start-line="18" selection-start-column="4" selection-end-line="19" selection-end-column="19" />
+            <state relative-caret-position="454">
+              <caret line="25" column="45" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="45" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#372#688#0" expanded="true" />
-                <element signature="e#687#688#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -251,9 +232,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>navigation</find>
-      <find>0x7f0800c3</find>
-      <find>manage</find>
       <find>btn_web_menu_down</find>
       <find>layout_width=&quot;40dp&quot;</find>
       <find>1</find>
@@ -281,6 +259,9 @@
       <find>Guar</find>
       <find>guar</find>
       <find>Destr</find>
+      <find>ChatHel</find>
+      <find>transmitType</find>
+      <find>MESSAGE_TYPE_LINK</find>
     </findStrings>
     <replaceStrings>
       <replace>20dp</replace>
@@ -316,10 +297,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/utils/PreferenceHelper.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/webfilter/KeywordEntity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/input_ho_white.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/menu/activity_main_drawer.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/input_filter_add.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/btn_filter_add.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/chat/ChatListAdapter.java" />
@@ -358,14 +337,16 @@
         <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/MyActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/chat/ChatHelper.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/ShieldingActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/utils/FilterPreferenceHelper.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_chat.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/RegisterActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/LoginActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/utils/EasemobUtil.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/utils/BmobUtil.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_chat.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/menu/activity_main_drawer.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/popupwindow/WebSharePopup.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/chat/ChatHelper.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/cn/dustray/chat/ChatFragment.java" />
       </list>
     </option>
@@ -423,6 +404,13 @@
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
               <item name="dustray" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="chat" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="DefenderPlatform" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="dustray" type="cbb59c9e:AndroidPsiDirectoryNode" />
               <item name="defenderplatform" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -431,6 +419,17 @@
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
               <item name="dustray" type="cbb59c9e:AndroidPsiDirectoryNode" />
               <item name="utils" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="DefenderPlatform" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+            </path>
+            <path>
+              <item name="DefenderPlatform" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="menu" type="ddeffd01:AndroidResFolderTypeNode" />
             </path>
             <path>
               <item name="DefenderPlatform" type="1abcf292:AndroidViewProjectNode" />
@@ -663,7 +662,7 @@
       <window_info anchor="bottom" id="Build" order="7" weight="0.20375335" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5020107" side_tool="true" weight="0.32078102" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32914925" />
-      <window_info active="true" anchor="bottom" x="22" y="336" width="1492" height="192" id="Logcat" order="10" sideWeight="0.49798927" visible="true" weight="0.28686327" />
+      <window_info anchor="bottom" x="22" y="336" width="1492" height="192" id="Logcat" order="10" sideWeight="0.49798927" weight="0.28686327" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.32914925" />
       <window_info anchor="bottom" id="Android Profiler" order="12" weight="0.32841823" />
       <window_info anchor="bottom" id="Statistic" order="13" />
@@ -680,51 +679,6 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_register.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-151">
-          <caret line="100" column="20" selection-start-line="100" selection-start-column="20" selection-end-line="100" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/entity/UserEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="33" column="22" selection-start-line="33" selection-start-column="22" selection-end-line="33" selection-end-column="22" />
-          <folding>
-            <element signature="e#820#821#0" expanded="true" />
-            <element signature="e#861#862#0" expanded="true" />
-            <element signature="e#1022#1023#0" expanded="true" />
-            <element signature="e#1064#1065#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/Android/SDK/platforms/android-27/android.jar!/android/widget/PopupWindow.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="51" column="11" selection-start-line="51" selection-start-column="11" selection-end-line="51" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/input_filter_add.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/input_o_gray.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="1" selection-start-line="1" selection-end-line="8" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="3" column="17" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/alert_o_white.xml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -887,25 +841,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="94" column="37" selection-start-line="94" selection-start-column="37" selection-end-line="94" selection-end-column="37" />
-          <folding>
-            <element signature="e#5986#6150#0" expanded="true" />
-            <element signature="e#6149#6150#0" expanded="true" />
-            <element signature="e#8616#8617#0" expanded="true" />
-            <element signature="e#8837#8838#0" expanded="true" />
-            <element signature="e#8912#8913#0" expanded="true" />
-            <element signature="e#15183#15184#0" expanded="true" />
-            <element signature="e#15645#15646#0" expanded="true" />
-            <element signature="e#15737#15738#0" expanded="true" />
-            <element signature="e#15848#15849#0" expanded="true" />
-            <element signature="e#17675#17676#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
       <provider editor-type-id="android-manifest" />
       <provider selected="true" editor-type-id="text-editor">
@@ -940,20 +875,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="460">
           <caret line="199" column="109" lean-forward="true" selection-start-line="187" selection-start-column="14" selection-end-line="199" selection-end-column="109" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/entity/LinkEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/entity/ChatRecordEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -1006,49 +927,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_chat.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="15" column="47" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="47" />
-          <folding>
-            <element signature="e#834#874#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.support/support-fragment/27.1.1/94732bda44fba11302c58e459b7c1f47e7521bf9/support-fragment-27.1.1-sources.jar!/android/support/v4/app/Fragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="42">
           <caret line="626" column="34" selection-start-line="626" selection-start-column="34" selection-end-line="626" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/LoginActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="347" selection-start-line="347" selection-end-line="348" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/utils/EasemobUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="57" column="23" selection-start-line="57" selection-start-column="23" selection-end-line="57" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/utils/BmobUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3477">
-          <caret line="313" column="21" selection-start-line="313" selection-start-column="21" selection-end-line="313" selection-end-column="21" />
-          <folding>
-            <element signature="e#9483#10273#0" expanded="true" />
-            <element signature="e#10272#10273#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1073,37 +955,150 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-5207">
+          <caret line="94" column="37" selection-start-line="94" selection-start-column="37" selection-end-line="94" selection-end-column="37" />
+          <folding>
+            <element signature="e#8555#8556#0" expanded="true" />
+            <element signature="e#8616#8617#0" expanded="true" />
+            <element signature="e#8795#8796#0" expanded="true" />
+            <element signature="e#8837#8838#0" expanded="true" />
+            <element signature="e#8870#8871#0" expanded="true" />
+            <element signature="e#8912#8913#0" expanded="true" />
+            <element signature="e#15146#15147#0" expanded="true" />
+            <element signature="e#15183#15184#0" expanded="true" />
+            <element signature="e#15594#15595#0" expanded="true" />
+            <element signature="e#15645#15646#0" expanded="true" />
+            <element signature="e#15693#15694#0" expanded="true" />
+            <element signature="e#15737#15738#0" expanded="true" />
+            <element signature="e#15791#15792#0" expanded="true" />
+            <element signature="e#15848#15849#0" expanded="true" />
+            <element signature="e#17624#17625#0" expanded="true" />
+            <element signature="e#17675#17676#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/main.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/LoginActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="335">
+          <caret line="347" selection-start-line="347" selection-end-line="348" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/utils/BmobUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3477">
+          <caret line="313" column="21" selection-start-line="313" selection-start-column="21" selection-end-line="313" selection-end-column="21" />
+          <folding>
+            <element signature="e#9483#10273#0" expanded="true" />
+            <element signature="e#10272#10273#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_chat.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="17" column="40" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/activity_main_drawer.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/utils/EasemobUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="57" column="23" selection-start-line="57" selection-start-column="23" selection-end-line="57" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.hyphenate/hyphenate-sdk-lite/3.5.6/cd94fc6f934e81bbd3fd869278a4740e8338c9e2/hyphenate-sdk-lite-3.5.6-sources.jar!/com/hyphenate/chat/EMMessage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="248" column="53" selection-start-line="248" selection-start-column="23" selection-end-line="248" selection-end-column="53" />
+        <state relative-caret-position="240">
+          <caret line="99" column="50" lean-forward="true" selection-start-line="99" selection-start-column="50" selection-end-line="99" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.support/recyclerview-v7/27.1.1/ad225a74247e675db0b05ea4f8b17202acbb7f9d/recyclerview-v7-27.1.1-sources.jar!/android/support/v7/widget/RecyclerView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="7069" column="26" selection-start-line="7069" selection-start-column="26" selection-end-line="7069" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/chat/ChatHolder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="484">
+          <caret line="113" column="62" selection-start-line="113" selection-start-column="51" selection-end-line="113" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/chat/ChatListAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="58">
+          <caret line="21" column="62" selection-start-line="21" selection-start-column="62" selection-end-line="21" selection-end-column="62" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/chat/ChatHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="18" column="4" selection-start-line="18" selection-start-column="4" selection-end-line="19" selection-end-column="19" />
+        <state relative-caret-position="454">
+          <caret line="25" column="45" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="45" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#372#688#0" expanded="true" />
-            <element signature="e#687#688#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/entity/LinkEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="7" column="56" lean-forward="true" selection-start-line="7" selection-start-column="56" selection-end-line="7" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/entity/ChatRecordEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="12" column="28" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/popupwindow/WebSharePopup.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="100" column="67" selection-start-line="100" selection-start-column="67" selection-end-line="100" selection-end-column="67" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/chat/ChatFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="304" column="26" selection-start-line="304" selection-start-column="26" selection-end-line="304" selection-end-column="26" />
+        <state relative-caret-position="265">
+          <caret line="259" column="70" selection-start-line="259" selection-start-column="70" selection-end-line="259" selection-end-column="70" />
           <folding>
             <element signature="class#4040:6945" />
-            <element signature="e#10324#11269#0" expanded="true" />
-            <element signature="e#11268#11269#0" expanded="true" />
-            <element signature="e#12146#13533#0" expanded="true" />
-            <element signature="e#12498#13499#0" expanded="true" />
-            <element signature="e#13498#13499#0" expanded="true" />
-            <element signature="e#13532#13533#0" expanded="true" />
+            <element signature="e#10324#12298#0" expanded="true" />
+            <element signature="e#12297#12298#0" expanded="true" />
+            <element signature="e#13175#16177#0" expanded="true" />
+            <element signature="e#13710#16143#0" expanded="true" />
+            <element signature="e#16142#16143#0" expanded="true" />
+            <element signature="e#16176#16177#0" expanded="true" />
           </folding>
         </state>
       </provider>

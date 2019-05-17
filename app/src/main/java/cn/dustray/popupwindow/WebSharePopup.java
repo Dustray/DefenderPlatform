@@ -15,6 +15,7 @@ import android.widget.ImageButton;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import cn.dustray.chat.ChatHelper;
 import cn.dustray.control.xWebPopupWindow;
 import cn.dustray.defenderplatform.MainActivity;
 import cn.dustray.defenderplatform.R;
@@ -98,6 +99,8 @@ public class WebSharePopup extends xWebPopupWindow implements View.OnClickListen
                     String shareContent = "[" + title + "] " + url;
                     LinkEntity entity = new LinkEntity(title, "描述", url);
                     ((MainActivity) context).chatFragment.sendMessage(entity);
+
+
                 }
                 ((MainActivity) context).switchToChat();
                 break;

@@ -251,15 +251,26 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                     @Override
                     public void run() {
                         for (EMMessage msg : messages) {
+                            //xToast.toast(getActivity(), "msg.getTo()：" + msg.getTo()+"//spHelper.getChatToUserName():"+spHelper.getChatToUserName());
+                            int transmitType = msg.getTo().equals(spHelper.getChatToUserName())?  ChatRecordEntity.TRANSMIT_TYPE_SENT:ChatRecordEntity.TRANSMIT_TYPE_RECEIVED;
                             String result = msg.getBody().toString();
                             String msgReceived = result.substring(5, result.length() - 1);
                             // xToast.toast(getActivity(), "收到一条新消息：" + messages.size());
-                            ChatRecordEntity c = new ChatRecordEntity(getActivity(), msgReceived, ChatRecordEntity.TRANSMIT_TYPE_RECEIVED, ChatRecordEntity.MESSAGE_TYPE_TEXT);
+                            ChatRecordEntity c = new ChatRecordEntity(getActivity(), msgReceived,transmitType, ChatRecordEntity.MESSAGE_TYPE_TEXT);
                             if (msg.getType() == EMMessage.Type.TXT) {
-                                c = new ChatRecordEntity(getActivity(), msgReceived, ChatRecordEntity.TRANSMIT_TYPE_RECEIVED, ChatRecordEntity.MESSAGE_TYPE_TEXT);
+                                boolean isLink = msg.getBooleanAttribute("isLinkUrl", false);
+                                if (isLink) {
+                                    String linkTitle=msg.getStringAttribute("linkTitle","标题");
+                                    String linkDes =  msg.getStringAttribute("linkDescription","描述");
+                                    LinkEntity linkEntity = new LinkEntity(linkTitle,linkDes,msgReceived);
 
+                                    c=new ChatRecordEntity(getActivity(),linkEntity,transmitType);
+                                }else{
+                                    c = new ChatRecordEntity(getActivity(), msgReceived, transmitType, ChatRecordEntity.MESSAGE_TYPE_TEXT);
+
+                                }
                             }
-                            sendMessage(c);
+                            showMessage(c);
                         }
                     }
                 });
@@ -300,45 +311,49 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                 public void run() {
                     EMConversation conversation = EMClient.getInstance().chatManager().getConversation(spHelper.getChatToUserName());
                     //获取此会话的所有消息
-                    List<EMMessage> lastMessages = conversation.getAllMessages();
-                    if(lastMessages.size()==0)return;
+                    final List<EMMessage> lastMessages = conversation.getAllMessages();
+                    if (lastMessages.size() == 0) return;
                     final List<EMMessage> messages = conversation.loadMoreMsgFromDB(lastMessages.get(0).getMsgId(), 50);
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+
                             List<ChatRecordEntity> cList = new ArrayList<>();
-                            xToast.toast(getActivity(), "加载历史记录数量：" + messages.size());
+                            //xToast.toast(getActivity(), "加载历史记录数量：" + messages.size());
                             for (EMMessage msg : messages) {
+                                int transmitType = msg.getTo().equals(spHelper.getChatToUserName())?  ChatRecordEntity.TRANSMIT_TYPE_SENT:ChatRecordEntity.TRANSMIT_TYPE_RECEIVED;
                                 String result = msg.getBody().toString();
                                 String msgReceived = result.substring(5, result.length() - 1);
-                                ChatRecordEntity c = new ChatRecordEntity(getActivity(), msgReceived, ChatRecordEntity.TRANSMIT_TYPE_RECEIVED, ChatRecordEntity.MESSAGE_TYPE_TEXT);
+                                ChatRecordEntity c = new ChatRecordEntity(getActivity(), msgReceived, transmitType, ChatRecordEntity.MESSAGE_TYPE_TEXT);
                                 if (msg.getType() == EMMessage.Type.TXT) {
-                                    c = new ChatRecordEntity(getActivity(), msgReceived, ChatRecordEntity.TRANSMIT_TYPE_RECEIVED, ChatRecordEntity.MESSAGE_TYPE_TEXT);
+                                    boolean isLink = msg.getBooleanAttribute("isLinkUrl", false);
+                                    if (isLink) {
+                                        String linkTitle=msg.getStringAttribute("linkTitle","标题");
+                                        String linkDes =  msg.getStringAttribute("linkDescription","描述");
+                                        LinkEntity linkEntity = new LinkEntity(linkTitle,linkDes,msgReceived);
+
+                                        c=new ChatRecordEntity(getActivity(),linkEntity,transmitType);
+                                    }else{
+                                        c = new ChatRecordEntity(getActivity(), msgReceived, transmitType, ChatRecordEntity.MESSAGE_TYPE_TEXT);
+
+                                    }
                                 }
                                 cList.add(c);
                             }
-                            sendMessageList(cList);
+                            showMessageList(cList);
+                            String result0 = lastMessages.get(0).getBody().toString();
+                            String msgReceived0 = result0.substring(5, result0.length() - 1);
+                            if (lastMessages.get(0).getType() == EMMessage.Type.TXT) {
+                                ChatRecordEntity c0 = new ChatRecordEntity(getActivity(), msgReceived0, ChatRecordEntity.TRANSMIT_TYPE_RECEIVED, ChatRecordEntity.MESSAGE_TYPE_TEXT);
+                                showMessage(c0);
+                            }
                         }
                     });
                 }
             }).start();
-            //SDK初始化加载的聊天记录为20条，到顶时需要去DB里获取更多
-            //获取startMsgId之前的pagesize条消息，此方法获取的messages SDK会自动存入到此会话中，APP中无需再次把获取到的messages添加到会话中
-            //
         }
     }
 
-    public void sendMessageToEase(String content) {
-//        chatToObjectUser = BmobUser.getCurrentUser(UserEntity.class);
-//        if (chatToObjectUser == null) return;
-        // xToast.toast(getActivity(), content+"sss" + spHelper.getChatToUserName());
-
-        //创建一条文本消息，content为消息文字内容，toChatUsername为对方用户或者群聊的id，后文皆是如此
-
-        EMMessage message = EMMessage.createTxtSendMessage(content, spHelper.getChatToUserName());
-        EMClient.getInstance().chatManager().sendMessage(message);
-
-    }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -407,9 +422,10 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                     alert.popupAlert(getActivity().getWindow().getDecorView(), "此账号还未绑定被守护者账号，请绑定后重新登录");
                     return;
                 }
+                //发送样式
                 sendMessage();
-                //xToast.toast(getActivity(), sendContent.getText().toString() + "sss");
-                sendMessageToEase(sendContent.getText().toString());
+                //发送至网络
+
 
                 sendContent.setText("");
                 break;
@@ -449,14 +465,27 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
     }
 
     private void sendMessage(ChatRecordEntity c) {
+        showMessage(c);
+
+        ChatHelper chatHelper = new ChatHelper();
+        switch (c.getMessageType()) {
+            case ChatRecordEntity.MESSAGE_TYPE_TEXT:
+                chatHelper.sendMessageToEase(c.getChatContent(), spHelper.getChatToUserName());
+                break;
+            case ChatRecordEntity.MESSAGE_TYPE_LINK:
+                chatHelper.sendLinkMessageToEase(c.getLinkEntity().getLinkTitle(), c.getLinkEntity().getLinkDescription(), c.getLinkEntity().getLinkUrl(), spHelper.getChatToUserName());
+        }
+    }
+
+
+    private void showMessage(ChatRecordEntity c) {
         list.add(c);
         adapter.notifyItemInserted(list.size());
         chatListView.scrollToPosition(list.size() - 1);
     }
 
-    private void sendMessageList(List<ChatRecordEntity> cList) {
-        for (ChatRecordEntity cre : cList)
-            list.add(cre);
+    private void showMessageList(List<ChatRecordEntity> cList) {
+        list.addAll(cList);
         adapter.notifyItemInserted(list.size());
         chatListView.scrollToPosition(list.size() - 1);
     }
