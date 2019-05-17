@@ -121,18 +121,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="32b7c26a-14bf-42cd-bc38-6a0982cc9987" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/cn/dustray/chat/ChatFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cn/dustray/chat/ChatFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/cn/dustray/chat/ChatHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cn/dustray/chat/ChatHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/cn/dustray/popupwindow/WebSharePopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cn/dustray/popupwindow/WebSharePopup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_chat.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_chat.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -157,16 +146,29 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/chat/ChatFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="265">
-              <caret line="259" column="70" selection-start-line="259" selection-start-column="70" selection-end-line="259" selection-end-column="70" />
+            <state relative-caret-position="225">
+              <caret line="345" column="48" selection-start-line="345" selection-start-column="48" selection-end-line="345" selection-end-column="48" />
               <folding>
                 <element signature="class#4040:6945" />
-                <element signature="e#10324#12298#0" expanded="true" />
-                <element signature="e#12297#12298#0" expanded="true" />
-                <element signature="e#13175#16177#0" expanded="true" />
-                <element signature="e#13710#16143#0" expanded="true" />
-                <element signature="e#16142#16143#0" expanded="true" />
-                <element signature="e#16176#16177#0" expanded="true" />
+                <element signature="e#10324#12162#0" expanded="true" />
+                <element signature="e#12161#12162#0" expanded="true" />
+                <element signature="e#13039#16832#0" expanded="true" />
+                <element signature="e#13574#16798#0" expanded="true" />
+                <element signature="e#16797#16798#0" expanded="true" />
+                <element signature="e#16831#16832#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/browser/BrowserFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="131">
+              <caret line="106" selection-start-line="106" selection-end-line="106" />
+              <folding>
+                <element signature="e#10387#10388#0" expanded="true" />
+                <element signature="e#10419#10420#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -260,8 +262,8 @@
       <find>guar</find>
       <find>Destr</find>
       <find>ChatHel</find>
-      <find>transmitType</find>
       <find>MESSAGE_TYPE_LINK</find>
+      <find>transmitType</find>
     </findStrings>
     <replaceStrings>
       <replace>20dp</replace>
@@ -456,7 +458,7 @@
   <component name="PropertiesComponent">
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/Users/Dustray/AndroidStudioProjects/DefenderPlatform/app/src/main/res/layout/popup_web_menu.xml" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
-    <property name="device.picker.selection" value="emulator-5554" />
+    <property name="device.picker.selection" value="f0a7c680" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable-v24" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../AccompanyMe" />
     <property name="project.structure.last.edited" value="Suggestions" />
@@ -662,7 +664,7 @@
       <window_info anchor="bottom" id="Build" order="7" weight="0.20375335" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5020107" side_tool="true" weight="0.32078102" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32914925" />
-      <window_info anchor="bottom" x="22" y="336" width="1492" height="192" id="Logcat" order="10" sideWeight="0.49798927" weight="0.28686327" />
+      <window_info anchor="bottom" x="22" y="336" width="1492" height="192" id="Logcat" order="10" sideWeight="0.49798927" weight="0.36193028" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.32914925" />
       <window_info anchor="bottom" id="Android Profiler" order="12" weight="0.32841823" />
       <window_info anchor="bottom" id="Statistic" order="13" />
@@ -856,17 +858,6 @@
           <folding>
             <element signature="e#858#1548#0" expanded="true" />
             <element signature="e#1547#1548#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/browser/BrowserFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="407" column="35" selection-start-line="407" selection-start-column="30" selection-end-line="407" selection-end-column="35" />
-          <folding>
-            <element signature="e#10387#10388#0" expanded="true" />
-            <element signature="e#10419#10420#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1087,18 +1078,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/browser/BrowserFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="131">
+          <caret line="106" selection-start-line="106" selection-end-line="106" />
+          <folding>
+            <element signature="e#10387#10388#0" expanded="true" />
+            <element signature="e#10419#10420#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/chat/ChatFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="259" column="70" selection-start-line="259" selection-start-column="70" selection-end-line="259" selection-end-column="70" />
+        <state relative-caret-position="225">
+          <caret line="345" column="48" selection-start-line="345" selection-start-column="48" selection-end-line="345" selection-end-column="48" />
           <folding>
             <element signature="class#4040:6945" />
-            <element signature="e#10324#12298#0" expanded="true" />
-            <element signature="e#12297#12298#0" expanded="true" />
-            <element signature="e#13175#16177#0" expanded="true" />
-            <element signature="e#13710#16143#0" expanded="true" />
-            <element signature="e#16142#16143#0" expanded="true" />
-            <element signature="e#16176#16177#0" expanded="true" />
+            <element signature="e#10324#12162#0" expanded="true" />
+            <element signature="e#12161#12162#0" expanded="true" />
+            <element signature="e#13039#16832#0" expanded="true" />
+            <element signature="e#13574#16798#0" expanded="true" />
+            <element signature="e#16797#16798#0" expanded="true" />
+            <element signature="e#16831#16832#0" expanded="true" />
           </folding>
         </state>
       </provider>

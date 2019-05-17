@@ -341,10 +341,26 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                                 cList.add(c);
                             }
                             showMessageList(cList);
-                            String result0 = lastMessages.get(0).getBody().toString();
+
+                            EMMessage msg = lastMessages.get(0);
+                            String result0 = msg.getBody().toString();
                             String msgReceived0 = result0.substring(5, result0.length() - 1);
-                            if (lastMessages.get(0).getType() == EMMessage.Type.TXT) {
-                                ChatRecordEntity c0 = new ChatRecordEntity(getActivity(), msgReceived0, ChatRecordEntity.TRANSMIT_TYPE_RECEIVED, ChatRecordEntity.MESSAGE_TYPE_TEXT);
+
+                            if (msg.getType() == EMMessage.Type.TXT) {
+                                ChatRecordEntity c0 ;
+                                int transmitType = msg.getTo().equals(spHelper.getChatToUserName())?  ChatRecordEntity.TRANSMIT_TYPE_SENT:ChatRecordEntity.TRANSMIT_TYPE_RECEIVED;
+                                boolean isLink = msg.getBooleanAttribute("isLinkUrl", false);
+                                if (isLink) {
+                                    String linkTitle=msg.getStringAttribute("linkTitle","标题");
+                                    String linkDes =  msg.getStringAttribute("linkDescription","描述");
+                                    LinkEntity linkEntity = new LinkEntity(linkTitle,linkDes,msgReceived0);
+
+                                    c0=new ChatRecordEntity(getActivity(),linkEntity,transmitType);
+                                }else{
+                                    c0 = new ChatRecordEntity(getActivity(), msgReceived0, transmitType, ChatRecordEntity.MESSAGE_TYPE_TEXT);
+
+                                }
+
                                 showMessage(c0);
                             }
                         }
