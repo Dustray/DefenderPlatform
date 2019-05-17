@@ -447,6 +447,11 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    public int getCurrentPageItem() {
+        return mainPage.getCurrentItem();
+    }
+
+    @Override
     public void onListFragmentInteraction(Uri uri) {
 
     }
