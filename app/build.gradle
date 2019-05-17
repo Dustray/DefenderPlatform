@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            storeFile file('C:\\Users\\yinxi\\Desktop\\DustrayAndroidKey.jks')
+            storePassword 'yxy199558'
+            keyAlias = 'Dustray'
+            keyPassword 'yxy199558'
+        }
+    }
     compileSdkVersion 27
     defaultConfig {
         applicationId "cn.dustray.defenderplatform"
@@ -9,6 +17,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.config
     }
     buildTypes {
         release {
