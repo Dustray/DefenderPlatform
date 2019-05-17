@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -25,6 +26,7 @@ import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMMessage;
+import com.hyphenate.chat.adapter.message.EMATextMessageBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -242,15 +244,27 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
         msgListener = new EMMessageListener() {
 
             @Override
-            public void onMessageReceived(List<EMMessage> messages) {
-                xToast.toast(getActivity(), "收到一条新消息：" + messages.size());
-                //收到消息
-                for (EMMessage msg : messages) {
-                   // if(msg.getType()=EMMessage.)
-                    ChatRecordEntity c = new ChatRecordEntity(getActivity(), msg.getBody().toString(), ChatRecordEntity.TRANSMIT_TYPE_RECEIVED, ChatRecordEntity.MESSAGE_TYPE_TEXT);
-                    sendMessage(c);
+            public void onMessageReceived(final List<EMMessage> messages) {
+//收到消息
 
-                }
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        for (EMMessage msg : messages) {
+                            String result = msg.getBody().toString();
+                            String msgReceived = result.substring(5, result.length() - 1);
+                            xToast.toast(getActivity(), "收到一条新消息：" + messages.size());
+                            ChatRecordEntity c = new ChatRecordEntity(getActivity(), msgReceived, ChatRecordEntity.TRANSMIT_TYPE_RECEIVED, ChatRecordEntity.MESSAGE_TYPE_TEXT);
+                            if (msg.getType() == EMMessage.Type.TXT) {
+                                c = new ChatRecordEntity(getActivity(), msgReceived, ChatRecordEntity.TRANSMIT_TYPE_RECEIVED, ChatRecordEntity.MESSAGE_TYPE_TEXT);
+
+                            }
+                            sendMessage(c);
+                        }
+                    }
+                });
+                //收到消息
+
             }
 
             @Override
@@ -278,8 +292,12 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                 //消息状态变动
             }
         };
+        new Thread(new Runnable() {
+            public void run() {
+                EMClient.getInstance().chatManager().addMessageListener(msgListener);
+            }
+        }).start();
 
-        EMClient.getInstance().chatManager().addMessageListener(msgListener);
 
 //                EMConversation conversation = EMClient.getInstance().chatManager().getConversation(chatToObjectUser.getGuardianUserEntity().getUsername());
 //                //获取此会话的所有消息

@@ -130,10 +130,6 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/cn/dustray/chat/ChatFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cn/dustray/chat/ChatFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/LoginActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/RegisterActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cn/dustray/defenderplatform/RegisterActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/cn/dustray/utils/BmobUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cn/dustray/utils/BmobUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/cn/dustray/utils/EasemobUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/cn/dustray/utils/EasemobUtil.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -158,10 +154,14 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/chat/ChatFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="248" column="21" selection-start-line="248" selection-start-column="21" selection-end-line="248" selection-end-column="21" />
+            <state relative-caret-position="79">
+              <caret line="246" column="31" lean-forward="true" selection-start-line="246" selection-start-column="31" selection-end-line="246" selection-end-column="31" />
               <folding>
                 <element signature="class#4040:6945" />
+                <element signature="e#10324#11266#0" expanded="true" />
+                <element signature="e#11265#11266#0" expanded="true" />
+                <element signature="e#12239#12397#0" expanded="true" />
+                <element signature="e#12396#12397#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -170,8 +170,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.hyphenate/hyphenate-sdk-lite/3.5.6/cd94fc6f934e81bbd3fd869278a4740e8338c9e2/hyphenate-sdk-lite-3.5.6-sources.jar!/com/hyphenate/chat/EMMessage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="111">
-              <caret line="241" column="25" selection-start-line="241" selection-start-column="25" selection-end-line="241" selection-end-column="25" />
+            <state relative-caret-position="265">
+              <caret line="248" column="53" selection-start-line="248" selection-start-column="23" selection-end-line="248" selection-end-column="53" />
             </state>
           </provider>
         </entry>
@@ -180,7 +180,7 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/utils/BmobUtil.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="3477">
-              <caret line="313" column="21" lean-forward="true" selection-start-line="313" selection-start-column="21" selection-end-line="313" selection-end-column="21" />
+              <caret line="313" column="21" selection-start-line="313" selection-start-column="21" selection-end-line="313" selection-end-column="21" />
               <folding>
                 <element signature="e#9483#10273#0" expanded="true" />
                 <element signature="e#10272#10273#0" expanded="true" />
@@ -226,10 +226,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/chat/ChatHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="12" column="33" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="33" />
+            <state relative-caret-position="418">
+              <caret line="19" column="16" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#372#688#0" expanded="true" />
+                <element signature="e#687#688#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -453,7 +455,7 @@
   <component name="PropertiesComponent">
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/Users/Dustray/AndroidStudioProjects/DefenderPlatform/app/src/main/res/layout/popup_web_menu.xml" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
-    <property name="device.picker.selection" value="emulator-5554" />
+    <property name="device.picker.selection" value="f0a7c680" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable-v24" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../AccompanyMe" />
     <property name="project.structure.last.edited" value="Suggestions" />
@@ -1002,16 +1004,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/chat/ChatHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="12" column="33" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_chat.xml">
       <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
@@ -1050,7 +1042,7 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/utils/BmobUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3477">
-          <caret line="313" column="21" lean-forward="true" selection-start-line="313" selection-start-column="21" selection-end-line="313" selection-end-column="21" />
+          <caret line="313" column="21" selection-start-line="313" selection-start-column="21" selection-end-line="313" selection-end-column="21" />
           <folding>
             <element signature="e#9483#10273#0" expanded="true" />
             <element signature="e#10272#10273#0" expanded="true" />
@@ -1081,17 +1073,33 @@
     </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.hyphenate/hyphenate-sdk-lite/3.5.6/cd94fc6f934e81bbd3fd869278a4740e8338c9e2/hyphenate-sdk-lite-3.5.6-sources.jar!/com/hyphenate/chat/EMMessage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="241" column="25" selection-start-line="241" selection-start-column="25" selection-end-line="241" selection-end-column="25" />
+        <state relative-caret-position="265">
+          <caret line="248" column="53" selection-start-line="248" selection-start-column="23" selection-end-line="248" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/chat/ChatHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="19" column="16" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#372#688#0" expanded="true" />
+            <element signature="e#687#688#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/dustray/chat/ChatFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="248" column="21" selection-start-line="248" selection-start-column="21" selection-end-line="248" selection-end-column="21" />
+        <state relative-caret-position="79">
+          <caret line="246" column="31" lean-forward="true" selection-start-line="246" selection-start-column="31" selection-end-line="246" selection-end-column="31" />
           <folding>
             <element signature="class#4040:6945" />
+            <element signature="e#10324#11266#0" expanded="true" />
+            <element signature="e#11265#11266#0" expanded="true" />
+            <element signature="e#12239#12397#0" expanded="true" />
+            <element signature="e#12396#12397#0" expanded="true" />
           </folding>
         </state>
       </provider>
