@@ -221,7 +221,6 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
         });
         moToolBtn = getActivity().findViewById(R.id.chat_moretool_btn);
         moToolBtn.setOnClickListener(this);
-        spHelper = new FilterPreferenceHelper(getActivity());
         if (BmobUser.isLogin() && spHelper.getChatToUserName().equals("")) {
             BmobUtil u = new BmobUtil(getActivity());
             u.upGradeChatToUserName();
@@ -235,6 +234,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_chat, container, false);
 
+        spHelper = new FilterPreferenceHelper(getActivity());
         initReceiveMessageFromEase();
         return view;
     }
@@ -253,7 +253,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                         for (EMMessage msg : messages) {
                             String result = msg.getBody().toString();
                             String msgReceived = result.substring(5, result.length() - 1);
-                            xToast.toast(getActivity(), "收到一条新消息：" + messages.size());
+                            // xToast.toast(getActivity(), "收到一条新消息：" + messages.size());
                             ChatRecordEntity c = new ChatRecordEntity(getActivity(), msgReceived, ChatRecordEntity.TRANSMIT_TYPE_RECEIVED, ChatRecordEntity.MESSAGE_TYPE_TEXT);
                             if (msg.getType() == EMMessage.Type.TXT) {
                                 c = new ChatRecordEntity(getActivity(), msgReceived, ChatRecordEntity.TRANSMIT_TYPE_RECEIVED, ChatRecordEntity.MESSAGE_TYPE_TEXT);
@@ -292,21 +292,40 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                 //消息状态变动
             }
         };
-        new Thread(new Runnable() {
-            public void run() {
-                EMClient.getInstance().chatManager().addMessageListener(msgListener);
-            }
-        }).start();
 
+        EMClient.getInstance().chatManager().addMessageListener(msgListener);
 
-//                EMConversation conversation = EMClient.getInstance().chatManager().getConversation(chatToObjectUser.getGuardianUserEntity().getUsername());
-//                //获取此会话的所有消息
-//                List<EMMessage> messages = conversation.getAllMessages();
-
-        //SDK初始化加载的聊天记录为20条，到顶时需要去DB里获取更多
-        //获取startMsgId之前的pagesize条消息，此方法获取的messages SDK会自动存入到此会话中，APP中无需再次把获取到的messages添加到会话中
-        // List<EMMessage> messages = conversation.loadMoreMsgFromDB(startMsgId, pagesize);
-
+        if (!spHelper.getChatToUserName().equals("")) {
+            new Thread(new Runnable() {
+                public void run() {
+                    EMConversation conversation = EMClient.getInstance().chatManager().getConversation(spHelper.getChatToUserName());
+                    //获取此会话的所有消息
+                    List<EMMessage> lastMessages = conversation.getAllMessages();
+                    if(lastMessages.size()==0)return;
+                    final List<EMMessage> messages = conversation.loadMoreMsgFromDB(lastMessages.get(0).getMsgId(), 50);
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            List<ChatRecordEntity> cList = new ArrayList<>();
+                            xToast.toast(getActivity(), "加载历史记录数量：" + messages.size());
+                            for (EMMessage msg : messages) {
+                                String result = msg.getBody().toString();
+                                String msgReceived = result.substring(5, result.length() - 1);
+                                ChatRecordEntity c = new ChatRecordEntity(getActivity(), msgReceived, ChatRecordEntity.TRANSMIT_TYPE_RECEIVED, ChatRecordEntity.MESSAGE_TYPE_TEXT);
+                                if (msg.getType() == EMMessage.Type.TXT) {
+                                    c = new ChatRecordEntity(getActivity(), msgReceived, ChatRecordEntity.TRANSMIT_TYPE_RECEIVED, ChatRecordEntity.MESSAGE_TYPE_TEXT);
+                                }
+                                cList.add(c);
+                            }
+                            sendMessageList(cList);
+                        }
+                    });
+                }
+            }).start();
+            //SDK初始化加载的聊天记录为20条，到顶时需要去DB里获取更多
+            //获取startMsgId之前的pagesize条消息，此方法获取的messages SDK会自动存入到此会话中，APP中无需再次把获取到的messages添加到会话中
+            //
+        }
     }
 
     public void sendMessageToEase(String content) {
@@ -431,6 +450,13 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
 
     private void sendMessage(ChatRecordEntity c) {
         list.add(c);
+        adapter.notifyItemInserted(list.size());
+        chatListView.scrollToPosition(list.size() - 1);
+    }
+
+    private void sendMessageList(List<ChatRecordEntity> cList) {
+        for (ChatRecordEntity cre : cList)
+            list.add(cre);
         adapter.notifyItemInserted(list.size());
         chatListView.scrollToPosition(list.size() - 1);
     }
