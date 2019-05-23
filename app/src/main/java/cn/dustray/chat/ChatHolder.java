@@ -69,6 +69,9 @@ public class ChatHolder extends RecyclerView.ViewHolder {
 
     public void addView(ChatRecordEntity entity) {
         adjustFrame(entity);
+        if (entity.getTransmitType() == ChatRecordEntity.TRANSMIT_TYPE_RECEIVED) {
+            headBtn.setImageResource(R.drawable.head_image_2);
+        }
         switch (entity.getMessageType()) {
             case ChatRecordEntity.MESSAGE_TYPE_TEXT:
                 textView.setText(entity.getChatContent());

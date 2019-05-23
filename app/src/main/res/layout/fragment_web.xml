@@ -4,16 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryLightLightLight"
     tools:context="cn.dustray.browser.BrowserFragment">
 
     <FrameLayout
         android:id="@+id/web_main_frag"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_above="@id/web_tool_bar">
+        android:layout_above="@id/web_tool_bar"
+        android:layout_alignParentTop="true">
 
     </FrameLayout>
+
     <LinearLayout
         android:id="@+id/web_tool_bar"
         android:layout_width="match_parent"
@@ -22,8 +24,8 @@
         android:background="#fff"
 
         android:elevation="10dp"
-        android:translationZ="5dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:translationZ="5dp">
 
         <ImageButton
             android:id="@+id/btn_web_tool_back"

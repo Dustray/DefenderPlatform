@@ -334,6 +334,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
             new Thread(new Runnable() {
                 public void run() {
                     EMConversation conversation = EMClient.getInstance().chatManager().getConversation(spHelper.getChatToUserName());
+                    if (conversation == null) return;
                     //获取此会话的所有消息
                     final List<EMMessage> lastMessages = conversation.getAllMessages();
                     if (lastMessages.size() == 0) return;

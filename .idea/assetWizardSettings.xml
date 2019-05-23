@@ -67,8 +67,10 @@
                                   </option>
                                   <option name="values">
                                     <map>
+                                      <entry key="assetType" value="IMAGE" />
                                       <entry key="imageAsset" value="C:\Users\yinxi\Desktop\power.png" />
-                                      <entry key="outputName" value="ic_btn_keyboard" />
+                                      <entry key="outputName" value="ic_btn_power" />
+                                      <entry key="theme" value="HOLO_DARK" />
                                       <entry key="themeColor" value="009688" />
                                     </map>
                                   </option>
@@ -96,7 +98,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="scalingPercent" value="57" />
+                                                <entry key="scalingPercent" value="51" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -107,8 +109,9 @@
                                   <option name="values">
                                     <map>
                                       <entry key="backgroundAssetType" value="COLOR" />
+                                      <entry key="backgroundColor" value="ffffff" />
                                       <entry key="backgroundImage" value="C:\Users\Dustray\Desktop\bg.png" />
-                                      <entry key="foregroundImage" value="C:\Users\yinxi\Desktop\liulanqi.png" />
+                                      <entry key="foregroundImage" value="C:\Users\yinxi\Desktop\browser (1).png" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -175,11 +178,6 @@
                                 </PersistentState>
                               </value>
                             </entry>
-                          </map>
-                        </option>
-                        <option name="values">
-                          <map>
-                            <entry key="outputIconType" value="ACTIONBAR" />
                           </map>
                         </option>
                       </PersistentState>

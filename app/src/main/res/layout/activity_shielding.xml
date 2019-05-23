@@ -40,11 +40,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
-        app:backgroundTint="@color/colorDanger"
+        app:backgroundTint="@color/colorAccent"
         app:elevation="8dp"
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|end"
-        app:pressedTranslationZ="16dp"
+        app:pressedTranslationZ="8dp"
         app:srcCompat="@drawable/ic_btn_power" />
 
 </android.support.design.widget.CoordinatorLayout>

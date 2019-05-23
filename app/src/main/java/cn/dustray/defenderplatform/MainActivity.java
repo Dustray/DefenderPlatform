@@ -31,6 +31,7 @@ import android.widget.Toast;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 
+import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.UpdateListener;
 import cn.dustray.adapter.MainViewPagerAdapter;
@@ -75,7 +76,7 @@ public class MainActivity extends AppCompatActivity
     private timeCount tc;
     //免屏蔽提醒框
     private LinearLayout noFilterRemind;
-    private ImageView noFilterRemindRed;
+    private ImageView noFilterRemindRed,headImage;
     private TextView noFilterRemindText;
 
 
@@ -130,7 +131,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         View headerLayout = navigationView.getHeaderView(0);
-
+        headImage = headerLayout.findViewById(R.id.head_image);
         textUserName = (TextView) headerLayout.findViewById(R.id.text_username);
         textEmail = (TextView) headerLayout.findViewById(R.id.text_email);
 
@@ -155,12 +156,12 @@ public class MainActivity extends AppCompatActivity
         noFilterRemind.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,ShieldingActivity.class));
+                startActivity(new Intent(MainActivity.this, ShieldingActivity.class));
             }
         });
         if (spHelper.getIsNoFilter()) {
             noFilterRemind.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             noFilterRemind.setVisibility(View.GONE);
         }
     }
@@ -169,7 +170,7 @@ public class MainActivity extends AppCompatActivity
         spHelper = new FilterPreferenceHelper(MainActivity.this);
 
         if (spHelper.getIsNoFilter()) {
-            if(tc!=null)tc.cancel();
+            if (tc != null) tc.cancel();
             tc = new timeCount(spHelper.getNoFilterTime(), 1000);
             noFilterTimeTemp = spHelper.getNoFilterTime() / 1000;
             tc.start();
@@ -202,8 +203,32 @@ public class MainActivity extends AppCompatActivity
                         break;
                     case UserEntity.USER_GUARDIAN:
                     case UserEntity.USER_UNGUARDIAN:
+                        Intent intent;
+                        if (BmobUser.isLogin())
+                            intent = new Intent(MainActivity.this, MyActivity.class);
+                        else
+                            intent = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        break;
+                }
+            }
+        });
+        headImage.setOnClickListener(new ImageView.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-                        startActivity(new Intent(MainActivity.this, MyActivity.class));
+                switch (UserManager.getUserType()) {
+                    case UserEntity.USER_UNLOGIN:
+                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                        break;
+                    case UserEntity.USER_GUARDIAN:
+                    case UserEntity.USER_UNGUARDIAN:
+                        Intent intent;
+                        if (BmobUser.isLogin())
+                            intent = new Intent(MainActivity.this, MyActivity.class);
+                        else
+                            intent = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(intent);
                         break;
                 }
             }
@@ -349,14 +374,19 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-            Intent intent = new Intent(this, WebGameActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_gallery) {
+//        if (id == R.id.nav_camera) {
+//            // Handle the camera action
+//            Intent intent = new Intent(this, WebGameActivity.class);
+//            startActivity(intent);
+//        } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_slideshow) {
-            Intent intent = new Intent(this, ShieldingActivity.class);
+//        } else
+        if (id == R.id.nav_slideshow) {
+            Intent intent;
+            if (BmobUser.isLogin())
+                intent = new Intent(this, ShieldingActivity.class);
+            else
+                intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_keyword_list) {//屏蔽关键字列表
             Intent intent = new Intent(this, KeywordListActivity.class);
@@ -367,7 +397,7 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_send) {
-
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -548,7 +578,7 @@ public class MainActivity extends AppCompatActivity
                 noFilterRemindRed.setVisibility(View.VISIBLE);
                 redFlag = true;
             }
-            noFilterRemindText.setText((noFilterTime-1) + "");
+            noFilterRemindText.setText((noFilterTime - 1) + "");
             if (noFilterTime == 1) {
                 spHelper.setIsNoFilter(false);
                 isActivityPause = true;

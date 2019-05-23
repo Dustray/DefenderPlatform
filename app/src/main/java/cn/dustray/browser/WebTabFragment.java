@@ -103,7 +103,7 @@ public class WebTabFragment extends Fragment {
                 //if (!spHelper.getIsNoFilter() && !sf.filterWebsite(request.getUrl().toString())) {
 
                 //xToast.toast(getContext(),"正在匹配1");
-                if (!spHelper.getIsNoFilter() && !webListener.onWebUrlCanLoad(request.getUrl().toString())) {
+                if (!spHelper.getIsNoFilter() && webListener != null && !webListener.onWebUrlCanLoad(request.getUrl().toString())) {
                     xToast.toast(getActivity(), "已拦截，关键字：" + webListener.showWebUrlFilterKeyword());
                     mainWebView.stopLoading();
                     if (!mainWebView.canGoForward())
@@ -122,7 +122,7 @@ public class WebTabFragment extends Fragment {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 //xToast.toast(getContext(),"正在匹配2");
-                if (!spHelper.getIsNoFilter() && !webListener.onWebUrlCanLoad(url)) {
+                if (!spHelper.getIsNoFilter() && webListener != null && !webListener.onWebUrlCanLoad(url)) {
                     xToast.toast(getActivity(), "已拦截，关键字：" + webListener.showWebUrlFilterKeyword());
                     mainWebView.stopLoading();
                     if (!mainWebView.canGoForward())
@@ -197,7 +197,7 @@ public class WebTabFragment extends Fragment {
                         callback.invoke(origin, false, remember);
                     }
                 });
-                alert.popupAlert(getActivity().getWindow().getDecorView(),origin + "想使用你的位置信息。", "允许", "拒绝");
+                alert.popupAlert(getActivity().getWindow().getDecorView(), origin + "想使用你的位置信息。", "允许", "拒绝");
             }
 
         });

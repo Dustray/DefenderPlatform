@@ -8,6 +8,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:background="@color/colorPrimaryLightLightLight"
         android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
@@ -37,13 +38,13 @@
                 android:background="#0000"
                 android:padding="3dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_btn_add" />
+                android:src="@drawable/ic_btn_add"
+                android:visibility="gone" />
 
             <EditText
                 android:id="@+id/chat_send_content"
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
-                android:layout_marginLeft="38dp"
                 android:background="@drawable/input_o_gray"
                 android:hint="输入消息"
                 android:paddingLeft="13dp"

@@ -11,6 +11,7 @@ import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -31,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.dustray.defenderplatform.MainActivity;
+import cn.dustray.defenderplatform.R;
 import cn.dustray.utils.Alert;
 import cn.dustray.utils.DataCacheUtil;
 import cn.dustray.utils.xToast;
@@ -79,7 +81,7 @@ public class xWebView extends WebView {
         this.getSettings().setLoadsImagesAutomatically(true); // 加载图片
         this.getSettings().setAllowFileAccess(true);
         this.getSettings().setAppCacheEnabled(true);
-        this.setBackgroundColor(Color.rgb(250, 250, 250)); // 设置背景色
+        this.setBackgroundColor(ContextCompat.getColor(context,R.color.colorPrimaryLightLightLight)); // 设置背景色
         //this.getBackground().setAlpha(0); // 设置填充透明度 范围：0-255
         //启用地理定位
         this.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
