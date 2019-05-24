@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+//apply plugin: 'com.mob.sdk'
 android {
     signingConfigs {
         config {
@@ -28,6 +28,27 @@ android {
     useLibrary 'org.apache.http.legacy'
 }
 
+
+//MobSDK {
+//    appKey "1f5c7231f7082"
+//    appSecret "7cf25797a1ea4311328712e337cd15cd"
+//
+//    ShareSDK {
+//        //平台配置信息
+//        devInfo {
+//            Wechat {
+//                appId "wx4868b35061f87885"
+//                appSecret "64020361b8ec4c99936c0e3999a9f249"
+//            }
+//            QQ {
+//                appId "100371282"
+//                appKey "aed9b0303e3ed1e27bae87c33761161d"
+//                shareByAppClient true
+//            }
+//        }
+//    }
+//
+//}
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:27.1.1'

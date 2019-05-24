@@ -393,7 +393,7 @@ public class BrowserFragment extends Fragment implements View.OnClickListener, W
                 if (webSharePopup == null) {
                     webSharePopup = new WebSharePopup(getActivity());
                 }
-                webSharePopup.showAtBottom(webToolBar, webFrag.mainWebView.getTitle(), webFrag.mainWebView.getUrl());
+                webSharePopup.showAtBottom(webToolBar, webFrag.mainWebView.getTitle(), webFrag.mainWebView.getUrl(), "链接");
                 break;
         }
     }

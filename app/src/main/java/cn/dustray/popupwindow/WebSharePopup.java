@@ -27,7 +27,7 @@ public class WebSharePopup extends xWebPopupWindow implements View.OnClickListen
     private Context context;
     private Button btnShareChat, btnShareCopy;
     private ImageButton btnExit;
-    private String title, url;
+    private String title, url,description;
     private TextView textTitle;
     private boolean textOnly = false;
 
@@ -81,10 +81,11 @@ public class WebSharePopup extends xWebPopupWindow implements View.OnClickListen
         showAtLocation(view, Gravity.BOTTOM, 0, 0);
     }
 
-    public void showAtBottom(View view, String title, String url) {
+    public void showAtBottom(View view, String title, String url,String description) {
 
         this.title = title;
         this.url = url;
+        this.description=description;
         textTitle.setText(title);
         showAtBottom(view);
     }
@@ -97,7 +98,7 @@ public class WebSharePopup extends xWebPopupWindow implements View.OnClickListen
                     ((MainActivity) context).chatFragment.sendMessage(url);
                 } else {//发送网页格式
                     String shareContent = "[" + title + "] " + url;
-                    LinkEntity entity = new LinkEntity(title, "描述", url);
+                    LinkEntity entity = new LinkEntity(title, description, url);
                     ((MainActivity) context).chatFragment.sendMessage(entity);
 
 

@@ -6,19 +6,17 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.drawable.ScalingUtils;
-import com.facebook.drawee.generic.GenericDraweeHierarchy;
-import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.generic.RoundingParams;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -32,7 +30,6 @@ import cn.dustray.entity.ChatRecordEntity;
 import cn.dustray.entity.LinkEntity;
 import cn.dustray.popupwindow.TextMenuPopup;
 import cn.dustray.utils.PixelConvert;
-import cn.dustray.utils.xToast;
 
 import static android.view.View.generateViewId;
 
@@ -69,9 +66,7 @@ public class ChatHolder extends RecyclerView.ViewHolder {
 
     public void addView(ChatRecordEntity entity) {
         adjustFrame(entity);
-        if (entity.getTransmitType() == ChatRecordEntity.TRANSMIT_TYPE_RECEIVED) {
-            headBtn.setImageResource(R.drawable.head_image_2);
-        }
+
         switch (entity.getMessageType()) {
             case ChatRecordEntity.MESSAGE_TYPE_TEXT:
                 textView.setText(entity.getChatContent());
@@ -117,6 +112,14 @@ public class ChatHolder extends RecyclerView.ViewHolder {
                 linkView.setText(linkEntity.getLinkDescription());
                 link = linkEntity.getLinkUrl();
                 break;
+        }
+        if (entity.getTransmitType() == ChatRecordEntity.TRANSMIT_TYPE_RECEIVED) {
+            try {
+                headBtn.setImageResource(R.drawable.head_image_2);
+            }catch (Resources.NotFoundException s){
+
+            }
+           // headBtn.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.head_image_2));
         }
     }
 

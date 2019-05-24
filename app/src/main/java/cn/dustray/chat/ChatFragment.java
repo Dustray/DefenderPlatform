@@ -20,6 +20,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.hyphenate.EMMessageListener;
@@ -62,6 +63,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
     private Button sendBtn;
     private ImageButton moToolBtn;
     private EditText sendContent;
+    private TextView notLoginRemind;
 
     private Fragment toolFrag;
     private FragmentManager manager;
@@ -225,6 +227,8 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
             BmobUtil u = new BmobUtil(getActivity());
             u.upGradeChatToUserName();
         }
+        notLoginRemind = getActivity().findViewById(R.id.not_login_remind);
+
 
     }
 
@@ -404,6 +408,12 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if (notLoginRemind != null && BmobUser.isLogin()) notLoginRemind.setVisibility(View.GONE);
+    }
+
+    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
@@ -550,7 +560,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
 
     public void share(String title, String url) {
 
-        new WebSharePopup(getActivity(), true).showAtBottom(sendBtn, title, url);
+        new WebSharePopup(getActivity(), true).showAtBottom(sendBtn, title, url,"");
     }
 
     public interface OnFragmentInteractionListener {
