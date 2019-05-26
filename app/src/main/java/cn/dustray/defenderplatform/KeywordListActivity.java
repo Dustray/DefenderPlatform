@@ -14,11 +14,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import cn.bmob.v3.BmobUser;
 import cn.dustray.control.xRecycleViewDivider;
 import cn.dustray.entity.ChatRecordEntity;
+import cn.dustray.entity.UserEntity;
 import cn.dustray.utils.xToast;
 import cn.dustray.webfilter.FilterHelper;
 import cn.dustray.webfilter.KeywordEntity;
@@ -81,9 +86,30 @@ public class KeywordListActivity extends AppCompatActivity implements View.OnCli
 
             @Override
             public void onItemLongClick(View view, int position) {
-                xToast.toast(KeywordListActivity.this, "正在删除");
+                //xToast.toast(KeywordListActivity.this, list.size()+"正在删除---"+list.get(position).getUpdatedAt());
+                if (!UserEntity.isLogin()) {
+                    xToast.toast(KeywordListActivity.this, "请先登录");
+                    return;
+                }
+                SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                Date d1 = null, d2 = null;
+                try {
+                    d1 = sDateFormat.parse(sDateFormat.format(new Date()));
+                    d2 = sDateFormat.parse(list.get(position).getUpdatedAt());
+                    long diff = d1.getTime() - d2.getTime();//这样得到的差值是微秒级别
 
-                filterHelper.deleteKeyword(list.get(position).getObjectId(),KeywordListActivity.this,position);
+                    if (BmobUser.getCurrentUser(UserEntity.class).isGuardian() || diff < 300000) {//用户类型为监护人或时长小于300秒
+                        filterHelper.deleteKeyword(list.get(position).getObjectId(), KeywordListActivity.this, position);
+                        xToast.toast(KeywordListActivity.this, "删除成功");
+                    } else {
+                        xToast.toast(KeywordListActivity.this, "时间超过5分钟，不能删除");
+
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                    xToast.toast(KeywordListActivity.this, "删除异常" + e.toString());
+                }
+                ////-------------------------------------
             }
         });
         filterHelper.updateKeywordFromBmob(this);
