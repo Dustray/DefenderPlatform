@@ -1,6 +1,9 @@
 package cn.dustray.browser;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -108,8 +111,8 @@ public class WebTabFragment extends Fragment {
                     mainWebView.stopLoading();
                     if (!mainWebView.canGoForward())
                         mainWebView.goBack();
-                }
-
+                }else
+                    webListener.addWebHistory(mainWebView.getTitle(),mainWebView.getUrl());//recordHistoryToSqlite();
                 //该方法在Build.VERSION_CODES.LOLLIPOP以前有效，从Build.VERSION_CODES.LOLLIPOP起，建议使用shouldOverrideUrlLoading(WebView, WebResourceRequest)}
                 boolean flag = mainWebView.openApp(request.getUrl().toString(), getActivity());
 //                if (Build.VERSION.SDK_INT < 26||Build.VERSION.SDK_INT==28) {
@@ -127,8 +130,8 @@ public class WebTabFragment extends Fragment {
                     mainWebView.stopLoading();
                     if (!mainWebView.canGoForward())
                         mainWebView.goBack();
-                }
-
+                }else
+                    webListener.addWebHistory(mainWebView.getTitle(),mainWebView.getUrl());//recordHistoryToSqlite();
                 //该方法在Build.VERSION_CODES.LOLLIPOP以前有效，从Build.VERSION_CODES.LOLLIPOP起，建议使用shouldOverrideUrlLoading(WebView, WebResourceRequest)}
                 boolean flag = mainWebView.openApp(url, getActivity());
 //                if (Build.VERSION.SDK_INT < 26||Build.VERSION.SDK_INT==28) {
@@ -375,6 +378,7 @@ public class WebTabFragment extends Fragment {
         mainWebView.cleanCache();
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -489,6 +493,7 @@ public class WebTabFragment extends Fragment {
         boolean onWebUrlCanLoad(String url);
 
         String showWebUrlFilterKeyword();
+        void addWebHistory(String title,String url);
     }
 
 

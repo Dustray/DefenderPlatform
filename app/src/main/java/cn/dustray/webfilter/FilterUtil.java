@@ -120,4 +120,7 @@ public class FilterUtil implements FilterHelper.OnSyncListener {
     public void onDeleteSuccess(int itemPosition) {
 
     }
+    public void close() {
+        if (db != null) db.close();
+    }
 }

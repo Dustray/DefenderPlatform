@@ -4,6 +4,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -76,7 +77,7 @@ public class MainActivity extends AppCompatActivity
     private timeCount tc;
     //免屏蔽提醒框
     private LinearLayout noFilterRemind;
-    private ImageView noFilterRemindRed,headImage;
+    private ImageView noFilterRemindRed, headImage;
     private TextView noFilterRemindText;
 
 
@@ -100,7 +101,6 @@ public class MainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
         initNavigation();
         initTabPage();
         initNoFilterTimer();//初始化免屏蔽计时
@@ -291,6 +291,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+
     @Override
     public void onBackPressed() {
         int position = mainPage.getCurrentItem();
@@ -392,7 +393,8 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(this, KeywordListActivity.class);
             startActivityForResult(intent, 0);
         } else if (id == R.id.nav_manage) {
-
+            Intent intent = new Intent(this, HistoryActivity.class);
+            startActivityForResult(intent, 1);
         } else if (id == R.id.nav_setting) {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
@@ -541,9 +543,14 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 0 && resultCode == RESULT_OK) {
-            xToast.toast(this, "拦截关键字已更新");
-            browserFragment.refleshFilterData();
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 0) {
+                xToast.toast(this, "拦截关键字已更新");
+                browserFragment.refleshFilterData();
+            } else if (requestCode == 1) {
+                String result = data.getExtras().getString("resultUrl");
+                browserFragment.createNewFragment(result);
+            }
         }
     }
 

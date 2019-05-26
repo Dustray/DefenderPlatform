@@ -25,6 +25,7 @@ import cn.dustray.popupwindow.WebGroupPopup;
 import cn.dustray.popupwindow.WebMenuPopup;
 import cn.dustray.popupwindow.WebSharePopup;
 import cn.dustray.utils.SettingUtil;
+import cn.dustray.utils.SqliteUtil;
 import cn.dustray.utils.WebUtil;
 import cn.dustray.utils.xToast;
 import cn.dustray.webfilter.FilterUtil;
@@ -53,6 +54,7 @@ public class BrowserFragment extends Fragment implements View.OnClickListener, W
     private WebSharePopup webSharePopup;
     private WebMenuPopup webMenuPopup;
     private FilterUtil sf;
+    private SqliteUtil su;
     //浏览器配置
     private boolean isNightMode = false;
 
@@ -81,7 +83,7 @@ public class BrowserFragment extends Fragment implements View.OnClickListener, W
         initWebToolBar();
         //初始化屏蔽引擎
         sf = new FilterUtil(getActivity());
-
+        su = new SqliteUtil(getActivity());
         //xToast.toast(getActivity(), "s" + webFragArray.size());
         if (webFragArray.size() == 0) {//未从文件中获取缓存的页面
             initFragment();
@@ -358,6 +360,8 @@ public class BrowserFragment extends Fragment implements View.OnClickListener, W
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        sf.close();
+        su.close();
     }
 
     @Override
@@ -436,6 +440,11 @@ public class BrowserFragment extends Fragment implements View.OnClickListener, W
     @Override
     public String showWebUrlFilterKeyword() {
         return sf.getFilterKey();
+    }
+
+    @Override
+    public void addWebHistory(String title, String url) {
+        su.recordHistoryToSqlite(title,url);
     }
 
 

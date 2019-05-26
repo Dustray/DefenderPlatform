@@ -10,7 +10,10 @@ public class LinkEntity {
         this.linkDescription = linkDescription;
         this.linkUrl = linkUrl;
     }
-
+    public LinkEntity(String linkTitle, String linkUrl) {
+        this.linkTitle = linkTitle;
+        this.linkUrl = linkUrl;
+    }
     public String getLinkTitle() {
         return linkTitle;
     }
@@ -22,5 +25,7 @@ public class LinkEntity {
     public String getLinkUrl() {
         return linkUrl;
     }
+
+
 }
 
