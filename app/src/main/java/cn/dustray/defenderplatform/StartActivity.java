@@ -35,6 +35,7 @@ public class StartActivity extends AppCompatActivity {
             @Override
             public void run() {
                 startActivity(new Intent(StartActivity.this, MainActivity.class));
+                finish();
             }
         };
         timer.schedule(task, 1000 ); //10秒后

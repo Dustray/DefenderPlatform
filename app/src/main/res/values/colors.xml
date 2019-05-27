@@ -8,6 +8,7 @@
     <!--<color name="colorPrimaryLight">#4dd0e1</color>-->
     <!--<color name="colorPrimaryDark">#0097A7</color>-->
     <!--<color name="colorAccent">#FF8a65</color>-->
+    <!-- 常规style -->
     <color name="colorPrimaryDarkDarkDark">#0d47a1</color>
     <color name="colorPrimaryDarkDark">#1565c0</color>
     <color name="colorPrimaryDark">#1976d2</color>
@@ -17,17 +18,47 @@
     <color name="colorPrimaryLightLightLight">#f5faff</color>
     <color name="colorAccent">#f44336</color>
 
-    <color name="colorWhite">#FFF</color>
+    <color name="statusBarColor">@color/colorPrimaryDark</color>
+    <color name="windowBackground">@color/colorPrimaryLightLightLight</color>
+    <color name="navigationBarColor">@color/colorPrimary</color>
+    <color name="colorForeground">#ccc</color>
+    <color name="colorBackground">#0000</color>
+    <color name="colorControlNormal">@color/colorAccent</color>
+    <color name="colorControlHighlight">@color/colorPrimaryLightLight</color>
+    <color name="colorControlActivated">@color/colorAccent</color>
+    <color name="colorButtonNormal">@color/colorPrimary</color>
+    <color name="textColor">#444</color>
+    <color name="textColorPrimaryDisableOnly">#999</color>
+    <color name="textColorPrimary">#444</color>
 
-    <color name="colorPrimaryNight">#2f2f2f</color>
+    <!-- 夜间style -->
+
     <color name="colorPrimaryLightNight">#455A64</color>
+    <color name="colorPrimaryNight">#2f2f2f</color>
     <color name="colorPrimaryDarkNight">#212121</color>
     <color name="colorAccentNight">#512DA8</color>
+
+    <color name="statusBarColorNight">@color/colorPrimaryDarkNight</color>
+    <color name="windowBackgroundNight">@color/colorPrimaryNight</color>
+    <color name="navigationBarColorNight">@color/colorPrimaryNight</color>
+    <color name="colorForegroundNight">@color/colorPrimaryLightNight</color>
+    <color name="colorBackgroundNight">#0000</color>
+    <color name="colorControlNormalNight">@color/colorAccent</color>
+    <color name="colorControlHighlightNight">@color/colorPrimaryLightLight</color>
+    <color name="colorControlActivatedNight">@color/colorAccent</color>
+    <color name="colorButtonNormalNight">@color/colorPrimary</color>
+    <color name="textColorNight">#999</color>
+    <color name="textColorPrimaryDisableOnlyNight">#999</color>
+    <color name="textColorPrimaryNight">#999</color>
+
+
+
     <color name="colorDanger">#ee0000</color>
     <color name="colorSafe">#00dd00</color>
     <color name="black_overlay">#66000000</color>
 
     <color name="light_light_gray">#eeeeee</color>
+    <color name="colorWhite">#FFF</color>
 
 
 </resources>

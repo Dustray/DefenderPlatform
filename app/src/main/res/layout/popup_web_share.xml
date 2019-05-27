@@ -45,7 +45,7 @@
     <LinearLayout
         android:id="@+id/web_share_item"
         android:layout_width="match_parent"
-        android:layout_height="205dp"
+        android:layout_height="105dp"
         android:orientation="vertical">
 
         <Button
@@ -63,7 +63,8 @@
             android:layout_marginTop="2dp"
             android:layout_marginBottom="2dp"
             android:background="@drawable/btn_web_share"
-            android:text="分享至QQ" />
+            android:text="分享至QQ"
+            android:visibility="gone" />
 
         <Button
             android:layout_width="match_parent"
@@ -71,7 +72,8 @@
             android:layout_marginTop="2dp"
             android:layout_marginBottom="2dp"
             android:background="@drawable/btn_web_share"
-            android:text="分享至微信" />
+            android:text="分享至微信"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/btn_web_share_copy"

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -331,6 +332,9 @@ public class MainActivity extends AppCompatActivity
             public void onFocusChange(View view, boolean b) {
                 if (!b) {
                     searchView.onActionViewCollapsed();
+                    titleTab.setVisibility(View.VISIBLE);
+                }else{
+                    titleTab.setVisibility(View.INVISIBLE);
                 }
             }
         });

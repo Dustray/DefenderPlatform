@@ -14,10 +14,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="7dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/alert_o_white"
-        android:elevation="5dp"
-        android:orientation="vertical">
+        android:elevation="10dp"
+        android:orientation="vertical"
+        android:paddingTop="5dp">
 
         <RelativeLayout
             android:id="@+id/web_share_item"

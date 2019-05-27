@@ -8,6 +8,19 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:actionBarSize">48dp</item>
         <item name="actionBarSize">48dp</item>
+
+        <item name="android:statusBarColor">@color/statusBarColor</item>
+        <item name="android:windowBackground">@color/windowBackground</item>
+        <item name="android:navigationBarColor">@color/navigationBarColor</item>
+        <item name="android:colorForeground">@color/colorForeground</item>
+        <item name="android:colorBackground">@color/colorBackground</item>
+        <item name="android:colorControlNormal">@color/colorControlNormal</item>
+        <item name="android:colorControlHighlight">@color/colorControlHighlight</item>
+        <item name="android:colorControlActivated">@color/colorControlActivated</item>
+        <item name="android:colorButtonNormal">@color/colorButtonNormal</item>
+        <!--<item name="android:textColor">@color/textColor</item>-->
+        <item name="android:textColorPrimaryDisableOnly">@color/textColorPrimaryDisableOnly</item>
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
     </style>
 
     <style name="AppThemeNight" parent="AppTheme">
@@ -15,19 +28,46 @@
         <item name="colorPrimary">@color/colorPrimaryNight</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDarkNight</item>
         <item name="colorAccent">@color/colorAccentNight</item>
+
+        <item name="android:statusBarColor">@color/statusBarColorNight</item>
+        <item name="android:windowBackground">@color/windowBackgroundNight</item>
+        <item name="android:navigationBarColor">@color/navigationBarColorNight</item>
+        <item name="android:colorForeground">@color/colorForegroundNight</item>
+        <item name="android:colorBackground">@color/colorBackgroundNight</item>
+        <item name="android:colorControlNormal">@color/colorControlNormalNight</item>
+        <item name="android:colorControlHighlight">@color/colorControlHighlightNight</item>
+        <item name="android:colorControlActivated">@color/colorControlActivatedNight</item>
+        <item name="android:colorButtonNormal">@color/colorButtonNormalNight</item>
+        <!--<item name="android:textColor">@color/textColor</item>-->
+        <item name="android:textColorPrimaryDisableOnly">@color/textColorPrimaryDisableOnlyNight
+        </item>
+        <item name="android:textColorPrimary">@color/textColorPrimaryNight</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
+    <style name="AppTheme.NoActionBar" parent="AppTheme">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
+    <style name="AppThemeNight.NoActionBar" parent="AppThemeNight">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimaryNight</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkNight</item>
+        <item name="colorAccent">@color/colorAccentNight</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="Theme.Splash" parent="AppTheme">
-        <item name="windowNoTitle">true</item>
+    <style name="Theme.Splash" parent="AppTheme.NoActionBar">
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">@drawable/img_app_start</item>
     </style>
@@ -53,6 +93,7 @@
     <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
         <item name="android:background">@color/black_overlay</item>
     </style>
+
     <style name="MyAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
         <!-- Used for the buttons -->
         <item name="colorAccent">@color/colorAccent</item>
