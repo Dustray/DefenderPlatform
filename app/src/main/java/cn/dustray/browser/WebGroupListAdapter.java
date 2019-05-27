@@ -47,7 +47,7 @@ public class WebGroupListAdapter extends RecyclerView.Adapter<WebGroupListAdapte
         holder.captureImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity) context).browserFragment.loadFragment(s,true);
+                ((MainActivity) context).browserFragment.loadFragment(s,position,true);
             }
         });
         holder.closeBtn.setOnClickListener(new View.OnClickListener() {
@@ -63,8 +63,9 @@ public class WebGroupListAdapter extends RecyclerView.Adapter<WebGroupListAdapte
                     frag.dismiss();
                     //Log.i("def","ssdismiss");
                     ((MainActivity) context).browserFragment.createNewFragment();
+                    ((MainActivity) context).browserFragment.currentItem=0;
                 } else {
-                    ((MainActivity) context).browserFragment.loadFragment(list.get(list.size() - 1),false);
+                    ((MainActivity) context).browserFragment.loadFragment(list.get(list.size() - 1),list.size() - 1,false);
                 }
                 ((MainActivity) context).browserFragment.refreshGroupIcon();
             }

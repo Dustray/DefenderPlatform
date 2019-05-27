@@ -111,8 +111,8 @@ public class WebTabFragment extends Fragment {
                     mainWebView.stopLoading();
                     if (!mainWebView.canGoForward())
                         mainWebView.goBack();
-                }else
-                    webListener.addWebHistory(mainWebView.getTitle(),mainWebView.getUrl());//recordHistoryToSqlite();
+                } else
+                    webListener.addWebHistory(mainWebView.getTitle(), mainWebView.getUrl());//recordHistoryToSqlite();
                 //该方法在Build.VERSION_CODES.LOLLIPOP以前有效，从Build.VERSION_CODES.LOLLIPOP起，建议使用shouldOverrideUrlLoading(WebView, WebResourceRequest)}
                 boolean flag = mainWebView.openApp(request.getUrl().toString(), getActivity());
 //                if (Build.VERSION.SDK_INT < 26||Build.VERSION.SDK_INT==28) {
@@ -130,8 +130,8 @@ public class WebTabFragment extends Fragment {
                     mainWebView.stopLoading();
                     if (!mainWebView.canGoForward())
                         mainWebView.goBack();
-                }else
-                    webListener.addWebHistory(mainWebView.getTitle(),mainWebView.getUrl());//recordHistoryToSqlite();
+                } else
+                    webListener.addWebHistory(mainWebView.getTitle(), mainWebView.getUrl());//recordHistoryToSqlite();
                 //该方法在Build.VERSION_CODES.LOLLIPOP以前有效，从Build.VERSION_CODES.LOLLIPOP起，建议使用shouldOverrideUrlLoading(WebView, WebResourceRequest)}
                 boolean flag = mainWebView.openApp(url, getActivity());
 //                if (Build.VERSION.SDK_INT < 26||Build.VERSION.SDK_INT==28) {
@@ -373,7 +373,13 @@ public class WebTabFragment extends Fragment {
         }
         return snapshotBmp;
     }
-
+public Bitmap createSnapshot(){
+    Bitmap sBmp=mainWebView.getCapture();
+    if (sBmp == null) {
+        sBmp = Bitmap.createBitmap(450, 800, Bitmap.Config.RGB_565);
+    }
+    return sBmp;
+}
     public void cleanCache() {
         mainWebView.cleanCache();
     }
@@ -493,7 +499,9 @@ public class WebTabFragment extends Fragment {
         boolean onWebUrlCanLoad(String url);
 
         String showWebUrlFilterKeyword();
-        void addWebHistory(String title,String url);
+
+        void addWebHistory(String title, String url);
+
     }
 
 

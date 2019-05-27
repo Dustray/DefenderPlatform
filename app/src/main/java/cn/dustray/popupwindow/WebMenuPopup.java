@@ -24,6 +24,7 @@ public class WebMenuPopup extends xWebPopupWindow implements View.OnClickListene
     //private TextView textFullScreen, textNoPicure, textRotate, textNightMode;
     private BrowserFragment browserFragment;
     private OnPopupInteractionListener mListener;
+    private OnWebMenuBtnClick btnClickListener;
 
     public WebMenuPopup(Context context) {
         super(context);
@@ -75,7 +76,9 @@ public class WebMenuPopup extends xWebPopupWindow implements View.OnClickListene
 
 
     }
-
+public void setOnWebMenuBtnClick(OnWebMenuBtnClick btnClickListener){
+    this.btnClickListener = btnClickListener;
+}
     @Override
     public void showAtBottom(View view) {        //弹窗位置设置
         super.showAtBottom(view);
@@ -153,6 +156,7 @@ public class WebMenuPopup extends xWebPopupWindow implements View.OnClickListene
                 SettingUtil.Ratote.changeRatoteFlag((MainActivity) context);
                 break;
             case R.id.btn_web_menu_capture:
+                btnClickListener.onScreenshotClick();
                 break;
             case R.id.btn_web_menu_night:
                 browserFragment.changeNightMode();
@@ -181,5 +185,8 @@ public class WebMenuPopup extends xWebPopupWindow implements View.OnClickListene
     public interface OnPopupInteractionListener {
         void onCleanCache();
         void onChangePageScroll();
+    }
+    public interface OnWebMenuBtnClick{
+        void onScreenshotClick();
     }
 }

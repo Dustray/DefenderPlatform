@@ -2,6 +2,7 @@ package cn.dustray.browser;
 
 import android.content.Context;
 import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -32,7 +33,7 @@ import cn.dustray.webfilter.FilterUtil;
 
 
 public class BrowserFragment extends Fragment implements View.OnClickListener, WebTabFragment.OnWebViewCreatedListener
-        , View.OnLongClickListener {
+        , View.OnLongClickListener, WebMenuPopup.OnWebMenuBtnClick {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -57,7 +58,7 @@ public class BrowserFragment extends Fragment implements View.OnClickListener, W
     private SqliteUtil su;
     //浏览器配置
     private boolean isNightMode = false;
-
+    public int currentItem = 0;
 
     public BrowserFragment() {
         // Required empty public constructor
@@ -187,7 +188,8 @@ public class BrowserFragment extends Fragment implements View.OnClickListener, W
         initFragment(Url);
     }
 
-    public void loadFragment(WebTabFragment fragment, boolean closePopup) {
+    public void loadFragment(WebTabFragment fragment, int currentItem, boolean closePopup) {
+        this.currentItem = currentItem;
         if (closePopup && webGroupPopup != null) {
             webGroupPopup.dismiss();
         }
@@ -383,6 +385,7 @@ public class BrowserFragment extends Fragment implements View.OnClickListener, W
             case R.id.btn_web_tool_menu:
                 if (webMenuPopup == null) {
                     webMenuPopup = new WebMenuPopup(getActivity());
+                    webMenuPopup.setOnWebMenuBtnClick(this);
                 }
                 webMenuPopup.showAtBottom(webToolBar);
                 break;
@@ -444,7 +447,18 @@ public class BrowserFragment extends Fragment implements View.OnClickListener, W
 
     @Override
     public void addWebHistory(String title, String url) {
-        su.recordHistoryToSqlite(title,url);
+        su.recordHistoryToSqlite(title, url);
+    }
+
+    @Override
+    public void onScreenshotClick() {
+        if (currentItem <= webFragArray.size() - 1) {
+            Bitmap bit = webFragArray.get(currentItem).createSnapshot();
+            new WebViewManager(getContext()).saveSnapshot(bit);
+            xToast.toast(getContext(),"截图已保存");
+        } else {
+            currentItem = 0;
+        }
     }
 
 

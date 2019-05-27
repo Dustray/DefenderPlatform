@@ -81,7 +81,7 @@ public class FilterHelper {
                     Log.i("filter", "当前的时间" + sdf.format(new Date()));
                     new FilterPreferenceHelper(context).setLastUpdateDate(sdf.format(new Date()));//设置本次更新日期
                     Log.i("filter", "新保存的时间" + new FilterPreferenceHelper(context).getLastUpdateDate());
-                    Log.i("filter", "----------第三步，重新将sqlite中显示出来---------------");
+                    Log.i("filter", "----------第三步，重新将sqlite显示出来---------------");
                     listener.InsertSuccess(fs.getKeywordList());
 
                     fs.close();

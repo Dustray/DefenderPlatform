@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 
 import java.io.File;
@@ -12,11 +13,13 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
 import cn.dustray.control.xWebView;
 import cn.dustray.utils.FileUtils;
+import cn.dustray.utils.xToast;
 import io.reactivex.Scheduler;
 
 import static android.support.constraint.Constraints.TAG;
@@ -35,7 +38,9 @@ public class WebViewManager {
         this.list = list;
         this.context = context;
     }
-
+    public WebViewManager(Context context) {
+        this.context = context;
+    }
     public void saveToFile() {
         Bundle outState = new Bundle(ClassLoader.getSystemClassLoader());
         Log.i("def", "saveToFile:------------------IN-------------------------------WEBVIEW");
@@ -97,6 +102,33 @@ public class WebViewManager {
         String fileName = "browser_tab_capture_" + index + ".jpg";
         File file = new File(appDir, fileName);
         Log.i(TAG, "write_filepath" + file.getPath());
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.flush();
+            fos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e(TAG, "Unable to write capture to storage" + e.toString(), e);
+        }
+
+    }
+
+    public void saveSnapshot(Bitmap bitmap) {
+        String path = "snapshot";
+        String fileName = new Date().getTime()+".jpg";
+        saveBitmapToDisk(bitmap, path, fileName);
+    }
+
+    public void saveBitmapToDisk(Bitmap bitmap, String path, String fileName) {
+        // 首先保存图片
+        File appDir = new File(Environment.getExternalStorageDirectory(), "DefenderPlatform/"+path );
+        if (!appDir.exists()) {
+            appDir.mkdir();
+        }
+        File file = new File(appDir, fileName);
+        //og.i(TAG, "write_filepath" + file.getPath());
+       // xToast.toast(context,file.getAbsolutePath()+"bitmap:"+bitmap.getHeight());
         try {
             FileOutputStream fos = new FileOutputStream(file);
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
