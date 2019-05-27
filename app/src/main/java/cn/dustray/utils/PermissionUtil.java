@@ -20,4 +20,14 @@ public class PermissionUtil {
             }
         }
     }
+    public  static void Storage(Activity activity){
+        if (Build.VERSION.SDK_INT >= 23) {
+            int checkPermission = ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            if (checkPermission != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        202);
+
+            }
+        }
+    }
 }

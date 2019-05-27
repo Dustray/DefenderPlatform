@@ -124,11 +124,12 @@ public class WebViewManager {
         // 首先保存图片
         File appDir = new File(Environment.getExternalStorageDirectory(), "DefenderPlatform/"+path );
         if (!appDir.exists()) {
-            appDir.mkdir();
+            appDir.mkdirs();
+         //   xToast.toast(context,"aa" +appDir.getAbsolutePath());
         }
         File file = new File(appDir, fileName);
         //og.i(TAG, "write_filepath" + file.getPath());
-       // xToast.toast(context,file.getAbsolutePath()+"bitmap:"+bitmap.getHeight());
+        //xToast.toast(context,file.getAbsolutePath()+"bitmap:"+bitmap.getHeight());
         try {
             FileOutputStream fos = new FileOutputStream(file);
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
@@ -137,6 +138,7 @@ public class WebViewManager {
         } catch (Exception e) {
             e.printStackTrace();
             Log.e(TAG, "Unable to write capture to storage" + e.toString(), e);
+
         }
 
     }

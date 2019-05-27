@@ -28,6 +28,8 @@ import android.widget.ProgressBar;
 
 import java.util.List;
 
+import cn.bmob.v3.BmobUser;
+import cn.dustray.entity.UserEntity;
 import cn.dustray.utils.FilterPreferenceHelper;
 import cn.dustray.control.xWebView;
 import cn.dustray.defenderplatform.MainActivity;
@@ -107,10 +109,14 @@ public class WebTabFragment extends Fragment {
 
                 //xToast.toast(getContext(),"正在匹配1");
                 if (!spHelper.getIsNoFilter() && webListener != null && !webListener.onWebUrlCanLoad(request.getUrl().toString())) {
-                    xToast.toast(getActivity(), "已拦截，关键字：" + webListener.showWebUrlFilterKeyword());
-                    mainWebView.stopLoading();
-                    if (!mainWebView.canGoForward())
-                        mainWebView.goBack();
+                    //判断是否为监护人，是则不拦截
+                    UserEntity userEntity = BmobUser.getCurrentUser(UserEntity.class);
+                    if (userEntity == null || userEntity.isUnGuardian()) {
+                        xToast.toast(getActivity(), "已拦截，关键字：" + webListener.showWebUrlFilterKeyword());
+                        mainWebView.stopLoading();
+                        if (!mainWebView.canGoForward())
+                            mainWebView.goBack();
+                    }
                 } else
                     webListener.addWebHistory(mainWebView.getTitle(), mainWebView.getUrl());//recordHistoryToSqlite();
                 //该方法在Build.VERSION_CODES.LOLLIPOP以前有效，从Build.VERSION_CODES.LOLLIPOP起，建议使用shouldOverrideUrlLoading(WebView, WebResourceRequest)}
@@ -126,10 +132,14 @@ public class WebTabFragment extends Fragment {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 //xToast.toast(getContext(),"正在匹配2");
                 if (!spHelper.getIsNoFilter() && webListener != null && !webListener.onWebUrlCanLoad(url)) {
-                    xToast.toast(getActivity(), "已拦截，关键字：" + webListener.showWebUrlFilterKeyword());
-                    mainWebView.stopLoading();
-                    if (!mainWebView.canGoForward())
-                        mainWebView.goBack();
+                    //判断是否为监护人，是则不拦截
+                    UserEntity userEntity = BmobUser.getCurrentUser(UserEntity.class);
+                    if (userEntity == null || userEntity.isUnGuardian()) {
+                        xToast.toast(getActivity(), "已拦截，关键字：" + webListener.showWebUrlFilterKeyword());
+                        mainWebView.stopLoading();
+                        if (!mainWebView.canGoForward())
+                            mainWebView.goBack();
+                    }
                 } else
                     webListener.addWebHistory(mainWebView.getTitle(), mainWebView.getUrl());//recordHistoryToSqlite();
                 //该方法在Build.VERSION_CODES.LOLLIPOP以前有效，从Build.VERSION_CODES.LOLLIPOP起，建议使用shouldOverrideUrlLoading(WebView, WebResourceRequest)}
@@ -351,7 +361,7 @@ public class WebTabFragment extends Fragment {
 
     public void generateSnapshot() {
         if (snapshotBmp == null || isCaptureChanged) {//如果是空或者改变过就获取新截图，否则不做处理
-            Bitmap bmp = mainWebView.getCapture();
+            Bitmap bmp = mainWebView.getCapture(false);
             if (bmp == null) {
                 snapshotBmp = Bitmap.createBitmap(450, 800, Bitmap.Config.RGB_565);
             } else {
@@ -373,13 +383,15 @@ public class WebTabFragment extends Fragment {
         }
         return snapshotBmp;
     }
-public Bitmap createSnapshot(){
-    Bitmap sBmp=mainWebView.getCapture();
-    if (sBmp == null) {
-        sBmp = Bitmap.createBitmap(450, 800, Bitmap.Config.RGB_565);
+
+    public Bitmap createSnapshot() {
+        Bitmap sBmp = mainWebView.getCapture(true);
+        if (sBmp == null) {
+            sBmp = Bitmap.createBitmap(450, 800, Bitmap.Config.RGB_565);
+        }
+        return sBmp;
     }
-    return sBmp;
-}
+
     public void cleanCache() {
         mainWebView.cleanCache();
     }

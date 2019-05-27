@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
@@ -52,14 +53,15 @@ public class ShieldingActivity extends AppCompatActivity implements View.OnClick
     private PopupWindow mPopUpWindow;
     private int userType = 0;
     private int waitingForApplyTime = 0;
-
+    private  Toolbar toolbar;
+    private CollapsingToolbarLayout toolbarLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shielding);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        toolbarLayout = findViewById(R.id.toolbar_layout);
         //getSupportActionBar().setHomeButtonEnabled(true); //设置返回键可用
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("免屏蔽");
@@ -72,6 +74,10 @@ public class ShieldingActivity extends AppCompatActivity implements View.OnClick
     private void initView() {
         tvRemainTime = findViewById(R.id.tv_remain_time);
         startNofilterBtn = (FloatingActionButton) findViewById(R.id.fab);
+        UserEntity userEntity = BmobUser.getCurrentUser(UserEntity.class);
+        if (userEntity != null && userEntity.isGuardian()) {
+            startNofilterBtn.setVisibility(View.GONE);
+        }
         startNofilterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,19 +87,19 @@ public class ShieldingActivity extends AppCompatActivity implements View.OnClick
                     xToast.toast(ShieldingActivity.this, "您的免屏蔽时长已用尽");
                     startNofilterBtn.setBackgroundResource(R.color.colorDanger);
                     //startNofilterBtn.setText("时长已用尽");
-                    getSupportActionBar().setTitle("免屏蔽时长已用尽");
+                    toolbarLayout.setTitle("免屏蔽时长已用尽");
                     spHelper.setIsNoFilter(false);
                 } else if (!spHelper.getIsNoFilter()) {//免屏蔽开启
                     xToast.toast(ShieldingActivity.this, "免屏蔽已开启");
                     startNofilterBtn.setBackgroundResource(R.color.colorSafe);
                     //startNofilterBtn.setText("暂停");
-                    getSupportActionBar().setTitle("免屏蔽已开启");
+                    toolbarLayout.setTitle("免屏蔽已开启");
                     spHelper.setIsNoFilter(true);
                 } else if (spHelper.getIsNoFilter()) {//关闭
                     xToast.toast(ShieldingActivity.this, "免屏蔽已关闭");
                     startNofilterBtn.setBackgroundResource(R.color.colorPrimary);
                     //startNofilterBtn.setText("开始");
-                    getSupportActionBar().setTitle("免屏蔽已关闭");
+                    toolbarLayout.setTitle("免屏蔽已关闭");
                     spHelper.setIsNoFilter(false);
                 }
 
@@ -235,17 +241,17 @@ public class ShieldingActivity extends AppCompatActivity implements View.OnClick
         if (spHelper.getNoFilterTime() == 0) {//时长用尽
             startNofilterBtn.setBackgroundResource(R.color.colorDanger);
             //startNofilterBtn.setText("时长已用尽");
-            getSupportActionBar().setTitle("免屏蔽时长已用尽");
+            toolbarLayout.setTitle("免屏蔽时长已用尽");
             spHelper.setIsNoFilter(false);
         } else if (spHelper.getIsNoFilter()) {//免屏蔽状态已开启
             startNofilterBtn.setBackgroundResource(R.color.colorSafe);
             //startNofilterBtn.setText("暂停");
-            getSupportActionBar().setTitle("免屏蔽已开启");
+            toolbarLayout.setTitle("免屏蔽已开启");
             spHelper.setIsNoFilter(true);
         } else if (!spHelper.getIsNoFilter()) {//免屏蔽状态已关闭
             startNofilterBtn.setBackgroundResource(R.color.colorPrimary);
             //startNofilterBtn.setText("开始");
-            getSupportActionBar().setTitle("免屏蔽已关闭");
+            toolbarLayout.setTitle("免屏蔽已关闭");
             spHelper.setIsNoFilter(false);
         }
     }

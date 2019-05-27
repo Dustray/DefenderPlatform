@@ -81,7 +81,7 @@ public class xWebView extends WebView {
         this.getSettings().setLoadsImagesAutomatically(true); // 加载图片
         this.getSettings().setAllowFileAccess(true);
         this.getSettings().setAppCacheEnabled(true);
-        this.setBackgroundColor(ContextCompat.getColor(context,R.color.colorPrimaryLightLightLight)); // 设置背景色
+        this.setBackgroundColor(ContextCompat.getColor(context, R.color.colorPrimaryLightLightLight)); // 设置背景色
         //this.getBackground().setAlpha(0); // 设置填充透明度 范围：0-255
         //启用地理定位
         this.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
@@ -107,7 +107,8 @@ public class xWebView extends WebView {
         CookieManager.getInstance().setAcceptThirdPartyCookies(this, true);
     }
 
-    public Bitmap getCapture() {
+    public Bitmap getCapture(boolean isOriginal) {
+
         this.destroyDrawingCache();
         this.setDrawingCacheEnabled(true);//设置能否缓存图片信息（drawing cache）
         this.buildDrawingCache();
@@ -117,11 +118,15 @@ public class xWebView extends WebView {
 //            bmp = Bitmap.createBitmap(450, 800, Bitmap.Config.RGB_565);
 //        } else {
         if (temp == null) return null;
-        bmp = Bitmap.createScaledBitmap(temp, 450, 800, true);
+        if (isOriginal)
+            bmp = Bitmap.createScaledBitmap(temp, temp.getWidth(), temp.getHeight(), true);
+        else
+            bmp = Bitmap.createScaledBitmap(temp, 480, 800, true);
         //}
         //this.setDrawingCacheEnabled(false);
         return bmp;
     }
+
 
     public void cleanCache() {
         clearCache(true);
@@ -178,7 +183,7 @@ public class xWebView extends WebView {
                             }
                         });
                         String appName = context.getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY).get(0).loadLabel(context.getPackageManager()).toString();
-                        alert.popupAlert(((MainActivity)context).getWindow().getDecorView(),"网站请求打开“" + appName + "”，是否同意？", "同意");
+                        alert.popupAlert(((MainActivity) context).getWindow().getDecorView(), "网站请求打开“" + appName + "”，是否同意？", "同意");
                         return true;
                     }
                 }
@@ -200,7 +205,7 @@ public class xWebView extends WebView {
         @Override
         public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
             super.onReceivedError(view, errorCode, description, failingUrl);
-            webView.loadUrl("file:///android_asset/html/ErrorPage.html?code="+errorCode+"&description="+description);
+            webView.loadUrl("file:///android_asset/html/ErrorPage.html?code=" + errorCode + "&description=" + description);
         }
 
         @Override

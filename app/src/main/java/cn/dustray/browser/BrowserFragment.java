@@ -25,6 +25,7 @@ import cn.dustray.entity.AppSettingEntity;
 import cn.dustray.popupwindow.WebGroupPopup;
 import cn.dustray.popupwindow.WebMenuPopup;
 import cn.dustray.popupwindow.WebSharePopup;
+import cn.dustray.utils.PermissionUtil;
 import cn.dustray.utils.SettingUtil;
 import cn.dustray.utils.SqliteUtil;
 import cn.dustray.utils.WebUtil;
@@ -453,6 +454,7 @@ public class BrowserFragment extends Fragment implements View.OnClickListener, W
     @Override
     public void onScreenshotClick() {
         if (currentItem <= webFragArray.size() - 1) {
+            PermissionUtil.Storage(getActivity());
             Bitmap bit = webFragArray.get(currentItem).createSnapshot();
             new WebViewManager(getContext()).saveSnapshot(bit);
             xToast.toast(getContext(),"截图已保存");

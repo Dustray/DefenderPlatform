@@ -58,6 +58,10 @@ public class KeywordListActivity extends AppCompatActivity implements View.OnCli
 
         rvKeyword = findViewById(R.id.rv_keyword);
         inputAdd = findViewById(R.id.input_add);
+
+        if (!BmobUser.isLogin()) {
+            inputAdd.setEnabled(false);
+        }
         btnAdd = findViewById(R.id.btn_add);
         inputAdd.setOnClickListener(this);
         btnAdd.setOnClickListener(this);
@@ -145,8 +149,10 @@ public class KeywordListActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_add:
-                filterHelper.addToDatebase(this, inputAdd.getText().toString());
-                inputAdd.setText("");
+                if(!inputAdd.getText().equals("")) {
+                    filterHelper.addToDatebase(this, inputAdd.getText().toString());
+                    inputAdd.setText("");
+                }
                 break;
         }
     }
