@@ -70,7 +70,7 @@ public class KeywordListActivity extends AppCompatActivity implements View.OnCli
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rvKeyword.setLayoutManager(layoutManager);
         rvKeyword.addItemDecoration(new xRecycleViewDivider(
-                this, LinearLayoutManager.VERTICAL, 3, getResources().getColor(R.color.black_overlay)));
+                this, LinearLayoutManager.VERTICAL, 0, getResources().getColor(R.color.black_overlay)));
     }
 
     private void initData() {

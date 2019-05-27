@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="3dp"
         android:layout_marginTop="3dp"
-        android:background="#ffffff"
+        android:background="@drawable/btn_item_white"
         android:paddingLeft="30dp">
 
         <TextView
