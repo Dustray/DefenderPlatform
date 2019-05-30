@@ -101,7 +101,7 @@ public class HistoryActivity extends AppCompatActivity {
      */
     private void getBookmark() {
         /*查询所有信息*/
-        Cursor c = db.rawQuery("select * from bookmark order by _id desc", null);
+        Cursor c = db.rawQuery("select * from bookmark order by _id asc", null);
 
         if (c != null) {
             while (c.moveToNext()) {
@@ -145,7 +145,7 @@ public class HistoryActivity extends AppCompatActivity {
                 if (type == 0) {//历史
                     db.delete("allhistory", null, null);
                     xToast.toast(HistoryActivity.this, "清空历史纪录成功");
-                } else {    
+                } else {
                     db.delete("bookmark", null, null);
                     xToast.toast(HistoryActivity.this, "清空书签成功");
                 }

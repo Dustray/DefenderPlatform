@@ -4,41 +4,45 @@
     tools:showIn="navigation_view">
 
     <!--<group android:checkableBehavior="single">-->
-        <!--<item-->
-            <!--android:id="@+id/nav_rq_code"-->
-            <!--android:icon="@drawable/ic_menu_camera"-->
-            <!--android:title="扫一扫" />-->
+    <!--<item-->
+    <!--android:id="@+id/nav_rq_code"-->
+    <!--android:icon="@drawable/ic_menu_camera"-->
+    <!--android:title="扫一扫" />-->
 
     <!--</group>-->
     <!--<item android:title="聊天">-->
-        <!--<menu>-->
-            <!--<item-->
-                <!--android:id="@+id/nav_camera"-->
-                <!--android:icon="@drawable/ic_menu_camera"-->
-                <!--android:title="聊天历史" />-->
-            <!--<item-->
-                <!--android:id="@+id/nav_gallery"-->
-                <!--android:icon="@drawable/ic_menu_gallery"-->
-                <!--android:title="相册" />-->
-        <!--</menu>-->
+    <!--<menu>-->
+    <!--<item-->
+    <!--android:id="@+id/nav_camera"-->
+    <!--android:icon="@drawable/ic_menu_camera"-->
+    <!--android:title="聊天历史" />-->
+    <!--<item-->
+    <!--android:id="@+id/nav_gallery"-->
+    <!--android:icon="@drawable/ic_menu_gallery"-->
+    <!--android:title="相册" />-->
+    <!--</menu>-->
     <!--</item>-->
     <item android:title="浏览器">
         <menu>
             <item
                 android:id="@+id/nav_slideshow"
-                android:icon="@drawable/ic_menu_slideshow"
+                android:icon="@drawable/ic_btn_shield_on"
+                android:iconTint="#000"
                 android:title="免屏蔽" />
             <item
                 android:id="@+id/nav_keyword_list"
-                android:icon="@drawable/ic_menu_slideshow"
+                android:icon="@drawable/ic_btn_keyword"
+                android:iconTint="#000"
                 android:title="屏蔽关键字" />
             <item
                 android:id="@+id/nav_manage"
-                android:icon="@drawable/ic_menu_manage"
+                android:icon="@drawable/ic_btn_history"
+                android:iconTint="#000"
                 android:title="浏览历史" />
             <item
                 android:id="@+id/nav_bookmark"
-                android:icon="@drawable/ic_menu_manage"
+                android:icon="@drawable/ic_btn_bookmark"
+                android:iconTint="#000"
                 android:title="书签" />
         </menu>
     </item>
@@ -46,11 +50,13 @@
         <menu>
             <item
                 android:id="@+id/nav_setting"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/ic_btn_setting"
+                android:iconTint="#000"
                 android:title="设置" />
             <item
                 android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/ic_btn_exit"
+                android:iconTint="#000"
                 android:title="退出" />
         </menu>
     </item>
