@@ -168,8 +168,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void initNoFilterTimer() {
-        spHelper = new FilterPreferenceHelper(MainActivity.this);
-
+        if (spHelper == null)
+            spHelper = new FilterPreferenceHelper(MainActivity.this);
         if (spHelper.getIsNoFilter()) {
             if (tc != null) tc.cancel();
             tc = new timeCount(spHelper.getNoFilterTime(), 1000);
@@ -333,7 +333,7 @@ public class MainActivity extends AppCompatActivity
                 if (!b) {
                     searchView.onActionViewCollapsed();
                     titleTab.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     titleTab.setVisibility(View.INVISIBLE);
                 }
             }
@@ -511,6 +511,21 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    public void onChangeNoFilter() {
+
+         if (!spHelper.getIsNoFilter()) {//免屏蔽开启
+//            xToast.toast(MainActivity.this, "免屏蔽已开启");
+//            spHelper.setIsNoFilter(true);
+//            initNoFilterTimer();//初始化计时
+             startActivity(new Intent(MainActivity.this,ShieldingActivity.class));
+        } else if (spHelper.getIsNoFilter()) {//关闭
+            xToast.toast(MainActivity.this, "免屏蔽已关闭");
+            spHelper.setIsNoFilter(false);
+            initNoFilterRemindView();
+        }
+    }
+
+    @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         // xToast.toast(this, "ss" + requestCode + grantResults[0]);
         switch (requestCode) {
@@ -589,7 +604,8 @@ public class MainActivity extends AppCompatActivity
                 noFilterRemindRed.setVisibility(View.VISIBLE);
                 redFlag = true;
             }
-            noFilterRemindText.setText((noFilterTime - 1) + "");
+            int realSecond = noFilterTime - 1;
+            noFilterRemindText.setText(realSecond / 60 + ":" + realSecond % 60);
             if (noFilterTime == 1) {
                 spHelper.setIsNoFilter(false);
                 isActivityPause = true;

@@ -66,10 +66,11 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="imageAsset" value="C:\Users\yinxi\Desktop\power.png" />
-                                      <entry key="outputName" value="ic_btn_delete" />
-                                      <entry key="theme" value="HOLO_DARK" />
-                                      <entry key="themeColor" value="009688" />
+                                      <entry key="assetType" value="IMAGE" />
+                                      <entry key="imageAsset" value="C:\Users\yinxi\Desktop\shield.png" />
+                                      <entry key="outputName" value="ic_btn_shield_off" />
+                                      <entry key="theme" value="CUSTOM" />
+                                      <entry key="themeColor" value="888888" />
                                     </map>
                                   </option>
                                 </PersistentState>

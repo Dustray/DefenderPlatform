@@ -13,18 +13,20 @@ import cn.dustray.control.xWebPopupWindow;
 import cn.dustray.defenderplatform.MainActivity;
 import cn.dustray.defenderplatform.R;
 import cn.dustray.browser.BrowserFragment;
+import cn.dustray.utils.FilterPreferenceHelper;
 import cn.dustray.utils.SettingUtil;
 
 public class WebMenuPopup extends xWebPopupWindow implements View.OnClickListener {
 
     private Context context;
-    private xButtonLayout btnFullScreen,btnNoPicture, btnRotate, btnScreenshot, btnNightMode;
-    private xButtonLayout btnHome, btnRefresh, btnRollLock,  btnClean;
+    private xButtonLayout btnFullScreen, btnNoPicture, btnRotate, btnScreenshot, btnNoFilterMode;
+    private xButtonLayout btnHome, btnRefresh, btnRollLock, btnClean;
     private ImageButton btnExit;
     //private TextView textFullScreen, textNoPicure, textRotate, textNightMode;
     private BrowserFragment browserFragment;
     private OnPopupInteractionListener mListener;
     private OnWebMenuBtnClick btnClickListener;
+    private FilterPreferenceHelper spHelper;
 
     public WebMenuPopup(Context context) {
         super(context);
@@ -49,18 +51,18 @@ public class WebMenuPopup extends xWebPopupWindow implements View.OnClickListene
         btnNoPicture = getContentView().findViewById(R.id.btn_web_menu_nopic);
         btnRotate = getContentView().findViewById(R.id.btn_web_menu_rotate);
         btnScreenshot = getContentView().findViewById(R.id.btn_web_menu_capture);
-        btnNightMode = getContentView().findViewById(R.id.btn_web_menu_night);
+        btnNoFilterMode = getContentView().findViewById(R.id.btn_web_menu_nofilter);
 
         btnFullScreen.setOnClickListener(this);
         btnNoPicture.setOnClickListener(this);
         btnRotate.setOnClickListener(this);
         btnScreenshot.setOnClickListener(this);
-        btnNightMode.setOnClickListener(this);
+        btnNoFilterMode.setOnClickListener(this);
 
         //textFullScreen = getContentView().findViewById(R.id.btn_web_menu_fullscreen);
-      //  textNoPicure = getContentView().findViewById(R.id.text_web_menu_nopic);
-       // textRotate = getContentView().findViewById(R.id.text_web_menu_rotate);
-       // textNightMode = getContentView().findViewById(R.id.text_web_menu_night);
+        //  textNoPicure = getContentView().findViewById(R.id.text_web_menu_nopic);
+        // textRotate = getContentView().findViewById(R.id.text_web_menu_rotate);
+        // textNightMode = getContentView().findViewById(R.id.text_web_menu_night);
         //第二组
         btnHome = getContentView().findViewById(R.id.btn_web_menu_home);
         btnHome.setOnClickListener(this);
@@ -74,11 +76,16 @@ public class WebMenuPopup extends xWebPopupWindow implements View.OnClickListene
         btnClean = getContentView().findViewById(R.id.btn_web_menu_clean);
         btnClean.setOnClickListener(this);
 
+        if (spHelper == null)
+            spHelper = new FilterPreferenceHelper(((MainActivity) context));
+
 
     }
-public void setOnWebMenuBtnClick(OnWebMenuBtnClick btnClickListener){
-    this.btnClickListener = btnClickListener;
-}
+
+    public void setOnWebMenuBtnClick(OnWebMenuBtnClick btnClickListener) {
+        this.btnClickListener = btnClickListener;
+    }
+
     @Override
     public void showAtBottom(View view) {        //弹窗位置设置
         super.showAtBottom(view);
@@ -129,14 +136,14 @@ public void setOnWebMenuBtnClick(OnWebMenuBtnClick btnClickListener){
         }
 
         //夜间模式
-        if (browserFragment.isNightMode()) {//已打开
-//            btnNightMode.setImageResource(R.drawable.ic_btn_nightmodeoff_gray);
+        if (spHelper.getIsNoFilter()) {//已打开
+//            btnNoFilterMode.setImageResource(R.drawable.ic_btn_nightmodeoff_gray);
 //            textNightMode.setText("日间模式");
-            btnNightMode.close();
+            btnNoFilterMode.close();
         } else {//已关闭
-//            btnNightMode.setImageResource(R.drawable.ic_btn_nightmodeon_black);
+//            btnNoFilterMode.setImageResource(R.drawable.ic_btn_nightmodeon_black);
 //            textNightMode.setText("夜间模式");
-            btnNightMode.open();
+            btnNoFilterMode.open();
         }
     }
 
@@ -161,6 +168,9 @@ public void setOnWebMenuBtnClick(OnWebMenuBtnClick btnClickListener){
             case R.id.btn_web_menu_night:
                 browserFragment.changeNightMode();
                 break;
+            case R.id.btn_web_menu_nofilter:
+                mListener.onChangeNoFilter();
+                break;
             //第二组
             case R.id.btn_web_menu_home:
                 browserFragment.goHome();
@@ -184,9 +194,13 @@ public void setOnWebMenuBtnClick(OnWebMenuBtnClick btnClickListener){
 
     public interface OnPopupInteractionListener {
         void onCleanCache();
+
         void onChangePageScroll();
+
+        void onChangeNoFilter();
     }
-    public interface OnWebMenuBtnClick{
+
+    public interface OnWebMenuBtnClick {
         void onScreenshotClick();
     }
 }

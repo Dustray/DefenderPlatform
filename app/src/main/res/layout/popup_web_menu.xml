@@ -42,15 +42,15 @@
             android:layout_height="40dp"
             android:layout_row="0"
             android:layout_rowWeight="1"
-            android:layout_gravity="center"
             android:layout_column="2"
             android:layout_columnWeight="1"
+            android:layout_gravity="center"
 
-            app:open_image="@drawable/ic_btn_rotateoff_gray"
+            android:background="@drawable/btn_web_menu_add"
             app:close_image="@drawable/ic_btn_rotateon_black"
-            app:open_text="旋转/关"
             app:close_text="旋转/开"
-            android:background="@drawable/btn_web_menu_add">
+            app:open_image="@drawable/ic_btn_rotateoff_gray"
+            app:open_text="旋转/关">
 
         </cn.dustray.control.xButtonLayout>
 
@@ -59,16 +59,16 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_row="0"
-            android:layout_gravity="center"
             android:layout_rowWeight="1"
             android:layout_column="0"
             android:layout_columnWeight="1"
+            android:layout_gravity="center"
 
-            app:open_image="@drawable/ic_btn_fullscreenon_black"
-            app:close_image="@drawable/ic_btn_fullscreenoff_gray"
-            app:open_text="全屏/关"
-            app:close_text="全屏/开"
             android:background="@drawable/btn_web_menu_add"
+            app:close_image="@drawable/ic_btn_fullscreenoff_gray"
+            app:close_text="全屏/开"
+            app:open_image="@drawable/ic_btn_fullscreenon_black"
+            app:open_text="全屏/关"
 
             >
 
@@ -80,18 +80,18 @@
 
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_gravity="center"
             android:layout_row="0"
             android:layout_rowWeight="1"
             android:layout_column="3"
             android:layout_columnWeight="1"
+            android:layout_gravity="center"
 
 
-            app:open_image="@drawable/ic_btn_screenshot_black"
+            android:background="@drawable/btn_web_menu_add"
             app:close_image="@drawable/ic_btn_screenshot_black"
-            app:open_text="截图"
             app:close_text="截图"
-            android:background="@drawable/btn_web_menu_add">
+            app:open_image="@drawable/ic_btn_screenshot_black"
+            app:open_text="截图">
 
 
         </cn.dustray.control.xButtonLayout>
@@ -101,39 +101,35 @@
 
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_gravity="center"
             android:layout_row="0"
             android:layout_rowWeight="1"
             android:layout_column="1"
             android:layout_columnWeight="1"
+            android:layout_gravity="center"
 
-            app:open_image="@drawable/ic_btn_picturemodeon_black"
+            android:background="@drawable/btn_web_menu_add"
             app:close_image="@drawable/ic_btn_picturemodeoff_gray"
-            app:open_text="无图/关"
             app:close_text="无图/开"
+            app:open_image="@drawable/ic_btn_picturemodeon_black"
 
-            android:background="@drawable/btn_web_menu_add">
+            app:open_text="无图/关">
 
         </cn.dustray.control.xButtonLayout>
 
         <cn.dustray.control.xButtonLayout
-            android:id="@+id/btn_web_menu_night"
-
-            android:layout_gravity="center"
+            android:id="@+id/btn_web_menu_nofilter"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_row="0"
             android:layout_rowWeight="1"
             android:layout_column="4"
             android:layout_columnWeight="1"
-            app:open_image="@drawable/ic_btn_picturemodeon_black"
-            app:close_image="@drawable/ic_btn_picturemodeoff_gray"
-            app:open_text="夜间/关"
-            app:close_text="夜间/开"
-
+            android:layout_gravity="center"
             android:background="@drawable/btn_web_menu_add"
-            >
-
+            app:close_image="@drawable/ic_btn_shield_on"
+            app:close_text="关闭屏蔽"
+            app:open_image="@drawable/ic_btn_shield_off"
+            app:open_text="免屏蔽">
 
         </cn.dustray.control.xButtonLayout>
 
@@ -146,17 +142,17 @@
             android:layout_height="40dp"
             android:layout_row="1"
             android:layout_rowWeight="1"
-            android:layout_gravity="center"
             android:layout_column="2"
             android:layout_columnWeight="1"
+            android:layout_gravity="center"
 
 
-            app:open_image="@drawable/ic_btn_home_black"
+            android:background="@drawable/btn_web_menu_add"
             app:close_image="@drawable/ic_btn_home_black"
-            app:open_text="主页"
             app:close_text="主页"
+            app:open_image="@drawable/ic_btn_home_black"
 
-            android:background="@drawable/btn_web_menu_add">
+            app:open_text="主页">
 
         </cn.dustray.control.xButtonLayout>
 
@@ -166,15 +162,15 @@
             android:layout_height="40dp"
             android:layout_row="1"
             android:layout_rowWeight="1"
-            android:layout_gravity="center"
             android:layout_column="0"
             android:layout_columnWeight="1"
-            app:open_image="@drawable/ic_btn_collect_black"
+            android:layout_gravity="center"
+            android:background="@drawable/btn_web_menu_add"
             app:close_image="@drawable/ic_btn_collect_black"
-            app:open_text="添加书签"
             app:close_text="添加书签"
+            app:open_image="@drawable/ic_btn_collect_black"
 
-            android:background="@drawable/btn_web_menu_add">
+            app:open_text="添加书签">
 
         </cn.dustray.control.xButtonLayout>
 
@@ -184,16 +180,16 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_row="1"
-            android:layout_gravity="center"
             android:layout_rowWeight="1"
             android:layout_column="3"
             android:layout_columnWeight="1"
-            app:open_image="@drawable/ic_btn_roll_lock_black"
+            android:layout_gravity="center"
+            android:background="@drawable/btn_web_menu_add"
             app:close_image="@drawable/ic_btn_roll_unlock_black"
-            app:open_text="侧滑/关"
             app:close_text="侧滑/开"
+            app:open_image="@drawable/ic_btn_roll_lock_black"
 
-            android:background="@drawable/btn_web_menu_add">
+            app:open_text="侧滑/关">
 
         </cn.dustray.control.xButtonLayout>
 
@@ -203,16 +199,16 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_row="1"
-            android:layout_gravity="center"
             android:layout_rowWeight="1"
             android:layout_column="1"
             android:layout_columnWeight="1"
-            app:open_image="@drawable/ic_btn_refresh_black"
+            android:layout_gravity="center"
+            android:background="@drawable/btn_web_menu_add"
             app:close_image="@drawable/ic_btn_refresh_black"
-            app:open_text="刷新"
             app:close_text="刷新"
+            app:open_image="@drawable/ic_btn_refresh_black"
 
-            android:background="@drawable/btn_web_menu_add">
+            app:open_text="刷新">
 
         </cn.dustray.control.xButtonLayout>
 
@@ -222,16 +218,16 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_row="1"
-            android:layout_gravity="center"
             android:layout_rowWeight="1"
             android:layout_column="4"
             android:layout_columnWeight="1"
-            app:open_image="@drawable/ic_btn_delete_black"
+            android:layout_gravity="center"
+            android:background="@drawable/btn_web_menu_add"
             app:close_image="@drawable/ic_btn_delete_black"
-            app:open_text="清空缓存"
             app:close_text="清空缓存"
+            app:open_image="@drawable/ic_btn_delete_black"
 
-            android:background="@drawable/btn_web_menu_add">
+            app:open_text="清空缓存">
 
         </cn.dustray.control.xButtonLayout>
 
