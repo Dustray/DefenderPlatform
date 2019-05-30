@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.dustray.control.xWebView;
 import cn.dustray.defenderplatform.R;
 import cn.dustray.entity.AppSettingEntity;
 import cn.dustray.popupwindow.WebGroupPopup;
@@ -457,7 +458,19 @@ public class BrowserFragment extends Fragment implements View.OnClickListener, W
             PermissionUtil.Storage(getActivity());
             Bitmap bit = webFragArray.get(currentItem).createSnapshot();
             new WebViewManager(getContext()).saveSnapshot(bit);
-            xToast.toast(getContext(),"截图已保存");
+            xToast.toast(getContext(), "截图已保存");
+        } else {
+            currentItem = 0;
+        }
+    }
+
+    @Override
+    public void onAddBookmarkClick() {
+        if (currentItem <= webFragArray.size() - 1) {
+            xWebView webview = webFragArray.get(currentItem).mainWebView;
+
+            su.recordBookmarkToSqlite(webview.getTitle(), webview.getUrl());
+            xToast.toast(getContext(), "书签已添加");
         } else {
             currentItem = 0;
         }

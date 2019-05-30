@@ -26,10 +26,11 @@ public class SqliteUtil {
 
         /*创建表，integer为整形，text为字符串，primary key代表主键，autoincrement代表自增，not null代表不为空*/
         db.execSQL("create table if not exists allhistory(_id integer primary key autoincrement, title text not null, url text not null)");//所有历史表
+        db.execSQL("create table if not exists bookmark(_id integer primary key autoincrement, title text not null, url text not null)");//书签表
     }
 
     /**
-     * 向sqlite中添加信息
+     * 向sqlite中添加历史信息
      */
     public void recordHistoryToSqlite(String nowTitle, String nowUrl) {
 
@@ -44,8 +45,20 @@ public class SqliteUtil {
             db.insert("allhistory", null, values);
             values.clear();//清空values值，便于后边继续使用该变量
         }
+    }
 
+    /**
+     * 向sqlite中添加书签
+     */
+    public void recordBookmarkToSqlite(String nowTitle, String nowUrl) {
 
+        if (nowTitle != null && !nowUrl.equals("")) {
+            ContentValues values = new ContentValues();
+            values.put("title", nowTitle);
+            values.put("url", nowUrl);
+            db.insert("bookmark", null, values);
+            values.clear();//清空values值，便于后边继续使用该变量
+        }
     }
 
     public void close() {

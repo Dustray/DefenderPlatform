@@ -398,6 +398,17 @@ public class MainActivity extends AppCompatActivity
             startActivityForResult(intent, 0);
         } else if (id == R.id.nav_manage) {
             Intent intent = new Intent(this, HistoryActivity.class);
+            //用Bundle携带数据
+            Bundle bundle=new Bundle();
+            bundle.putInt("type", 0);
+            intent.putExtras(bundle);
+            startActivityForResult(intent, 1);
+        }  else if (id == R.id.nav_bookmark) {
+            Intent intent = new Intent(this, HistoryActivity.class);
+            //用Bundle携带数据
+            Bundle bundle=new Bundle();
+            bundle.putInt("type", 1);
+            intent.putExtras(bundle);
             startActivityForResult(intent, 1);
         } else if (id == R.id.nav_setting) {
             Intent intent = new Intent(this, SettingsActivity.class);

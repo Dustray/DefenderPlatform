@@ -20,7 +20,7 @@ public class WebMenuPopup extends xWebPopupWindow implements View.OnClickListene
 
     private Context context;
     private xButtonLayout btnFullScreen, btnNoPicture, btnRotate, btnScreenshot, btnNoFilterMode;
-    private xButtonLayout btnHome, btnRefresh, btnRollLock, btnClean;
+    private xButtonLayout btnBookmark, btnHome, btnRefresh, btnRollLock, btnClean;
     private ImageButton btnExit;
     //private TextView textFullScreen, textNoPicure, textRotate, textNightMode;
     private BrowserFragment browserFragment;
@@ -64,6 +64,8 @@ public class WebMenuPopup extends xWebPopupWindow implements View.OnClickListene
         // textRotate = getContentView().findViewById(R.id.text_web_menu_rotate);
         // textNightMode = getContentView().findViewById(R.id.text_web_menu_night);
         //第二组
+        btnBookmark = getContentView().findViewById(R.id.btn_web_menu_bookmark);
+        btnBookmark.setOnClickListener(this);
         btnHome = getContentView().findViewById(R.id.btn_web_menu_home);
         btnHome.setOnClickListener(this);
         btnRefresh = getContentView().findViewById(R.id.btn_web_menu_refresh);
@@ -135,7 +137,7 @@ public class WebMenuPopup extends xWebPopupWindow implements View.OnClickListene
             btnRotate.open();
         }
 
-        //夜间模式
+        //屏蔽模式
         if (spHelper.getIsNoFilter()) {//已打开
 //            btnNoFilterMode.setImageResource(R.drawable.ic_btn_nightmodeoff_gray);
 //            textNightMode.setText("日间模式");
@@ -188,6 +190,9 @@ public class WebMenuPopup extends xWebPopupWindow implements View.OnClickListene
                 //((MainActivity) context).browserFragment.cleanCache();
                 mListener.onCleanCache();
                 break;
+            case R.id.btn_web_menu_bookmark:
+                btnClickListener.onAddBookmarkClick();
+                break;
         }
         dismiss();
     }
@@ -202,5 +207,7 @@ public class WebMenuPopup extends xWebPopupWindow implements View.OnClickListene
 
     public interface OnWebMenuBtnClick {
         void onScreenshotClick();
+
+        void onAddBookmarkClick();
     }
 }

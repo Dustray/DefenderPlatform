@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#f0f0f0">
+    android:background="#00f0f0f0">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -10,7 +10,8 @@
         android:layout_marginBottom="3dp"
         android:layout_marginTop="3dp"
         android:background="@drawable/btn_item_white"
-        android:paddingLeft="30dp">
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp">
 
         <TextView
             android:id="@+id/c_item_history_title_text"

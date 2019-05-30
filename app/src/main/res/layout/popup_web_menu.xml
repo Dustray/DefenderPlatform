@@ -157,7 +157,7 @@
         </cn.dustray.control.xButtonLayout>
 
         <cn.dustray.control.xButtonLayout
-
+            android:id="@+id/btn_web_menu_bookmark"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_row="1"
