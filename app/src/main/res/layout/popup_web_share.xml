@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:name="cn.dustray.defenderplatform.ChatToolFragment"
     android:layout_width="match_parent"
-    android:layout_height="345dp"
+    android:layout_height="348dp"
     android:background="#eee"
     android:orientation="vertical"
     tools:context="cn.dustray.chat.ChatToolFragment">
@@ -96,7 +96,7 @@
         <ImageButton
             android:id="@+id/btn_web_share_down"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="48dp"
             android:background="@drawable/btn_web_share"
             android:src="@drawable/ic_btn_menu_down_black" />
     </RelativeLayout>

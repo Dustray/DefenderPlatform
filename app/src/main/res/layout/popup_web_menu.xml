@@ -243,7 +243,7 @@
         <ImageButton
             android:id="@+id/btn_web_menu_down"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="48dp"
             android:background="@drawable/btn_web_share"
             android:src="@drawable/ic_btn_menu_down_black" />
     </RelativeLayout>

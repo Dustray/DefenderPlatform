@@ -149,9 +149,12 @@ public class KeywordListActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_add:
-                if(!inputAdd.getText().equals("")) {
+                if(!inputAdd.getText().toString().equals("")) {
                     filterHelper.addToDatebase(this, inputAdd.getText().toString());
                     inputAdd.setText("");
+                }else{
+                    xToast.toast(this, "关键字不能为空");
+
                 }
                 break;
         }

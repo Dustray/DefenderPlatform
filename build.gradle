@@ -4,7 +4,12 @@ buildscript {
 
     repositories {
         google()
+        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
         jcenter()
+        maven { url "https://raw.github.com/bmob/bmob-android-sdk/master" }
+        maven {
+            url "https://raw.githubusercontent.com/HyphenateInc/Hyphenate-SDK-Android/master/repository"
+        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.4.1'
@@ -18,6 +23,7 @@ buildscript {
 allprojects {
     repositories {
         google()
+        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
         jcenter()
         maven { url "https://raw.github.com/bmob/bmob-android-sdk/master" }
         maven {

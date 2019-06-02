@@ -58,9 +58,11 @@ public class FilterHelper {
         final String createdAt = new FilterPreferenceHelper(context).getLastUpdateDate();//获取上次更新日期"2018-11-23 10:30:00"
         Log.i("filter", "保存的时间" + createdAt);
         final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
         Date createdAtDate = null;
         try {
             createdAtDate = sdf.parse(createdAt);
+            createdAtDate.setTime(createdAtDate.getTime() + 1000);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -77,7 +79,7 @@ public class FilterHelper {
                     FilterSQLite fs = new FilterSQLite();
                     Log.i("filter", "----------第二步，转存Bmob至sqlite--------------");
                     fs.recordKeywordToSqlite(object, true);
-                    Log.i("filter", "比较" + bmobCreatedAtDate.getDate() + "///" + object.get(0).getUpdatedAt());
+                    Log.i("filter", "比较：：：上次保存" + bmobCreatedAtDate.getDate() + "///" + object.get(0).getUpdatedAt());
                     Log.i("filter", "当前的时间" + sdf.format(new Date()));
                     new FilterPreferenceHelper(context).setLastUpdateDate(sdf.format(new Date()));//设置本次更新日期
                     Log.i("filter", "新保存的时间" + new FilterPreferenceHelper(context).getLastUpdateDate());
