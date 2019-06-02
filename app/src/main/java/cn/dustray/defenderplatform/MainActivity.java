@@ -198,18 +198,19 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
 
+                Intent intent;
                 switch (UserManager.getUserType()) {
                     case UserEntity.USER_UNLOGIN:
-                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                        intent = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivityForResult(intent, 2);
                         break;
                     case UserEntity.USER_GUARDIAN:
                     case UserEntity.USER_UNGUARDIAN:
-                        Intent intent;
                         if (BmobUser.isLogin())
                             intent = new Intent(MainActivity.this, MyActivity.class);
                         else
                             intent = new Intent(MainActivity.this, LoginActivity.class);
-                        startActivity(intent);
+                        startActivityForResult(intent, 2);
                         break;
                 }
             }
@@ -218,18 +219,19 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
 
+                Intent intent;
                 switch (UserManager.getUserType()) {
                     case UserEntity.USER_UNLOGIN:
-                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                        intent = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivityForResult(intent, 2);
                         break;
                     case UserEntity.USER_GUARDIAN:
                     case UserEntity.USER_UNGUARDIAN:
-                        Intent intent;
                         if (BmobUser.isLogin())
                             intent = new Intent(MainActivity.this, MyActivity.class);
                         else
                             intent = new Intent(MainActivity.this, LoginActivity.class);
-                        startActivity(intent);
+                        startActivityForResult(intent, 2);
                         break;
                 }
             }
@@ -292,6 +294,9 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    public void reInitChatEase() {
+        chatFragment.initReceiveMessageFromEase();
+    }
 
     @Override
     public void onBackPressed() {
@@ -388,25 +393,27 @@ public class MainActivity extends AppCompatActivity
 //        } else
         if (id == R.id.nav_slideshow) {
             Intent intent;
-            if (BmobUser.isLogin())
+            if (BmobUser.isLogin()) {
                 intent = new Intent(this, ShieldingActivity.class);
-            else
+                startActivity(intent);
+            } else {
                 intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
+                startActivityForResult(intent, 2);
+            }
         } else if (id == R.id.nav_keyword_list) {//屏蔽关键字列表
             Intent intent = new Intent(this, KeywordListActivity.class);
             startActivityForResult(intent, 0);
         } else if (id == R.id.nav_manage) {
             Intent intent = new Intent(this, HistoryActivity.class);
             //用Bundle携带数据
-            Bundle bundle=new Bundle();
+            Bundle bundle = new Bundle();
             bundle.putInt("type", 0);
             intent.putExtras(bundle);
             startActivityForResult(intent, 1);
-        }  else if (id == R.id.nav_bookmark) {
+        } else if (id == R.id.nav_bookmark) {
             Intent intent = new Intent(this, HistoryActivity.class);
             //用Bundle携带数据
-            Bundle bundle=new Bundle();
+            Bundle bundle = new Bundle();
             bundle.putInt("type", 1);
             intent.putExtras(bundle);
             startActivityForResult(intent, 1);
@@ -524,11 +531,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onChangeNoFilter() {
 
-         if (!spHelper.getIsNoFilter()) {//免屏蔽开启
+        if (!spHelper.getIsNoFilter()) {//免屏蔽开启
 //            xToast.toast(MainActivity.this, "免屏蔽已开启");
 //            spHelper.setIsNoFilter(true);
 //            initNoFilterTimer();//初始化计时
-             startActivity(new Intent(MainActivity.this,ShieldingActivity.class));
+            startActivity(new Intent(MainActivity.this, ShieldingActivity.class));
         } else if (spHelper.getIsNoFilter()) {//关闭
             xToast.toast(MainActivity.this, "免屏蔽已关闭");
             spHelper.setIsNoFilter(false);
@@ -580,6 +587,16 @@ public class MainActivity extends AppCompatActivity
             } else if (requestCode == 1) {
                 String result = data.getExtras().getString("resultUrl");
                 browserFragment.createNewFragment(result);
+            } else if (requestCode == 2) {
+                int i = data.getIntExtra("userstate", 0);
+                if (i == 1) {
+                    //成功登录
+                    reInitChatEase();
+                } else {
+                    //成功注销
+                    chatFragment.onLogout();
+
+                }
             }
         }
     }

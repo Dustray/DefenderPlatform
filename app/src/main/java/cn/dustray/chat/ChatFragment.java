@@ -560,7 +560,22 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
 
     public void share(String title, String url) {
 
-        new WebSharePopup(getActivity(), true).showAtBottom(sendBtn, title, url,"");
+        new WebSharePopup(getActivity(), true).showAtBottom(sendBtn, title, url, "");
+    }
+
+    public void onLogout() {
+        if (chatListView != null)
+            chatListView.removeAllViews();
+        if (list != null)
+            list.clear();
+        if (adapter != null)
+            adapter.notifyDataSetChanged();
+        if (msgListener != null) {
+            EMClient.getInstance().chatManager().removeMessageListener(msgListener);
+            msgListener = null;
+        }
+        notLoginRemind.setVisibility(View.VISIBLE);
+
     }
 
     public interface OnFragmentInteractionListener {

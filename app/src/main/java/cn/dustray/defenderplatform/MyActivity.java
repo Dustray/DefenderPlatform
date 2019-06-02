@@ -1,5 +1,7 @@
 package cn.dustray.defenderplatform;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -87,6 +89,9 @@ public class MyActivity extends AppCompatActivity implements View.OnClickListene
             case R.id.btn_exit:
                 BmobUser.logOut();
                 logoutEaseMob();
+                Intent data = new Intent();
+                data.putExtra("userstate", 0);
+                setResult(Activity.RESULT_OK, data );
                 finish();
                 break;
         }

@@ -3,6 +3,7 @@ package cn.dustray.defenderplatform;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
@@ -412,6 +413,9 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
                 }
             });
         }
+        Intent data = new Intent();
+        data.putExtra("userstate", 1);
+        setResult(Activity.RESULT_OK, data );
         finish();
     }
 

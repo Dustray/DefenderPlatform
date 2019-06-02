@@ -3,6 +3,7 @@ package cn.dustray.defenderplatform;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Looper;
@@ -349,6 +350,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         u.upGradeChatToUserName();
 
         loginEaseMob(mEmailView.getText().toString(), mPasswordView.getText().toString());
+        Intent data = new Intent();
+        data.putExtra("userstate", 1);
+        setResult(Activity.RESULT_OK, data );
         finish();
     }
 
