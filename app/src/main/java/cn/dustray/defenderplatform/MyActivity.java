@@ -39,11 +39,15 @@ public class MyActivity extends AppCompatActivity implements View.OnClickListene
 
     private void initData() {
         if (!BmobUser.isLogin()) return;
-        UserEntity u = BmobUser.getCurrentUser(UserEntity.class);
-        username.setText(u.getUsername());
-        email.setText(u.getEmail());
-        emailVerify.setText(u.getEmailVerified() ? "已验证" : "未验证");
-        identity.setText(u.isGuardian() ? "监护人" : "被监护人");
+        try {
+            UserEntity u = BmobUser.getCurrentUser(UserEntity.class);
+            username.setText(u.getUsername());
+            email.setText(u.getEmail());
+            emailVerify.setText(u.getEmailVerified() ? "已验证" : "未验证");
+            identity.setText(u.isGuardian() ? "监护人" : "被监护人");
+        }catch (NullPointerException e){
+
+        }
     }
 
     public void logoutEaseMob() {

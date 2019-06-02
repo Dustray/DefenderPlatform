@@ -532,10 +532,12 @@ public class MainActivity extends AppCompatActivity
     public void onChangeNoFilter() {
 
         if (!spHelper.getIsNoFilter()) {//免屏蔽开启
-//            xToast.toast(MainActivity.this, "免屏蔽已开启");
-//            spHelper.setIsNoFilter(true);
-//            initNoFilterTimer();//初始化计时
-            startActivity(new Intent(MainActivity.this, ShieldingActivity.class));
+            Intent intent;
+            if (BmobUser.isLogin())
+                intent = new Intent(MainActivity.this, ShieldingActivity.class);
+            else
+                intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivityForResult(intent, 2);
         } else if (spHelper.getIsNoFilter()) {//关闭
             xToast.toast(MainActivity.this, "免屏蔽已关闭");
             spHelper.setIsNoFilter(false);

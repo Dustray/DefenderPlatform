@@ -6,6 +6,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -33,7 +34,9 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.hyphenate.EMCallBack;
 import com.hyphenate.EMError;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.exceptions.HyphenateException;
@@ -137,8 +140,7 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
         btnToLogin.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                startActivity(intent);
+
                 finish();
             }
         });
@@ -413,17 +415,53 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
                 }
             });
         }
+
+
+        registerStateFinish(1);
+    }
+
+    private void registerStateFinish(int state) {
         Intent data = new Intent();
-        data.putExtra("userstate", 1);
+        data.putExtra("registerstate", state);
         setResult(Activity.RESULT_OK, data );
         finish();
     }
+    public void loginEaseMob(final String username, final String pwd) {
+        new Thread(new Runnable() {
+            public void run() {
+                EMClient.getInstance().login(username, pwd, new EMCallBack() {//回调
+                    @Override
+                    public void onSuccess() {
+                        EMClient.getInstance().groupManager().loadAllGroups();
+                        EMClient.getInstance().chatManager().loadAllConversations();
+                        //Log.d("main", "登录聊天服务器成功！");
+                        Looper.prepare();
+                        Toast.makeText(RegisterActivity.this, "登录聊天服务器成功", Toast.LENGTH_LONG).show();
+                        Looper.loop();
+                    }
 
+                    @Override
+                    public void onProgress(int progress, String status) {
+
+                    }
+
+                    @Override
+                    public void onError(int code, String message) {
+                        // Log.d("main", "登录聊天服务器失败！");
+                        Looper.prepare();
+                        Toast.makeText(RegisterActivity.this, "登录聊天服务器失败"+code+message, Toast.LENGTH_LONG).show();
+                        Looper.loop();
+                    }
+                });
+            }
+        }).start();
+    }
     public void registerEaseMob(final String username, final String pwd) {
         new Thread(new Runnable() {
             public void run() {
                 try {
                     EMClient.getInstance().createAccount(username, pwd);
+                    loginEaseMob(mUserName.getText().toString(), mPasswordView_1.getText().toString());
                 } catch (final HyphenateException e) {
                     runOnUiThread(new Runnable() {
                         public void run() {
@@ -483,10 +521,16 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {
-            finish();
+            registerStateFinish(0);
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        registerStateFinish(0);
     }
 
     /**

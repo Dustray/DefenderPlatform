@@ -121,8 +121,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivity(intent);
-                finish();
+                startActivityForResult(intent, 0);
             }
         });
         mLoginFormView = findViewById(R.id.login_form);
@@ -350,9 +349,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         u.upGradeChatToUserName();
 
         loginEaseMob(mEmailView.getText().toString(), mPasswordView.getText().toString());
+        loginSuccessFinish();
+    }
+
+    private void loginSuccessFinish() {
         Intent data = new Intent();
         data.putExtra("userstate", 1);
-        setResult(Activity.RESULT_OK, data );
+        setResult(Activity.RESULT_OK, data);
         finish();
     }
 
@@ -423,6 +426,21 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 0) {
+                int a = data.getIntExtra("registerstate", 0);
+                if (a == 0) {
+                    finish();
+                } else if (a == 1) {
+                    loginSuccessFinish();//注册成功
+                }
+            }
+        }
     }
 
     /**

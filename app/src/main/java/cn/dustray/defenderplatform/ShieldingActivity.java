@@ -95,6 +95,7 @@ public class ShieldingActivity extends AppCompatActivity implements View.OnClick
                     //startNofilterBtn.setText("暂停");
                     toolbarLayout.setTitle("免屏蔽已开启");
                     spHelper.setIsNoFilter(true);
+                    finish();
                 } else if (spHelper.getIsNoFilter()) {//关闭
                     xToast.toast(ShieldingActivity.this, "免屏蔽已关闭");
                     startNofilterBtn.setBackgroundResource(R.color.colorPrimary);
