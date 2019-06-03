@@ -349,12 +349,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         u.upGradeChatToUserName();
 
         loginEaseMob(mEmailView.getText().toString(), mPasswordView.getText().toString());
-        loginSuccessFinish();
+        loginSuccessFinish(1);
     }
 
-    private void loginSuccessFinish() {
+    private void loginSuccessFinish(int state) {
         Intent data = new Intent();
-        data.putExtra("userstate", 1);
+        data.putExtra("userstate", state);
         setResult(Activity.RESULT_OK, data);
         finish();
     }
@@ -436,8 +436,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 int a = data.getIntExtra("registerstate", 0);
                 if (a == 0) {
                     finish();
-                } else if (a == 1) {
-                    loginSuccessFinish();//注册成功
+                } else if (a == 2) {
+                    loginSuccessFinish(2);//注册成功
                 }
             }
         }

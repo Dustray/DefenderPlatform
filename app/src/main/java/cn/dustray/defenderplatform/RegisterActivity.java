@@ -399,6 +399,7 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
                     }
                 }
             });
+
         } else if (user.getUserType() == UserEntity.USER_UNGUARDIAN) {
 
             //查找UserEntity表里面id为guardianSwitchId的用户名
@@ -417,15 +418,17 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
         }
 
 
-        registerStateFinish(1);
+
+        registerStateFinish(2);
     }
 
     private void registerStateFinish(int state) {
         Intent data = new Intent();
         data.putExtra("registerstate", state);
-        setResult(Activity.RESULT_OK, data );
+        setResult(Activity.RESULT_OK, data);
         finish();
     }
+
     public void loginEaseMob(final String username, final String pwd) {
         new Thread(new Runnable() {
             public void run() {
@@ -449,13 +452,14 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
                     public void onError(int code, String message) {
                         // Log.d("main", "登录聊天服务器失败！");
                         Looper.prepare();
-                        Toast.makeText(RegisterActivity.this, "登录聊天服务器失败"+code+message, Toast.LENGTH_LONG).show();
+                        Toast.makeText(RegisterActivity.this, "登录聊天服务器失败" + code + message, Toast.LENGTH_LONG).show();
                         Looper.loop();
                     }
                 });
             }
         }).start();
     }
+
     public void registerEaseMob(final String username, final String pwd) {
         new Thread(new Runnable() {
             public void run() {
@@ -529,8 +533,8 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         registerStateFinish(0);
+        super.onBackPressed();
     }
 
     /**

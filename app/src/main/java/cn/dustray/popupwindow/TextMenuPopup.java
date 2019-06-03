@@ -89,7 +89,7 @@ public class TextMenuPopup extends PopupWindow implements View.OnClickListener {
                 cm.setPrimaryClip(clipData);
                 break;
             case R.id.text_menu_share:
-                ((MainActivity) context).chatFragment.share("转发",text);
+                ((MainActivity) context).chatFragment.share("转发自聊天的内容",text);
                 break;
         }
         dismiss();

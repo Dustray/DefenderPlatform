@@ -594,6 +594,21 @@ public class MainActivity extends AppCompatActivity
                 if (i == 1) {
                     //成功登录
                     reInitChatEase();
+                } else if (i == 2) {
+                    //成功注册
+                    reInitChatEase();
+                    Alert alert = new Alert(this);
+                    alert.setOnPopupAlertListener(new Alert.OnPopupAlertListener() {
+                        @Override
+                        public void onClickOk() {
+
+                        }
+
+                        @Override
+                        public void onClickCancel() {
+                        }
+                    });
+                    alert.popupAlert(this.getWindow().getDecorView(), "您已注册成功，接下来建议注册被监护人账号，并在注册时绑定您的邮箱账号。");
                 } else {
                     //成功注销
                     chatFragment.onLogout();

@@ -24,7 +24,7 @@
     <string name="pref_description_scroll_change">关闭后将只能通过页面上方按钮切换功能页
     </string>
     <string name="pref_title_full_screen">应用全屏</string>
-    <string name="pref_description_full_screen">应用设置为全屏
+    <string name="pref_description_full_screen">首页设置为全屏
     </string>
     <string name="pref_title_night_mode">夜间模式</string>
     <string name="pref_description_night_mode">启用夜间模式

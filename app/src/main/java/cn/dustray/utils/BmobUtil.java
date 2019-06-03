@@ -122,14 +122,14 @@ public class BmobUtil {
      */
     public void login(String account, String password, final UserManager.onLoginListener mListener) {
 
-        if (account.contains("@") && account.contains(".")) {//邮箱登录
-            loginWithEmail(account, password, mListener);
-        } else {
+//        if (account.contains("@") && account.contains(".")) {//邮箱登录
+//            loginWithEmail(account, password, mListener);
+//        } else {
             UserEntity ue = new UserEntity();
             ue.setUsername(account);
             ue.setPassword(password);
             loginWithName(ue, mListener);
-        }
+//        }
     }
 
     /**

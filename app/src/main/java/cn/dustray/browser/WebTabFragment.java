@@ -103,37 +103,38 @@ public class WebTabFragment extends Fragment {
         mainWebView.setWebViewClient(new xWebView.xWebViewCilent() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                           //xToast.toast(getContext(),"正在匹配1");
-                if (!spHelper.getIsNoFilter() && webListener != null && !webListener.onWebUrlCanLoad(request.getUrl().toString())) {
-                    //判断是否为监护人，是则不拦截
-                    UserEntity userEntity = BmobUser.getCurrentUser(UserEntity.class);
-                    if (userEntity == null || userEntity.isUnGuardian()) {
+                //xToast.toast(getContext(),"正在匹配1");
+                //判断是否为监护人，是则不拦截
+                UserEntity userEntity = BmobUser.getCurrentUser(UserEntity.class);
+                if (userEntity == null || userEntity.isUnGuardian()) {
+                    if (!spHelper.getIsNoFilter() && webListener != null && !webListener.onWebUrlCanLoad(request.getUrl().toString())) {
                         xToast.toast(getActivity(), "已拦截" + webListener.showWebUrlFilterKeyword());
                         mainWebView.stopLoading();
                         if (!mainWebView.canGoForward())
                             mainWebView.goBack();
                     }
-                } else
-                    webListener.addWebHistory(mainWebView.getTitle(), mainWebView.getUrl());//recordHistoryToSqlite();
-               boolean flag = mainWebView.openApp(request.getUrl().toString(), getActivity());
+                }
+                webListener.addWebHistory(mainWebView.getTitle(), mainWebView.getUrl());//recordHistoryToSqlite();
+                boolean flag = mainWebView.openApp(request.getUrl().toString(), getActivity());
                 return flag;
             }
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 //xToast.toast(getContext(),"正在匹配2");
+                //判断是否为监护人，是则不拦截
+                UserEntity userEntity = BmobUser.getCurrentUser(UserEntity.class);
+                if (userEntity == null || userEntity.isUnGuardian()) {
                 if (!spHelper.getIsNoFilter() && webListener != null && !webListener.onWebUrlCanLoad(url)) {
-                    //判断是否为监护人，是则不拦截
-                    UserEntity userEntity = BmobUser.getCurrentUser(UserEntity.class);
-                    if (userEntity == null || userEntity.isUnGuardian()) {
+
                         xToast.toast(getActivity(), "已拦截" + webListener.showWebUrlFilterKeyword());
                         mainWebView.stopLoading();
                         if (!mainWebView.canGoForward())
                             mainWebView.goBack();
                     }
-                } else
-                    webListener.addWebHistory(mainWebView.getTitle(), mainWebView.getUrl());
-                 boolean flag = mainWebView.openApp(url, getActivity());
+                }
+                webListener.addWebHistory(mainWebView.getTitle(), mainWebView.getUrl());
+                boolean flag = mainWebView.openApp(url, getActivity());
 
                 return flag;
             }

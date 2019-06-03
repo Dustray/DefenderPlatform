@@ -17,6 +17,7 @@ import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -402,7 +403,16 @@ public class BrowserFragment extends Fragment implements View.OnClickListener, W
                 if (webSharePopup == null) {
                     webSharePopup = new WebSharePopup(getActivity());
                 }
-                webSharePopup.showAtBottom(webToolBar, webFrag.mainWebView.getTitle(), webFrag.mainWebView.getUrl(), "链接");
+                java.net.URL url = null;
+                try {
+                    url = new java.net.URL(webFrag.mainWebView.getUrl());
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
+                String host = "链接";
+                if (url != null)
+                    host = url.getHost();// 获取主机名
+                webSharePopup.showAtBottom(webToolBar, webFrag.mainWebView.getTitle(), webFrag.mainWebView.getUrl(), host);
                 break;
         }
     }

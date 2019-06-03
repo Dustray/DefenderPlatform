@@ -29,6 +29,7 @@ import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.adapter.message.EMATextMessageBody;
 
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -559,8 +560,16 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
     }
 
     public void share(String title, String url) {
-
-        new WebSharePopup(getActivity(), true).showAtBottom(sendBtn, title, url, "");
+        java.net.URL urls = null;
+        try {
+            urls = new java.net.URL(url);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        String host = "链接";
+        if (urls != null)
+            host = urls.getHost();// 获取主机名
+        new WebSharePopup(getActivity(), true).showAtBottom(sendBtn, title, url, host);
     }
 
     public void onLogout() {

@@ -13,9 +13,9 @@
         android:src="@drawable/img_app_start" />
 
     <ImageView
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:layout_marginBottom="220dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginBottom="280dp"
         android:scaleType="centerCrop"
         android:src="@drawable/img_app_start_logo"
         app:layout_constraintBottom_toBottomOf="parent"
