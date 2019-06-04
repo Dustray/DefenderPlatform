@@ -272,7 +272,7 @@ public class ShieldingActivity extends AppCompatActivity implements View.OnClick
             public void onClickCancel() {
             }
         });
-        alert.popupAlert(this.getWindow().getDecorView(), "申请免屏蔽时长将清空当前已有时长，是否继续？", "继续");
+        alert.popupAlert("申请免屏蔽时长将清空当前已有时长，是否继续？", "继续");
     }
 
 

@@ -199,7 +199,7 @@ public class WebTabFragment extends Fragment {
                         callback.invoke(origin, false, remember);
                     }
                 });
-                alert.popupAlert(getActivity().getWindow().getDecorView(), origin + "想使用你的位置信息。", "允许", "拒绝");
+                alert.popupAlert(origin + "想使用你的位置信息。", "允许", "拒绝");
             }
 
         });

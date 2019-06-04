@@ -157,7 +157,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                                 mListener.switchToViewPager(1);
                             }
                         });
-                        alert.popupAlert(getActivity().getWindow().getDecorView(), "滑动切换已关闭,开启侧滑还是直接切换？", "开启侧滑", "直接切换");
+                        alert.popupAlert( "滑动切换已关闭,开启侧滑还是直接切换？", "开启侧滑", "直接切换");
                     }
                 }
                 //点击
@@ -276,7 +276,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                                 String result = ems.getBody().toString();
                                 showText = "新消息：" + result.substring(5, result.length() - 1);
                             }
-                            alert.popupAlert(getActivity().getWindow().getDecorView(), showText, "查看");
+                            alert.popupAlert( showText, "查看");
                         }
 
                         for (EMMessage msg : messages) {
@@ -456,7 +456,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                         public void onClickCancel() {
                         }
                     });
-                    alert.popupAlert(getActivity().getWindow().getDecorView(), "您还未登录,是否立即登录。", "是");
+                    alert.popupAlert("您还未登录,是否立即登录。", "是");
                     return;
                 }
 
@@ -471,7 +471,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                         public void onClickCancel() {
                         }
                     });
-                    alert.popupAlert(getActivity().getWindow().getDecorView(), "此账号还未绑定被守护者账号，请绑定后重新登录");
+                    alert.popupAlert("此账号还未绑定被守护者账号，请绑定后重新登录");
                     return;
                 }
                 //发送样式

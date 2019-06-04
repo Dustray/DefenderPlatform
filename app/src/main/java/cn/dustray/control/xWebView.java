@@ -1,5 +1,6 @@
 package cn.dustray.control;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
@@ -156,7 +157,7 @@ public class xWebView extends WebView {
     }
 
     //打开app
-    public static boolean openApp(String url, final Context activityContext) {
+    public static boolean openApp(String url, final Activity activity) {
         if (TextUtils.isEmpty(url)) return false;
         try {
             if (!url.startsWith("http") && !url.startsWith("https") && !url.startsWith("ftp")) {
@@ -170,7 +171,7 @@ public class xWebView extends WebView {
                     final Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                     if (isInstall(intent)) {
                         //Log.i("browser", "已安装");
-                        Alert alert = new Alert(activityContext);
+                        Alert alert = new Alert(activity);
                         alert.setOnPopupAlertListener(new Alert.OnPopupAlertListener() {
                             @Override
                             public void onClickOk() {
@@ -183,7 +184,7 @@ public class xWebView extends WebView {
                             }
                         });
                         String appName = context.getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY).get(0).loadLabel(context.getPackageManager()).toString();
-                        alert.popupAlert(((MainActivity) context).getWindow().getDecorView(), "网站请求打开“" + appName + "”，是否同意？", "同意");
+                        alert.popupAlert( "网站请求打开“" + appName + "”，是否同意？", "同意");
                         return true;
                     }
                 }

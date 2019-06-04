@@ -1,5 +1,6 @@
 package cn.dustray.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 
@@ -9,41 +10,41 @@ import cn.dustray.popupwindow.AlertPopup;
 public class Alert {
     private static boolean lastClickTime = true;//标志字
     private Alert.OnPopupAlertListener mLisenter;
-    Context context;
+    Activity activity;
     private boolean isShowing = false;
     private View parentView;
-    public Alert(Context context) {
-        this.context = context;
+    public Alert(Activity activity) {
+        this.activity = activity;
     }
 
     public void setOnPopupAlertListener(Alert.OnPopupAlertListener mLisenter) {
         this.mLisenter = mLisenter;
     }
 
-    public boolean popupAlert(View parentView,String alertContext) {
-        return popupAlert(parentView,alertContext, null);
+    public boolean popupAlert(String alertContext) {
+        return popupAlert(alertContext, null);
     }
 
     ;
 
-    public boolean popupAlert(View parentView,String alertContext, String button1Text) {
-        return popupAlert(parentView,alertContext, button1Text, null);
+    public boolean popupAlert(String alertContext, String button1Text) {
+        return popupAlert(alertContext, button1Text, null);
     }
 
     ;
 
-    public boolean popupAlert(View parentView,String alertContext, String button1Text, String button2Text) {
+    public boolean popupAlert(String alertContext, String button1Text, String button2Text) {
         if (lastClickTime && !isShowing) {//标志字为true可调用Toast
             isShowing = true;
             lastClickTime = false;//标志字置false
             //Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
             AlertPopup alert;
             if (button1Text == null) {//no button
-                alert = new AlertPopup(context, alertContext);
+                alert = new AlertPopup(activity, alertContext);
             } else if (button2Text == null) {//ok
-                alert = new AlertPopup(context, alertContext, button1Text);
+                alert = new AlertPopup(activity, alertContext, button1Text);
             } else {//ok cancle
-                alert = new AlertPopup(context, alertContext, button1Text, button2Text);
+                alert = new AlertPopup(activity, alertContext, button1Text, button2Text);
             }
             alert.setOnPopupAlertListener(new AlertPopup.OnPopupAlertListener() {
                 @Override
@@ -62,7 +63,7 @@ public class Alert {
                     isShowing = false;
                 }
             });
-            alert.showAtTop(parentView);
+            alert.showAtTop(activity.getWindow().getDecorView());
             new Thread() {//使用Thread
                 public void run() {
                     try {

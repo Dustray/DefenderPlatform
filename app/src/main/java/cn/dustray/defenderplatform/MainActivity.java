@@ -567,7 +567,7 @@ public class MainActivity extends AppCompatActivity
 
                             }
                         });
-                        alert.popupAlert(this.getWindow().getDecorView(), "应用需获取定位权限，请允许。", "确定");
+                        alert.popupAlert( "应用需获取定位权限，请允许。", "确定");
                     }
                 }
                 break;
@@ -608,7 +608,7 @@ public class MainActivity extends AppCompatActivity
                         public void onClickCancel() {
                         }
                     });
-                    alert.popupAlert(this.getWindow().getDecorView(), "您已注册成功，接下来建议注册被监护人账号，并在注册时绑定您的邮箱账号。");
+                    alert.popupAlert("您已注册成功，接下来建议注册被监护人账号，并在注册时绑定您的邮箱账号。");
                 } else {
                     //成功注销
                     chatFragment.onLogout();
@@ -666,7 +666,7 @@ public class MainActivity extends AppCompatActivity
                     public void onClickCancel() {
                     }
                 });
-                alert.popupAlert(MainActivity.this.getWindow().getDecorView(), "您的免屏蔽时长已到，是否重新申请？", "好的");
+                alert.popupAlert("您的免屏蔽时长已到，是否重新申请？", "好的");
                 onFinish();
             }
 //            if (noFilterTimeTemp - noFilterTime >= 1 && !isActivityPause && spHelper.getIsNoFilter()) {
