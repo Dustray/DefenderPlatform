@@ -50,12 +50,6 @@ public class KeywordListActivity extends AppCompatActivity implements View.OnCli
 
 
     private void initView() {
-//        for (int i = 0; i < 10; i++) {
-//            KeywordEntity ke = new KeywordEntity();
-//            ke.setKeyword("ss");
-//            list.add(ke);
-
-
         rvKeyword = findViewById(R.id.rv_keyword);
         inputAdd = findViewById(R.id.input_add);
 
@@ -113,7 +107,6 @@ public class KeywordListActivity extends AppCompatActivity implements View.OnCli
                     e.printStackTrace();
                     xToast.toast(KeywordListActivity.this, "删除异常" + e.toString());
                 }
-                ////-------------------------------------
             }
         });
         filterHelper.updateKeywordFromBmob(this);
@@ -154,7 +147,6 @@ public class KeywordListActivity extends AppCompatActivity implements View.OnCli
                     inputAdd.setText("");
                 }else{
                     xToast.toast(this, "关键字不能为空");
-
                 }
                 break;
         }

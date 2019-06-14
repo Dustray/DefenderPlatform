@@ -23,6 +23,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.hyphenate.EMContactListener;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
@@ -157,7 +158,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                                 mListener.switchToViewPager(1);
                             }
                         });
-                        alert.popupAlert( "滑动切换已关闭,开启侧滑还是直接切换？", "开启侧滑", "直接切换");
+                        alert.popupAlert("滑动切换已关闭,开启侧滑还是直接切换？", "开启侧滑", "直接切换");
                     }
                 }
                 //点击
@@ -251,8 +252,6 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void onMessageReceived(final List<EMMessage> messages) {
-//收到消息
-
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -276,7 +275,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                                 String result = ems.getBody().toString();
                                 showText = "新消息：" + result.substring(5, result.length() - 1);
                             }
-                            alert.popupAlert( showText, "查看");
+                            alert.popupAlert(showText, "查看");
                         }
 
                         for (EMMessage msg : messages) {
@@ -304,7 +303,6 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                     }
                 });
                 //收到消息
-
             }
 
             @Override
@@ -388,9 +386,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                                     c0 = new ChatRecordEntity(getActivity(), linkEntity, transmitType);
                                 } else {
                                     c0 = new ChatRecordEntity(getActivity(), msgReceived0, transmitType, ChatRecordEntity.MESSAGE_TYPE_TEXT);
-
                                 }
-
                                 showMessage(c0);
                             }
                         }
@@ -398,6 +394,53 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                 }
             }).start();
         }
+        //xToast.toast(getActivity(),"初始化");
+        EMClient.getInstance().contactManager().setContactListener(new EMContactListener() {
+
+            @Override
+            public void onContactInvited(String username, String reason) {
+                //收到好友邀请
+                xToast.toast(getActivity(),"增加了联系人"+username);
+            }
+
+            @Override
+            public void onFriendRequestAccepted(String username) {
+                xToast.toast(getActivity(),"增加了联系人"+username);
+//好友请求被同意
+            }
+
+            @Override
+            public void onFriendRequestDeclined(String username) {
+                xToast.toast(getActivity(),"增加了联系人"+username);
+//好友请求被拒绝
+            }
+
+            @Override
+            public void onContactDeleted(String username) {
+                xToast.toast(getActivity(),"增加了联系人"+username);
+                //被删除时回调此方法
+            }
+
+
+            @Override
+            public void onContactAdded(String username) {
+                //增加了联系人时回调此方法
+                xToast.toast(getActivity(),"增加了联系人"+username);
+                //您已绑定被监护人：
+                spHelper.setChatToUserName(username);
+                Alert alert = new Alert(getActivity());
+                alert.setOnPopupAlertListener(new Alert.OnPopupAlertListener() {
+                    @Override
+                    public void onClickOk() {
+                    }
+
+                    @Override
+                    public void onClickCancel() {
+                    }
+                });
+                alert.popupAlert("您已绑定被监护人:" + username);
+            }
+        });
     }
 
 

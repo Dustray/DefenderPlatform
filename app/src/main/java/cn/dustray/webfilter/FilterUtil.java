@@ -44,10 +44,12 @@ public class FilterUtil implements FilterHelper.OnSyncListener {
         //String keyword[] = {"weibo", "tieba", "taobao", "tmail", "mbd.baidu", "ithome", "video", "image.baidu", "news", "qq.com", "sohu.com", "huanqiu.com", "xinhuanet.com", "3g.163.com", "s.pae.baidu", "chinanews"};
         //initData();
         //getKeyword();
+        PatternMatching patternMatching = new PatternMatching();
         for (KeywordEntity ke : keywordList) {
 
             //xToast.toast(mContext,"正在匹配"+ke.getKeyword());
-            if (url.contains(ke.getKeyword())) {
+            //if (url.contains(ke.getKeyword())) {
+            if(patternMatching.isBelongToSource(ke.getKeyword(),url)){
                 theKey = ke.getKeyword();
                 return false;
             }

@@ -32,6 +32,8 @@ import android.widget.Toast;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
+import com.hyphenate.EMContactListener;
+import com.hyphenate.chat.EMClient;
 
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
@@ -296,6 +298,7 @@ public class MainActivity extends AppCompatActivity
 
     public void reInitChatEase() {
         chatFragment.initReceiveMessageFromEase();
+
     }
 
     @Override
@@ -312,13 +315,8 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-//            super.onBackPressed();
             //返回桌面不销毁
             xToast.exitBy2Click(this);
-//            Intent home = new Intent(Intent.ACTION_MAIN);
-//            home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//            home.addCategory(Intent.CATEGORY_HOME);
-//            startActivity(home);
         }
     }
 
@@ -369,28 +367,15 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-
         return super.onOptionsItemSelected(item);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
-//        if (id == R.id.nav_camera) {
-//            // Handle the camera action
-//            Intent intent = new Intent(this, WebGameActivity.class);
-//            startActivity(intent);
-//        } else if (id == R.id.nav_gallery) {
 
-//        } else
         if (id == R.id.nav_slideshow) {
             Intent intent;
             if (BmobUser.isLogin()) {
@@ -597,18 +582,20 @@ public class MainActivity extends AppCompatActivity
                 } else if (i == 2) {
                     //成功注册
                     reInitChatEase();
-                    Alert alert = new Alert(this);
-                    alert.setOnPopupAlertListener(new Alert.OnPopupAlertListener() {
-                        @Override
-                        public void onClickOk() {
+                    if(UserEntity.getCurrentUser(UserEntity.class).isGuardian()) {
+                        Alert alert = new Alert(this);
+                        alert.setOnPopupAlertListener(new Alert.OnPopupAlertListener() {
+                            @Override
+                            public void onClickOk() {
 
-                        }
+                            }
 
-                        @Override
-                        public void onClickCancel() {
-                        }
-                    });
-                    alert.popupAlert("您已注册成功，接下来建议注册被监护人账号，并在注册时绑定您的邮箱账号。");
+                            @Override
+                            public void onClickCancel() {
+                            }
+                        });
+                        alert.popupAlert("您已注册成功，接下来建议注册被监护人账号，并在注册时绑定您的邮箱账号。");
+                    }
                 } else {
                     //成功注销
                     chatFragment.onLogout();
@@ -669,22 +656,12 @@ public class MainActivity extends AppCompatActivity
                 alert.popupAlert("您的免屏蔽时长已到，是否重新申请？", "好的");
                 onFinish();
             }
-//            if (noFilterTimeTemp - noFilterTime >= 1 && !isActivityPause && spHelper.getIsNoFilter()) {
-//                if (noFilterTime < 59)
-//                    MyToast.toast(MainActivity.this, "测试" + noFilterTimeTemp + "s" + noFilterTime);
-//            }
             if (noFilterTimeTemp / 60 - noFilterTime / 60 >= 1 && !isActivityPause && spHelper.getIsNoFilter()) {
                 spHelper.setNoFilterTime(noFilterTime * 1000);
 
                 updateNoFilterTimeToNet();
-                //MyToast.toast(MainActivity.this, "时长已刷新，还剩" + noFilterTime/60+"分钟");
-                ////tvNoFilterToolbarHint.setText("剩余时长：" + (noFilterTime / 60 + 1) + "分钟");
-                //MyToast.toast(MainActivity.this, "测试时长已刷新" + noFilterTimeTemp + "s" + noFilterTime);
                 noFilterTimeTemp = noFilterTime;
             }
-//            btnRegisterGoStep.setText(l / 1000 + "");
-//            btnRegisterGoStep.setEnabled(false);
-//            btnRegisterGoStep.setBackgroundResource(R.drawable.xml_btn_color_accent);
         }
 
         @Override
